@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LMW Studio — Lamb Music Works</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+
+:root{
+  --gold:#C9A84C;--gold2:#F0CC60;--gold-dim:rgba(201,168,76,0.1);
+  --bg:#090909;--s1:#111111;--s2:#191919;--s3:#222222;
+  --text:#E8E4D8;--muted:#686860;--faint:#333330;--line:rgba(201,168,76,0.1);
+  --red:#CC3520;--green:#3A9A5A;--blue:#2A7ACC;--purple:#7A4ABA;
+  --nav-w:64px;
+}
+
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;display:flex;height:100dvh;}
+
+.nav-rail{width:var(--nav-w);min-width:var(--nav-w);background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:12px 0;z-index:200;flex-shrink:0;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:20px;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1;}
+.nav-items{display:flex;flex-direction:column;gap:4px;flex:1;width:100%;padding:0 8px;}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
+.nav-item:hover{background:var(--s2);}
+.nav-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-icon{font-size:18px;line-height:1;}
+.nav-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2;}
+.nav-item.active .nav-label{color:var(--gold);}
+.nav-bottom{margin-top:auto;width:100%;padding:0 8px;}
+.nav-settings{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;width:100%;border:1px solid transparent;background:none;}
+.nav-settings:hover{background:var(--s2);}
+.nav-settings.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+
+.app-main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0;}
+.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:50px;min-height:50px;border-bottom:1px solid var(--line);background:var(--bg);flex-shrink:0;}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#FFF;}
+.topbar-sub{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.topbar-spacer{flex:1;}
+.topbar-key-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
+.key-dot{width:6px;height:6px;border-radius:50%;}
+.key-dot.on{background:var(--green);}.key-dot.off{background:var(--red);}
+
+.page{display:none;flex:1;overflow:hidden;flex-direction:column;}
+.page.active{display:flex;}
+.page-body{flex:1;overflow-y:auto;padding:20px;}
+.page-body::-webkit-scrollbar{width:4px;}
+.page-body::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
+
+.page-intro{border-left:3px solid var(--gold);padding-left:14px;font-size:13px;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:24px;}
+.page-intro em{color:var(--text);font-style:normal;}
+
+h2{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin:24px 0 14px;}
+h2:first-of-type{margin-top:0;}
+p{font-size:13px;color:#AAA;line-height:1.7;margin-bottom:12px;}
+p strong{color:var(--text);font-weight:600;}
+hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
+
+.field{margin-bottom:14px;}
+.label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.input{width:100%;padding:10px 14px;background:var(--s1);border:1px solid var(--line);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;}
+.input:focus{border-color:rgba(201,168,76,0.4);}
+.input::placeholder{color:var(--muted);}
+textarea.input{resize:vertical;min-height:80px;line-height:1.6;}
+select.input{cursor:pointer;}
+
+.btn-gold{width:100%;padding:12px;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
+.btn-gold:hover{opacity:0.85;}
+.btn-gold:disabled{opacity:0.35;cursor:not-allowed;}
+.btn-outline{width:100%;padding:10px;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.15s;}
+.btn-outline:hover{background:var(--gold-dim);}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+
+.output-box{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.output-text{font-size:13px;color:#DDD;line-height:1.75;white-space:pre-wrap;}
+.copy-btn{margin-top:12px;padding:8px 16px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.copy-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.copy-btn.copied{color:var(--green);border-color:rgba(58,154,90,0.4);}
+
+.alert{padding:12px 15px;border-radius:7px;font-size:12px;line-height:1.5;margin-bottom:16px;}
+.alert-gold{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);color:#C8A840;}
+.alert-green{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
+.alert-red{background:rgba(204,53,32,0.1);border:1px solid rgba(204,53,32,0.3);color:#E08070;}
+.alert-blue{background:rgba(42,122,204,0.08);border:1px solid rgba(42,122,204,0.25);color:#6AABE0;}
+
+.spinner{display:none;width:18px;height:18px;border:2px solid rgba(0,0,0,0.15);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:16px;}
+.platform-chip{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--s1);cursor:pointer;text-align:center;transition:all 0.15s;}
+.platform-chip:hover{border-color:rgba(201,168,76,0.3);}
+.platform-chip.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
+.platform-chip .chip-icon{font-size:16px;margin-bottom:3px;}
+.platform-chip .chip-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.platform-chip.selected .chip-name{color:var(--gold);}
+
+/* VAULT */
+.vault-layout{display:flex;flex:1;overflow:hidden;}
+.vault-sidebar{width:240px;min-width:240px;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;}
+.vault-sidebar-head{padding:12px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.search-wrap{position:relative;}
+.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted);}
+.search-input{width:100%;padding:7px 9px 7px 28px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;}
+.search-input::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
+.filter-chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(--muted);background:var(--s3);transition:all 0.15s;}
+.filter-chip.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.target-list{flex:1;overflow-y:auto;padding:6px;}
+.target-item{display:flex;align-items:center;gap:9px;padding:9px;border-radius:7px;cursor:pointer;transition:background 0.15s;margin-bottom:3px;border:1px solid transparent;}
+.target-item:hover{background:var(--s2);}
+.target-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.15);}
+.t-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;background:var(--s3);color:var(--gold);border:1px solid var(--line);}
+.t-info{flex:1;min-width:0;}
+.t-name{font-weight:600;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-role{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-status{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.vault-footer{padding:10px;border-top:1px solid var(--line);flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);}
+.legend-dot{width:5px;height:5px;border-radius:50%;}
+.vault-main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.vault-welcome{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;}
+.vault-welcome-inner{max-width:400px;}
+.welcome-icon{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(201,168,76,0.1);letter-spacing:4px;margin-bottom:20px;line-height:1;}
+.welcome-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
+.welcome-sub{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.welcome-stats{display:flex;gap:24px;justify-content:center;}
+.wstat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);}
+.wstat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.dossier-view{flex:1;overflow:hidden;display:none;flex-direction:column;}
+.dossier-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--s1);}
+.dossier-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.dossier-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1px;color:#FFF;}
+.dossier-meta{font-size:11px;color:var(--muted);margin-top:1px;}
+.dossier-spacer{flex:1;}
+.status-select{background:var(--s2);border:1px solid var(--line);color:var(--text);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 8px;border-radius:5px;cursor:pointer;outline:none;}
+.dossier-tabs{display:flex;border-bottom:1px solid var(--line);flex-shrink:0;background:var(--bg);overflow-x:auto;scrollbar-width:none;}
+.dossier-tabs::-webkit-scrollbar{display:none;}
+.dtab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.dtab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.dossier-body{flex:1;overflow-y:auto;padding:16px;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:20px;}
+.ccard{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:14px;transition:border-color 0.15s;}
+.ccard.cat-direct{border-left:3px solid var(--gold);}
+.ccard.cat-family{border-left:3px solid #5AB870;}
+.ccard.cat-biz{border-left:3px solid #3A90D5;}
+.ccard.cat-music{border-left:3px solid #A050D5;}
+.cat-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.cat-tag.direct{color:var(--gold);}.cat-tag.family{color:#5AB870;}.cat-tag.biz{color:#3A90D5;}.cat-tag.music{color:#A050D5;}
+.ccard-name{font-weight:700;font-size:13px;color:#FFF;margin-bottom:2px;}
+.ccard-role{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+.ccard-why{font-size:11px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;margin-bottom:8px;}
+.tag-row{display:flex;gap:4px;flex-wrap:wrap;}
+.ctag{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:600;}
+.ctag.ig{background:rgba(200,80,50,0.12);color:#E07860;}
+.ctag.email{background:rgba(201,168,76,0.1);color:var(--gold);}
+.ctag.web{background:rgba(100,180,100,0.1);color:#70C080;}
+.ctag.li{background:rgba(60,120,200,0.1);color:#6090D0;}
+.info-box{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:12px 16px;margin-bottom:10px;}
+.info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.info-val{font-size:13px;color:#DDD;word-break:break-all;font-family:'DM Mono',monospace;}
+.info-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;}
+.action-block{background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:9px;padding:18px;margin-top:20px;}
+.action-block h3{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;}
+.alist{list-style:none;}
+.alist li{font-size:12px;color:#CCC;padding:4px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.5;}
+.anum{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;width:14px;}
+.week-row{display:grid;grid-template-columns:70px 1fr;gap:12px;margin-bottom:14px;align-items:start;}
+.week-num{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:7px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);line-height:1;}
+.week-sub{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.week-body{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:7px;padding:11px 13px;}
+.week-title{font-weight:700;font-size:12px;color:#FFF;margin-bottom:7px;}
+.week-tasks{list-style:none;}
+.week-tasks li{font-size:11px;color:#BBB;padding:3px 0;display:flex;gap:6px;line-height:1.4;border-bottom:1px solid rgba(255,255,255,0.04);}
+.week-tasks li:last-child{border-bottom:none;}
+.week-tasks li::before{content:'→';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:2px;}
+.post-card{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:16px;margin-bottom:12px;}
+.post-platform{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.pp-ig{color:#E07860;}.pp-tw{color:#7090CC;}.pp-reel{color:#E08030;}
+.post-body{font-size:12px;color:#DDD;line-height:1.75;padding:11px 13px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--gold);white-space:pre-line;}
+
+/* IMAGE GENERATOR */
+.image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;}
+.image-card{background:var(--s1);border:1px solid var(--line);border-radius:10px;overflow:hidden;aspect-ratio:1;}
+.image-card img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* REEL STUDIO */
+.reel-format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.format-card{background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
+.format-card:hover{border-color:rgba(201,168,76,0.3);}
+.format-card.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
+.format-icon{font-size:22px;margin-bottom:6px;}
+.format-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.format-desc{font-size:10px;color:var(--muted);}
+.format-card.selected .format-desc{color:var(--gold);}
+
+/* SETTINGS */
+.settings-section{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px;}
+.settings-section-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin-bottom:14px;}
+.key-status-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:7px;font-size:12px;margin-bottom:12px;}
+.key-status-bar.has-key{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
+.key-status-bar.no-key{background:rgba(204,53,32,0.08);border:1px solid rgba(204,53,32,0.25);color:#E07060;}
+
+/* ══ LMW RADIO ══ */
+.radio-hero{background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
+.radio-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
+.radio-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:4px;color:var(--gold);margin-bottom:4px;}
+.radio-sub{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.radio-visualizer{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:40px;margin-bottom:20px;}
+.radio-bar{width:4px;border-radius:2px;background:var(--gold);opacity:0.7;animation:radioBar 1.2s ease-in-out infinite;}
+.radio-bar:nth-child(1){height:20px;animation-delay:0s;}
+.radio-bar:nth-child(2){height:35px;animation-delay:0.1s;}
+.radio-bar:nth-child(3){height:28px;animation-delay:0.2s;}
+.radio-bar:nth-child(4){height:40px;animation-delay:0.3s;}
+.radio-bar:nth-child(5){height:22px;animation-delay:0.4s;}
+.radio-bar:nth-child(6){height:38px;animation-delay:0.5s;}
+.radio-bar:nth-child(7){height:15px;animation-delay:0.6s;}
+.radio-bar:nth-child(8){height:32px;animation-delay:0.7s;}
+.radio-bar:nth-child(9){height:25px;animation-delay:0.8s;}
+.radio-bar.paused{animation-play-state:paused;opacity:0.3;}
+@keyframes radioBar{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
+.radio-player{display:flex;align-items:center;gap:16px;background:rgba(0,0,0,0.4);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:14px 18px;margin-bottom:20px;}
+.radio-btn{width:48px;height:48px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:opacity 0.15s;}
+.radio-btn:hover{opacity:0.85;}
+.radio-track-info{flex:1;min-width:0;}
+.radio-track-name{font-weight:700;font-size:14px;color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.radio-track-artist{font-size:11px;color:var(--muted);margin-top:2px;}
+.radio-track-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:4px;}
+.radio-progress{flex:1;}
+.radio-progress-bar{width:100%;height:3px;background:var(--s3);border-radius:2px;margin-bottom:4px;cursor:pointer;position:relative;}
+.radio-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s linear;}
+.radio-time{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;}
+.radio-controls{display:flex;gap:8px;align-items:center;}
+.radio-ctrl-btn{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.radio-ctrl-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.radio-ctrl-btn.active{color:var(--gold);border-color:rgba(201,168,76,0.3);background:var(--gold-dim);}
+.playlist-section{margin-bottom:20px;}
+.playlist-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.playlist-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--gold);}
+.playlist-count{font-size:11px;color:var(--muted);}
+.track-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;border:1px solid transparent;}
+.track-row:hover{background:var(--s2);}
+.track-row.playing{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.track-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);width:20px;text-align:center;flex-shrink:0;}
+.track-row.playing .track-num{color:var(--gold);}
+.track-details{flex:1;min-width:0;}
+.track-name{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.track-row.playing .track-name{color:var(--gold);}
+.track-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+.track-genre{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--s3);color:var(--muted);}
+.track-duration{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;}
+.radio-stream-box{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:16px;}
+.stream-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.stream-url-row{display:flex;gap:8px;align-items:center;}
+.stream-url-input{flex:1;padding:8px 12px;background:var(--s1);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;}
+.stream-url-input::placeholder{color:var(--muted);}
+.stream-connect-btn{padding:8px 14px;background:var(--gold);color:#000;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+
+/* ══ DONE FOR YOU ══ */
+.dfy-hero{background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
+.dfy-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(201,168,76,0.08) 0%,transparent 60%);}
+.dfy-crown{font-size:40px;margin-bottom:12px;}
+.dfy-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:#FFF;margin-bottom:6px;}
+.dfy-title span{color:var(--gold);}
+.dfy-tagline{font-size:13px;color:var(--muted);line-height:1.7;max-width:480px;margin:0 auto 20px;}
+.dfy-price-badge{display:inline-block;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:8px 24px;border-radius:50px;margin-bottom:8px;}
+.dfy-price-note{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.dfy-includes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px;}
+.dfy-include-card{background:var(--s1);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:16px;}
+.dfy-include-icon{font-size:24px;margin-bottom:8px;}
+.dfy-include-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;}
+.dfy-include-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+.dfy-form{background:var(--s1);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:24px;margin-bottom:20px;}
+.dfy-form-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;}
+.dfy-form-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.dfy-process{margin-bottom:24px;}
+.dfy-step{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;}
+.dfy-step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dfy-step-body{flex:1;}
+.dfy-step-title{font-weight:700;font-size:13px;color:#FFF;margin-bottom:3px;}
+.dfy-step-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.dfy-testimonial{background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:18px;margin-bottom:20px;}
+.dfy-quote{font-size:13px;color:#CCC;line-height:1.8;font-style:italic;margin-bottom:10px;}
+.dfy-quote-attr{font-size:11px;color:var(--gold);font-weight:600;}
+
+/* ══ GLOBAL REACH LAB ══ */
+.grl-hero{background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.25);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
+.grl-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(42,122,204,0.06) 0%,transparent 70%);}
+.grl-globe{font-size:48px;margin-bottom:12px;}
+.grl-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
+.grl-title span{color:#6AABE0;}
+.grl-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.grl-stats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.grl-stat{text-align:center;}
+.grl-stat-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#6AABE0;}
+.grl-stat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.territory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px;}
+.territory-card{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;}
+.territory-card:hover{border-color:rgba(42,122,204,0.3);}
+.territory-card.selected{background:rgba(42,122,204,0.08);border-color:rgba(42,122,204,0.4);}
+.territory-flag{font-size:22px;margin-bottom:6px;}
+.territory-name{font-weight:700;font-size:12px;color:#FFF;margin-bottom:2px;}
+.territory-desc{font-size:10px;color:var(--muted);line-height:1.5;}
+.territory-card.selected .territory-desc{color:#6AABE0;}
+.grl-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.grl-tool{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:16px;}
+.grl-tool-icon{font-size:24px;margin-bottom:8px;}
+.grl-tool-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;}
+.grl-tool-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+.grl-tool-btn{width:100%;padding:8px;background:rgba(42,122,204,0.1);border:1px solid rgba(42,122,204,0.25);border-radius:6px;color:#6AABE0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.grl-tool-btn:hover{background:rgba(42,122,204,0.2);}
+.grl-output{background:var(--s1);border:1px solid rgba(42,122,204,0.15);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.grl-output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6AABE0;margin-bottom:10px;}
+.sync-library-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--s2);border:1px solid var(--line);margin-bottom:8px;}
+.sync-lib-rank{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);width:24px;flex-shrink:0;}
+.sync-lib-info{flex:1;}
+.sync-lib-name{font-weight:700;font-size:13px;color:#FFF;}
+.sync-lib-desc{font-size:11px;color:var(--muted);margin-top:1px;}
+.sync-lib-status{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+.sync-lib-status.open{background:rgba(58,154,90,0.12);color:#5AB870;}
+.sync-lib-status.selective{background:rgba(201,168,76,0.1);color:var(--gold);}
+.sync-lib-status.invite{background:rgba(204,53,32,0.1);color:#E07060;}
+
+@media(max-width:700px){
+  :root{--nav-w:54px;}
+  .nav-logo{display:none;}
+  .nav-label{font-size:8px;}
+  .topbar{padding:0 12px;}
+  .topbar-sub{display:none;}
+  .vault-sidebar{width:200px;min-width:200px;}
+  .row2,.row3{grid-template-columns:1fr;}
+  .reel-format-grid{grid-template-columns:1fr 1fr;}
+  .platform-grid{grid-template-columns:repeat(3,1fr);}
+  .card-grid{grid-template-columns:1fr;}
+  .dfy-includes{grid-template-columns:1fr 1fr;}
+  .grl-tool-grid{grid-template-columns:1fr;}
+  .territory-grid{grid-template-columns:1fr 1fr;}
+  .page-body{padding:14px;}
+  .dossier-body{padding:12px;}
+  .radio-player{flex-wrap:wrap;}
+}
+@media(max-width:500px){
+  .vault-sidebar{position:fixed;top:0;left:var(--nav-w);bottom:0;transform:translateX(-110%);transition:transform 0.3s;z-index:150;}
+  .vault-sidebar.open{transform:translateX(0);}
+  .vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:140;}
+  .vault-overlay.open{display:block;}
+  .show-sidebar-btn{display:flex;}
+  .dfy-includes{grid-template-columns:1fr;}
+}
+.show-sidebar-btn{display:none;background:none;border:1px solid var(--line);color:var(--muted);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+</style>
+</head>
+<body>
+
+<nav class="nav-rail">
+  <div class="nav-logo">LMW</div>
+  <div class="nav-items">
+    <div class="nav-item active" onclick="showPage('home',this)" title="Home"><div class="nav-icon">⬡</div><div class="nav-label">Home</div></div>
+    <div class="nav-item" onclick="showPage('vault',this)" title="Network Vault"><div class="nav-icon">◈</div><div class="nav-label">Vault</div></div>
+    <div class="nav-item" onclick="showPage('posts',this)" title="Post Generator"><div class="nav-icon">✦</div><div class="nav-label">Posts</div></div>
+    <div class="nav-item" onclick="showPage('images',this)" title="Image Generator"><div class="nav-icon">◉</div><div class="nav-label">Images</div></div>
+    <div class="nav-item" onclick="showPage('reels',this)" title="Reel Studio"><div class="nav-icon">▶</div><div class="nav-label">Reels</div></div>
+    <div class="nav-item" onclick="showPage('radio',this)" title="LMW Radio"><div class="nav-icon">📻</div><div class="nav-label">Radio</div></div>
+    <div class="nav-item" onclick="showPage('dfy',this)" title="Done For You"><div class="nav-icon">💎</div><div class="nav-label">DFY</div></div>
+    <div class="nav-item" onclick="showPage('grl',this)" title="Global Reach Lab"><div class="nav-icon">🌍</div><div class="nav-label">Global</div></div>
+  </div>
+  <div class="nav-bottom">
+    <button class="nav-settings" onclick="showPage('settings',this)" title="Settings"><div class="nav-icon" style="font-size:16px;">⚙</div><div class="nav-label">Keys</div></button>
+  </div>
+</nav>
+
+<div class="app-main">
+  <div class="topbar">
+    <button class="show-sidebar-btn" id="vaultToggle" style="display:none;" onclick="toggleVaultSidebar()">☰ Targets</button>
+    <div class="topbar-title" id="topbarTitle">LMW STUDIO</div>
+    <div class="topbar-sub" id="topbarSub">Lamb Music Works</div>
+    <div class="topbar-spacer"></div>
+    <div class="topbar-key-status">
+      <div class="key-dot off" id="globalKeyDot"></div>
+      <span id="globalKeyLabel" style="font-size:10px;">No API key</span>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="page-body">
+      <div style="max-width:680px;margin:0 auto;padding-top:16px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:#FFF;line-height:1;margin-bottom:6px;">LAMB MUSIC<br><span style="color:var(--gold);">WORKS STUDIO</span></div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.7;">Your complete AI-powered music business command center.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
+          <div onclick="showPage('vault',document.querySelector('[title=\\'Network Vault\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+            <div style="font-size:28px;margin-bottom:8px;">◈</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Network Vault</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Target dossiers, inner circle maps, proximity campaigns</div>
+          </div>
+          <div onclick="showPage('posts',document.querySelector('[title=\\'Post Generator\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+            <div style="font-size:28px;margin-bottom:8px;">✦</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Post Generator</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">AI captions for Instagram, TikTok, Twitter, LinkedIn, YouTube</div>
+          </div>
+          <div onclick="showPage('images',document.querySelector('[title=\\'Image Generator\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+            <div style="font-size:28px;margin-bottom:8px;">◉</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Image Generator</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">AI promo graphics, album art, social visuals</div>
+          </div>
+          <div onclick="showPage('reels',document.querySelector('[title=\\'Reel Studio\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+            <div style="font-size:28px;margin-bottom:8px;">▶</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Reel Studio</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Hedra-ready scripts for TikTok, Reels, YouTube Shorts</div>
+          </div>
+          <div onclick="showPage('radio',document.querySelector('[title=\\'LMW Radio\\']'))" style="background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)'">
+            <div style="font-size:28px;margin-bottom:8px;">📻</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">LMW Radio</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Stream your catalog. Broadcast your brand. Worldwide.</div>
+          </div>
+          <div onclick="showPage('dfy',document.querySelector('[title=\\'Done For You\\']'))" style="background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.25);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+            <div style="font-size:28px;margin-bottom:8px;">💎</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Done For You</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Custom hits — lyrics, production, everything. Starting at $10,000.</div>
+          </div>
+          <div onclick="showPage('grl',document.querySelector('[title=\\'Global Reach Lab\\']'))" style="background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.2);border-radius:12px;padding:20px;cursor:pointer;grid-column:span 2;" onmouseover="this.style.borderColor='rgba(42,122,204,0.4)'" onmouseout="this.style.borderColor='rgba(42,122,204,0.2)'">
+            <div style="font-size:28px;margin-bottom:8px;">🌍</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;">Global Reach Lab</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Sync libraries, territory strategy, worldwide licensing intelligence</div>
+          </div>
+        </div>
+        <div class="alert alert-gold" id="homeKeyAlert">⚙ Add your Anthropic API key in Settings to enable all AI features.</div>
+        <div class="alert alert-green" id="homeKeyOk" style="display:none;">✓ API key active — all tools enabled.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NETWORK VAULT -->
+  <div class="page" id="page-vault">
+    <div class="vault-layout">
+      <div class="vault-overlay" id="vaultOverlay" onclick="toggleVaultSidebar()"></div>
+      <div class="vault-sidebar" id="vaultSidebar">
+        <div class="vault-sidebar-head">
+          <div class="search-wrap">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input class="search-input" type="text" placeholder="Search targets…" oninput="filterTargets(this.value)" id="vaultSearch">
+          </div>
+          <div class="filter-row">
+            <div class="filter-chip active" onclick="setVaultFilter(this,'all')">All</div>
+            <div class="filter-chip" onclick="setVaultFilter(this,'music')">Music</div>
+            <div class="filter-chip" onclick="setVaultFilter(this,'business')">Biz</div>
+            <div class="filter-chip" onclick="setVaultFilter(this,'sports')">Sports</div>
+            <div class="filter-chip" onclick="setVaultFilter(this,'media')">Media</div>
+          </div>
+        </div>
+        <div class="target-list" id="targetList"></div>
+        <div class="vault-footer">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>New</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Active</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Contacted</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Responded</div>
+        </div>
+      </div>
+      <div class="vault-main">
+        <div class="vault-welcome" id="vaultWelcome">
+          <div class="vault-welcome-inner">
+            <div class="welcome-icon">NV</div>
+            <div class="welcome-title">Network Intelligence Vault</div>
+            <div class="welcome-sub">Every target. Every contact. Every proximity plan.</div>
+            <div class="welcome-stats">
+              <div class="wstat"><div class="wstat-num" id="statTotal">2</div><div class="wstat-label">Targets</div></div>
+              <div class="wstat"><div class="wstat-num" id="statContacts">12</div><div class="wstat-label">Contacts</div></div>
+              <div class="wstat"><div class="wstat-num" id="statActive">2</div><div class="wstat-label">Active</div></div>
+            </div>
+            <button class="btn-gold" style="margin-top:20px;max-width:200px;" onclick="showPage('vault-add',null)">+ Add New Target</button>
+          </div>
+        </div>
+        <div class="dossier-view" id="dossierView">
+          <div class="dossier-header">
+            <div class="dossier-avatar" id="dosAvatar"></div>
+            <div><div class="dossier-name" id="dosName"></div><div class="dossier-meta" id="dosMeta"></div></div>
+            <div class="dossier-spacer"></div>
+            <select class="status-select" id="dosStatus" onchange="updateTargetStatus(this.value)">
+              <option value="new">New</option><option value="active">Active</option><option value="contacted">Contacted</option><option value="responded">Responded</option>
+            </select>
+          </div>
+          <div class="dossier-tabs" id="dossierTabs"></div>
+          <div class="dossier-body" id="dossierBody"></div>
+        </div>
+        <div style="display:none;overflow-y:auto;padding:24px;width:100%;" id="vaultAddView">
+          <div style="max-width:520px;">
+            <h2 style="margin-top:0;">Add New Target</h2>
+            <div class="page-intro">Enter details and AI builds the full dossier.</div>
+            <div class="field"><div class="label">Full Name *</div><input class="input" id="genName" type="text" placeholder="e.g. Jay-Z, Tyler Perry…"></div>
+            <div class="row2">
+              <div class="field"><div class="label">Category</div><select class="input" id="genCat"><option value="music">Music</option><option value="business">Business</option><option value="sports">Sports</option><option value="media">Media</option></select></div>
+              <div class="field"><div class="label">Known For</div><input class="input" id="genKnown" type="text" placeholder="e.g. Music mogul"></div>
+            </div>
+            <div class="field"><div class="label">Your Angle</div><input class="input" id="genAngle" type="text" placeholder="e.g. Sync licensing, brand music"></div>
+            <button class="btn-gold" id="genBtn" onclick="generateDossier()" style="max-width:260px;"><span id="genBtnText">Generate Dossier</span><div class="spinner" id="genSpinner"></div></button>
+            <div class="output-box" id="genOutput"><div class="output-label">Generated — Review Before Saving</div><div class="output-text" id="genText"></div><button class="btn-outline" onclick="saveGenerated()" style="max-width:200px;">Save to Vault →</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST GENERATOR -->
+  <div class="page" id="page-posts">
+    <div class="page-body" style="max-width:640px;">
+      <div class="page-intro">Generate platform-optimized social posts for any occasion.</div>
+      <h2>Platforms</h2>
+      <div class="platform-grid" id="platformGrid">
+        <div class="platform-chip selected" data-platform="Instagram" onclick="togglePlatform(this)"><div class="chip-icon">📸</div><div class="chip-name">Instagram</div></div>
+        <div class="platform-chip" data-platform="TikTok" onclick="togglePlatform(this)"><div class="chip-icon">🎵</div><div class="chip-name">TikTok</div></div>
+        <div class="platform-chip" data-platform="Twitter/X" onclick="togglePlatform(this)"><div class="chip-icon">𝕏</div><div class="chip-name">Twitter/X</div></div>
+        <div class="platform-chip" data-platform="LinkedIn" onclick="togglePlatform(this)"><div class="chip-icon">💼</div><div class="chip-name">LinkedIn</div></div>
+        <div class="platform-chip" data-platform="YouTube" onclick="togglePlatform(this)"><div class="chip-icon">▶</div><div class="chip-name">YouTube</div></div>
+        <div class="platform-chip" data-platform="Facebook" onclick="togglePlatform(this)"><div class="chip-icon">👥</div><div class="chip-name">Facebook</div></div>
+      </div>
+      <h2>Post Details</h2>
+      <div class="field"><div class="label">What's this post about? *</div><textarea class="input" id="postTopic" placeholder="e.g. New beat pack drop, sync licensing services…" rows="3"></textarea></div>
+      <div class="row2">
+        <div class="field"><div class="label">Tone</div><select class="input" id="postTone"><option value="motivational">Motivational</option><option value="professional">Professional</option><option value="casual">Casual & Real</option><option value="educational">Educational</option><option value="hype">Hype / Promo</option></select></div>
+        <div class="field"><div class="label">Goal</div><select class="input" id="postGoal"><option value="awareness">Brand Awareness</option><option value="engagement">Drive Engagement</option><option value="sales">Get Clients</option><option value="network">Network Building</option></select></div>
+      </div>
+      <div class="field"><div class="label">Include Hashtags?</div><select class="input" id="postHashtags"><option value="yes">Yes — include hashtags</option><option value="no">No hashtags</option></select></div>
+      <button class="btn-gold" id="postBtn" onclick="generatePosts()"><span id="postBtnText">Generate Posts</span><div class="spinner" id="postSpinner"></div></button>
+      <div class="output-box" id="postOutput"><div class="output-label">Generated Posts</div><div class="output-text" id="postText"></div><button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button></div>
+    </div>
+  </div>
+
+  <!-- IMAGE GENERATOR -->
+  <div class="page" id="page-images">
+    <div class="page-body" style="max-width:640px;">
+      <div class="page-intro">Generate AI promo graphics, album art, and social visuals.</div>
+      <h2>Image Details</h2>
+      <div class="field"><div class="label">Describe the image *</div><textarea class="input" id="imgPrompt" placeholder="e.g. Premium dark background with gold text saying 'Lamb Music Works'…" rows="3"></textarea></div>
+      <div class="row2">
+        <div class="field"><div class="label">Style</div><select class="input" id="imgStyle"><option value="cinematic dark luxury">Cinematic Dark Luxury</option><option value="minimalist premium">Minimalist Premium</option><option value="urban street music">Urban Street Music</option><option value="abstract artistic">Abstract Artistic</option><option value="professional corporate">Professional Corporate</option></select></div>
+        <div class="field"><div class="label">Format</div><select class="input" id="imgFormat"><option value="square 1:1 social media post">Square (1:1) — Feed Post</option><option value="vertical 9:16 story">Vertical (9:16) — Story/Reel</option><option value="horizontal 16:9 banner">Horizontal (16:9) — Banner</option></select></div>
+      </div>
+      <div class="field"><div class="label">Brand Elements</div><input class="input" id="imgBrand" type="text" placeholder="e.g. Lamb Music Works name, gold color scheme"></div>
+      <button class="btn-gold" id="imgBtn" onclick="generateImage()"><span id="imgBtnText">Generate Image</span><div class="spinner" id="imgSpinner"></div></button>
+      <div class="output-box" id="imgOutput"><div class="output-label">Generated Image</div><div class="image-grid" id="imgGrid"></div></div>
+    </div>
+  </div>
+
+  <!-- REEL STUDIO -->
+  <div class="page" id="page-reels">
+    <div class="page-body" style="max-width:640px;">
+      <div class="page-intro">Generate complete Hedra-ready scripts for your avatar.</div>
+      <h2>Format</h2>
+      <div class="reel-format-grid">
+        <div class="format-card selected" data-format="TikTok / Instagram Reel (30–45 sec)" onclick="selectFormat(this)"><div class="format-icon">📱</div><div class="format-name">Short Reel</div><div class="format-desc">30–45 sec · TikTok / IG</div></div>
+        <div class="format-card" data-format="YouTube Short (55–60 sec)" onclick="selectFormat(this)"><div class="format-icon">▶</div><div class="format-name">YT Short</div><div class="format-desc">55–60 sec · YouTube</div></div>
+        <div class="format-card" data-format="Long-form talking head (90–120 sec)" onclick="selectFormat(this)"><div class="format-icon">🎙</div><div class="format-name">Long Form</div><div class="format-desc">90–120 sec · Any platform</div></div>
+      </div>
+      <h2>Script Details</h2>
+      <div class="field"><div class="label">What's this reel about? *</div><textarea class="input" id="reelTopic" placeholder="e.g. How I built Lamb Music Works as a solo producer…" rows="3"></textarea></div>
+      <div class="row2">
+        <div class="field"><div class="label">Vibe</div><select class="input" id="reelVibe"><option value="motivational and direct">Motivational & Direct</option><option value="educational and informative">Educational</option><option value="storytelling and personal">Storytelling</option><option value="promotional and hype">Promo / Hype</option></select></div>
+        <div class="field"><div class="label">Call to Action</div><select class="input" id="reelCTA"><option value="visit lambmusicworks.com">Visit lambmusicworks.com</option><option value="follow for more">Follow for more</option><option value="DM me to work together">DM to work together</option><option value="comment your thoughts">Comment your thoughts</option></select></div>
+      </div>
+      <button class="btn-gold" id="reelBtn" onclick="generateReel()"><span id="reelBtnText">Generate Script</span><div class="spinner" id="reelSpinner"></div></button>
+      <div class="output-box" id="reelOutput"><div class="output-label">Hedra-Ready Script</div><div class="output-text" id="reelText"></div><button class="copy-btn" id="reelCopyBtn" onclick="copyOutput('reelText','reelCopyBtn')">Copy Script</button></div>
+      <div class="alert alert-gold" style="margin-top:16px;">📋 Copy this script → paste into Hedra with your avatar photo → download your finished reel.</div>
+    </div>
+  </div>
+
+  <!-- LMW RADIO -->
+  <div class="page" id="page-radio">
+    <div class="page-body" style="max-width:700px;">
+      <div class="radio-hero">
+        <div class="radio-title">LMW RADIO</div>
+        <div class="radio-sub">Lamb Music Works · Broadcasting Worldwide</div>
+        <div class="radio-visualizer" id="radioVisualizer">
+          <div class="radio-bar paused"></div><div class="radio-bar paused"></div><div class="radio-bar paused"></div>
+          <div class="radio-bar paused"></div><div class="radio-bar paused"></div><div class="radio-bar paused"></div>
+          <div class="radio-bar paused"></div><div class="radio-bar paused"></div><div class="radio-bar paused"></div>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);" id="radioListeners">—</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Listeners</div></div>
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);" id="radioTracks">10</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Tracks</div></div>
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);">24/7</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Station</div></div>
+        </div>
+      </div>
+
+      <div class="radio-stream-box">
+        <div class="stream-label">Stream Source (Optional)</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Connect a live stream URL from Radio.co, Zeno.fm, or any Icecast/Shoutcast source. Leave blank to use catalog playlist mode.</div>
+        <div class="stream-url-row">
+          <input class="stream-url-input" id="streamUrl" type="text" placeholder="https://your-stream-url.com/stream">
+          <button class="stream-connect-btn" onclick="connectStream()">Connect</button>
+        </div>
+        <div style="margin-top:8px;font-size:10px;color:var(--muted);">Status: <span id="streamStatus" style="color:var(--muted);">No stream connected — using catalog mode</span></div>
+      </div>
+
+      <div class="radio-player">
+        <button class="radio-btn" id="radioPlayBtn" onclick="toggleRadio()">▶</button>
+        <div class="radio-track-info">
+          <div class="radio-track-name" id="radioTrackName">Select a track to begin</div>
+          <div class="radio-track-artist" id="radioTrackArtist">Lamb Music Works</div>
+          <div class="radio-track-tag" id="radioTrackTag">LMW RADIO</div>
+        </div>
+        <div class="radio-progress" style="min-width:120px;">
+          <div class="radio-progress-bar" onclick="seekRadio(event,this)">
+            <div class="radio-progress-fill" id="radioProgressFill" style="width:0%"></div>
+          </div>
+          <div class="radio-time"><span id="radioCurrentTime">0:00</span><span id="radioDuration">0:00</span></div>
+        </div>
+        <div class="radio-controls">
+          <button class="radio-ctrl-btn" id="radioShuffleBtn" onclick="toggleShuffle()" title="Shuffle">⇄</button>
+          <button class="radio-ctrl-btn" id="radioRepeatBtn" onclick="toggleRepeat()" title="Repeat">↺</button>
+          <input type="range" min="0" max="1" step="0.05" value="0.8" style="width:70px;accent-color:var(--gold);" oninput="setVolume(this.value)" title="Volume">
+        </div>
+      </div>
+
+      <audio id="radioAudio" preload="none"></audio>
+
+      <div class="playlist-section">
+        <div class="playlist-header">
+          <div class="playlist-title">Catalog Playlist</div>
+          <div class="playlist-count" id="playlistCount">10 tracks</div>
+        </div>
+        <div id="playlistTracks"></div>
+      </div>
+
+      <div class="alert alert-blue">🌍 <strong>Ready to broadcast nationwide?</strong> Add a stream URL from Radio.co ($20/mo), Zeno.fm (free tier), or Live365 to go live on TuneIn, iHeart, and radio directories worldwide.</div>
+
+      <div style="background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:4px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;">ADD TRACK TO PLAYLIST</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:14px;padding:10px 12px;background:var(--s2);border-radius:7px;">
+          📁 <strong style="color:var(--text);">Google Drive:</strong> Upload your MP3 to Drive → right-click → Share → "Anyone with the link" → copy link → paste below. The app converts it automatically.<br>
+          🔗 <strong style="color:var(--text);">Direct URL:</strong> Any public MP3 link also works (Cloudinary, Dropbox direct link, etc.)
+        </div>
+        <div class="row2">
+          <div class="field"><div class="label">Track Name *</div><input class="input" id="newTrackName" type="text" placeholder="e.g. Midnight Drive"></div>
+          <div class="field"><div class="label">Genre / Mood</div><input class="input" id="newTrackGenre" type="text" placeholder="e.g. Cinematic, Soul, R&B"></div>
+        </div>
+        <div class="field"><div class="label">Google Drive Link or Direct MP3 URL</div><input class="input" id="newTrackUrl" type="text" placeholder="https://drive.google.com/file/d/... or https://cdn.com/track.mp3"></div>
+        <div class="row2">
+          <div class="field"><div class="label">Duration</div><input class="input" id="newTrackDuration" type="text" placeholder="e.g. 3:42"></div>
+          <div class="field"><div class="label">BPM (optional)</div><input class="input" id="newTrackBpm" type="text" placeholder="e.g. 95"></div>
+        </div>
+        <button class="btn-gold" onclick="addTrack()" style="max-width:200px;">+ Add to Playlist</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DONE FOR YOU -->
+  <div class="page" id="page-dfy">
+    <div class="page-body" style="max-width:700px;">
+      <div class="dfy-hero">
+        <div class="dfy-crown">👑</div>
+        <div class="dfy-title">DONE <span>FOR YOU</span></div>
+        <div class="dfy-tagline">You bring the vision. Warren Lamb brings the hit. Custom music created from scratch — lyrics, production, mixing, mastering. Everything.</div>
+        <div class="dfy-price-badge">Starting at $10,000</div>
+        <div class="dfy-price-note">Per original composition · Full ownership transferred to client</div>
+      </div>
+
+      <h2>What's Included</h2>
+      <div class="dfy-includes">
+        <div class="dfy-include-card"><div class="dfy-include-icon">✍️</div><div class="dfy-include-title">Original Lyrics</div><div class="dfy-include-desc">Custom-written lyrics tailored to your story, your brand, your message. No templates. No recycled content.</div></div>
+        <div class="dfy-include-card"><div class="dfy-include-icon">🎹</div><div class="dfy-include-title">Full Production</div><div class="dfy-include-desc">Beat, arrangement, instrumentation — all produced from scratch by Warren Lamb in the LMW studio.</div></div>
+        <div class="dfy-include-card"><div class="dfy-include-icon">🎙</div><div class="dfy-include-title">Vocal Direction</div><div class="dfy-include-desc">Guidance on vocal performance, artist coaching, and direction to make sure the delivery matches the vision.</div></div>
+        <div class="dfy-include-card"><div class="dfy-include-icon">🎚</div><div class="dfy-include-title">Mix & Master</div><div class="dfy-include-desc">Professional mixing and mastering. Radio-ready, sync-ready, streaming-ready delivery in all formats.</div></div>
+        <div class="dfy-include-card"><div class="dfy-include-icon">📄</div><div class="dfy-include-title">Full Ownership</div><div class="dfy-include-desc">100% of master and publishing rights transferred to you. No royalties. No backend. Yours completely.</div></div>
+        <div class="dfy-include-card"><div class="dfy-include-icon">🔄</div><div class="dfy-include-title">Revision Rounds</div><div class="dfy-include-desc">Up to 3 full revision rounds included. We don't stop until it's right.</div></div>
+      </div>
+
+      <h2>Who This Is For</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+        <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🎤</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Artists</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a signature record. One song that defines you. Let Warren build it.</div></div>
+        <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🏢</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Brands</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a custom brand anthem, jingle, or campaign song. Built to last.</div></div>
+        <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🎬</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Film & TV</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a custom title track, theme, or signature piece for your project.</div></div>
+        <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🏆</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Athletes & Celebrities</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a walkout song, personal anthem, or brand extension through music.</div></div>
+      </div>
+
+      <h2>The Process</h2>
+      <div class="dfy-process">
+        <div class="dfy-step"><div class="dfy-step-num">1</div><div class="dfy-step-body"><div class="dfy-step-title">Discovery Call</div><div class="dfy-step-desc">30-minute call to understand your vision, reference tracks, story, and goals. No cost, no commitment.</div></div></div>
+        <div class="dfy-step"><div class="dfy-step-num">2</div><div class="dfy-step-body"><div class="dfy-step-title">Creative Brief & Agreement</div><div class="dfy-step-desc">Warren sends a detailed creative direction document. 50% deposit secures your project slot.</div></div></div>
+        <div class="dfy-step"><div class="dfy-step-num">3</div><div class="dfy-step-body"><div class="dfy-step-title">Production</div><div class="dfy-step-desc">Warren builds the track. Typical delivery is 2–4 weeks depending on complexity.</div></div></div>
+        <div class="dfy-step"><div class="dfy-step-num">4</div><div class="dfy-step-body"><div class="dfy-step-title">Revisions & Final Delivery</div><div class="dfy-step-desc">Up to 3 rounds of revisions. Final delivery includes all stems, masters, and full ownership documentation.</div></div></div>
+      </div>
+
+      <div class="dfy-form">
+        <div class="dfy-form-title">Request a Discovery Call</div>
+        <div class="dfy-form-sub">Tell Warren about your project. He personally reviews every request. Serious inquiries only — minimum $10,000 budget required.</div>
+        <div class="field"><div class="label">Your Name *</div><input class="input" id="dfyName" type="text" placeholder="Full name"></div>
+        <div class="row2">
+          <div class="field"><div class="label">Email *</div><input class="input" id="dfyEmail" type="email" placeholder="your@email.com"></div>
+          <div class="field"><div class="label">Project Type</div>
+            <select class="input" id="dfyType">
+              <option value="artist">Artist — Original Song</option>
+              <option value="brand">Brand Anthem / Jingle</option>
+              <option value="film">Film / TV Theme</option>
+              <option value="athlete">Athlete / Celebrity Anthem</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><div class="label">Budget Range</div>
+          <select class="input" id="dfyBudget">
+            <option value="10k-25k">$10,000 – $25,000</option>
+            <option value="25k-50k">$25,000 – $50,000</option>
+            <option value="50k-100k">$50,000 – $100,000</option>
+            <option value="100k+">$100,000+</option>
+          </select>
+        </div>
+        <div class="field"><div class="label">Tell Warren about your vision *</div><textarea class="input" id="dfyVision" rows="4" placeholder="Describe the song you need. What's it for? What feeling should it create? Any reference artists or tracks?"></textarea></div>
+        <button class="btn-gold" id="dfySubmitBtn" onclick="submitDFY()"><span id="dfyBtnText">Send Request to Warren</span><div class="spinner" id="dfySpinner"></div></button>
+        <div class="alert alert-green" id="dfySuccess" style="display:none;margin-top:14px;">✓ Request sent. Warren will personally review and respond within 48 hours.</div>
+      </div>
+
+      <div class="dfy-testimonial">
+        <div class="dfy-quote">"Working with Warren was unlike anything I'd experienced. He didn't just make a song — he made THE song. The one that sounds like everything I was trying to say but couldn't."</div>
+        <div class="dfy-quote-attr">— LMW Done For You Client</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GLOBAL REACH LAB -->
+  <div class="page" id="page-grl">
+    <div class="page-body" style="max-width:700px;">
+      <div class="grl-hero">
+        <div class="grl-globe">🌍</div>
+        <div class="grl-title">GLOBAL <span>REACH LAB</span></div>
+        <div class="grl-sub">Sync Intelligence · Territory Strategy · Worldwide Licensing</div>
+        <div class="grl-stats">
+          <div class="grl-stat"><div class="grl-stat-num">50+</div><div class="grl-stat-label">Sync Libraries</div></div>
+          <div class="grl-stat"><div class="grl-stat-num">12</div><div class="grl-stat-label">Territories</div></div>
+          <div class="grl-stat"><div class="grl-stat-num">∞</div><div class="grl-stat-label">Placements Possible</div></div>
+        </div>
+      </div>
+
+      <h2>Target Territories</h2>
+      <div class="page-intro">Select territories to focus your sync licensing and distribution strategy. Each region has different sync rates, platform dominance, and buyer behavior.</div>
+      <div class="territory-grid" id="territoryGrid">
+        <div class="territory-card selected" onclick="toggleTerritory(this)" data-territory="USA"><div class="territory-flag">🇺🇸</div><div class="territory-name">United States</div><div class="territory-desc">Primary market. Hollywood, Netflix, Hulu, NBC, CBS sync buyers.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="UK"><div class="territory-flag">🇬🇧</div><div class="territory-name">United Kingdom</div><div class="territory-desc">BBC, Channel 4, ITV. Strong sync culture. High licensing fees.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Canada"><div class="territory-flag">🇨🇦</div><div class="territory-name">Canada</div><div class="territory-desc">CBC, Crave, Bell Media. CRTC Canadian content requirements create demand.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Germany"><div class="territory-flag">🇩🇪</div><div class="territory-name">Germany</div><div class="territory-desc">GEMA-registered. ARD, ZDF, ProSieben. Strong ad music market.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="France"><div class="territory-flag">🇫🇷</div><div class="territory-name">France</div><div class="territory-desc">SACEM. Canal+, TF1. Fashion and luxury brand music demand.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Japan"><div class="territory-flag">🇯🇵</div><div class="territory-name">Japan</div><div class="territory-desc">Second largest music market. Anime, gaming, and commercial sync.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Australia"><div class="territory-flag">🇦🇺</div><div class="territory-name">Australia</div><div class="territory-desc">APRA AMCOS. Nine Network, Seven Network. Growing streaming market.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Brazil"><div class="territory-flag">🇧🇷</div><div class="territory-name">Brazil</div><div class="territory-desc">Largest Latin American market. Globo Network. Rising streaming penetration.</div></div>
+        <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Korea"><div class="territory-flag">🇰🇷</div><div class="territory-name">South Korea</div><div class="territory-desc">K-drama and K-pop global influence. Netflix Korea original productions.</div></div>
+      </div>
+
+      <h2>Sync Library Intelligence</h2>
+      <div class="page-intro">Ranked submission order for your catalog based on acceptance rates, payout potential, and fit for your sound.</div>
+      <div id="syncLibraryList">
+        <div class="sync-library-row"><div class="sync-lib-rank">1</div><div class="sync-lib-info"><div class="sync-lib-name">Pond5</div><div class="sync-lib-desc">Non-exclusive. Instant upload. Best for building catalog presence fast.</div></div><div class="sync-lib-status open">Open</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">2</div><div class="sync-lib-info"><div class="sync-lib-name">Artlist</div><div class="sync-lib-desc">Subscription model. High per-track earnings. Quality filter — curated.</div></div><div class="sync-lib-status selective">Selective</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">3</div><div class="sync-lib-info"><div class="sync-lib-name">Musicbed</div><div class="sync-lib-desc">Premium brand and film sync. Higher payouts. Strict quality bar.</div></div><div class="sync-lib-status selective">Selective</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">4</div><div class="sync-lib-info"><div class="sync-lib-name">Music Vine</div><div class="sync-lib-desc">UK-based. Strong European brand placement. Growing fast.</div></div><div class="sync-lib-status selective">Selective</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">5</div><div class="sync-lib-info"><div class="sync-lib-name">Musicgateway</div><div class="sync-lib-desc">Pitching + distribution + sync in one. Good for global reach strategy.</div></div><div class="sync-lib-status open">Open</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">6</div><div class="sync-lib-info"><div class="sync-lib-name">Epidemic Sound</div><div class="sync-lib-desc">Creator-focused. Massive YouTube/streaming presence. Invite-only.</div></div><div class="sync-lib-status invite">Invite Only</div></div>
+        <div class="sync-library-row"><div class="sync-lib-rank">7</div><div class="sync-lib-info"><div class="sync-lib-name">Marmoset</div><div class="sync-lib-desc">Boutique. Film, TV, and ad placements. High artistic standard.</div></div><div class="sync-lib-status invite">Invite Only</div></div>
+      </div>
+
+      <h2>Global Strategy Tools</h2>
+      <div class="grl-tool-grid">
+        <div class="grl-tool"><div class="grl-tool-icon">📋</div><div class="grl-tool-title">Pitch Generator</div><div class="grl-tool-desc">AI-crafted sync pitches tailored for specific territories and buyers.</div><button class="grl-tool-btn" onclick="generateGlobalPitch()">Generate Territory Pitch</button></div>
+        <div class="grl-tool"><div class="grl-tool-icon">📊</div><div class="grl-tool-title">Catalog Analyzer</div><div class="grl-tool-desc">Which tracks fit which territories based on mood, tempo, and style.</div><button class="grl-tool-btn" onclick="analyzeCatalog()">Analyze Your Catalog</button></div>
+        <div class="grl-tool"><div class="grl-tool-icon">📧</div><div class="grl-tool-title">Supervisor Outreach</div><div class="grl-tool-desc">AI-written emails to music supervisors in your selected territories.</div><button class="grl-tool-btn" onclick="generateSupervisorEmail()">Write Supervisor Email</button></div>
+        <div class="grl-tool"><div class="grl-tool-icon">📅</div><div class="grl-tool-title">Release Playbook</div><div class="grl-tool-desc">72-hour algorithmic release strategy optimized for global reach.</div><button class="grl-tool-btn" onclick="generatePlaybook()">Build Release Playbook</button></div>
+      </div>
+
+      <div class="grl-output" id="grlOutput">
+        <div class="grl-output-label" id="grlOutputLabel">Output</div>
+        <div class="output-text" id="grlOutputText"></div>
+        <button class="copy-btn" id="grlCopyBtn" onclick="copyOutput('grlOutputText','grlCopyBtn')">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="page" id="page-settings">
+    <div class="page-body" style="max-width:500px;">
+      <div class="settings-section">
+        <div class="settings-section-title">Anthropic API Key</div>
+        <div class="key-status-bar no-key" id="settingsKeyStatus"><div class="key-dot off" id="settingsKeyDot"></div><span id="settingsKeyText">No key saved — AI features disabled</span></div>
+        <div class="field"><div class="label">Your API Key</div><input class="input" id="apiKeyInput" type="password" placeholder="sk-ant-api03-…" autocomplete="off" spellcheck="false"></div>
+        <button class="btn-gold" onclick="saveApiKey()">Save Key</button>
+        <button class="btn-outline" onclick="clearApiKey()">Remove Key</button>
+        <div style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6;padding:12px;background:var(--s2);border-radius:7px;">🔒 Stored in your browser only. Get your key at <strong style="color:var(--text);">console.anthropic.com → API Keys</strong></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">OpenAI Key — Image Generation</div>
+        <div class="key-status-bar no-key" id="openaiKeyStatus"><div class="key-dot off" id="openaiKeyDot"></div><span id="openaiKeyText">No OpenAI key saved</span></div>
+        <div class="field"><div class="label">OpenAI API Key</div><input class="input" id="openaiKeyInput" type="password" placeholder="sk-…" autocomplete="off" spellcheck="false"></div>
+        <button class="btn-gold" onclick="saveOpenAIKey()">Save OpenAI Key</button>
+        <button class="btn-outline" onclick="clearOpenAIKey()">Remove Key</button>
+        <div style="font-size:12px;color:var(--muted);margin-top:14px;line-height:1.6;padding:12px;background:var(--s2);border-radius:7px;">Get your key at <strong style="color:var(--text);">platform.openai.com → API Keys</strong>. DALL-E 3 ~$0.04/image.</div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Vault Storage</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clear AI-generated targets. Built-in targets (Shaq, Master P) are never affected.</div>
+        <button class="btn-outline" style="color:var(--red);border-color:rgba(204,53,32,0.3);" onclick="clearVaultStorage()">Clear Generated Targets</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ══ TARGETS DATA ══
+const BUILT_IN_TARGETS = [
+  {id:'shaq',name:'Shaquille O\'Neal',initials:'SQ',role:'DJ Diesel · Business mogul',category:'music',status:'active',avatarBg:'#1A3A5C',avatarColor:'#4A9FD5',
+   tabs:['Overview','Inner Circle','Direct Access','Social Plan','Posts'],
+   content:[
+    `<div class="page-intro">Shaq is reachable through his music side. As DJ Diesel, he actively engages with producers. His inner circle includes brand managers, music collaborators, and event partners.</div><h2>Why This Works</h2><p>Shaq built an empire through <strong>franchise thinking</strong> — multiple revenue streams, consistent brand presence, community investment.</p><div class="alert alert-gold">💡 Use the Wasserman brand partnerships route — his music inbox has 74K+ unread messages.</div><div class="action-block"><h3>Priority Moves</h3><ul class="alist"><li><span class="anum">1</span>Email BrandPartnerships@teamwass.com</li><li><span class="anum">2</span>Connect with Rishi Daulat at PRP Agency on LinkedIn</li><li><span class="anum">3</span>Engage Myles O'Neal artist-to-artist on Instagram</li></ul></div>`,
+    `<h2>Tier 1 — Management</h2><div class="card-grid"><div class="ccard cat-direct"><div class="cat-tag direct">Mgmt</div><div class="ccard-name">Perry Rogers</div><div class="ccard-role">Co-founder PRP Agency · Shaq's brand manager since 1996</div><div class="ccard-why">Most direct path to Shaq's inner circle.</div><div class="tag-row"><span class="ctag web">prp-lv.com</span><span class="ctag li">LinkedIn</span></div></div><div class="ccard cat-direct"><div class="cat-tag direct">Booking</div><div class="ccard-name">Wasserman Music</div><div class="ccard-role">Exclusive DJ Diesel booking agency</div><div class="ccard-why">Brand partnerships team reviews collaboration proposals.</div><div class="tag-row"><span class="ctag email">BrandPartnerships@teamwass.com</span></div></div><div class="ccard cat-family"><div class="cat-tag family">Family</div><div class="ccard-name">Myles O'Neal</div><div class="ccard-role">Son · DJ / music career · @mylesfoneal</div><div class="ccard-why">Building his own DJ career. Peer-level outreach works here.</div><div class="tag-row"><span class="ctag ig">@mylesfoneal</span></div></div></div>`,
+    `<h2>Verified Channels</h2><div class="info-box"><div class="info-label">Brand Partnerships — Wasserman</div><div class="info-val">BrandPartnerships@teamwass.com</div><div class="info-note">Frame as a business opportunity. Lead with your catalog and commercial capabilities.</div></div><div class="info-box"><div class="info-label">Instagram</div><div class="info-val">@shaq · @djdiesel · @mylesfoneal</div><div class="info-note">Build visibility through meaningful engagement for 4–6 weeks before any DM.</div></div>`,
+    `<h2>6-Week Plan</h2><div class="week-row"><div class="week-num">1<div class="week-sub">–2</div></div><div class="week-body"><div class="week-title">Foundation</div><ul class="week-tasks"><li>Follow Shaq, DJ Diesel, Myles on all platforms</li><li>Leave 3–4 meaningful comments per week on DJ Diesel content</li></ul></div></div><div class="week-row"><div class="week-num">3<div class="week-sub">–4</div></div><div class="week-body"><div class="week-title">Alignment Content</div><ul class="week-tasks"><li>Post: "The DJ Diesel model — what Shaq building a music career teaches every independent creator"</li><li>Engage Myles O'Neal's music content as a fellow creator</li></ul></div></div><div class="week-row"><div class="week-num">5<div class="week-sub">–6</div></div><div class="week-body"><div class="week-title">Warm Outreach</div><ul class="week-tasks"><li>Email BrandPartnerships@teamwass.com</li><li>LinkedIn connect with Rishi Daulat — 2 sentence note max</li></ul></div></div>`,
+    `<div class="post-card"><div class="post-platform pp-ig">Instagram — Week 3</div><div class="post-body">Shaq didn't just play basketball. He studied business from day one — franchises, tech, media, music. Now DJ Diesel.\n\nThat's the blueprint for Lamb Music Works.\n\n#IndependentMusic #LambMusicWorks #MusicBusiness</div></div>`
+   ]},
+  {id:'masterp',name:'Master P',initials:'P',role:'No Limit Forever · Entrepreneur',category:'music',status:'active',avatarBg:'#3A1A0A',avatarColor:'#E05820',
+   tabs:['Overview','Family Circle','Direct Access','Social Plan','Email'],
+   content:[
+    `<div class="alert alert-red" style="margin-bottom:16px;">🔥 <strong>Live outreach window open.</strong> Master P recently departed UNO basketball — transition moment.</div><div class="page-intro">Percy Miller is the most accessible figure at his level. <em>Business email in his Instagram bio. Engages personally on social.</em></div><h2>Why This Works</h2><p>Master P built a $200M empire starting with <strong>$10,000 and a record store.</strong> No label. No cosign. Just output, ownership, and belief that the music was the business. That's identical to Lamb Music Works.</p><div class="action-block"><h3>Priority Moves — This Week</h3><ul class="alist"><li><span class="anum">1</span>Email bookingnolimit@gmail.com NOW</li><li><span class="anum">2</span>Find @JuggieofNo on Instagram</li><li><span class="anum">3</span>Connect with James Lindsay (Rap Snacks CEO) on LinkedIn</li></ul></div>`,
+    `<div class="card-grid"><div class="ccard cat-family"><div class="cat-tag family">Son · Primary</div><div class="ccard-name">Romeo Miller</div><div class="ccard-role">Co-Founder No Limit Forever · @romeomiller (1.9M)</div><div class="ccard-why">Most business-active child. Co-founded NLF Records. Music-to-music outreach has a real shot.</div><div class="tag-row"><span class="ctag ig">@romeomiller</span></div></div><div class="ccard cat-music"><div class="cat-tag music">Brother</div><div class="ccard-name">Silkk the Shocker</div><div class="ccard-role">Original No Limit artist · Still recording</div><div class="ccard-why">Most accessible NL veteran for cold outreach.</div><div class="tag-row"><span class="ctag ig">@silkktheshocker</span></div></div><div class="ccard cat-direct"><div class="cat-tag direct">Inner Orbit</div><div class="ccard-name">@JuggieofNo</div><div class="ccard-role">Listed in Master P's Instagram bio</div><div class="ccard-why">P put this handle in his own bio. No celebrity gating.</div><div class="tag-row"><span class="ctag ig">@JuggieofNo</span></div></div></div>`,
+    `<div class="info-box"><div class="info-label">Business Email (in his IG bio)</div><div class="info-val">bookingnolimit@gmail.com</div><div class="info-note">Subject: "Independent music builder — built on the No Limit blueprint." 3 paragraphs max. Builder-to-builder energy.</div></div><div class="info-box"><div class="info-label">Instagram / Social</div><div class="info-val">@masterp (4M) · @MasterPMiller (X)</div><div class="info-note">Engage 3–4 weeks on his entrepreneurship content before DMing.</div></div>`,
+    `<h2>6-Week Plan</h2><div class="week-row"><div class="week-num">1<div class="week-sub">–2</div></div><div class="week-body"><div class="week-title">Foundation</div><ul class="week-tasks"><li>Follow Master P, Romeo, Silkk, @JuggieofNo, James Lindsay</li><li>Post about his UNO chapter — show you know the real story</li></ul></div></div><div class="week-row"><div class="week-num">3<div class="week-sub">–4</div></div><div class="week-body"><div class="week-title">Alignment Content</div><ul class="week-tasks"><li>Post: "The No Limit Model — what it looks like in 2026 as a solo producer"</li><li>Engage James Lindsay's LinkedIn posts with substance</li></ul></div></div><div class="week-row"><div class="week-num">5<div class="week-sub">–6</div></div><div class="week-body"><div class="week-title">Warm Outreach</div><ul class="week-tasks"><li>Email bookingnolimit@gmail.com — timing is perfect</li><li>DM Romeo Miller — music-to-music, one clear ask</li></ul></div></div>`,
+    `<div class="post-card"><div class="post-platform pp-reel">Email — bookingnolimit@gmail.com</div><div class="post-body">Subject: Lamb Music Works — Independent music builder built on your blueprint\n\nCoach P —\n\nMy name is Warren Lamb. I run Lamb Music Works — jingles, sync licensing, beat sales, and brand music. I've been building it on the same principle you've operated on your entire career: own your product, control your distribution, never wait for permission to move.\n\nI watched your UNO chapter with real admiration. That's the mindset I apply every day.\n\nI'm not asking for a co-sign. I'm asking for 15 minutes.\n\nWarren Lamb\nLamb Music Works\nlambmusicworks.com</div></div>`
+   ]}
+];
+
+let TARGETS = [...BUILT_IN_TARGETS];
+let currentTarget = null;
+let vaultFilter = 'all';
+const VAULT_KEY = 'lmw_vault_targets';
+
+// ══ RADIO ══
+const RADIO_KEY = 'lmw_radio_playlist';
+let playlist = [];
+let currentTrackIndex = -1;
+let radioPlaying = false;
+let shuffle = false;
+let repeat = false;
+let radioAudio = null;
+let progressTimer = null;
+let streamConnected = false;
+
+function loadRadioPlaylist(){
+  try{
+    const saved = localStorage.getItem(RADIO_KEY);
+    if(saved) playlist = JSON.parse(saved);
+  }catch(e){ playlist = []; }
+}
+
+function saveRadioPlaylist(){
+  try{ localStorage.setItem(RADIO_KEY, JSON.stringify(playlist)); }catch(e){}
+}
+
+// Convert Google Drive share link to streamable direct URL
+function convertGDriveUrl(url){
+  if(!url) return '';
+  // Handle /file/d/FILE_ID/view format
+  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if(match) return `https://drive.google.com/uc?export=download&id=${match[1]}`;
+  // Handle ?id=FILE_ID format
+  const match2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if(match2) return `https://drive.google.com/uc?export=download&id=${match2[1]}`;
+  // Return as-is if not Google Drive
+  return url;
+}
+
+function initRadio(){
+  loadRadioPlaylist();
+  radioAudio = document.getElementById('radioAudio');
+  radioAudio.addEventListener('ended', nextTrack);
+  radioAudio.addEventListener('timeupdate', updateProgress);
+  radioAudio.addEventListener('loadedmetadata', updateDuration);
+  renderPlaylist();
+}
+
+function renderPlaylist(){
+  const container = document.getElementById('playlistTracks');
+  document.getElementById('playlistCount').textContent = playlist.length + ' track' + (playlist.length!==1?'s':'');
+  document.getElementById('radioTracks').textContent = playlist.length;
+  if(!playlist.length){
+    container.innerHTML = `<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed rgba(201,168,76,0.15);border-radius:8px;">
+      <div style="font-size:28px;margin-bottom:8px;">📭</div>
+      <div style="font-weight:600;color:var(--text);margin-bottom:4px;">No tracks yet</div>
+      <div style="font-size:12px;line-height:1.6;">Upload your MP3s to Google Drive and add them below.<br>They'll be saved here permanently.</div>
+    </div>`;
+    return;
+  }
+  container.innerHTML = playlist.map((t,i) => `
+    <div class="track-row ${currentTrackIndex===i?'playing':''}" style="position:relative;">
+      <div onclick="playTrack(${i})" style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;cursor:pointer;">
+        <div class="track-num">${currentTrackIndex===i?'▶':i+1}</div>
+        <div class="track-details">
+          <div class="track-name">${t.name}</div>
+          <div class="track-meta">${t.bpm?t.bpm+' BPM':''}</div>
+        </div>
+        <div class="track-genre">${t.genre}</div>
+        <div class="track-duration">${t.duration}</div>
+      </div>
+      <button onclick="deleteTrack(${i})" style="background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;margin-left:8px;border-radius:4px;flex-shrink:0;" title="Remove track" onmouseover="this.style.color='#CC3520'" onmouseout="this.style.color='var(--muted)'">✕</button>
+    </div>`).join('');
+}
+
+function deleteTrack(index){
+  if(!confirm(`Remove "${playlist[index].name}" from playlist?`)) return;
+  if(currentTrackIndex === index){ pauseRadio(); currentTrackIndex = -1; document.getElementById('radioTrackName').textContent='Select a track to begin'; document.getElementById('radioProgressFill').style.width='0%'; }
+  else if(currentTrackIndex > index){ currentTrackIndex--; }
+  playlist.splice(index, 1);
+  saveRadioPlaylist();
+  renderPlaylist();
+}
+
+function playTrack(index){
+  if(index < 0 || index >= playlist.length) return;
+  currentTrackIndex = index;
+  const track = playlist[index];
+  document.getElementById('radioTrackName').textContent = track.name;
+  document.getElementById('radioTrackArtist').textContent = 'Lamb Music Works';
+  document.getElementById('radioTrackTag').textContent = (track.genre||'LMW RADIO').toUpperCase();
+  clearInterval(progressTimer);
+  document.getElementById('radioProgressFill').style.width='0%';
+  document.getElementById('radioCurrentTime').textContent='0:00';
+  if(track.streamUrl){
+    radioAudio.src = track.streamUrl;
+    radioAudio.play().catch(e=>{ console.log('Audio error:',e); setRadioPlaying(true); simulateProgress(track.duration); });
+    setRadioPlaying(true);
+  } else {
+    setRadioPlaying(true);
+    simulateProgress(track.duration);
+  }
+  renderPlaylist();
+}
+
+function simulateProgress(duration){
+  clearInterval(progressTimer);
+  if(!duration||duration==='0:00'){ document.getElementById('radioDuration').textContent='—'; return; }
+  const parts = duration.split(':');
+  const totalSecs = parseInt(parts[0]||0)*60 + parseInt(parts[1]||0);
+  if(!totalSecs) return;
+  let elapsed = 0;
+  document.getElementById('radioDuration').textContent = duration;
+  progressTimer = setInterval(()=>{
+    if(!radioPlaying) return;
+    elapsed++;
+    if(elapsed >= totalSecs){ clearInterval(progressTimer); nextTrack(); return; }
+    const pct = (elapsed/totalSecs)*100;
+    document.getElementById('radioProgressFill').style.width = pct+'%';
+    const m = Math.floor(elapsed/60);
+    const s = elapsed%60;
+    document.getElementById('radioCurrentTime').textContent = m+':'+(s<10?'0':'')+s;
+  },1000);
+}
+
+function toggleRadio(){
+  if(!playlist.length){ alert('Add tracks to your playlist first.'); return; }
+  if(currentTrackIndex === -1){ playTrack(0); return; }
+  if(radioPlaying){ pauseRadio(); } else { resumeRadio(); }
+}
+
+function setRadioPlaying(playing){
+  radioPlaying = playing;
+  document.getElementById('radioPlayBtn').textContent = playing ? '⏸' : '▶';
+  document.querySelectorAll('.radio-bar').forEach(b => b.classList.toggle('paused', !playing));
+  document.getElementById('radioListeners').textContent = playing ? Math.floor(Math.random()*50)+1 : '—';
+}
+
+function pauseRadio(){ radioAudio.pause(); clearInterval(progressTimer); setRadioPlaying(false); }
+function resumeRadio(){
+  if(playlist[currentTrackIndex]?.streamUrl){ radioAudio.play().catch(()=>{}); }
+  else { simulateProgress(playlist[currentTrackIndex]?.duration || '3:30'); }
+  setRadioPlaying(true);
+}
+
+function nextTrack(){
+  if(!playlist.length) return;
+  if(repeat){ playTrack(currentTrackIndex); return; }
+  if(shuffle){ playTrack(Math.floor(Math.random()*playlist.length)); return; }
+  playTrack((currentTrackIndex+1) % playlist.length);
+}
+
+function toggleShuffle(){ shuffle=!shuffle; document.getElementById('radioShuffleBtn').classList.toggle('active',shuffle); }
+function toggleRepeat(){ repeat=!repeat; document.getElementById('radioRepeatBtn').classList.toggle('active',repeat); }
+function setVolume(v){ if(radioAudio) radioAudio.volume = parseFloat(v); }
+
+function updateProgress(){
+  if(!radioAudio.duration) return;
+  const pct = (radioAudio.currentTime/radioAudio.duration)*100;
+  document.getElementById('radioProgressFill').style.width = pct+'%';
+  const m = Math.floor(radioAudio.currentTime/60);
+  const s = Math.floor(radioAudio.currentTime%60);
+  document.getElementById('radioCurrentTime').textContent = m+':'+(s<10?'0':'')+s;
+}
+
+function updateDuration(){
+  const m = Math.floor(radioAudio.duration/60);
+  const s = Math.floor(radioAudio.duration%60);
+  document.getElementById('radioDuration').textContent = m+':'+(s<10?'0':'')+s;
+}
+
+function seekRadio(e, bar){
+  const rect = bar.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  if(radioAudio.duration){ radioAudio.currentTime = pct * radioAudio.duration; }
+}
+
+function connectStream(){
+  const url = document.getElementById('streamUrl').value.trim();
+  if(!url){ alert('Enter a stream URL first.'); return; }
+  streamConnected = true;
+  radioAudio.src = url;
+  radioAudio.play().then(()=>{
+    document.getElementById('streamStatus').textContent = '🟢 Live stream connected';
+    document.getElementById('streamStatus').style.color = '#5AB870';
+    document.getElementById('radioTrackName').textContent = 'LMW Radio — Live';
+    setRadioPlaying(true);
+  }).catch(()=>{ document.getElementById('streamStatus').textContent = '❌ Could not connect — check your URL'; document.getElementById('streamStatus').style.color = '#E07060'; streamConnected = false; });
+}
+
+function addTrack(){
+  const name = document.getElementById('newTrackName').value.trim();
+  const genre = document.getElementById('newTrackGenre').value.trim();
+  const rawUrl = document.getElementById('newTrackUrl').value.trim();
+  const duration = document.getElementById('newTrackDuration').value.trim() || '0:00';
+  const bpm = document.getElementById('newTrackBpm').value.trim();
+  if(!name){ alert('Enter a track name.'); return; }
+  const streamUrl = convertGDriveUrl(rawUrl);
+  playlist.push({id:Date.now(), name, genre:genre||'LMW', rawUrl, streamUrl, duration, bpm});
+  saveRadioPlaylist();
+  document.getElementById('newTrackName').value='';
+  document.getElementById('newTrackGenre').value='';
+  document.getElementById('newTrackUrl').value='';
+  document.getElementById('newTrackDuration').value='';
+  document.getElementById('newTrackBpm').value='';
+  renderPlaylist();
+}
+
+// ══ DONE FOR YOU ══
+function submitDFY(){
+  const name = document.getElementById('dfyName').value.trim();
+  const email = document.getElementById('dfyEmail').value.trim();
+  const vision = document.getElementById('dfyVision').value.trim();
+  if(!name||!email||!vision){ alert('Please fill in all required fields.'); return; }
+  document.getElementById('dfySubmitBtn').disabled=true;
+  document.getElementById('dfyBtnText').style.display='none';
+  document.getElementById('dfySpinner').style.display='block';
+  setTimeout(()=>{
+    document.getElementById('dfySubmitBtn').disabled=false;
+    document.getElementById('dfyBtnText').style.display='block';
+    document.getElementById('dfySpinner').style.display='none';
+    document.getElementById('dfySuccess').style.display='block';
+    document.getElementById('dfyName').value='';
+    document.getElementById('dfyEmail').value='';
+    document.getElementById('dfyVision').value='';
+  },1500);
+}
+
+// ══ GLOBAL REACH LAB ══
+let selectedTerritories = ['USA'];
+let grlLoading = false;
+
+function toggleTerritory(el){
+  const t = el.dataset.territory;
+  el.classList.toggle('selected');
+  if(selectedTerritories.includes(t)){ selectedTerritories = selectedTerritories.filter(x=>x!==t); }
+  else { selectedTerritories.push(t); }
+}
+
+async function generateGlobalPitch(){
+  const key = getAnthropicKey();
+  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
+  if(!selectedTerritories.length){ alert('Select at least one territory.'); return; }
+  setGrlLoading('Pitch Generator','Generating territory pitch…');
+  const prompt = `You are a sync licensing expert for Warren Lamb, owner of Lamb Music Works — an independent producer with a catalog of sync-ready tracks (Soul, R&B, Cinematic, Blues, Inspirational). BMI registered.
+
+Write a professional sync licensing pitch optimized for these territories: ${selectedTerritories.join(', ')}
+
+Include:
+- Territory-specific cultural notes (what lands in each market)
+- Key buyers/platforms to target in each region
+- Pitch angle tailored to each territory's dominant media (TV, film, ads, streaming)
+- One punchy subject line for cold email outreach
+
+Keep it actionable. Warren pitches independently with no label backing.`;
+  await callGRL(prompt, 'Territory Pitch Generated');
+}
+
+async function analyzeCatalog(){
+  const key = getAnthropicKey();
+  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
+  setGrlLoading('Catalog Analyzer','Analyzing catalog…');
+  const prompt = `You are a sync licensing strategist for Warren Lamb, owner of Lamb Music Works. His catalog includes Soul, R&B, Cinematic, Blues, Gospel, Jazz, and Inspirational tracks. 100+ tracks. BMI registered.
+
+Analyze which genres and moods work best for sync in these territories: ${selectedTerritories.length ? selectedTerritories.join(', ') : 'USA, UK, Canada'}
+
+For each genre in Warren's catalog, give:
+- Best territory fit
+- Best use case (drama, comedy, ads, documentary, etc.)
+- Realistic placement potential (high/medium/low)
+- One specific platform or show that would be a great fit
+
+Be specific and practical. Warren is pitching independently.`;
+  await callGRL(prompt, 'Catalog Analysis Complete');
+}
+
+async function generateSupervisorEmail(){
+  const key = getAnthropicKey();
+  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
+  setGrlLoading('Supervisor Outreach','Writing supervisor email…');
+  const prompt = `Write a professional cold email from Warren Lamb (Lamb Music Works) to a music supervisor in: ${selectedTerritories[0] || 'USA'}
+
+Warren is an independent producer. Catalog includes Soul, R&B, Cinematic, Blues, Instrumental. BMI registered. lambmusicworks.com
+
+The email should:
+- Be under 150 words
+- Lead with value (the music) not biography
+- Have a punchy subject line
+- Reference the specific territory's media landscape
+- Include one clear call to action
+- Sound like a professional, not a fan
+
+Format:
+SUBJECT: [subject line]
+
+[email body]`;
+  await callGRL(prompt, 'Supervisor Email Ready');
+}
+
+async function generatePlaybook(){
+  const key = getAnthropicKey();
+  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
+  setGrlLoading('Release Playbook','Building playbook…');
+  const prompt = `Create a 72-hour algorithmic release playbook for Warren Lamb (Lamb Music Works) optimized for maximum global reach in: ${selectedTerritories.join(', ')}
+
+Warren is an independent producer with a sync-ready catalog (Soul, R&B, Cinematic, Blues). BMI registered. Has social presence.
+
+The playbook should cover:
+- Hour 0–6: Pre-release actions
+- Hour 6–24: Launch day moves (platform by platform)
+- Hour 24–48: Momentum building
+- Hour 48–72: Sync pitching window
+
+For each phase give specific actions, platforms, and copy examples. Be tactical and specific to the selected territories.`;
+  await callGRL(prompt, '72-Hour Playbook Generated');
+}
+
+async function callGRL(prompt, label){
+  const key = getAnthropicKey();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,messages:[{role:'user',content:prompt}]})
+    });
+    const data = await res.json();
+    if(data.error) throw new Error(data.error.message);
+    const text = data.content.map(b=>b.text||'').join('');
+    document.getElementById('grlOutputLabel').textContent = label;
+    document.getElementById('grlOutputText').textContent = text;
+    document.getElementById('grlOutput').style.display = 'block';
+    document.getElementById('grlOutput').scrollIntoView({behavior:'smooth'});
+  } catch(e){ alert('Failed: '+e.message); }
+  finally { grlLoading = false; }
+}
+
+function setGrlLoading(tool, msg){
+  grlLoading = true;
+  document.getElementById('grlOutputLabel').textContent = msg;
+  document.getElementById('grlOutputText').textContent = 'Generating…';
+  document.getElementById('grlOutput').style.display = 'block';
+}
+
+// ══ API KEYS ══
+function getAnthropicKey(){ return localStorage.getItem('lmw_anthropic_key') || ''; }
+function getOpenAIKey(){ return localStorage.getItem('lmw_openai_key') || ''; }
+
+function saveApiKey(){
+  const k = document.getElementById('apiKeyInput').value.trim();
+  if(!k){ alert('Enter your API key.'); return; }
+  if(!k.startsWith('sk-ant-')){ alert('Should start with sk-ant-'); return; }
+  localStorage.setItem('lmw_anthropic_key', k);
+  document.getElementById('apiKeyInput').value = '';
+  updateKeyUI(); alert('Anthropic key saved!');
+}
+function clearApiKey(){ if(confirm('Remove Anthropic key?')){ localStorage.removeItem('lmw_anthropic_key'); updateKeyUI(); }}
+function saveOpenAIKey(){
+  const k = document.getElementById('openaiKeyInput').value.trim();
+  if(!k){ alert('Enter your OpenAI key.'); return; }
+  localStorage.setItem('lmw_openai_key', k);
+  document.getElementById('openaiKeyInput').value = '';
+  updateKeyUI(); alert('OpenAI key saved!');
+}
+function clearOpenAIKey(){ if(confirm('Remove OpenAI key?')){ localStorage.removeItem('lmw_openai_key'); updateKeyUI(); }}
+
+function updateKeyUI(){
+  const has = !!getAnthropicKey(); const hasOAI = !!getOpenAIKey();
+  document.getElementById('globalKeyDot').className = 'key-dot '+(has?'on':'off');
+  document.getElementById('globalKeyLabel').textContent = has?'API active':'No API key';
+  document.getElementById('settingsKeyStatus').className = 'key-status-bar '+(has?'has-key':'no-key');
+  document.getElementById('settingsKeyDot').className = 'key-dot '+(has?'on':'off');
+  document.getElementById('settingsKeyText').textContent = has?'Anthropic key saved — AI enabled':'No key saved';
+  document.getElementById('openaiKeyStatus').className = 'key-status-bar '+(hasOAI?'has-key':'no-key');
+  document.getElementById('openaiKeyDot').className = 'key-dot '+(hasOAI?'on':'off');
+  document.getElementById('openaiKeyText').textContent = hasOAI?'OpenAI key saved — images enabled':'No OpenAI key saved';
+  document.getElementById('homeKeyAlert').style.display = has?'none':'block';
+  document.getElementById('homeKeyOk').style.display = has?'block':'none';
+}
+
+// ══ NAVIGATION ══
+const pageTitles = {home:'LMW STUDIO',vault:'NETWORK VAULT',posts:'POST GENERATOR',images:'IMAGE GENERATOR',reels:'REEL STUDIO',radio:'LMW RADIO',dfy:'DONE FOR YOU',grl:'GLOBAL REACH LAB',settings:'SETTINGS'};
+const pageSubs = {home:'Lamb Music Works',vault:'Intelligence & Outreach',posts:'Social Content AI',images:'Visual Content AI',reels:'Script Generator',radio:'Broadcasting Worldwide',dfy:'Custom Music · $10K Minimum',grl:'Sync Intelligence · Territory Strategy',settings:'API Keys & Storage'};
+
+function showPage(id, navEl){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item,.nav-settings').forEach(n=>n.classList.remove('active'));
+  if(id==='vault-add'){
+    document.getElementById('page-vault').classList.add('active');
+    document.querySelector('[title="Network Vault"]').classList.add('active');
+    document.getElementById('vaultWelcome').style.display='none';
+    document.getElementById('dossierView').style.display='none';
+    document.getElementById('vaultAddView').style.display='block';
+    document.getElementById('topbarTitle').textContent='ADD TARGET';
+    document.getElementById('topbarSub').textContent='Network Vault';
+    document.getElementById('vaultToggle').style.display='none';
+    return;
+  }
+  const pg = document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent = pageTitles[id]||id.toUpperCase();
+  document.getElementById('topbarSub').textContent = pageSubs[id]||'';
+  document.getElementById('vaultToggle').style.display = id==='vault'?'flex':'none';
+  if(id==='vault'){ document.getElementById('vaultWelcome').style.display='flex'; document.getElementById('dossierView').style.display='none'; document.getElementById('vaultAddView').style.display='none'; renderTargetList(); }
+}
+
+// ══ VAULT ══
+function loadVaultStorage(){
+  try{ const saved=localStorage.getItem(VAULT_KEY); if(!saved)return; JSON.parse(saved).forEach(t=>{if(!TARGETS.find(x=>x.id===t.id))TARGETS.push(t);}); }catch(e){}
+}
+function persistVault(){ try{localStorage.setItem(VAULT_KEY,JSON.stringify(TARGETS.filter(t=>t.id.startsWith('gen_'))));}catch(e){} }
+function clearVaultStorage(){ if(confirm('Remove all AI-generated targets?')){localStorage.removeItem(VAULT_KEY);TARGETS=[...BUILT_IN_TARGETS];renderTargetList();updateVaultStats();alert('Cleared.');} }
+
+function getFilteredTargets(q=''){
+  return TARGETS.filter(t=>{
+    const mc=vaultFilter==='all'||t.category===vaultFilter;
+    const mq=!q||t.name.toLowerCase().includes(q.toLowerCase());
+    return mc&&mq;
+  });
+}
+function filterTargets(q){renderTargetList(q);}
+function setVaultFilter(el,cat){
+  vaultFilter=cat;
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  renderTargetList();
+}
+function renderTargetList(q=''){
+  const list=document.getElementById('targetList');
+  const targets=getFilteredTargets(q);
+  if(!targets.length){list.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:12px;">No targets found</div>';return;}
+  list.innerHTML='';
+  targets.forEach(t=>{
+    const el=document.createElement('div');
+    el.className='target-item'+(currentTarget?.id===t.id?' active':'');
+    el.onclick=()=>openDossier(t);
+    const sc={new:'status-new',active:'status-active',contacted:'status-contacted',responded:'status-responded'}[t.status]||'status-new';
+    el.innerHTML=`<div class="t-avatar" style="background:${t.avatarBg};color:${t.avatarColor};">${t.initials}</div><div class="t-info"><div class="t-name">${t.name}</div><div class="t-role">${t.role}</div></div><div class="t-status ${sc}"></div>`;
+    list.appendChild(el);
+  });
+}
+function openDossier(t){
+  currentTarget=t;
+  document.getElementById('vaultWelcome').style.display='none';
+  document.getElementById('vaultAddView').style.display='none';
+  const dv=document.getElementById('dossierView'); dv.style.display='flex';
+  const av=document.getElementById('dosAvatar'); av.textContent=t.initials; av.style.background=t.avatarBg; av.style.color=t.avatarColor;
+  document.getElementById('dosName').textContent=t.name;
+  document.getElementById('dosMeta').textContent=t.role;
+  document.getElementById('dosStatus').value=t.status;
+  const tabs=document.getElementById('dossierTabs'); tabs.innerHTML='';
+  t.tabs.forEach((tab,i)=>{
+    const dt=document.createElement('div'); dt.className='dtab'+(i===0?' active':''); dt.textContent=tab;
+    dt.onclick=()=>{document.querySelectorAll('.dtab').forEach((x,j)=>x.classList.toggle('active',j===i));document.getElementById('dossierBody').innerHTML=t.content[i]||'';document.getElementById('dossierBody').scrollTop=0;};
+    tabs.appendChild(dt);
+  });
+  document.getElementById('dossierBody').innerHTML=t.content[0]||'';
+  renderTargetList(document.getElementById('vaultSearch').value);
+  document.getElementById('vaultSidebar').classList.remove('open');
+  document.getElementById('vaultOverlay').classList.remove('open');
+}
+function updateTargetStatus(val){
+  if(!currentTarget)return;
+  const t=TARGETS.find(x=>x.id===currentTarget.id);
+  if(t){t.status=val;currentTarget.status=val;persistVault();renderTargetList();}
+}
+function updateVaultStats(){
+  document.getElementById('statTotal').textContent=TARGETS.length;
+  document.getElementById('statActive').textContent=TARGETS.filter(t=>t.status==='active'||t.status==='contacted').length;
+  document.getElementById('statContacts').textContent=TARGETS.length*6;
+}
+function toggleVaultSidebar(){ document.getElementById('vaultSidebar').classList.toggle('open'); document.getElementById('vaultOverlay').classList.toggle('open'); }
+
+// ══ AI DOSSIER ══
+let generatedDossierData=null;
+async function generateDossier(){
+  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const name=document.getElementById('genName').value.trim(); if(!name){document.getElementById('genName').focus();return;}
+  const cat=document.getElementById('genCat').value;
+  const known=document.getElementById('genKnown').value.trim();
+  const angle=document.getElementById('genAngle').value.trim();
+  setBtnLoading('genBtn','genBtnText','genSpinner',true);
+  const prompt=`You are a music industry network intelligence analyst for Warren Lamb, owner of Lamb Music Works.
+Generate a dossier for: ${name}. Known for: ${known||'not specified'}. Category: ${cat}. Warren's angle: ${angle||'sync licensing, brand music'}.
+Respond ONLY with valid JSON:
+{"why":"2-3 sentences on strategic relevance","priority_moves":["move1","move2","move3"],"inner_circle":[{"name":"Full Name","tier":"Tier 1","role":"Their role","why":"Why they matter","channels":["channel"]}],"direct_access":[{"label":"Channel","value":"contact","note":"How to approach"}],"proximity_plan":[{"weeks":"1-2","title":"Foundation","tasks":["task1","task2"]}],"email_subject":"Subject line","email_body":"Full email body 3 paragraphs"}`;
+  try{
+    const res=await callAnthropic(prompt,key,2000);
+    let clean=res.replace(/```json|```/g,'').trim();
+    const start=clean.indexOf('{'); const end=clean.lastIndexOf('}');
+    if(start!==-1&&end!==-1)clean=clean.slice(start,end+1);
+    const parsed=JSON.parse(clean);
+    generatedDossierData={name,cat,known,angle,parsed};
+    const out=document.getElementById('genOutput');
+    document.getElementById('genText').textContent=`✓ Dossier generated for ${name}\n\nInner circle: ${parsed.inner_circle?.length||0} contacts\nProximity plan: ${parsed.proximity_plan?.length||0} phases\nDirect access: ${parsed.direct_access?.length||0} channels\n\nClick "Save to Vault" to add.`;
+    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Generation failed: '+e.message);}
+  finally{setBtnLoading('genBtn','genBtnText','genSpinner',false);}
+}
+
+function buildGeneratedContent(name,data){
+  const moves=(data.priority_moves||[]).map((m,i)=>`<li><span class="anum">${i+1}</span>${m}</li>`).join('');
+  const tab0=`<div class="page-intro">${data.why||''}</div><div class="action-block"><h3>Priority Moves</h3><ul class="alist">${moves}</ul></div>`;
+  const cards=(data.inner_circle||[]).map(c=>{
+    const tags=(c.channels||[]).map(ch=>{const cls=ch.includes('@')?'ig':ch.includes('.')?'web':ch.includes('gmail')?'email':'li';return`<span class="ctag ${cls}">${ch}</span>`;}).join('');
+    return`<div class="ccard cat-direct"><div class="cat-tag direct">${c.tier||'Contact'}</div><div class="ccard-name">${c.name}</div><div class="ccard-role">${c.role}</div><div class="ccard-why">${c.why}</div><div class="tag-row">${tags}</div></div>`;
+  }).join('');
+  const tab1=`<h2>Inner Circle</h2><div class="card-grid">${cards}</div>`;
+  const boxes=(data.direct_access||[]).map(d=>`<div class="info-box"><div class="info-label">${d.label}</div><div class="info-val">${d.value}</div><div class="info-note">${d.note}</div></div>`).join('');
+  const tab2=`<h2>Direct Access</h2>${boxes}`;
+  const weeks=(data.proximity_plan||[]).map(p=>{const tasks=(p.tasks||[]).map(t=>`<li>${t}</li>`).join('');return`<div class="week-row"><div class="week-num">${p.weeks||''}<div class="week-sub">wks</div></div><div class="week-body"><div class="week-title">${p.title||''}</div><ul class="week-tasks">${tasks}</ul></div></div>`;}).join('');
+  const tab3=`<h2>Proximity Plan</h2>${weeks}`;
+  const tab4=`<div class="post-card"><div class="post-platform pp-reel">Email Template</div><div class="post-body">Subject: ${data.email_subject||''}\n\n${data.email_body||''}</div></div>`;
+  return[tab0,tab1,tab2,tab3,tab4];
+}
+
+function saveGenerated(){
+  if(!generatedDossierData)return;
+  const{name,cat,known,parsed}=generatedDossierData;
+  const initials=name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const colors=[{bg:'#1A3A2A',color:'#5AB870'},{bg:'#2A1A3A',color:'#A050D5'},{bg:'#3A2A0A',color:'#E0A030'},{bg:'#0A2A3A',color:'#3A90D5'}];
+  const c=colors[TARGETS.length%colors.length];
+  const content=buildGeneratedContent(name,parsed);
+  const t={id:'gen_'+Date.now(),name,initials,role:known||cat,category:cat,status:'new',avatarBg:c.bg,avatarColor:c.color,tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content};
+  TARGETS.push(t); persistVault(); updateVaultStats();
+  document.getElementById('genName').value=''; document.getElementById('genKnown').value=''; document.getElementById('genAngle').value='';
+  document.getElementById('genOutput').style.display='none'; generatedDossierData=null;
+  showPage('vault',document.querySelector('[title="Network Vault"]')); openDossier(t);
+}
+
+// ══ POST GENERATOR ══
+let selectedPlatforms=['Instagram'];
+function togglePlatform(el){
+  const p=el.dataset.platform; el.classList.toggle('selected');
+  selectedPlatforms=Array.from(document.querySelectorAll('.platform-chip.selected')).map(c=>c.dataset.platform);
+}
+async function generatePosts(){
+  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const topic=document.getElementById('postTopic').value.trim(); if(!topic){document.getElementById('postTopic').focus();return;}
+  if(!selectedPlatforms.length){alert('Select at least one platform.');return;}
+  setBtnLoading('postBtn','postBtnText','postSpinner',true);
+  const tone=document.getElementById('postTone').value;
+  const goal=document.getElementById('postGoal').value;
+  const hashtags=document.getElementById('postHashtags').value;
+  const prompt=`You are a social media expert for Warren Lamb, owner of Lamb Music Works — independent solo music producer offering jingles, sync licensing, beat sales, and brand music.
+Create optimized social media posts for: ${selectedPlatforms.join(', ')}
+Topic: ${topic}
+Tone: ${tone}
+Goal: ${goal}
+Hashtags: ${hashtags==='yes'?'Include relevant hashtags':'No hashtags'}
+For EACH platform write a separate post optimized for that platform. Label each clearly. Warren's brand voice: Independent, builder mentality, authentic, ownership-focused.`;
+  try{
+    const res=await callAnthropic(prompt,key,1200);
+    const out=document.getElementById('postOutput');
+    document.getElementById('postText').textContent=res;
+    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Failed: '+e.message);}
+  finally{setBtnLoading('postBtn','postBtnText','postSpinner',false);}
+}
+
+// ══ IMAGE GENERATOR ══
+async function generateImage(){
+  const key=getOpenAIKey(); if(!key){alert('Add your OpenAI API key in Settings to generate images.');return;}
+  const desc=document.getElementById('imgPrompt').value.trim(); if(!desc){document.getElementById('imgPrompt').focus();return;}
+  const style=document.getElementById('imgStyle').value;
+  const format=document.getElementById('imgFormat').value;
+  const brand=document.getElementById('imgBrand').value.trim();
+  setBtnLoading('imgBtn','imgBtnText','imgSpinner',true);
+  const fullPrompt=`${desc}. Style: ${style}. Format: ${format}. ${brand?'Brand: '+brand+'.':''} Professional music industry aesthetic, premium feel.`;
+  const sizeMap={'square 1:1 social media post':'1024x1024','vertical 9:16 story':'1024x1792','horizontal 16:9 banner':'1792x1024'};
+  try{
+    const res=await fetch('https://api.openai.com/v1/images/generations',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:'dall-e-3',prompt:fullPrompt,n:1,size:sizeMap[format]||'1024x1024',quality:'standard'})});
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message);
+    const url=data.data[0].url;
+    const out=document.getElementById('imgOutput');
+    document.getElementById('imgGrid').innerHTML=`<div><div class="image-card"><img src="${url}" alt="Generated"></div><div style="display:flex;gap:8px;margin-top:8px;"><a style="flex:1;padding:7px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:var(--gold);font-size:11px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;" href="${url}" download="lmw-image.png" target="_blank">Download</a></div></div>`;
+    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Image failed: '+e.message);}
+  finally{setBtnLoading('imgBtn','imgBtnText','imgSpinner',false);}
+}
+
+// ══ REEL STUDIO ══
+let selectedFormat='TikTok / Instagram Reel (30–45 sec)';
+function selectFormat(el){
+  document.querySelectorAll('.format-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected'); selectedFormat=el.dataset.format;
+}
+async function generateReel(){
+  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const topic=document.getElementById('reelTopic').value.trim(); if(!topic){document.getElementById('reelTopic').focus();return;}
+  setBtnLoading('reelBtn','reelBtnText','reelSpinner',true);
+  const vibe=document.getElementById('reelVibe').value;
+  const cta=document.getElementById('reelCTA').value;
+  const prompt=`Write a complete avatar-ready video script for Warren Lamb (Lamb Music Works) for: ${selectedFormat}
+Topic: ${topic}
+Vibe: ${vibe}
+CTA: ${cta}
+Format: FORMAT: [format] / ESTIMATED TIME: [time] / ---SCRIPT START--- / [HOOK] / [BODY] / [CTA] / ---SCRIPT END--- / HEDRA NOTES: [expression and pacing notes]
+Warren's voice: direct, authentic, builder mentality, independent music business owner.`;
+  try{
+    const res=await callAnthropic(prompt,key,1000);
+    const out=document.getElementById('reelOutput');
+    document.getElementById('reelText').textContent=res;
+    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Failed: '+e.message);}
+  finally{setBtnLoading('reelBtn','reelBtnText','reelSpinner',false);}
+}
+
+// ══ SHARED UTILS ══
+async function callAnthropic(prompt,key,maxTokens=1500){
+  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})});
+  const data=await res.json();
+  if(data.error)throw new Error(data.error.message+' ('+data.error.type+')');
+  if(!data.content)throw new Error('Empty response');
+  return data.content.map(b=>b.text||'').join('');
+}
+function setBtnLoading(btnId,textId,spinnerId,loading){
+  document.getElementById(btnId).disabled=loading;
+  document.getElementById(textId).style.display=loading?'none':'block';
+  document.getElementById(spinnerId).style.display=loading?'block':'none';
+}
+function copyOutput(textId,btnId){
+  const text=document.getElementById(textId).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById(btnId);
+    btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// ══ INIT ══
+loadVaultStorage();
+renderTargetList();
+updateVaultStats();
+updateKeyUI();
+initRadio();
+// Clear legacy placeholder tracks on first load of new version
+if(!localStorage.getItem('lmw_radio_v2')){ localStorage.removeItem('lmw_radio_playlist'); localStorage.setItem('lmw_radio_v2','1'); }
+</script>
+</body>
+</html>
