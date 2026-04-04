@@ -905,7 +905,9 @@ function renderPlaylist(){
 }
 
 function deleteTrack(index){
-  if(!confirm(`Remove "${playlist[index].name}" from playlist?`)) return;
+  if(!confirm("Remove "+playlist[index].name+" from playlist?")) return;
+  const dbId = playlist[index].dbId || playlist[index].id;
+  deleteTrackFromSupabase(dbId);
   if(currentTrackIndex === index){ pauseRadio(); currentTrackIndex = -1; document.getElementById('radioTrackName').textContent='Select a track to begin'; document.getElementById('radioProgressFill').style.width='0%'; }
   else if(currentTrackIndex > index){ currentTrackIndex--; }
   playlist.splice(index, 1);
@@ -1027,8 +1029,10 @@ function addTrack(){
   const bpm = document.getElementById('newTrackBpm').value.trim();
   if(!name){ alert('Enter a track name.'); return; }
   const streamUrl = convertGDriveUrl(rawUrl);
-  playlist.push({id:Date.now(), name, genre:genre||'LMW', rawUrl, streamUrl, duration, bpm});
+  const newTrack = {id:Date.now(), name, genre:genre||'LMW', rawUrl, streamUrl, duration, bpm};
+  playlist.push(newTrack);
   saveRadioPlaylist();
+  saveTrackToSupabase(newTrack).then(dbId=>{ if(dbId) newTrack.dbId=dbId; });
   document.getElementById('newTrackName').value='';
   document.getElementById('newTrackGenre').value='';
   document.getElementById('newTrackUrl').value='';
@@ -1353,7 +1357,7 @@ function saveGenerated(){
   const c=colors[TARGETS.length%colors.length];
   const content=buildGeneratedContent(name,parsed);
   const t={id:'gen_'+Date.now(),name,initials,role:known||cat,category:cat,status:'new',avatarBg:c.bg,avatarColor:c.color,tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content};
-  TARGETS.push(t); persistVault(); updateVaultStats();
+  TARGETS.push(t); persistVault(); updateVaultStats(); saveTargetToSupabase(t);
   document.getElementById('genName').value=''; document.getElementById('genKnown').value=''; document.getElementById('genAngle').value='';
   document.getElementById('genOutput').style.display='none'; generatedDossierData=null;
   showPage('vault',document.querySelector('[title="Network Vault"]')); openDossier(t);
@@ -1460,13 +1464,78 @@ function copyOutput(textId,btnId){
   });
 }
 
+// ══ SUPABASE ══
+const SUPABASE_URL = 'https://ptgatsxuexmudteqzxmc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs';
+
+async function sbFetch(table, method, body, filter){
+  method = method||'GET'; filter = filter||'';
+  const url = SUPABASE_URL+'/rest/v1/'+table+filter;
+  const opts = {
+    method,
+    headers:{
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer '+SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': method==='POST' ? 'return=representation' : ''
+    }
+  };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if(!res.ok){ const err = await res.text(); throw new Error(err); }
+  if(method==='DELETE') return true;
+  const text = await res.text();
+  return text ? JSON.parse(text) : [];
+}
+
+async function loadRadioFromSupabase(){
+  try{
+    const data = await sbFetch('radio_playlist','GET',null,'?order=created_at.asc');
+    if(data && data.length){ playlist = data.map(t=>({id:t.id,name:t.name,genre:t.genre,rawUrl:t.raw_url,streamUrl:t.stream_url,duration:t.duration,bpm:t.bpm})); renderPlaylist(); }
+  }catch(e){ console.log('Radio load error:',e); }
+}
+
+async function saveTrackToSupabase(track){
+  try{
+    const saved = await sbFetch('radio_playlist','POST',{name:track.name,genre:track.genre,raw_url:track.rawUrl||'',stream_url:track.streamUrl||'',duration:track.duration,bpm:track.bpm||''});
+    if(saved && saved[0]) return saved[0].id;
+  }catch(e){ console.log('Supabase save error:',e); }
+  return null;
+}
+
+async function deleteTrackFromSupabase(dbId){
+  try{ await sbFetch('radio_playlist','DELETE',null,'?id=eq.'+dbId); }catch(e){ console.log('Delete error:',e); }
+}
+
+async function loadVaultFromSupabase(){
+  try{
+    const data = await sbFetch('vault_targets','GET',null,'?order=created_at.asc');
+    if(data && data.length){
+      data.forEach(t=>{
+        if(!TARGETS.find(x=>x.id===t.id)){
+          const parsed = {why:t.why,priority_moves:t.priority_moves||[],inner_circle:(t.contacts||[]).map(c=>({name:c.name,tier:'Contact',role:c.role,why:'',channels:[c.channel]})),direct_access:[],proximity_plan:[],email_subject:'',email_body:''};
+          TARGETS.push({id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status,avatarBg:t.avatar_bg,avatarColor:t.avatar_color,why:t.why,priorityMoves:t.priority_moves||[],contacts:t.contacts||[],tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content:buildGeneratedContent(t.name,parsed)});
+        }
+      });
+      renderTargetList(); updateVaultStats();
+    }
+  }catch(e){ console.log('Vault load error:',e); }
+}
+
+async function saveTargetToSupabase(t){
+  try{
+    await sbFetch('vault_targets','POST',{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||'new',avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});
+  }catch(e){ console.log('Vault save error:',e); }
+}
+
 // ══ INIT ══
 loadVaultStorage();
 renderTargetList();
 updateVaultStats();
 updateKeyUI();
 initRadio();
-// Clear legacy placeholder tracks on first load of new version
+loadRadioFromSupabase();
+loadVaultFromSupabase();
 if(!localStorage.getItem('lmw_radio_v2')){ localStorage.removeItem('lmw_radio_playlist'); localStorage.setItem('lmw_radio_v2','1'); }
 </script>
 </body>
