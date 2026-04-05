@@ -1649,7 +1649,7 @@ Be specific. Use the song title. Reference the story. Make every piece of copy s
         html += '<div style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:4px;">' + line + '</div>';
       }
     });
-        document.getElementById('viralOutputContent').innerHTML = '<p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">' + formatted + '</p>';
+        document.getElementById('viralOutputContent').innerHTML = html;
     document.getElementById('viralOutput').style.display = 'block';
     document.getElementById('viralOutput').scrollIntoView({behavior:'smooth'});
   } catch(e) { alert('Failed: ' + e.message); }
