@@ -1186,7 +1186,8 @@ function saveApiKey(){
   if(!k.startsWith('sk-ant-')){ alert('Should start with sk-ant-'); return; }
   localStorage.setItem('lmw_anthropic_key', k);
   document.getElementById('apiKeyInput').value = '';
-  updateKeyUI(); alert('Anthropic key saved!');
+  saveSettingToSupabase('anthropic_key', k);
+  updateKeyUI(); alert('Anthropic key saved permanently!');
 }
 function clearApiKey(){ if(confirm('Remove Anthropic key?')){ localStorage.removeItem('lmw_anthropic_key'); updateKeyUI(); }}
 function saveOpenAIKey(){
@@ -1194,7 +1195,8 @@ function saveOpenAIKey(){
   if(!k){ alert('Enter your OpenAI key.'); return; }
   localStorage.setItem('lmw_openai_key', k);
   document.getElementById('openaiKeyInput').value = '';
-  updateKeyUI(); alert('OpenAI key saved!');
+  saveSettingToSupabase('openai_key', k);
+  updateKeyUI(); alert('OpenAI key saved permanently!');
 }
 function clearOpenAIKey(){ if(confirm('Remove OpenAI key?')){ localStorage.removeItem('lmw_openai_key'); updateKeyUI(); }}
 
@@ -1488,6 +1490,28 @@ async function sbFetch(table, method, body, filter){
   return text ? JSON.parse(text) : [];
 }
 
+// ── Settings Supabase ──
+async function loadSettingsFromSupabase(){
+  try{
+    const data = await sbFetch('app_settings','GET',null,'?order=created_at.asc');
+    if(data && data.length){
+      data.forEach(s=>{
+        if(s.key==='anthropic_key' && s.value){ localStorage.setItem('lmw_anthropic_key',s.value); }
+        if(s.key==='openai_key' && s.value){ localStorage.setItem('lmw_openai_key',s.value); }
+      });
+      updateKeyUI();
+    }
+  }catch(e){ console.log('Settings load error:',e); }
+}
+
+async function saveSettingToSupabase(key, value){
+  try{
+    // Delete existing then insert
+    await sbFetch('app_settings','DELETE',null,'?key=eq.'+key);
+    await sbFetch('app_settings','POST',{key:key,value:value});
+  }catch(e){ console.log('Settings save error:',e); }
+}
+
 async function loadRadioFromSupabase(){
   try{
     const data = await sbFetch('radio_playlist','GET',null,'?order=created_at.asc');
@@ -1534,6 +1558,7 @@ renderTargetList();
 updateVaultStats();
 updateKeyUI();
 initRadio();
+loadSettingsFromSupabase();
 loadRadioFromSupabase();
 loadVaultFromSupabase();
 if(!localStorage.getItem('lmw_radio_v2')){ localStorage.removeItem('lmw_radio_playlist'); localStorage.setItem('lmw_radio_v2','1'); }
