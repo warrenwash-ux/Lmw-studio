@@ -99,6 +99,14 @@ select.input{cursor:pointer;}
 .platform-chip .chip-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
 .platform-chip.selected .chip-name{color:var(--gold);}
 
+/* EXPORT MODAL */
+.export-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;}
+.export-modal.open{display:flex;}
+.export-box{background:#111;border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:28px;width:90%;max-width:420px;}
+.export-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
+.export-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.export-close{float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;margin-top:-4px;}
+
 /* VAULT */
 .vault-layout{display:flex;flex:1;overflow:hidden;}
 .vault-sidebar{width:240px;min-width:240px;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;}
@@ -367,6 +375,7 @@ select.input{cursor:pointer;}
     <div class="nav-item" onclick="showPage('radio',this)" title="LMW Radio"><div class="nav-icon">📻</div><div class="nav-label">Radio</div></div>
     <div class="nav-item" onclick="showPage('dfy',this)" title="Done For You"><div class="nav-icon">💎</div><div class="nav-label">DFY</div></div>
     <div class="nav-item" onclick="showPage('grl',this)" title="Global Reach Lab"><div class="nav-icon">🌍</div><div class="nav-label">Global</div></div>
+    <div class="nav-item" onclick="showPage('viral',this)" title="Viral Release Engine"><div class="nav-icon">🚀</div><div class="nav-label">Viral</div></div>
   </div>
   <div class="nav-bottom">
     <button class="nav-settings" onclick="showPage('settings',this)" title="Settings"><div class="nav-icon" style="font-size:16px;">⚙</div><div class="nav-label">Keys</div></button>
@@ -422,10 +431,15 @@ select.input{cursor:pointer;}
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Done For You</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Custom hits — lyrics, production, everything. Starting at $10,000.</div>
           </div>
-          <div onclick="showPage('grl',document.querySelector('[title=\\'Global Reach Lab\\']'))" style="background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.2);border-radius:12px;padding:20px;cursor:pointer;grid-column:span 2;" onmouseover="this.style.borderColor='rgba(42,122,204,0.4)'" onmouseout="this.style.borderColor='rgba(42,122,204,0.2)'">
+          <div onclick="showPage('grl',document.querySelector('[title=\\'Global Reach Lab\\']'))" style="background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(42,122,204,0.4)'" onmouseout="this.style.borderColor='rgba(42,122,204,0.2)'">
             <div style="font-size:28px;margin-bottom:8px;">🌍</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;">Global Reach Lab</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Sync libraries, territory strategy, worldwide licensing intelligence</div>
+          </div>
+          <div onclick="showPage('viral',document.querySelector('[title=\\'Viral Release Engine\\']'))" style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(180,50,220,0.5)'" onmouseout="this.style.borderColor='rgba(180,50,220,0.2)'">
+            <div style="font-size:28px;margin-bottom:8px;">🚀</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#C050E8;margin-bottom:4px;">Viral Release Engine</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Algorithm-engineered release campaigns. Built to go viral every time.</div>
           </div>
         </div>
         <div class="alert alert-gold" id="homeKeyAlert">⚙ Add your Anthropic API key in Settings to enable all AI features.</div>
@@ -472,6 +486,7 @@ select.input{cursor:pointer;}
               <div class="wstat"><div class="wstat-num" id="statActive">2</div><div class="wstat-label">Active</div></div>
             </div>
             <button class="btn-gold" style="margin-top:20px;max-width:200px;" onclick="showPage('vault-add',null)">+ Add New Target</button>
+            <button class="btn-outline" style="margin-top:10px;max-width:200px;" onclick="openExportModal()">📋 Export Contact Pack</button>
           </div>
         </div>
         <div class="dossier-view" id="dossierView">
@@ -776,6 +791,63 @@ select.input{cursor:pointer;}
     </div>
   </div>
 
+  <!-- VIRAL RELEASE ENGINE -->
+  <div class="page" id="page-viral">
+    <div class="page-body" style="max-width:700px;">
+      <div style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.25);border-radius:14px;padding:28px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(180,50,220,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="font-size:40px;margin-bottom:10px;">🚀</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;">VIRAL RELEASE <span style="color:#C050E8;">ENGINE</span></div>
+        <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Algorithm-Engineered · Platform-Optimized · Built to Spread</div>
+        <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#C050E8;">7</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Platforms</div></div>
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#C050E8;">72HR</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Campaign</div></div>
+          <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#C050E8;">4</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Triggers</div></div>
+        </div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid rgba(180,50,220,0.15);border-radius:12px;padding:22px;margin-bottom:20px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#C050E8;margin-bottom:16px;">ABOUT YOUR RELEASE</div>
+        <div class="field"><div class="label">Song Title *</div><input class="input" id="viralTitle" type="text" placeholder="e.g. Midnight Drive, Champion, Gold Standard"></div>
+        <div class="row2">
+          <div class="field"><div class="label">Genre / Mood</div><input class="input" id="viralGenre" type="text" placeholder="e.g. Cinematic Soul, R&B, Motivational"></div>
+          <div class="field"><div class="label">BPM / Energy</div><input class="input" id="viralBpm" type="text" placeholder="e.g. 88 BPM, slow burn, high energy"></div>
+        </div>
+        <div class="field"><div class="label">The Story Behind This Song *</div><textarea class="input" id="viralStory" rows="3" placeholder="e.g. I made this at 2am after a conversation with my son. It's about building something from nothing and never giving up on your vision…"></textarea></div>
+        <div class="field"><div class="label">Who Is This Song For?</div><input class="input" id="viralAudience" type="text" placeholder="e.g. Entrepreneurs, faith community, athletes, film directors, brands"></div>
+        <div class="field"><div class="label">Release Strategy</div>
+          <select class="input" id="viralStrategy">
+            <option value="standard">Standard Release — Full identity from day one</option>
+            <option value="silent">Silent Virality — Anonymous first, reveal later</option>
+            <option value="challenge">Challenge Launch — Attach a viral challenge</option>
+            <option value="story">Story Arc — 3-day narrative build before drop</option>
+          </select>
+        </div>
+        <div class="field"><div class="label">Platforms to Target</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-top:4px;" id="viralPlatformGrid">
+            <div class="platform-chip selected" data-vp="TikTok" onclick="toggleViralPlatform(this)"><div class="chip-icon">🎵</div><div class="chip-name">TikTok</div></div>
+            <div class="platform-chip selected" data-vp="Instagram" onclick="toggleViralPlatform(this)"><div class="chip-icon">📸</div><div class="chip-name">Instagram</div></div>
+            <div class="platform-chip selected" data-vp="YouTube" onclick="toggleViralPlatform(this)"><div class="chip-icon">▶</div><div class="chip-name">YouTube</div></div>
+            <div class="platform-chip" data-vp="Twitter/X" onclick="toggleViralPlatform(this)"><div class="chip-icon">𝕏</div><div class="chip-name">Twitter/X</div></div>
+            <div class="platform-chip" data-vp="LinkedIn" onclick="toggleViralPlatform(this)"><div class="chip-icon">💼</div><div class="chip-name">LinkedIn</div></div>
+            <div class="platform-chip" data-vp="Facebook" onclick="toggleViralPlatform(this)"><div class="chip-icon">👥</div><div class="chip-name">Facebook</div></div>
+            <div class="platform-chip" data-vp="Threads" onclick="toggleViralPlatform(this)"><div class="chip-icon">🧵</div><div class="chip-name">Threads</div></div>
+          </div>
+        </div>
+        <button class="btn-gold" id="viralBtn" onclick="generateViralCampaign()" style="background:linear-gradient(135deg,#C050E8,#8030B0);border:none;">
+          <span id="viralBtnText">🚀 Generate Viral Campaign</span>
+          <div class="spinner" id="viralSpinner"></div>
+        </button>
+      </div>
+
+      <div id="viralOutput" style="display:none;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#C050E8;margin-bottom:16px;">YOUR VIRAL CAMPAIGN</div>
+        <div id="viralOutputContent"></div>
+        <button class="copy-btn" id="viralCopyBtn" onclick="copyViralOutput()" style="margin-top:16px;width:100%;padding:10px;text-align:center;">Copy Full Campaign</button>
+      </div>
+    </div>
+  </div>
+
   <!-- SETTINGS -->
   <div class="page" id="page-settings">
     <div class="page-body" style="max-width:500px;">
@@ -803,6 +875,19 @@ select.input{cursor:pointer;}
     </div>
   </div>
 
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="export-modal" id="exportModal">
+  <div class="export-box">
+    <button class="export-close" onclick="closeExportModal()">✕</button>
+    <div class="export-title">Export Contact Pack</div>
+    <div class="export-sub">Enter your export password to download the full outreach pack. Share the downloaded file — never share app access.</div>
+    <div class="field"><div class="label">Export Password</div><input class="input" id="exportPasswordInput" type="password" placeholder="Enter your password"></div>
+    <div class="field"><div class="label">Set New Password (first time only)</div><input class="input" id="exportNewPassword" type="password" placeholder="Set a password if none exists yet"></div>
+    <button class="btn-gold" onclick="generateExport()" id="exportBtn"><span id="exportBtnText">Generate & Download</span><div class="spinner" id="exportSpinner"></div></button>
+    <div class="alert alert-red" id="exportError" style="display:none;margin-top:12px;">Incorrect password. Try again.</div>
+  </div>
 </div>
 
 <script>
@@ -1215,8 +1300,8 @@ function updateKeyUI(){
 }
 
 // ══ NAVIGATION ══
-const pageTitles = {home:'LMW STUDIO',vault:'NETWORK VAULT',posts:'POST GENERATOR',images:'IMAGE GENERATOR',reels:'REEL STUDIO',radio:'LMW RADIO',dfy:'DONE FOR YOU',grl:'GLOBAL REACH LAB',settings:'SETTINGS'};
-const pageSubs = {home:'Lamb Music Works',vault:'Intelligence & Outreach',posts:'Social Content AI',images:'Visual Content AI',reels:'Script Generator',radio:'Broadcasting Worldwide',dfy:'Custom Music · $10K Minimum',grl:'Sync Intelligence · Territory Strategy',settings:'API Keys & Storage'};
+const pageTitles = {home:'LMW STUDIO',vault:'NETWORK VAULT',posts:'POST GENERATOR',images:'IMAGE GENERATOR',reels:'REEL STUDIO',radio:'LMW RADIO',dfy:'DONE FOR YOU',grl:'GLOBAL REACH LAB',viral:'VIRAL RELEASE ENGINE',settings:'SETTINGS'};
+const pageSubs = {home:'Lamb Music Works',vault:'Intelligence & Outreach',posts:'Social Content AI',images:'Visual Content AI',reels:'Script Generator',radio:'Broadcasting Worldwide',dfy:'Custom Music · $10K Minimum',grl:'Sync Intelligence · Territory Strategy',viral:'Algorithm-Engineered Release Campaigns',settings:'API Keys & Storage'};
 
 function showPage(id, navEl){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -1239,6 +1324,7 @@ function showPage(id, navEl){
   document.getElementById('topbarSub').textContent = pageSubs[id]||'';
   document.getElementById('vaultToggle').style.display = id==='vault'?'flex':'none';
   if(id==='vault'){ document.getElementById('vaultWelcome').style.display='flex'; document.getElementById('dossierView').style.display='none'; document.getElementById('vaultAddView').style.display='none'; renderTargetList(); }
+  if(id==='viral' && document.getElementById('page-viral')) document.getElementById('page-viral').classList.add('active');
 }
 
 // ══ VAULT ══
@@ -1466,6 +1552,238 @@ function copyOutput(textId,btnId){
   });
 }
 
+// ══ VIRAL RELEASE ENGINE ══
+let viralPlatforms = ['TikTok','Instagram','YouTube'];
+
+function toggleViralPlatform(el){
+  const p = el.dataset.vp;
+  el.classList.toggle('selected');
+  viralPlatforms = Array.from(document.querySelectorAll('#viralPlatformGrid .platform-chip.selected')).map(c=>c.dataset.vp);
+}
+
+async function generateViralCampaign(){
+  const key = getAnthropicKey();
+  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
+  const title = document.getElementById('viralTitle').value.trim();
+  if(!title){ alert('Enter your song title.'); return; }
+  const story = document.getElementById('viralStory').value.trim();
+  if(!story){ alert('Tell the story behind this song.'); return; }
+  const genre = document.getElementById('viralGenre').value.trim();
+  const bpm = document.getElementById('viralBpm').value.trim();
+  const audience = document.getElementById('viralAudience').value.trim();
+  const strategy = document.getElementById('viralStrategy').value;
+  const platforms = viralPlatforms.join(', ');
+
+  setBtnLoading('viralBtn','viralBtnText','viralSpinner',true);
+
+  const strategyGuides = {
+    standard: 'Full identity release. Warren Lamb / Lamb Music Works front and center from day one.',
+    silent: 'Anonymous "Silent Virality" strategy. Release as unknown artist first. No name, no logo. Just "found this..." energy. Plan the reveal moment as a separate campaign event.',
+    challenge: 'Build a viral challenge around this song. The challenge must be simple enough for anyone to do, emotionally connected to the song theme, and shareable in under 15 seconds.',
+    story: '3-day story arc before the drop. Day 1: The struggle/backstory. Day 2: The turning point. Day 3: The song drops. Each day builds on the last and creates anticipation.'
+  };
+
+  const prompt = `You are a viral music marketing expert who has engineered campaigns for independent artists that broke through on social media without label budgets.
+
+Warren Lamb is releasing a new song for Lamb Music Works. Here are the details:
+
+SONG: "${title}"
+GENRE/MOOD: ${genre||'Soul/R&B/Cinematic'}
+ENERGY: ${bpm||'not specified'}
+STORY: ${story}
+TARGET AUDIENCE: ${audience||'entrepreneurs, faith community, music lovers'}
+PLATFORMS: ${platforms}
+STRATEGY: ${strategyGuides[strategy]}
+
+Create a complete 72-hour viral release campaign. For each section, be SPECIFIC, CREATIVE, and ACTIONABLE. Use the actual song title and story details.
+
+Structure your response exactly like this:
+
+## 🎯 VIRAL HOOKS (3 different angles)
+[3 distinct psychological hooks that make people stop scrolling and share. Label each: CURIOSITY / EMOTION / CONTROVERSY or CHALLENGE]
+
+## ⏰ 72-HOUR TIMELINE
+
+### HOUR 0-6: PRE-LAUNCH
+[Exact actions, exact post copy for each platform]
+
+### HOUR 6-24: LAUNCH DAY
+[Platform-by-platform launch sequence with exact post copy, timing, and what to pin/feature]
+
+### HOUR 24-48: MOMENTUM
+[Engagement tactics, comment responses to use, what to repost, algorithm signals to trigger]
+
+### HOUR 48-72: SYNC PITCH WINDOW
+[How to turn the momentum into sync licensing outreach — who to email, what to say, how to package the traction]
+
+## 📱 PLATFORM PLAYBOOK
+[For each selected platform, write the EXACT first post — caption, hashtags, and the psychological trigger being used]
+
+## 🔁 THE CHALLENGE (if applicable)
+[Design a specific challenge or participation hook tied to this song]
+
+## 📧 PRESS & SYNC OUTREACH
+[3 email subject lines and one paragraph pitch to send to blogs, playlists, and sync supervisors using the release momentum]
+
+## 🎭 THE REVEAL PLAN (if Silent Virality strategy)
+[When and how to reveal Warren Lamb / Lamb Music Works as the artist behind the track]
+
+Be specific. Use the song title. Reference the story. Make every piece of copy sound authentic to an independent builder, not a label.`;
+
+  try {
+    const res = await callAnthropic(prompt, key, 2500);
+    
+    // Format the output beautifully
+    const formatted = res
+      .replace(/## (.*)/g, '<div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#C050E8;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(180,50,220,0.2);">$1</div>')
+      .replace(/### (.*)/g, '<div style="font-weight:700;font-size:13px;color:#FFF;margin:16px 0 8px;">$1</div>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#FFF;">$1</strong>')
+      .replace(/
+
+/g, '</p><p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">')
+      .replace(/
+/g, '<br>');
+
+    document.getElementById('viralOutputContent').innerHTML = '<p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">' + formatted + '</p>';
+    document.getElementById('viralOutput').style.display = 'block';
+    document.getElementById('viralOutput').scrollIntoView({behavior:'smooth'});
+  } catch(e) { alert('Failed: ' + e.message); }
+  finally { setBtnLoading('viralBtn','viralBtnText','viralSpinner',false); }
+}
+
+function copyViralOutput(){
+  const text = document.getElementById('viralOutputContent').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.getElementById('viralCopyBtn');
+    btn.textContent = 'Copied!';
+    setTimeout(()=>{ btn.textContent = 'Copy Full Campaign'; }, 2000);
+  });
+}
+
+// ══ EXPORT ══
+const EXPORT_PWD_KEY = 'lmw_export_password';
+
+function openExportModal(){
+  document.getElementById('exportModal').classList.add('open');
+  document.getElementById('exportPasswordInput').value='';
+  document.getElementById('exportNewPassword').value='';
+  document.getElementById('exportError').style.display='none';
+}
+
+function closeExportModal(){
+  document.getElementById('exportModal').classList.remove('open');
+}
+
+function generateExport(){
+  const entered = document.getElementById('exportPasswordInput').value.trim();
+  const newPwd = document.getElementById('exportNewPassword').value.trim();
+  const stored = localStorage.getItem(EXPORT_PWD_KEY);
+
+  // First time — no password set yet
+  if(!stored){
+    if(!newPwd){ alert('No password set yet. Enter a new password in the "Set New Password" field.'); return; }
+    localStorage.setItem(EXPORT_PWD_KEY, newPwd);
+    saveSettingToSupabase('export_password', newPwd);
+    buildAndDownloadExport();
+    closeExportModal();
+    return;
+  }
+
+  // Update password if new one provided
+  if(newPwd && entered === stored){
+    localStorage.setItem(EXPORT_PWD_KEY, newPwd);
+    saveSettingToSupabase('export_password', newPwd);
+  }
+
+  // Verify password
+  if(entered !== stored){
+    document.getElementById('exportError').style.display='block';
+    return;
+  }
+
+  document.getElementById('exportError').style.display='none';
+  buildAndDownloadExport();
+  closeExportModal();
+}
+
+function buildAndDownloadExport(){
+  const date = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>LMW Contact Pack — ${date}</title>
+<style>
+body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.6;}
+h1{font-size:28px;border-bottom:3px solid #C9A84C;padding-bottom:10px;color:#1a1a1a;}
+h2{font-size:20px;color:#C9A84C;margin-top:40px;margin-bottom:4px;}
+.meta{font-size:13px;color:#666;margin-bottom:16px;}
+.section{margin-bottom:12px;}
+.section-title{font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px;}
+.section-body{font-size:14px;color:#222;padding:10px 14px;background:#f9f7f2;border-left:3px solid #C9A84C;border-radius:4px;}
+.move{padding:4px 0;font-size:13px;border-bottom:1px solid #eee;}
+.move:last-child{border-bottom:none;}
+.contact{background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px;margin-bottom:8px;}
+.contact-name{font-weight:bold;font-size:14px;}
+.contact-role{font-size:12px;color:#666;margin-bottom:4px;}
+.contact-channel{font-size:13px;color:#C9A84C;font-family:monospace;}
+.divider{border:none;border-top:1px solid #eee;margin:30px 0;}
+.footer{font-size:11px;color:#999;text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;}
+.badge{display:inline-block;background:#C9A84C;color:#fff;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:3px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+</style></head><body>
+<h1>🎵 LMW Outreach Pack</h1>
+<p style="color:#666;font-size:14px;">Generated: ${date} &nbsp;|&nbsp; Lamb Music Works &nbsp;|&nbsp; lambmusicworks.com &nbsp;|&nbsp; Confidential — For Authorized Use Only</p>
+<hr style="border:none;border-top:2px solid #C9A84C;margin:20px 0;">
+<p style="font-size:13px;color:#444;padding:12px 16px;background:#fffdf5;border:1px solid #f0e8c8;border-radius:6px;">
+<strong>Instructions:</strong> This document contains contact intelligence for Lamb Music Works outreach. 
+Use the priority moves and email templates as your guide. Always reach out professionally and represent the LMW brand with excellence. 
+Questions? Contact Warren Lamb directly.
+</p>`;
+
+  TARGETS.forEach((t,i) => {
+    const statusColors = {new:'#C9A84C',active:'#3A9A5A',contacted:'#2A7ACC',responded:'#7A4ABA'};
+    const statusColor = statusColors[t.status]||'#C9A84C';
+    html += `<h2>${i+1}. ${t.name}</h2>
+<div class="meta"><span style="background:${statusColor};color:#fff;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;">${t.status||'New'}</span> &nbsp; ${t.role}</div>`;
+
+    if(t.why){ html += `<div class="section"><div class="section-title">Why This Target</div><div class="section-body">${t.why}</div></div>`; }
+
+    const moves = t.priorityMoves || [];
+    if(moves.length){
+      html += `<div class="section"><div class="section-title">Priority Moves</div><div class="section-body">`;
+      moves.forEach((m,j) => { html += `<div class="move"><strong>${j+1}.</strong> ${m}</div>`; });
+      html += `</div></div>`;
+    }
+
+    const contacts = t.contacts || [];
+    if(contacts.length){
+      html += `<div class="section"><div class="section-title">Contacts</div>`;
+      contacts.forEach(c => {
+        html += `<div class="contact"><div class="contact-name">${c.name}</div><div class="contact-role">${c.role}</div><div class="contact-channel">${c.channel}</div></div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Get email from tabs if available
+    if(t.content && t.content.length >= 5){
+      const emailTab = t.content[t.content.length-1];
+      const emailMatch = emailTab.match(/Subject:(.*?)\n\n([\s\S]*?)<\/div>/);
+      if(emailMatch){
+        html += `<div class="section"><div class="section-title">Email Template</div><div class="section-body" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${emailMatch[0].replace(/<[^>]+>/g,'').trim()}</div></div>`;
+      }
+    }
+
+    if(i < TARGETS.length-1) html += '<hr class="divider">';
+  });
+
+  html += `<div class="footer">LMW Contact Pack &nbsp;|&nbsp; Generated ${date} &nbsp;|&nbsp; Confidential<br>Lamb Music Works &nbsp;|&nbsp; lambmusicworks.com</div></body></html>`;
+
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'LMW-Contact-Pack-'+date.replace(/,/g,'').replace(/ /g,'-')+'.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 // ══ SUPABASE ══
 const SUPABASE_URL = 'https://ptgatsxuexmudteqzxmc.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs';
@@ -1498,6 +1816,7 @@ async function loadSettingsFromSupabase(){
       data.forEach(s=>{
         if(s.key==='anthropic_key' && s.value){ localStorage.setItem('lmw_anthropic_key',s.value); }
         if(s.key==='openai_key' && s.value){ localStorage.setItem('lmw_openai_key',s.value); }
+        if(s.key==='export_password' && s.value){ localStorage.setItem('lmw_export_password',s.value); }
       });
       updateKeyUI();
     }
