@@ -1633,18 +1633,23 @@ Be specific. Use the song title. Reference the story. Make every piece of copy s
   try {
     const res = await callAnthropic(prompt, key, 2500);
     
-    // Format the output beautifully
-    const formatted = res
-      .replace(/## (.*)/g, '<div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:#C050E8;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(180,50,220,0.2);">$1</div>')
-      .replace(/### (.*)/g, '<div style="font-weight:700;font-size:13px;color:#FFF;margin:16px 0 8px;">$1</div>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:#FFF;">$1</strong>')
-      .replace(/
-
-/g, '</p><p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">')
-      .replace(/
-/g, '<br>');
-
-    document.getElementById('viralOutputContent').innerHTML = '<p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">' + formatted + '</p>';
+    // Format the output
+    const lines = res.split('\n');
+    let html = '';
+    lines.forEach(function(line) {
+      if(line.startsWith('## ')) {
+        html += '<div style="font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:1.5px;color:#C050E8;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(180,50,220,0.2);">' + line.substring(3) + '</div>';
+      } else if(line.startsWith('### ')) {
+        html += '<div style="font-weight:700;font-size:14px;color:#FFF;margin:16px 0 6px;">' + line.substring(4) + '</div>';
+      } else if(line.startsWith('**') && line.endsWith('**')) {
+        html += '<div style="font-weight:700;font-size:13px;color:#E8E4D8;margin:6px 0;">' + line.slice(2,-2) + '</div>';
+      } else if(line.trim() === '') {
+        html += '<div style="height:8px;"></div>';
+      } else {
+        html += '<div style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:4px;">' + line + '</div>';
+      }
+    });
+        document.getElementById('viralOutputContent').innerHTML = '<p style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:8px;">' + formatted + '</p>';
     document.getElementById('viralOutput').style.display = 'block';
     document.getElementById('viralOutput').scrollIntoView({behavior:'smooth'});
   } catch(e) { alert('Failed: ' + e.message); }
