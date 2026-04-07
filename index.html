@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,356 +12,419 @@
 html,body{height:100%;overflow:hidden;}
 
 :root{
-  --gold:#C9A84C;--gold2:#F0CC60;--gold-dim:rgba(201,168,76,0.1);
-  --bg:#090909;--s1:#111111;--s2:#191919;--s3:#222222;
-  --text:#E8E4D8;--muted:#686860;--faint:#333330;--line:rgba(201,168,76,0.1);
-  --red:#CC3520;--green:#3A9A5A;--blue:#2A7ACC;--purple:#7A4ABA;
-  --nav-w:64px;
+–gold:#C9A84C;–gold2:#F0CC60;–gold-dim:rgba(201,168,76,0.1);
+–bg:#090909;–s1:#111111;–s2:#191919;–s3:#222222;
+–text:#E8E4D8;–muted:#686860;–faint:#333330;–line:rgba(201,168,76,0.1);
+–red:#CC3520;–green:#3A9A5A;–blue:#2A7ACC;–purple:#7A4ABA;
+–social:#1A7A5A;–social-dim:rgba(26,122,90,0.1);–social2:#2ECC8A;
+–nav-w:64px;
 }
 
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;display:flex;height:100dvh;}
+body{font-family:‘DM Sans’,sans-serif;background:var(–bg);color:var(–text);font-size:14px;display:flex;height:100dvh;}
 
-.nav-rail{width:var(--nav-w);min-width:var(--nav-w);background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:12px 0;z-index:200;flex-shrink:0;}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:20px;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1;}
+.nav-rail{width:var(–nav-w);min-width:var(–nav-w);background:var(–s1);border-right:1px solid var(–line);display:flex;flex-direction:column;align-items:center;padding:12px 0;z-index:200;flex-shrink:0;}
+.nav-logo{font-family:‘Bebas Neue’,sans-serif;font-size:11px;letter-spacing:2px;color:var(–gold);margin-bottom:20px;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1;}
 .nav-items{display:flex;flex-direction:column;gap:4px;flex:1;width:100%;padding:0 8px;}
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
-.nav-item:hover{background:var(--s2);}
-.nav-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-item:hover{background:var(–s2);}
+.nav-item.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-item.sc-nav.active{background:var(–social-dim);border-color:rgba(26,122,90,0.3);}
 .nav-icon{font-size:18px;line-height:1;}
-.nav-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2;}
-.nav-item.active .nav-label{color:var(--gold);}
+.nav-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(–muted);text-align:center;line-height:1.2;}
+.nav-item.active .nav-label{color:var(–gold);}
+.nav-item.sc-nav.active .nav-label{color:var(–social2);}
 .nav-bottom{margin-top:auto;width:100%;padding:0 8px;}
 .nav-settings{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;width:100%;border:1px solid transparent;background:none;}
-.nav-settings:hover{background:var(--s2);}
-.nav-settings.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-settings:hover{background:var(–s2);}
+.nav-settings.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
 
 .app-main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0;}
-.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:50px;min-height:50px;border-bottom:1px solid var(--line);background:var(--bg);flex-shrink:0;}
-.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#FFF;}
-.topbar-sub{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:50px;min-height:50px;border-bottom:1px solid var(–line);background:var(–bg);flex-shrink:0;}
+.topbar-title{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:2px;color:#FFF;}
+.topbar-sub{font-size:11px;color:var(–muted);letter-spacing:1px;}
 .topbar-spacer{flex:1;}
-.topbar-key-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
+.topbar-key-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(–muted);}
 .key-dot{width:6px;height:6px;border-radius:50%;}
-.key-dot.on{background:var(--green);}.key-dot.off{background:var(--red);}
+.key-dot.on{background:var(–green);}.key-dot.off{background:var(–red);}
 
 .page{display:none;flex:1;overflow:hidden;flex-direction:column;}
 .page.active{display:flex;}
 .page-body{flex:1;overflow-y:auto;padding:20px;}
 .page-body::-webkit-scrollbar{width:4px;}
-.page-body::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
+.page-body::-webkit-scrollbar-thumb{background:var(–s3);border-radius:2px;}
 
-.page-intro{border-left:3px solid var(--gold);padding-left:14px;font-size:13px;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:24px;}
-.page-intro em{color:var(--text);font-style:normal;}
+.page-intro{border-left:3px solid var(–gold);padding-left:14px;font-size:13px;color:var(–muted);line-height:1.75;max-width:600px;margin-bottom:24px;}
+.page-intro em{color:var(–text);font-style:normal;}
 
-h2{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin:24px 0 14px;}
+h2{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1.5px;color:var(–gold);margin:24px 0 14px;}
 h2:first-of-type{margin-top:0;}
 p{font-size:13px;color:#AAA;line-height:1.7;margin-bottom:12px;}
-p strong{color:var(--text);font-weight:600;}
-hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
+p strong{color:var(–text);font-weight:600;}
+hr{border:none;border-top:1px solid var(–line);margin:20px 0;}
 
 .field{margin-bottom:14px;}
-.label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
-.input{width:100%;padding:10px 14px;background:var(--s1);border:1px solid var(--line);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;}
+.label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–muted);margin-bottom:7px;}
+.input{width:100%;padding:10px 14px;background:var(–s1);border:1px solid var(–line);border-radius:8px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;}
 .input:focus{border-color:rgba(201,168,76,0.4);}
-.input::placeholder{color:var(--muted);}
+.input::placeholder{color:var(–muted);}
 textarea.input{resize:vertical;min-height:80px;line-height:1.6;}
 select.input{cursor:pointer;}
 
-.btn-gold{width:100%;padding:12px;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
+.btn-gold{width:100%;padding:12px;background:var(–gold);color:#000;border:none;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
 .btn-gold:hover{opacity:0.85;}
 .btn-gold:disabled{opacity:0.35;cursor:not-allowed;}
-.btn-outline{width:100%;padding:10px;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.15s;}
-.btn-outline:hover{background:var(--gold-dim);}
+.btn-outline{width:100%;padding:10px;background:transparent;color:var(–gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.15s;}
+.btn-outline:hover{background:var(–gold-dim);}
+.btn-social{width:100%;padding:12px;background:var(–social);color:#fff;border:none;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
+.btn-social:hover{opacity:0.85;}
+.btn-social:disabled{opacity:0.35;cursor:not-allowed;}
 
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
 
-.output-box{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:16px;display:none;}
-.output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.output-box{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:10px;}
 .output-text{font-size:13px;color:#DDD;line-height:1.75;white-space:pre-wrap;}
-.copy-btn{margin-top:12px;padding:8px 16px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
-.copy-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
-.copy-btn.copied{color:var(--green);border-color:rgba(58,154,90,0.4);}
+.copy-btn{margin-top:12px;padding:8px 16px;background:var(–s2);border:1px solid var(–line);border-radius:6px;color:var(–muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;}
+.copy-btn:hover{color:var(–text);border-color:rgba(255,255,255,0.2);}
+.copy-btn.copied{color:var(–green);border-color:rgba(58,154,90,0.4);}
 
 .alert{padding:12px 15px;border-radius:7px;font-size:12px;line-height:1.5;margin-bottom:16px;}
 .alert-gold{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);color:#C8A840;}
 .alert-green{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
 .alert-red{background:rgba(204,53,32,0.1);border:1px solid rgba(204,53,32,0.3);color:#E08070;}
 .alert-blue{background:rgba(42,122,204,0.08);border:1px solid rgba(42,122,204,0.25);color:#6AABE0;}
+.alert-social{background:rgba(26,122,90,0.08);border:1px solid rgba(26,122,90,0.3);color:var(–social2);}
 
 .spinner{display:none;width:18px;height:18px;border:2px solid rgba(0,0,0,0.15);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;}
+.spinner-white{border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
 .platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:16px;}
-.platform-chip{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--s1);cursor:pointer;text-align:center;transition:all 0.15s;}
+.platform-chip{padding:8px 10px;border-radius:8px;border:1px solid var(–line);background:var(–s1);cursor:pointer;text-align:center;transition:all 0.15s;}
 .platform-chip:hover{border-color:rgba(201,168,76,0.3);}
-.platform-chip.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
+.platform-chip.selected{background:var(–gold-dim);border-color:rgba(201,168,76,0.4);}
 .platform-chip .chip-icon{font-size:16px;margin-bottom:3px;}
-.platform-chip .chip-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
-.platform-chip.selected .chip-name{color:var(--gold);}
+.platform-chip .chip-name{font-size:10px;font-weight:600;color:var(–muted);text-transform:uppercase;letter-spacing:0.5px;}
+.platform-chip.selected .chip-name{color:var(–gold);}
 
 /* EXPORT MODAL */
 .export-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;}
 .export-modal.open{display:flex;}
 .export-box{background:#111;border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:28px;width:90%;max-width:420px;}
-.export-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
-.export-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
-.export-close{float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;margin-top:-4px;}
+.export-title{font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;color:var(–gold);margin-bottom:6px;}
+.export-sub{font-size:12px;color:var(–muted);margin-bottom:20px;line-height:1.6;}
+.export-close{float:right;background:none;border:none;color:var(–muted);font-size:20px;cursor:pointer;margin-top:-4px;}
 
 /* VAULT */
 .vault-layout{display:flex;flex:1;overflow:hidden;}
-.vault-sidebar{width:240px;min-width:240px;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;}
-.vault-sidebar-head{padding:12px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.vault-sidebar{width:240px;min-width:240px;background:var(–s1);border-right:1px solid var(–line);display:flex;flex-direction:column;overflow:hidden;}
+.vault-sidebar-head{padding:12px;border-bottom:1px solid var(–line);flex-shrink:0;}
 .search-wrap{position:relative;}
-.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted);}
-.search-input{width:100%;padding:7px 9px 7px 28px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;}
-.search-input::placeholder{color:var(--muted);}
+.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(–muted);}
+.search-input{width:100%;padding:7px 9px 7px 28px;background:var(–s2);border:1px solid var(–line);border-radius:6px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:12px;outline:none;}
+.search-input::placeholder{color:var(–muted);}
 .filter-row{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
-.filter-chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(--muted);background:var(--s3);transition:all 0.15s;}
-.filter-chip.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.3);color:var(--gold);}
+.filter-chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(–muted);background:var(–s3);transition:all 0.15s;}
+.filter-chip.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.3);color:var(–gold);}
 .target-list{flex:1;overflow-y:auto;padding:6px;}
 .target-item{display:flex;align-items:center;gap:9px;padding:9px;border-radius:7px;cursor:pointer;transition:background 0.15s;margin-bottom:3px;border:1px solid transparent;}
-.target-item:hover{background:var(--s2);}
-.target-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.15);}
-.t-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;background:var(--s3);color:var(--gold);border:1px solid var(--line);}
+.target-item:hover{background:var(–s2);}
+.target-item.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.15);}
+.t-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,sans-serif;font-size:13px;background:var(–s3);color:var(–gold);border:1px solid var(–line);}
 .t-info{flex:1;min-width:0;}
-.t-name{font-weight:600;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.t-role{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-name{font-weight:600;font-size:12px;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-role{font-size:10px;color:var(–muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .t-status{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.vault-footer{padding:10px;border-top:1px solid var(--line);flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);}
+.vault-footer{padding:10px;border-top:1px solid var(–line);flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(–muted);}
 .legend-dot{width:5px;height:5px;border-radius:50%;}
 .vault-main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
 .vault-welcome{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;}
 .vault-welcome-inner{max-width:400px;}
-.welcome-icon{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(201,168,76,0.1);letter-spacing:4px;margin-bottom:20px;line-height:1;}
-.welcome-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
-.welcome-sub{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
+.welcome-icon{font-family:‘Bebas Neue’,sans-serif;font-size:56px;color:rgba(201,168,76,0.1);letter-spacing:4px;margin-bottom:20px;line-height:1;}
+.welcome-title{font-family:‘Bebas Neue’,sans-serif;font-size:24px;letter-spacing:2px;color:var(–text);margin-bottom:8px;}
+.welcome-sub{font-size:12px;color:var(–muted);line-height:1.7;margin-bottom:20px;}
 .welcome-stats{display:flex;gap:24px;justify-content:center;}
-.wstat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);}
-.wstat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.wstat-num{font-family:‘Bebas Neue’,sans-serif;font-size:28px;color:var(–gold);}
+.wstat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
 .dossier-view{flex:1;overflow:hidden;display:none;flex-direction:column;}
-.dossier-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--s1);}
-.dossier-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;}
-.dossier-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1px;color:#FFF;}
-.dossier-meta{font-size:11px;color:var(--muted);margin-top:1px;}
+.dossier-header{padding:12px 16px;border-bottom:1px solid var(–line);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(–s1);}
+.dossier-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,sans-serif;font-size:16px;}
+.dossier-name{font-family:‘Bebas Neue’,sans-serif;font-size:19px;letter-spacing:1px;color:#FFF;}
+.dossier-meta{font-size:11px;color:var(–muted);margin-top:1px;}
 .dossier-spacer{flex:1;}
-.status-select{background:var(--s2);border:1px solid var(--line);color:var(--text);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 8px;border-radius:5px;cursor:pointer;outline:none;}
-.dossier-tabs{display:flex;border-bottom:1px solid var(--line);flex-shrink:0;background:var(--bg);overflow-x:auto;scrollbar-width:none;}
+.status-select{background:var(–s2);border:1px solid var(–line);color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:11px;padding:4px 8px;border-radius:5px;cursor:pointer;outline:none;}
+.dossier-tabs{display:flex;border-bottom:1px solid var(–line);flex-shrink:0;background:var(–bg);overflow-x:auto;scrollbar-width:none;}
 .dossier-tabs::-webkit-scrollbar{display:none;}
-.dtab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
-.dtab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.dtab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.dtab.active{color:var(–gold);border-bottom-color:var(–gold);}
 .dossier-body{flex:1;overflow-y:auto;padding:16px;}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:20px;}
-.ccard{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:14px;transition:border-color 0.15s;}
-.ccard.cat-direct{border-left:3px solid var(--gold);}
+.ccard{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:14px;transition:border-color 0.15s;}
+.ccard.cat-direct{border-left:3px solid var(–gold);}
 .ccard.cat-family{border-left:3px solid #5AB870;}
 .ccard.cat-biz{border-left:3px solid #3A90D5;}
 .ccard.cat-music{border-left:3px solid #A050D5;}
 .cat-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
-.cat-tag.direct{color:var(--gold);}.cat-tag.family{color:#5AB870;}.cat-tag.biz{color:#3A90D5;}.cat-tag.music{color:#A050D5;}
+.cat-tag.direct{color:var(–gold);}.cat-tag.family{color:#5AB870;}.cat-tag.biz{color:#3A90D5;}.cat-tag.music{color:#A050D5;}
 .ccard-name{font-weight:700;font-size:13px;color:#FFF;margin-bottom:2px;}
-.ccard-role{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+.ccard-role{font-size:11px;color:var(–muted);margin-bottom:8px;line-height:1.4;}
 .ccard-why{font-size:11px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;margin-bottom:8px;}
 .tag-row{display:flex;gap:4px;flex-wrap:wrap;}
 .ctag{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:600;}
 .ctag.ig{background:rgba(200,80,50,0.12);color:#E07860;}
-.ctag.email{background:rgba(201,168,76,0.1);color:var(--gold);}
+.ctag.email{background:rgba(201,168,76,0.1);color:var(–gold);}
 .ctag.web{background:rgba(100,180,100,0.1);color:#70C080;}
 .ctag.li{background:rgba(60,120,200,0.1);color:#6090D0;}
-.info-box{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:12px 16px;margin-bottom:10px;}
-.info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
-.info-val{font-size:13px;color:#DDD;word-break:break-all;font-family:'DM Mono',monospace;}
-.info-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;}
+.info-box{background:var(–s2);border:1px solid var(–line);border-radius:7px;padding:12px 16px;margin-bottom:10px;}
+.info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:5px;}
+.info-val{font-size:13px;color:#DDD;word-break:break-all;font-family:‘DM Mono’,monospace;}
+.info-note{font-size:11px;color:var(–muted);margin-top:6px;line-height:1.5;}
 .action-block{background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:9px;padding:18px;margin-top:20px;}
-.action-block h3{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;}
+.action-block h3{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1.5px;color:var(–gold);margin-bottom:10px;}
 .alist{list-style:none;}
 .alist li{font-size:12px;color:#CCC;padding:4px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.5;}
-.anum{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;width:14px;}
+.anum{font-family:‘Bebas Neue’,sans-serif;font-size:13px;color:var(–gold);flex-shrink:0;width:14px;}
 .week-row{display:grid;grid-template-columns:70px 1fr;gap:12px;margin-bottom:14px;align-items:start;}
-.week-num{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:7px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);line-height:1;}
-.week-sub{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-.week-body{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:7px;padding:11px 13px;}
+.week-num{background:var(–s2);border:1px solid var(–line);border-radius:7px;padding:7px;text-align:center;font-family:‘Bebas Neue’,sans-serif;font-size:22px;color:var(–gold);line-height:1;}
+.week-sub{font-size:9px;font-weight:600;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
+.week-body{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:7px;padding:11px 13px;}
 .week-title{font-weight:700;font-size:12px;color:#FFF;margin-bottom:7px;}
 .week-tasks{list-style:none;}
 .week-tasks li{font-size:11px;color:#BBB;padding:3px 0;display:flex;gap:6px;line-height:1.4;border-bottom:1px solid rgba(255,255,255,0.04);}
 .week-tasks li:last-child{border-bottom:none;}
-.week-tasks li::before{content:'→';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:2px;}
-.post-card{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:16px;margin-bottom:12px;}
+.week-tasks li::before{content:‘→’;color:var(–gold);flex-shrink:0;font-size:10px;margin-top:2px;}
+.post-card{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:16px;margin-bottom:12px;}
 .post-platform{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
 .pp-ig{color:#E07860;}.pp-tw{color:#7090CC;}.pp-reel{color:#E08030;}
-.post-body{font-size:12px;color:#DDD;line-height:1.75;padding:11px 13px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--gold);white-space:pre-line;}
+.post-body{font-size:12px;color:#DDD;line-height:1.75;padding:11px 13px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(–gold);white-space:pre-line;}
 
 /* IMAGE GENERATOR */
 .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;}
-.image-card{background:var(--s1);border:1px solid var(--line);border-radius:10px;overflow:hidden;aspect-ratio:1;}
+.image-card{background:var(–s1);border:1px solid var(–line);border-radius:10px;overflow:hidden;aspect-ratio:1;}
 .image-card img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* REEL STUDIO */
 .reel-format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
-.format-card{background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
+.format-card{background:var(–s1);border:1px solid var(–line);border-radius:9px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
 .format-card:hover{border-color:rgba(201,168,76,0.3);}
-.format-card.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
+.format-card.selected{background:var(–gold-dim);border-color:rgba(201,168,76,0.4);}
 .format-icon{font-size:22px;margin-bottom:6px;}
-.format-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;}
-.format-desc{font-size:10px;color:var(--muted);}
-.format-card.selected .format-desc{color:var(--gold);}
+.format-name{font-size:11px;font-weight:700;color:var(–text);margin-bottom:2px;}
+.format-desc{font-size:10px;color:var(–muted);}
+.format-card.selected .format-desc{color:var(–gold);}
 
 /* SETTINGS */
-.settings-section{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px;}
-.settings-section-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin-bottom:14px;}
+.settings-section{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:18px;margin-bottom:16px;}
+.settings-section-title{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:1.5px;color:var(–gold);margin-bottom:14px;}
 .key-status-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:7px;font-size:12px;margin-bottom:12px;}
 .key-status-bar.has-key{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
 .key-status-bar.no-key{background:rgba(204,53,32,0.08);border:1px solid rgba(204,53,32,0.25);color:#E07060;}
 
-/* ══ LMW RADIO ══ */
+/* LMW RADIO */
 .radio-hero{background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.radio-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
-.radio-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:4px;color:var(--gold);margin-bottom:4px;}
-.radio-sub{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.radio-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
+.radio-title{font-family:‘Bebas Neue’,sans-serif;font-size:36px;letter-spacing:4px;color:var(–gold);margin-bottom:4px;}
+.radio-sub{font-size:12px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .radio-visualizer{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:40px;margin-bottom:20px;}
-.radio-bar{width:4px;border-radius:2px;background:var(--gold);opacity:0.7;animation:radioBar 1.2s ease-in-out infinite;}
-.radio-bar:nth-child(1){height:20px;animation-delay:0s;}
-.radio-bar:nth-child(2){height:35px;animation-delay:0.1s;}
-.radio-bar:nth-child(3){height:28px;animation-delay:0.2s;}
-.radio-bar:nth-child(4){height:40px;animation-delay:0.3s;}
-.radio-bar:nth-child(5){height:22px;animation-delay:0.4s;}
-.radio-bar:nth-child(6){height:38px;animation-delay:0.5s;}
-.radio-bar:nth-child(7){height:15px;animation-delay:0.6s;}
-.radio-bar:nth-child(8){height:32px;animation-delay:0.7s;}
-.radio-bar:nth-child(9){height:25px;animation-delay:0.8s;}
+.radio-bar{width:4px;border-radius:2px;background:var(–gold);opacity:0.7;animation:radioBar 1.2s ease-in-out infinite;}
+.radio-bar:nth-child(1){height:20px;animation-delay:0s;}.radio-bar:nth-child(2){height:35px;animation-delay:0.1s;}.radio-bar:nth-child(3){height:28px;animation-delay:0.2s;}.radio-bar:nth-child(4){height:40px;animation-delay:0.3s;}.radio-bar:nth-child(5){height:22px;animation-delay:0.4s;}.radio-bar:nth-child(6){height:38px;animation-delay:0.5s;}.radio-bar:nth-child(7){height:15px;animation-delay:0.6s;}.radio-bar:nth-child(8){height:32px;animation-delay:0.7s;}.radio-bar:nth-child(9){height:25px;animation-delay:0.8s;}
 .radio-bar.paused{animation-play-state:paused;opacity:0.3;}
 @keyframes radioBar{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
 .radio-player{display:flex;align-items:center;gap:16px;background:rgba(0,0,0,0.4);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:14px 18px;margin-bottom:20px;}
-.radio-btn{width:48px;height:48px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:opacity 0.15s;}
+.radio-btn{width:48px;height:48px;border-radius:50%;background:var(–gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:opacity 0.15s;}
 .radio-btn:hover{opacity:0.85;}
 .radio-track-info{flex:1;min-width:0;}
 .radio-track-name{font-weight:700;font-size:14px;color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.radio-track-artist{font-size:11px;color:var(--muted);margin-top:2px;}
-.radio-track-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:4px;}
+.radio-track-artist{font-size:11px;color:var(–muted);margin-top:2px;}
+.radio-track-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–gold);margin-top:4px;}
 .radio-progress{flex:1;}
-.radio-progress-bar{width:100%;height:3px;background:var(--s3);border-radius:2px;margin-bottom:4px;cursor:pointer;position:relative;}
-.radio-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s linear;}
-.radio-time{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;}
+.radio-progress-bar{width:100%;height:3px;background:var(–s3);border-radius:2px;margin-bottom:4px;cursor:pointer;position:relative;}
+.radio-progress-fill{height:100%;background:var(–gold);border-radius:2px;transition:width 0.5s linear;}
+.radio-time{display:flex;justify-content:space-between;font-size:10px;color:var(–muted);font-family:‘DM Mono’,monospace;}
 .radio-controls{display:flex;gap:8px;align-items:center;}
-.radio-ctrl-btn{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
-.radio-ctrl-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
-.radio-ctrl-btn.active{color:var(--gold);border-color:rgba(201,168,76,0.3);background:var(--gold-dim);}
+.radio-ctrl-btn{background:none;border:1px solid var(–line);color:var(–muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:‘DM Sans’,sans-serif;transition:all 0.15s;}
+.radio-ctrl-btn:hover{color:var(–text);border-color:rgba(255,255,255,0.2);}
+.radio-ctrl-btn.active{color:var(–gold);border-color:rgba(201,168,76,0.3);background:var(–gold-dim);}
 .playlist-section{margin-bottom:20px;}
 .playlist-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.playlist-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--gold);}
-.playlist-count{font-size:11px;color:var(--muted);}
+.playlist-title{font-family:‘Bebas Neue’,sans-serif;font-size:16px;letter-spacing:1.5px;color:var(–gold);}
+.playlist-count{font-size:11px;color:var(–muted);}
 .track-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;border:1px solid transparent;}
-.track-row:hover{background:var(--s2);}
-.track-row.playing{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
-.track-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);width:20px;text-align:center;flex-shrink:0;}
-.track-row.playing .track-num{color:var(--gold);}
+.track-row:hover{background:var(–s2);}
+.track-row.playing{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
+.track-num{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);width:20px;text-align:center;flex-shrink:0;}
+.track-row.playing .track-num{color:var(–gold);}
 .track-details{flex:1;min-width:0;}
-.track-name{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.track-row.playing .track-name{color:var(--gold);}
-.track-meta{font-size:10px;color:var(--muted);margin-top:2px;}
-.track-genre{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--s3);color:var(--muted);}
-.track-duration{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;}
-.radio-stream-box{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:16px;}
-.stream-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.track-name{font-weight:600;font-size:13px;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.track-row.playing .track-name{color:var(–gold);}
+.track-meta{font-size:10px;color:var(–muted);margin-top:2px;}
+.track-genre{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(–s3);color:var(–muted);}
+.track-duration{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);flex-shrink:0;}
+.radio-stream-box{background:var(–s2);border:1px solid var(–line);border-radius:8px;padding:14px;margin-bottom:16px;}
+.stream-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:8px;}
 .stream-url-row{display:flex;gap:8px;align-items:center;}
-.stream-url-input{flex:1;padding:8px 12px;background:var(--s1);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;}
-.stream-url-input::placeholder{color:var(--muted);}
-.stream-connect-btn{padding:8px 14px;background:var(--gold);color:#000;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.stream-url-input{flex:1;padding:8px 12px;background:var(–s1);border:1px solid var(–line);border-radius:6px;color:var(–text);font-family:‘DM Mono’,monospace;font-size:12px;outline:none;}
+.stream-url-input::placeholder{color:var(–muted);}
+.stream-connect-btn{padding:8px 14px;background:var(–gold);color:#000;border:none;border-radius:6px;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
 
-/* ══ DONE FOR YOU ══ */
+/* DONE FOR YOU */
 .dfy-hero{background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
-.dfy-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(201,168,76,0.08) 0%,transparent 60%);}
+.dfy-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(201,168,76,0.08) 0%,transparent 60%);}
 .dfy-crown{font-size:40px;margin-bottom:12px;}
-.dfy-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:#FFF;margin-bottom:6px;}
-.dfy-title span{color:var(--gold);}
-.dfy-tagline{font-size:13px;color:var(--muted);line-height:1.7;max-width:480px;margin:0 auto 20px;}
-.dfy-price-badge{display:inline-block;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:8px 24px;border-radius:50px;margin-bottom:8px;}
-.dfy-price-note{font-size:11px;color:var(--muted);letter-spacing:1px;}
+.dfy-title{font-family:‘Bebas Neue’,sans-serif;font-size:38px;letter-spacing:3px;color:#FFF;margin-bottom:6px;}
+.dfy-title span{color:var(–gold);}
+.dfy-tagline{font-size:13px;color:var(–muted);line-height:1.7;max-width:480px;margin:0 auto 20px;}
+.dfy-price-badge{display:inline-block;background:var(–gold);color:#000;font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;padding:8px 24px;border-radius:50px;margin-bottom:8px;}
+.dfy-price-note{font-size:11px;color:var(–muted);letter-spacing:1px;}
 .dfy-includes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px;}
-.dfy-include-card{background:var(--s1);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:16px;}
+.dfy-include-card{background:var(–s1);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:16px;}
 .dfy-include-icon{font-size:24px;margin-bottom:8px;}
-.dfy-include-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;}
-.dfy-include-desc{font-size:11px;color:var(--muted);line-height:1.6;}
-.dfy-form{background:var(--s1);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:24px;margin-bottom:20px;}
-.dfy-form-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;}
-.dfy-form-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.dfy-include-title{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1px;color:var(–gold);margin-bottom:4px;}
+.dfy-include-desc{font-size:11px;color:var(–muted);line-height:1.6;}
+.dfy-form{background:var(–s1);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:24px;margin-bottom:20px;}
+.dfy-form-title{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1.5px;color:var(–gold);margin-bottom:6px;}
+.dfy-form-sub{font-size:12px;color:var(–muted);margin-bottom:20px;line-height:1.6;}
 .dfy-process{margin-bottom:24px;}
 .dfy-step{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;}
-.dfy-step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dfy-step-num{width:32px;height:32px;border-radius:50%;background:var(–gold);color:#000;font-family:‘Bebas Neue’,sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .dfy-step-body{flex:1;}
 .dfy-step-title{font-weight:700;font-size:13px;color:#FFF;margin-bottom:3px;}
-.dfy-step-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.dfy-step-desc{font-size:12px;color:var(–muted);line-height:1.5;}
 .dfy-testimonial{background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:18px;margin-bottom:20px;}
 .dfy-quote{font-size:13px;color:#CCC;line-height:1.8;font-style:italic;margin-bottom:10px;}
-.dfy-quote-attr{font-size:11px;color:var(--gold);font-weight:600;}
+.dfy-quote-attr{font-size:11px;color:var(–gold);font-weight:600;}
 
-/* ══ GLOBAL REACH LAB ══ */
+/* GLOBAL REACH LAB */
 .grl-hero{background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.25);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.grl-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(42,122,204,0.06) 0%,transparent 70%);}
+.grl-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(42,122,204,0.06) 0%,transparent 70%);}
 .grl-globe{font-size:48px;margin-bottom:12px;}
-.grl-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
+.grl-title{font-family:‘Bebas Neue’,sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
 .grl-title span{color:#6AABE0;}
-.grl-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.grl-sub{font-size:12px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
 .grl-stats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
 .grl-stat{text-align:center;}
-.grl-stat-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#6AABE0;}
-.grl-stat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.grl-stat-num{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:#6AABE0;}
+.grl-stat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
 .territory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px;}
-.territory-card{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;}
+.territory-card{background:var(–s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;}
 .territory-card:hover{border-color:rgba(42,122,204,0.3);}
 .territory-card.selected{background:rgba(42,122,204,0.08);border-color:rgba(42,122,204,0.4);}
 .territory-flag{font-size:22px;margin-bottom:6px;}
 .territory-name{font-weight:700;font-size:12px;color:#FFF;margin-bottom:2px;}
-.territory-desc{font-size:10px;color:var(--muted);line-height:1.5;}
+.territory-desc{font-size:10px;color:var(–muted);line-height:1.5;}
 .territory-card.selected .territory-desc{color:#6AABE0;}
 .grl-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-.grl-tool{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:16px;}
+.grl-tool{background:var(–s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:16px;}
 .grl-tool-icon{font-size:24px;margin-bottom:8px;}
-.grl-tool-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;}
-.grl-tool-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
-.grl-tool-btn{width:100%;padding:8px;background:rgba(42,122,204,0.1);border:1px solid rgba(42,122,204,0.25);border-radius:6px;color:#6AABE0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.grl-tool-title{font-family:‘Bebas Neue’,sans-serif;font-size:13px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;}
+.grl-tool-desc{font-size:11px;color:var(–muted);line-height:1.5;margin-bottom:10px;}
+.grl-tool-btn{width:100%;padding:8px;background:rgba(42,122,204,0.1);border:1px solid rgba(42,122,204,0.25);border-radius:6px;color:#6AABE0;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .grl-tool-btn:hover{background:rgba(42,122,204,0.2);}
-.grl-output{background:var(--s1);border:1px solid rgba(42,122,204,0.15);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.grl-output{background:var(–s1);border:1px solid rgba(42,122,204,0.15);border-radius:10px;padding:18px;margin-top:16px;display:none;}
 .grl-output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6AABE0;margin-bottom:10px;}
-.sync-library-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--s2);border:1px solid var(--line);margin-bottom:8px;}
-.sync-lib-rank{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);width:24px;flex-shrink:0;}
+.sync-library-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(–s2);border:1px solid var(–line);margin-bottom:8px;}
+.sync-lib-rank{font-family:‘Bebas Neue’,sans-serif;font-size:18px;color:var(–gold);width:24px;flex-shrink:0;}
 .sync-lib-info{flex:1;}
 .sync-lib-name{font-weight:700;font-size:13px;color:#FFF;}
-.sync-lib-desc{font-size:11px;color:var(--muted);margin-top:1px;}
+.sync-lib-desc{font-size:11px;color:var(–muted);margin-top:1px;}
 .sync-lib-status{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
 .sync-lib-status.open{background:rgba(58,154,90,0.12);color:#5AB870;}
-.sync-lib-status.selective{background:rgba(201,168,76,0.1);color:var(--gold);}
+.sync-lib-status.selective{background:rgba(201,168,76,0.1);color:var(–gold);}
 .sync-lib-status.invite{background:rgba(204,53,32,0.1);color:#E07060;}
 
+/* SOCIAL COMMAND */
+.sc-hero{background:linear-gradient(135deg,#050F0A,#0A1F14);border:1px solid rgba(26,122,90,0.3);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
+.sc-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(46,204,138,0.06) 0%,transparent 70%);pointer-events:none;}
+.sc-title{font-family:‘Bebas Neue’,sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
+.sc-title span{color:var(–social2);}
+.sc-sub{font-size:12px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.sc-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+.sc-stat-num{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:var(–social2);}
+.sc-stat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
+.brand-switcher{display:flex;gap:8px;margin-bottom:20px;padding:6px;background:var(–s1);border:1px solid var(–line);border-radius:10px;}
+.brand-btn{flex:1;padding:10px 14px;border-radius:7px;border:1px solid transparent;background:transparent;cursor:pointer;text-align:left;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;}
+.brand-btn.active-lmw{background:var(–gold-dim);border-color:rgba(201,168,76,0.3);}
+.brand-btn.active-artist{background:var(–social-dim);border-color:rgba(26,122,90,0.3);}
+.brand-btn:not(.active-lmw):not(.active-artist):hover{background:var(–s2);}
+.brand-btn-name{font-weight:700;font-size:13px;color:var(–text);}
+.brand-btn-type{font-size:10px;color:var(–muted);margin-top:1px;}
+.brand-btn.active-lmw .brand-btn-type{color:var(–gold);}
+.brand-btn.active-artist .brand-btn-type{color:var(–social2);}
+.sc-tabs{display:flex;border-bottom:1px solid var(–line);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
+.sc-tabs::-webkit-scrollbar{display:none;}
+.sc-tab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.sc-tab.active{color:var(–social2);border-bottom-color:var(–social2);}
+.sc-panel{display:none;}
+.sc-panel.active{display:block;}
+.queue-card{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:16px;margin-bottom:10px;position:relative;}
+.queue-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.queue-platform-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
+.qp-ig{background:rgba(200,80,50,0.12);color:#E07860;}
+.qp-tt{background:rgba(0,200,150,0.12);color:#00C896;}
+.qp-tw{background:rgba(70,130,200,0.12);color:#70A0D0;}
+.qp-li{background:rgba(60,120,200,0.12);color:#6090D0;}
+.qp-yt{background:rgba(200,50,50,0.12);color:#E06060;}
+.qp-fb{background:rgba(60,100,200,0.12);color:#6080D0;}
+.queue-time{font-size:10px;color:var(–muted);font-family:‘DM Mono’,monospace;margin-left:auto;}
+.queue-caption{font-size:12px;color:#DDD;line-height:1.7;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(–social);margin-bottom:10px;white-space:pre-line;}
+.queue-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.queue-btn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;border:none;}
+.queue-btn-approve{background:rgba(26,122,90,0.15);color:var(–social2);border:1px solid rgba(26,122,90,0.3);}
+.queue-btn-approve:hover{background:rgba(26,122,90,0.25);}
+.queue-btn-copy{background:var(–s2);color:var(–muted);border:1px solid var(–line);}
+.queue-btn-copy:hover{color:var(–text);}
+.queue-btn-remove{background:transparent;color:var(–muted);border:1px solid var(–line);}
+.queue-approved{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(–social2);background:rgba(26,122,90,0.12);border:1px solid rgba(26,122,90,0.3);padding:2px 8px;border-radius:4px;text-transform:uppercase;}
+.engage-item{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;}
+.engage-check{width:20px;height:20px;border-radius:4px;border:1px solid var(–line);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;font-size:12px;color:#fff;}
+.engage-check.done{background:var(–social);border-color:var(–social);}
+.engage-body{flex:1;min-width:0;}
+.engage-account{font-weight:600;font-size:12px;color:var(–text);margin-bottom:3px;}
+.engage-comment{font-size:12px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;border-left:2px solid var(–social);margin-bottom:8px;}
+.engage-copy-btn{padding:5px 10px;background:var(–s2);border:1px solid var(–line);border-radius:5px;color:var(–muted);font-size:11px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all 0.15s;}
+.engage-copy-btn:hover{color:var(–text);}
+.schedule-row{display:grid;grid-template-columns:90px 1fr 70px;gap:10px;align-items:center;padding:10px 12px;border-radius:8px;background:var(–s1);border:1px solid var(–line);margin-bottom:6px;}
+.schedule-time{font-family:‘DM Mono’,monospace;font-size:12px;color:var(–social2);}
+.schedule-info{font-size:12px;color:var(–text);}
+.schedule-platform-label{font-size:10px;color:var(–muted);}
+.schedule-status{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:right;}
+.ss-pending{color:var(–muted);}.ss-live{color:var(–social2);}.ss-posted{color:var(–green);}
+.brand-setup-card{background:var(–s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:18px;margin-bottom:14px;}
+.brand-setup-title{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1px;color:var(–social2);margin-bottom:12px;}
+
 @media(max-width:700px){
-  :root{--nav-w:54px;}
-  .nav-logo{display:none;}
-  .nav-label{font-size:8px;}
-  .topbar{padding:0 12px;}
-  .topbar-sub{display:none;}
-  .vault-sidebar{width:200px;min-width:200px;}
-  .row2,.row3{grid-template-columns:1fr;}
-  .reel-format-grid{grid-template-columns:1fr 1fr;}
-  .platform-grid{grid-template-columns:repeat(3,1fr);}
-  .card-grid{grid-template-columns:1fr;}
-  .dfy-includes{grid-template-columns:1fr 1fr;}
-  .grl-tool-grid{grid-template-columns:1fr;}
-  .territory-grid{grid-template-columns:1fr 1fr;}
-  .page-body{padding:14px;}
-  .dossier-body{padding:12px;}
-  .radio-player{flex-wrap:wrap;}
+:root{–nav-w:54px;}
+.nav-logo{display:none;}
+.nav-label{font-size:8px;}
+.topbar{padding:0 12px;}
+.topbar-sub{display:none;}
+.vault-sidebar{width:200px;min-width:200px;}
+.row2,.row3{grid-template-columns:1fr;}
+.reel-format-grid{grid-template-columns:1fr 1fr;}
+.platform-grid{grid-template-columns:repeat(3,1fr);}
+.card-grid{grid-template-columns:1fr;}
+.dfy-includes{grid-template-columns:1fr 1fr;}
+.grl-tool-grid{grid-template-columns:1fr;}
+.territory-grid{grid-template-columns:1fr 1fr;}
+.page-body{padding:14px;}
+.dossier-body{padding:12px;}
+.radio-player{flex-wrap:wrap;}
+.brand-switcher{flex-direction:column;}
+.schedule-row{grid-template-columns:70px 1fr 60px;}
 }
 @media(max-width:500px){
-  .vault-sidebar{position:fixed;top:0;left:var(--nav-w);bottom:0;transform:translateX(-110%);transition:transform 0.3s;z-index:150;}
-  .vault-sidebar.open{transform:translateX(0);}
-  .vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:140;}
-  .vault-overlay.open{display:block;}
-  .show-sidebar-btn{display:flex;}
-  .dfy-includes{grid-template-columns:1fr;}
+.vault-sidebar{position:fixed;top:0;left:var(–nav-w);bottom:0;transform:translateX(-110%);transition:transform 0.3s;z-index:150;}
+.vault-sidebar.open{transform:translateX(0);}
+.vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:140;}
+.vault-overlay.open{display:block;}
+.show-sidebar-btn{display:flex;}
+.dfy-includes{grid-template-columns:1fr;}
 }
-.show-sidebar-btn{display:none;background:none;border:1px solid var(--line);color:var(--muted);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.show-sidebar-btn{display:none;background:none;border:1px solid var(–line);color:var(–muted);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
 </style>
+
 </head>
 <body>
 
@@ -376,6 +440,7 @@ select.input{cursor:pointer;}
     <div class="nav-item" onclick="showPage('dfy',this)" title="Done For You"><div class="nav-icon">💎</div><div class="nav-label">DFY</div></div>
     <div class="nav-item" onclick="showPage('grl',this)" title="Global Reach Lab"><div class="nav-icon">🌍</div><div class="nav-label">Global</div></div>
     <div class="nav-item" onclick="showPage('viral',this)" title="Viral Release Engine"><div class="nav-icon">🚀</div><div class="nav-label">Viral</div></div>
+    <div class="nav-item sc-nav" onclick="showPage('social',this)" title="Social Command"><div class="nav-icon">📡</div><div class="nav-label">Social</div></div>
   </div>
   <div class="nav-bottom">
     <button class="nav-settings" onclick="showPage('settings',this)" title="Settings"><div class="nav-icon" style="font-size:16px;">⚙</div><div class="nav-label">Keys</div></button>
@@ -395,51 +460,57 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- HOME -->
+
   <div class="page active" id="page-home">
     <div class="page-body">
       <div style="max-width:680px;margin:0 auto;padding-top:16px;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:#FFF;line-height:1;margin-bottom:6px;">LAMB MUSIC<br><span style="color:var(--gold);">WORKS STUDIO</span></div>
         <div style="font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.7;">Your complete AI-powered music business command center.</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;">
-          <div onclick="showPage('vault',document.querySelector('[title=\\'Network Vault\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+          <div onclick="showPage('vault',document.querySelector('[title=\'Network Vault\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
             <div style="font-size:28px;margin-bottom:8px;">◈</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Network Vault</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Target dossiers, inner circle maps, proximity campaigns</div>
           </div>
-          <div onclick="showPage('posts',document.querySelector('[title=\\'Post Generator\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+          <div onclick="showPage('posts',document.querySelector('[title=\'Post Generator\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
             <div style="font-size:28px;margin-bottom:8px;">✦</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Post Generator</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">AI captions for Instagram, TikTok, Twitter, LinkedIn, YouTube</div>
           </div>
-          <div onclick="showPage('images',document.querySelector('[title=\\'Image Generator\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+          <div onclick="showPage('images',document.querySelector('[title=\'Image Generator\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
             <div style="font-size:28px;margin-bottom:8px;">◉</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Image Generator</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">AI promo graphics, album art, social visuals</div>
           </div>
-          <div onclick="showPage('reels',document.querySelector('[title=\\'Reel Studio\\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
+          <div onclick="showPage('reels',document.querySelector('[title=\'Reel Studio\']'))" style="background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.3)'" onmouseout="this.style.borderColor='var(--line)'">
             <div style="font-size:28px;margin-bottom:8px;">▶</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Reel Studio</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Hedra-ready scripts for TikTok, Reels, YouTube Shorts</div>
           </div>
-          <div onclick="showPage('radio',document.querySelector('[title=\\'LMW Radio\\']'))" style="background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)'">
+          <div onclick="showPage('radio',document.querySelector('[title=\'LMW Radio\']'))" style="background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.2)'">
             <div style="font-size:28px;margin-bottom:8px;">📻</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">LMW Radio</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Stream your catalog. Broadcast your brand. Worldwide.</div>
           </div>
-          <div onclick="showPage('dfy',document.querySelector('[title=\\'Done For You\\']'))" style="background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.25);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
+          <div onclick="showPage('dfy',document.querySelector('[title=\'Done For You\']'))" style="background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.25);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.5)'" onmouseout="this.style.borderColor='rgba(201,168,76,0.25)'">
             <div style="font-size:28px;margin-bottom:8px;">💎</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;">Done For You</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Custom hits — lyrics, production, everything. Starting at $10,000.</div>
           </div>
-          <div onclick="showPage('grl',document.querySelector('[title=\\'Global Reach Lab\\']'))" style="background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(42,122,204,0.4)'" onmouseout="this.style.borderColor='rgba(42,122,204,0.2)'">
+          <div onclick="showPage('grl',document.querySelector('[title=\'Global Reach Lab\']'))" style="background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(42,122,204,0.4)'" onmouseout="this.style.borderColor='rgba(42,122,204,0.2)'">
             <div style="font-size:28px;margin-bottom:8px;">🌍</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;">Global Reach Lab</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Sync libraries, territory strategy, worldwide licensing intelligence</div>
           </div>
-          <div onclick="showPage('viral',document.querySelector('[title=\\'Viral Release Engine\\']'))" style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(180,50,220,0.5)'" onmouseout="this.style.borderColor='rgba(180,50,220,0.2)'">
+          <div onclick="showPage('viral',document.querySelector('[title=\'Viral Release Engine\']'))" style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.2);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(180,50,220,0.5)'" onmouseout="this.style.borderColor='rgba(180,50,220,0.2)'">
             <div style="font-size:28px;margin-bottom:8px;">🚀</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#C050E8;margin-bottom:4px;">Viral Release Engine</div>
             <div style="font-size:12px;color:var(--muted);line-height:1.5;">Algorithm-engineered release campaigns. Built to go viral every time.</div>
+          </div>
+          <div onclick="showPage('social',document.querySelector('[title=\'Social Command\']'))" style="background:linear-gradient(135deg,#050F0A,#0A1F14);border:1px solid rgba(26,122,90,0.25);border-radius:12px;padding:20px;cursor:pointer;" onmouseover="this.style.borderColor='rgba(46,204,138,0.4)'" onmouseout="this.style.borderColor='rgba(26,122,90,0.25)'">
+            <div style="font-size:28px;margin-bottom:8px;">📡</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--social2);margin-bottom:4px;">Social Command</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.5;">Multi-brand social OS. AI content. Daily queue. Engagement list.</div>
           </div>
         </div>
         <div class="alert alert-gold" id="homeKeyAlert">⚙ Add your Anthropic API key in Settings to enable all AI features.</div>
@@ -449,6 +520,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- NETWORK VAULT -->
+
   <div class="page" id="page-vault">
     <div class="vault-layout">
       <div class="vault-overlay" id="vaultOverlay" onclick="toggleVaultSidebar()"></div>
@@ -520,6 +592,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- POST GENERATOR -->
+
   <div class="page" id="page-posts">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate platform-optimized social posts for any occasion.</div>
@@ -545,6 +618,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- IMAGE GENERATOR -->
+
   <div class="page" id="page-images">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate AI promo graphics, album art, and social visuals.</div>
@@ -561,6 +635,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- REEL STUDIO -->
+
   <div class="page" id="page-reels">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate complete Hedra-ready scripts for your avatar.</div>
@@ -583,6 +658,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- LMW RADIO -->
+
   <div class="page" id="page-radio">
     <div class="page-body" style="max-width:700px;">
       <div class="radio-hero">
@@ -599,7 +675,6 @@ select.input{cursor:pointer;}
           <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);">24/7</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Station</div></div>
         </div>
       </div>
-
       <div class="radio-stream-box">
         <div class="stream-label">Stream Source (Optional)</div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.6;">Connect a live stream URL from Radio.co, Zeno.fm, or any Icecast/Shoutcast source. Leave blank to use catalog playlist mode.</div>
@@ -609,7 +684,6 @@ select.input{cursor:pointer;}
         </div>
         <div style="margin-top:8px;font-size:10px;color:var(--muted);">Status: <span id="streamStatus" style="color:var(--muted);">No stream connected — using catalog mode</span></div>
       </div>
-
       <div class="radio-player">
         <button class="radio-btn" id="radioPlayBtn" onclick="toggleRadio()">▶</button>
         <div class="radio-track-info">
@@ -629,9 +703,7 @@ select.input{cursor:pointer;}
           <input type="range" min="0" max="1" step="0.05" value="0.8" style="width:70px;accent-color:var(--gold);" oninput="setVolume(this.value)" title="Volume">
         </div>
       </div>
-
       <audio id="radioAudio" preload="none"></audio>
-
       <div class="playlist-section">
         <div class="playlist-header">
           <div class="playlist-title">Catalog Playlist</div>
@@ -639,9 +711,7 @@ select.input{cursor:pointer;}
         </div>
         <div id="playlistTracks"></div>
       </div>
-
       <div class="alert alert-blue">🌍 <strong>Ready to broadcast nationwide?</strong> Add a stream URL from Radio.co ($20/mo), Zeno.fm (free tier), or Live365 to go live on TuneIn, iHeart, and radio directories worldwide.</div>
-
       <div style="background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:4px;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;">ADD TRACK TO PLAYLIST</div>
         <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:14px;padding:10px 12px;background:var(--s2);border-radius:7px;">
@@ -663,6 +733,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- DONE FOR YOU -->
+
   <div class="page" id="page-dfy">
     <div class="page-body" style="max-width:700px;">
       <div class="dfy-hero">
@@ -672,7 +743,6 @@ select.input{cursor:pointer;}
         <div class="dfy-price-badge">Starting at $10,000</div>
         <div class="dfy-price-note">Per original composition · Full ownership transferred to client</div>
       </div>
-
       <h2>What's Included</h2>
       <div class="dfy-includes">
         <div class="dfy-include-card"><div class="dfy-include-icon">✍️</div><div class="dfy-include-title">Original Lyrics</div><div class="dfy-include-desc">Custom-written lyrics tailored to your story, your brand, your message. No templates. No recycled content.</div></div>
@@ -682,7 +752,6 @@ select.input{cursor:pointer;}
         <div class="dfy-include-card"><div class="dfy-include-icon">📄</div><div class="dfy-include-title">Full Ownership</div><div class="dfy-include-desc">100% of master and publishing rights transferred to you. No royalties. No backend. Yours completely.</div></div>
         <div class="dfy-include-card"><div class="dfy-include-icon">🔄</div><div class="dfy-include-title">Revision Rounds</div><div class="dfy-include-desc">Up to 3 full revision rounds included. We don't stop until it's right.</div></div>
       </div>
-
       <h2>Who This Is For</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
         <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🎤</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Artists</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a signature record. One song that defines you. Let Warren build it.</div></div>
@@ -690,7 +759,6 @@ select.input{cursor:pointer;}
         <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🎬</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Film & TV</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a custom title track, theme, or signature piece for your project.</div></div>
         <div style="background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px;"><div style="font-size:16px;margin-bottom:6px;">🏆</div><div style="font-weight:700;font-size:13px;color:#FFF;margin-bottom:4px;">Athletes & Celebrities</div><div style="font-size:11px;color:var(--muted);line-height:1.6;">Need a walkout song, personal anthem, or brand extension through music.</div></div>
       </div>
-
       <h2>The Process</h2>
       <div class="dfy-process">
         <div class="dfy-step"><div class="dfy-step-num">1</div><div class="dfy-step-body"><div class="dfy-step-title">Discovery Call</div><div class="dfy-step-desc">30-minute call to understand your vision, reference tracks, story, and goals. No cost, no commitment.</div></div></div>
@@ -698,7 +766,6 @@ select.input{cursor:pointer;}
         <div class="dfy-step"><div class="dfy-step-num">3</div><div class="dfy-step-body"><div class="dfy-step-title">Production</div><div class="dfy-step-desc">Warren builds the track. Typical delivery is 2–4 weeks depending on complexity.</div></div></div>
         <div class="dfy-step"><div class="dfy-step-num">4</div><div class="dfy-step-body"><div class="dfy-step-title">Revisions & Final Delivery</div><div class="dfy-step-desc">Up to 3 rounds of revisions. Final delivery includes all stems, masters, and full ownership documentation.</div></div></div>
       </div>
-
       <div class="dfy-form">
         <div class="dfy-form-title">Request a Discovery Call</div>
         <div class="dfy-form-sub">Tell Warren about your project. He personally reviews every request. Serious inquiries only — minimum $10,000 budget required.</div>
@@ -727,7 +794,6 @@ select.input{cursor:pointer;}
         <button class="btn-gold" id="dfySubmitBtn" onclick="submitDFY()"><span id="dfyBtnText">Send Request to Warren</span><div class="spinner" id="dfySpinner"></div></button>
         <div class="alert alert-green" id="dfySuccess" style="display:none;margin-top:14px;">✓ Request sent. Warren will personally review and respond within 48 hours.</div>
       </div>
-
       <div class="dfy-testimonial">
         <div class="dfy-quote">"Working with Warren was unlike anything I'd experienced. He didn't just make a song — he made THE song. The one that sounds like everything I was trying to say but couldn't."</div>
         <div class="dfy-quote-attr">— LMW Done For You Client</div>
@@ -736,6 +802,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- GLOBAL REACH LAB -->
+
   <div class="page" id="page-grl">
     <div class="page-body" style="max-width:700px;">
       <div class="grl-hero">
@@ -748,7 +815,6 @@ select.input{cursor:pointer;}
           <div class="grl-stat"><div class="grl-stat-num">∞</div><div class="grl-stat-label">Placements Possible</div></div>
         </div>
       </div>
-
       <h2>Target Territories</h2>
       <div class="page-intro">Select territories to focus your sync licensing and distribution strategy. Each region has different sync rates, platform dominance, and buyer behavior.</div>
       <div class="territory-grid" id="territoryGrid">
@@ -762,7 +828,6 @@ select.input{cursor:pointer;}
         <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Brazil"><div class="territory-flag">🇧🇷</div><div class="territory-name">Brazil</div><div class="territory-desc">Largest Latin American market. Globo Network. Rising streaming penetration.</div></div>
         <div class="territory-card" onclick="toggleTerritory(this)" data-territory="Korea"><div class="territory-flag">🇰🇷</div><div class="territory-name">South Korea</div><div class="territory-desc">K-drama and K-pop global influence. Netflix Korea original productions.</div></div>
       </div>
-
       <h2>Sync Library Intelligence</h2>
       <div class="page-intro">Ranked submission order for your catalog based on acceptance rates, payout potential, and fit for your sound.</div>
       <div id="syncLibraryList">
@@ -774,7 +839,6 @@ select.input{cursor:pointer;}
         <div class="sync-library-row"><div class="sync-lib-rank">6</div><div class="sync-lib-info"><div class="sync-lib-name">Epidemic Sound</div><div class="sync-lib-desc">Creator-focused. Massive YouTube/streaming presence. Invite-only.</div></div><div class="sync-lib-status invite">Invite Only</div></div>
         <div class="sync-library-row"><div class="sync-lib-rank">7</div><div class="sync-lib-info"><div class="sync-lib-name">Marmoset</div><div class="sync-lib-desc">Boutique. Film, TV, and ad placements. High artistic standard.</div></div><div class="sync-lib-status invite">Invite Only</div></div>
       </div>
-
       <h2>Global Strategy Tools</h2>
       <div class="grl-tool-grid">
         <div class="grl-tool"><div class="grl-tool-icon">📋</div><div class="grl-tool-title">Pitch Generator</div><div class="grl-tool-desc">AI-crafted sync pitches tailored for specific territories and buyers.</div><button class="grl-tool-btn" onclick="generateGlobalPitch()">Generate Territory Pitch</button></div>
@@ -782,7 +846,6 @@ select.input{cursor:pointer;}
         <div class="grl-tool"><div class="grl-tool-icon">📧</div><div class="grl-tool-title">Supervisor Outreach</div><div class="grl-tool-desc">AI-written emails to music supervisors in your selected territories.</div><button class="grl-tool-btn" onclick="generateSupervisorEmail()">Write Supervisor Email</button></div>
         <div class="grl-tool"><div class="grl-tool-icon">📅</div><div class="grl-tool-title">Release Playbook</div><div class="grl-tool-desc">72-hour algorithmic release strategy optimized for global reach.</div><button class="grl-tool-btn" onclick="generatePlaybook()">Build Release Playbook</button></div>
       </div>
-
       <div class="grl-output" id="grlOutput">
         <div class="grl-output-label" id="grlOutputLabel">Output</div>
         <div class="output-text" id="grlOutputText"></div>
@@ -792,6 +855,7 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- VIRAL RELEASE ENGINE -->
+
   <div class="page" id="page-viral">
     <div class="page-body" style="max-width:700px;">
       <div style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.25);border-radius:14px;padding:28px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;">
@@ -805,7 +869,6 @@ select.input{cursor:pointer;}
           <div style="text-align:center;"><div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#C050E8;">4</div><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">Triggers</div></div>
         </div>
       </div>
-
       <div style="background:var(--s1);border:1px solid rgba(180,50,220,0.15);border-radius:12px;padding:22px;margin-bottom:20px;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#C050E8;margin-bottom:16px;">ABOUT YOUR RELEASE</div>
         <div class="field"><div class="label">Song Title *</div><input class="input" id="viralTitle" type="text" placeholder="e.g. Midnight Drive, Champion, Gold Standard"></div>
@@ -839,7 +902,6 @@ select.input{cursor:pointer;}
           <div class="spinner" id="viralSpinner"></div>
         </button>
       </div>
-
       <div id="viralOutput" style="display:none;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#C050E8;margin-bottom:16px;">YOUR VIRAL CAMPAIGN</div>
         <div id="viralOutputContent"></div>
@@ -848,7 +910,236 @@ select.input{cursor:pointer;}
     </div>
   </div>
 
+  <!-- SOCIAL COMMAND -->
+
+  <div class="page" id="page-social">
+    <div class="page-body" style="max-width:760px;">
+      <div class="sc-hero">
+        <div class="sc-title">SOCIAL <span>COMMAND</span></div>
+        <div class="sc-sub">Multi-Brand Social Operating System</div>
+        <div class="sc-stats">
+          <div class="sc-stat"><div class="sc-stat-num" id="scQueueCount">0</div><div class="sc-stat-label">In Queue</div></div>
+          <div class="sc-stat"><div class="sc-stat-num" id="scEngageCount">0</div><div class="sc-stat-label">To Engage</div></div>
+          <div class="sc-stat"><div class="sc-stat-num">2</div><div class="sc-stat-label">Brands</div></div>
+          <div class="sc-stat"><div class="sc-stat-num">6</div><div class="sc-stat-label">Platforms</div></div>
+        </div>
+      </div>
+
+```
+  <div class="brand-switcher">
+    <button class="brand-btn active-lmw" id="brandLMW" onclick="switchBrand('lmw')">
+      <div class="brand-btn-name">Lamb Music Works</div>
+      <div class="brand-btn-type">Sync · Beats · Brand Music</div>
+    </button>
+    <button class="brand-btn" id="brandArtist" onclick="switchBrand('artist')">
+      <div class="brand-btn-name" id="artistBrandName">The Artist</div>
+      <div class="brand-btn-type">Soul / R&B · Hip-Hop</div>
+    </button>
+  </div>
+
+  <div class="sc-tabs">
+    <div class="sc-tab active" onclick="showSCTab('generate',this)">🤖 Content Engine</div>
+    <div class="sc-tab" onclick="showSCTab('queue',this)">📋 Daily Queue</div>
+    <div class="sc-tab" onclick="showSCTab('engage',this)">💬 Engagement List</div>
+    <div class="sc-tab" onclick="showSCTab('schedule',this)">🕐 Schedule</div>
+    <div class="sc-tab" onclick="showSCTab('setup',this)">⚙️ Brand Setup</div>
+  </div>
+
+  <!-- CONTENT ENGINE -->
+  <div class="sc-panel active" id="sc-generate">
+    <div class="alert alert-social">🤖 AI writes every post. You review, approve, copy-paste to post. Safe, manual, undetectable.</div>
+    <div class="row2">
+      <div class="field"><div class="label">What's happening today?</div>
+        <textarea class="input" id="scTopic" rows="3" placeholder="e.g. New track release, sync placement landed, studio session behind the scenes…"></textarea>
+      </div>
+      <div class="field"><div class="label">Content Goal</div>
+        <select class="input" id="scGoal">
+          <option value="awareness">Brand Awareness</option>
+          <option value="engagement">Drive Engagement</option>
+          <option value="sync">Sync / Business Pitch</option>
+          <option value="artist_promo">Artist Promo</option>
+          <option value="community">Community Building</option>
+          <option value="education">Educational / Value</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><div class="label">Platforms</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:4px;" id="scPlatformGrid">
+        <div class="platform-chip selected" data-sp="Instagram" onclick="toggleSCPlatform(this)"><div class="chip-icon">📸</div><div class="chip-name">Instagram</div></div>
+        <div class="platform-chip selected" data-sp="TikTok" onclick="toggleSCPlatform(this)"><div class="chip-icon">🎵</div><div class="chip-name">TikTok</div></div>
+        <div class="platform-chip selected" data-sp="Twitter/X" onclick="toggleSCPlatform(this)"><div class="chip-icon">𝕏</div><div class="chip-name">Twitter/X</div></div>
+        <div class="platform-chip" data-sp="LinkedIn" onclick="toggleSCPlatform(this)"><div class="chip-icon">💼</div><div class="chip-name">LinkedIn</div></div>
+        <div class="platform-chip" data-sp="YouTube" onclick="toggleSCPlatform(this)"><div class="chip-icon">▶</div><div class="chip-name">YouTube</div></div>
+        <div class="platform-chip" data-sp="Facebook" onclick="toggleSCPlatform(this)"><div class="chip-icon">👥</div><div class="chip-name">Facebook</div></div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field"><div class="label">Tone</div>
+        <select class="input" id="scTone">
+          <option value="authentic and real">Authentic & Real</option>
+          <option value="motivational">Motivational</option>
+          <option value="professional">Professional</option>
+          <option value="hype and energy">Hype & Energy</option>
+          <option value="educational">Educational</option>
+        </select>
+      </div>
+      <div class="field"><div class="label">Hashtags?</div>
+        <select class="input" id="scHashtags">
+          <option value="yes">Yes — rotated set</option>
+          <option value="no">No hashtags</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-social" id="scGenBtn" onclick="generateSCContent()">
+      <span id="scGenBtnText">⚡ Generate Today's Content</span>
+      <div class="spinner spinner-white" id="scGenSpinner"></div>
+    </button>
+    <div id="scGeneratedOutput" style="display:none;margin-top:20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--social2);">GENERATED CONTENT</div>
+        <button onclick="approveAllSC()" style="padding:6px 14px;background:rgba(26,122,90,0.15);border:1px solid rgba(26,122,90,0.3);border-radius:6px;color:var(--social2);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Approve All</button>
+      </div>
+      <div id="scPostCards"></div>
+    </div>
+  </div>
+
+  <!-- DAILY QUEUE -->
+  <div class="sc-panel" id="sc-queue">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">TODAY'S QUEUE</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="queueDate"></div>
+      </div>
+      <button onclick="clearSCQueue()" style="padding:6px 12px;background:transparent;border:1px solid rgba(204,53,32,0.3);border-radius:6px;color:#E07060;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">Clear Queue</button>
+    </div>
+    <div id="queueList">
+      <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
+        <div style="font-size:32px;margin-bottom:10px;">📭</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:4px;">Queue is empty</div>
+        <div style="font-size:12px;line-height:1.6;">Go to Content Engine → generate posts → approve to add</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENGAGEMENT LIST -->
+  <div class="sc-panel" id="sc-engage">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">ENGAGEMENT CHECKLIST</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Copy-paste comments. You post manually.</div>
+      </div>
+      <button onclick="generateEngageList()" id="engageGenBtn" style="padding:8px 14px;background:var(--social);border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;">
+        <span id="engageGenText">⚡ Generate List</span>
+      </button>
+    </div>
+    <div id="engageList">
+      <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
+        <div style="font-size:32px;margin-bottom:10px;">💬</div>
+        <div style="font-weight:600;color:var(--text);margin-bottom:4px;">No engagement tasks yet</div>
+        <div style="font-size:12px;line-height:1.6;">Click Generate List to create today's checklist with copy-paste comments</div>
+      </div>
+    </div>
+    <div class="alert alert-social" style="margin-top:16px;">✋ <strong>You post manually.</strong> Copy the comment, go to the account, paste and post. Keeps your account safe from automation flags.</div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="sc-panel" id="sc-schedule">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);margin-bottom:6px;">OPTIMAL POSTING SCHEDULE</div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Optimized for LA/PST audience. Each time has ±15 min randomization built in. LMW and Artist posts staggered 45+ min apart.</div>
+    <div style="background:var(--s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:16px;margin-bottom:16px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">LAMB MUSIC WORKS — WEEKDAY</div>
+      <div class="schedule-row"><div class="schedule-time">8:47 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Brand awareness · Sync catalog</div></div><div class="schedule-status ss-live">● LIVE</div></div>
+      <div class="schedule-row"><div class="schedule-time">12:03 PM</div><div class="schedule-info"><div>TikTok / Reel</div><div class="schedule-platform-label">Behind the scenes</div></div><div class="schedule-status ss-pending">Pending</div></div>
+      <div class="schedule-row"><div class="schedule-time">3:22 PM</div><div class="schedule-info"><div>Twitter/X</div><div class="schedule-platform-label">Industry insight</div></div><div class="schedule-status ss-pending">Pending</div></div>
+      <div class="schedule-row"><div class="schedule-time">6:11 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Engagement · Poll or Q&A</div></div><div class="schedule-status ss-pending">Pending</div></div>
+      <div class="schedule-row"><div class="schedule-time">8:34 PM</div><div class="schedule-info"><div>LinkedIn</div><div class="schedule-platform-label">Sync licensing · Professional</div></div><div class="schedule-status ss-pending">Pending</div></div>
+    </div>
+    <div style="background:var(--s1);border:1px solid rgba(46,204,138,0.15);border-radius:10px;padding:16px;margin-bottom:16px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">THE ARTIST — WEEKDAY</div>
+      <div class="schedule-row"><div class="schedule-time">9:15 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Artist lifestyle · Music journey</div></div><div class="schedule-status ss-pending">Pending</div></div>
+      <div class="schedule-row"><div class="schedule-time">1:44 PM</div><div class="schedule-info"><div>TikTok</div><div class="schedule-platform-label">Music snippet · Vibe content</div></div><div class="schedule-status ss-pending">Pending</div></div>
+      <div class="schedule-row"><div class="schedule-time">7:27 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Fan connection · Personal</div></div><div class="schedule-status ss-pending">Pending</div></div>
+    </div>
+    <div class="alert alert-gold">📌 <strong>Red flags to avoid:</strong> Never post both brands at same time. No identical content across platforms. No consistent exact timing daily. No 100+ likes in one hour.</div>
+    <div style="background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:16px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--gold);margin-bottom:10px;">BEST DAYS BY PLATFORM</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Instagram</strong><br>Tue, Wed, Thu · 9am, 12pm, 6pm</div>
+        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">TikTok</strong><br>Tue–Fri · 12pm, 3pm, 7pm</div>
+        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Twitter/X</strong><br>Mon–Thu · 8am, 12pm, 5pm</div>
+        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">LinkedIn</strong><br>Tue, Wed · 8am, 12pm, 6pm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND SETUP -->
+  <div class="sc-panel" id="sc-setup">
+    <div class="alert alert-social">⚙️ Set each brand's voice. AI uses these profiles to write content that sounds authentically like each brand — not generic AI copy.</div>
+    <div class="brand-setup-card">
+      <div class="brand-setup-title">🎵 LAMB MUSIC WORKS — Brand Profile</div>
+      <div class="row2">
+        <div class="field"><div class="label">Brand Voice</div>
+          <select class="input" id="lmwVoice">
+            <option value="independent builder, ownership-first, no cosign needed">Independent Builder</option>
+            <option value="professional and credible music business">Professional & Credible</option>
+            <option value="educator and guide for other producers">Educator & Guide</option>
+          </select>
+        </div>
+        <div class="field"><div class="label">Primary Goal</div>
+          <select class="input" id="lmwGoal">
+            <option value="sync licensing clients and film/TV placements">Sync Licensing</option>
+            <option value="beat sales and producer networking">Beat Sales</option>
+            <option value="brand music and jingle clients">Brand Music</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><div class="label">Key Messages (comma separated)</div>
+        <input class="input" id="lmwMessages" type="text" value="Full ownership, independent, music built for picture, sync-ready catalog, no label needed">
+      </div>
+      <div class="field"><div class="label">Website / CTA</div>
+        <input class="input" id="lmwCTA" type="text" value="lambmusicworks.com">
+      </div>
+    </div>
+    <div class="brand-setup-card" style="border-color:rgba(46,204,138,0.2);">
+      <div class="brand-setup-title">🎤 THE ARTIST — Brand Profile</div>
+      <div class="field"><div class="label">Artist Name (enter when ready)</div>
+        <input class="input" id="artistName" type="text" placeholder="TBD — enter when name is chosen" oninput="updateArtistName(this.value)">
+      </div>
+      <div class="row2">
+        <div class="field"><div class="label">Genre</div>
+          <select class="input" id="artistGenre">
+            <option value="Soul / R&B">Soul / R&B</option>
+            <option value="Soul / R&B / Hip-Hop">Soul / R&B / Hip-Hop</option>
+            <option value="Hip-Hop / R&B">Hip-Hop / R&B</option>
+            <option value="Gospel / Inspirational">Gospel / Inspirational</option>
+          </select>
+        </div>
+        <div class="field"><div class="label">Vibe</div>
+          <select class="input" id="artistVibe">
+            <option value="gentle, compassionate, uplifting, warm">Gentle & Uplifting</option>
+            <option value="smooth and sophisticated">Smooth & Sophisticated</option>
+            <option value="raw and authentic">Raw & Authentic</option>
+            <option value="powerful and commanding">Powerful & Commanding</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><div class="label">Artist Story / Narrative</div>
+        <textarea class="input" id="artistStory" rows="3" placeholder="e.g. A soulful voice from LA building an independent career on their own terms. Music rooted in faith, love, and the human experience…"></textarea>
+      </div>
+      <div class="field"><div class="label">Key Themes</div>
+        <input class="input" id="artistThemes" type="text" placeholder="e.g. Faith, love, resilience, real life, growth, redemption">
+      </div>
+    </div>
+    <button class="btn-social" onclick="saveBrandProfiles()">💾 Save Brand Profiles</button>
+    <div class="alert alert-green" id="brandSaveOK" style="display:none;margin-top:12px;">✓ Brand profiles saved. Content Engine will now generate brand-specific content.</div>
+  </div>
+</div>
+```
+
+  </div>
+
   <!-- SETTINGS -->
+
   <div class="page" id="page-settings">
     <div class="page-body" style="max-width:500px;">
       <div class="settings-section">
@@ -878,6 +1169,7 @@ select.input{cursor:pointer;}
 </div>
 
 <!-- EXPORT MODAL -->
+
 <div class="export-modal" id="exportModal">
   <div class="export-box">
     <button class="export-close" onclick="closeExportModal()">✕</button>
@@ -918,392 +1210,353 @@ let currentTarget = null;
 let vaultFilter = 'all';
 const VAULT_KEY = 'lmw_vault_targets';
 
-// ══ RADIO ══
-const RADIO_KEY = 'lmw_radio_playlist';
-let playlist = [];
-let currentTrackIndex = -1;
-let radioPlaying = false;
-let shuffle = false;
-let repeat = false;
-let radioAudio = null;
-let progressTimer = null;
-let streamConnected = false;
+// ══ SOCIAL COMMAND STATE ══
+let scActiveBrand = 'lmw';
+let scPlatforms = ['Instagram','TikTok','Twitter/X'];
+let scQueue = [];
+let scEngageItems = [];
 
-function loadRadioPlaylist(){
+function switchBrand(brand) {
+  scActiveBrand = brand;
+  document.getElementById('brandLMW').className = 'brand-btn' + (brand==='lmw'?' active-lmw':'');
+  document.getElementById('brandArtist').className = 'brand-btn' + (brand==='artist'?' active-artist':'');
+}
+
+function showSCTab(tab, el) {
+  document.querySelectorAll('.sc-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.sc-panel').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sc-'+tab).classList.add('active');
+  if(tab==='queue') renderSCQueue();
+  if(tab==='engage') renderEngageList();
+}
+
+function toggleSCPlatform(el) {
+  el.classList.toggle('selected');
+  scPlatforms = Array.from(document.querySelectorAll('#scPlatformGrid .platform-chip.selected')).map(c=>c.dataset.sp);
+}
+
+function updateArtistName(val) {
+  document.getElementById('artistBrandName').textContent = val || 'The Artist';
+}
+
+function saveBrandProfiles() {
+  const p = {
+    lmw:{voice:document.getElementById('lmwVoice').value,goal:document.getElementById('lmwGoal').value,messages:document.getElementById('lmwMessages').value,cta:document.getElementById('lmwCTA').value},
+    artist:{name:document.getElementById('artistName').value,genre:document.getElementById('artistGenre').value,vibe:document.getElementById('artistVibe').value,story:document.getElementById('artistStory').value,themes:document.getElementById('artistThemes').value}
+  };
+  try{localStorage.setItem('lmw_brand_profiles',JSON.stringify(p));}catch(e){}
+  const el=document.getElementById('brandSaveOK');el.style.display='block';setTimeout(()=>el.style.display='none',3000);
+}
+
+function loadBrandProfiles() {
   try{
-    const saved = localStorage.getItem(RADIO_KEY);
-    if(saved) playlist = JSON.parse(saved);
-  }catch(e){ playlist = []; }
+    const s=localStorage.getItem('lmw_brand_profiles');if(!s)return;
+    const p=JSON.parse(s);
+    if(p.lmw){
+      if(p.lmw.voice)document.getElementById('lmwVoice').value=p.lmw.voice;
+      if(p.lmw.messages)document.getElementById('lmwMessages').value=p.lmw.messages;
+      if(p.lmw.cta)document.getElementById('lmwCTA').value=p.lmw.cta;
+    }
+    if(p.artist){
+      if(p.artist.name){document.getElementById('artistName').value=p.artist.name;updateArtistName(p.artist.name);}
+      if(p.artist.genre)document.getElementById('artistGenre').value=p.artist.genre;
+      if(p.artist.vibe)document.getElementById('artistVibe').value=p.artist.vibe;
+      if(p.artist.story)document.getElementById('artistStory').value=p.artist.story;
+      if(p.artist.themes)document.getElementById('artistThemes').value=p.artist.themes;
+    }
+  }catch(e){}
 }
 
-function saveRadioPlaylist(){
-  try{ localStorage.setItem(RADIO_KEY, JSON.stringify(playlist)); }catch(e){}
+function getBrandCtx() {
+  try{
+    const s=localStorage.getItem('lmw_brand_profiles');
+    const p=s?JSON.parse(s):{};
+    if(scActiveBrand==='lmw'){
+      return 'Brand: Lamb Music Works. Voice: '+(p.lmw?.voice||'independent builder, ownership-first')+'. Goal: '+(p.lmw?.goal||'sync licensing')+'. Key messages: '+(p.lmw?.messages||'full ownership, music built for picture')+'. Website: '+(p.lmw?.cta||'lambmusicworks.com');
+    } else {
+      const n=p.artist?.name||'The Artist';
+      return 'Brand: '+n+' (separate artist project). Genre: '+(p.artist?.genre||'Soul/R&B')+'. Vibe: '+(p.artist?.vibe||'gentle and uplifting')+'. Story: '+(p.artist?.story||'Independent soulful artist')+'. Themes: '+(p.artist?.themes||'faith, love, resilience');
+    }
+  }catch(e){return 'Brand: Lamb Music Works — Independent music producer.';}
 }
 
-// Convert Google Drive share link to streamable direct URL
+async function generateSCContent() {
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const topic=document.getElementById('scTopic').value.trim();if(!topic){alert('Enter what today\'s content is about.');return;}
+  if(!scPlatforms.length){alert('Select at least one platform.');return;}
+  const goal=document.getElementById('scGoal').value;
+  const tone=document.getElementById('scTone').value;
+  const hashtags=document.getElementById('scHashtags').value;
+  setSCBtnLoading(true);
+  const prompt=`You are a social media content expert for Warren Lamb.\n${getBrandCtx()}\n\nCreate posts for: ${scPlatforms.join(', ')}\nTopic: ${topic}\nGoal: ${goal}\nTone: ${tone}\nHashtags: ${hashtags==='yes'?'Include platform-specific hashtags (rotate sets, never repeat)':'No hashtags'}\n\nRules:\n- Each post uniquely formatted for its platform — no copy-pasting between platforms\n- Instagram: visual, emotional, 150-220 words, line breaks for readability\n- TikTok: hooky first line, conversational, trend-aware\n- Twitter/X: punchy standalone thought, 240 chars max\n- LinkedIn: professional insight angle, value-driven\n- YouTube: community-post style with engaging question\n- Facebook: warm, community-oriented\n- Sound like a real human, not a brand robot\n\nRespond ONLY with valid JSON, no markdown:\n{"posts":[{"platform":"Instagram","caption":"...","hashtags":"...","bestTime":"8:47 AM","tip":"..."}]}`;
+  try{
+    const res=await callAnthropic(prompt,key,2000);
+    let clean=res.replace(/```json|```/g,'').trim();
+    const s=clean.indexOf('{');const e=clean.lastIndexOf('}');
+    if(s!==-1&&e!==-1)clean=clean.slice(s,e+1);
+    const data=JSON.parse(clean);
+    renderSCPosts(data.posts||[]);
+  }catch(e){alert('Generation failed: '+e.message);}
+  finally{setSCBtnLoading(false);}
+}
+
+function setSCBtnLoading(loading){
+  document.getElementById('scGenBtn').disabled=loading;
+  document.getElementById('scGenBtnText').style.display=loading?'none':'block';
+  document.getElementById('scGenSpinner').style.display=loading?'block':'none';
+}
+
+const platBadge={'Instagram':'qp-ig','TikTok':'qp-tt','Twitter/X':'qp-tw','LinkedIn':'qp-li','YouTube':'qp-yt','Facebook':'qp-fb'};
+
+function renderSCPosts(posts){
+  const c=document.getElementById('scPostCards');c.innerHTML='';
+  posts.forEach((post,i)=>{
+    const bc=platBadge[post.platform]||'qp-ig';
+    const fullCap=(post.hashtags&&post.hashtags.trim())?post.caption+'\n\n'+post.hashtags:post.caption;
+    const card=document.createElement('div');card.className='queue-card';card.id='gcard'+i;
+    card.innerHTML=`<div class="queue-card-header"><span class="queue-platform-badge ${bc}">${post.platform}</span><span class="queue-time">⏰ ${post.bestTime||'Optimal time'}</span></div>`
+      +`<div class="queue-caption" id="gcap${i}">${fullCap}</div>`
+      +(post.tip?`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;padding:6px 10px;background:rgba(26,122,90,0.05);border-radius:5px;border-left:2px solid var(--social);">💡 ${post.tip}</div>`:'')
+      +`<div class="queue-actions"><button class="queue-btn queue-btn-approve" id="gapprove${i}" onclick="approveSCPost(${i},'${post.platform}')">✓ Add to Queue</button>`
+      +`<button class="queue-btn queue-btn-copy" onclick="copySCPost(${i})">📋 Copy</button></div>`;
+    c.appendChild(card);
+  });
+  document.getElementById('scGeneratedOutput').style.display='block';
+  document.getElementById('scGeneratedOutput').scrollIntoView({behavior:'smooth'});
+}
+
+function approveSCPost(i,platform){
+  if(document.querySelector('#gcard'+i+' .queue-approved'))return;
+  const cap=document.getElementById('gcap'+i).textContent;
+  const timeEl=document.querySelector('#gcard'+i+' .queue-time');
+  const time=timeEl?timeEl.textContent.replace('⏰ ',''):'';
+  scQueue.push({id:Date.now()+i,platform,caption:cap,time,brand:scActiveBrand});
+  saveSCQueue();updateSCStats();
+  const badge=document.createElement('div');badge.className='queue-approved';badge.textContent='✓ Queued';
+  document.getElementById('gcard'+i).appendChild(badge);
+}
+
+function approveAllSC(){
+  document.querySelectorAll('[id^="gapprove"]').forEach(btn=>btn.click());
+}
+
+function copySCPost(i){
+  const cap=document.getElementById('gcap'+i).textContent;
+  navigator.clipboard.writeText(cap).then(()=>{
+    const btns=document.querySelectorAll('#gcard'+i+' .queue-btn-copy');
+    if(btns[0]){btns[0].textContent='✓ Copied';setTimeout(()=>btns[0].textContent='📋 Copy',2000);}
+  });
+}
+
+function renderSCQueue(){
+  const c=document.getElementById('queueList');
+  const d=new Date();
+  document.getElementById('queueDate').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  updateSCStats();
+  if(!scQueue.length){
+    c.innerHTML='<div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;"><div style="font-size:32px;margin-bottom:10px;">📭</div><div style="font-weight:600;color:var(--text);margin-bottom:4px;">Queue is empty</div><div style="font-size:12px;line-height:1.6;">Go to Content Engine → generate posts → approve to add</div></div>';
+    return;
+  }
+  c.innerHTML=scQueue.map((item,i)=>{
+    const bc=platBadge[item.platform]||'qp-ig';
+    const bl=item.brand==='lmw'?'LMW':'Artist';
+    return`<div class="queue-card"><div class="queue-card-header"><span class="queue-platform-badge ${bc}">${item.platform}</span><span style="font-size:9px;font-weight:700;letter-spacing:1px;padding:3px 7px;border-radius:4px;background:rgba(201,168,76,0.1);color:var(--gold);">${bl}</span><span class="queue-time">⏰ ${item.time||'Scheduled'}</span></div><div class="queue-caption">${item.caption}</div><div class="queue-actions"><button class="queue-btn queue-btn-copy" onclick="copyQueueItem(${i})">📋 Copy & Post</button><button class="queue-btn queue-btn-remove" onclick="removeQueueItem(${i})">✕ Remove</button></div></div>`;
+  }).join('');
+}
+
+function copyQueueItem(i){
+  navigator.clipboard.writeText(scQueue[i].caption).then(()=>{
+    const btns=document.querySelectorAll('#queueList .queue-btn-copy');
+    if(btns[i]){btns[i].textContent='✓ Copied!';setTimeout(()=>btns[i].textContent='📋 Copy & Post',2000);}
+  });
+}
+
+function removeQueueItem(i){scQueue.splice(i,1);saveSCQueue();updateSCStats();renderSCQueue();}
+function clearSCQueue(){if(confirm('Clear all queued posts?')){scQueue=[];saveSCQueue();updateSCStats();renderSCQueue();}}
+function saveSCQueue(){try{localStorage.setItem('lmw_sc_queue',JSON.stringify(scQueue));}catch(e){}}
+function loadSCQueue(){try{const s=localStorage.getItem('lmw_sc_queue');if(s)scQueue=JSON.parse(s);}catch(e){}}
+
+async function generateEngageList(){
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const btn=document.getElementById('engageGenBtn');
+  const txt=document.getElementById('engageGenText');
+  btn.disabled=true;txt.textContent='Generating…';
+  const prompt=`You are a social media engagement strategist for Warren Lamb.\n${getBrandCtx()}\n\nGenerate a daily engagement checklist of 8 accounts to engage with today. Mix of music supervisors, independent producers, music business accounts, and collaboration targets.\n\nFor each account provide a copy-paste ready comment that:\n- Sounds 100% human and natural\n- Is specific to what that type of account posts about\n- Adds real value or insight (not just "great post!")\n- Is never promotional about Warren or LMW\n- Is 1-2 sentences max\n\nRespond ONLY with valid JSON:\n{"items":[{"account":"@accountname","platform":"Instagram","accountType":"Music Supervisor","commentPrompt":"What they typically post about","comment":"The exact comment to copy-paste"}]}\n\nGenerate exactly 8 items.`;
+  try{
+    const res=await callAnthropic(prompt,key,1200);
+    let clean=res.replace(/```json|```/g,'').trim();
+    const s=clean.indexOf('{');const e=clean.lastIndexOf('}');
+    if(s!==-1&&e!==-1)clean=clean.slice(s,e+1);
+    const data=JSON.parse(clean);
+    scEngageItems=(data.items||[]).map(i=>({...i,done:false}));
+    renderEngageList();updateSCStats();
+  }catch(e){alert('Failed: '+e.message);}
+  finally{btn.disabled=false;txt.textContent='⚡ Generate List';}
+}
+
+function renderEngageList(){
+  const c=document.getElementById('engageList');
+  if(!scEngageItems.length){
+    c.innerHTML='<div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;"><div style="font-size:32px;margin-bottom:10px;">💬</div><div style="font-weight:600;color:var(--text);margin-bottom:4px;">No tasks yet</div><div style="font-size:12px;line-height:1.6;">Click Generate List above</div></div>';
+    return;
+  }
+  c.innerHTML=scEngageItems.map((item,i)=>`
+    <div class="engage-item">
+      <div class="engage-check ${item.done?'done':''}" onclick="toggleEngage(${i})">${item.done?'✓':''}</div>
+      <div class="engage-body">
+        <div class="engage-account">${item.account} <span style="font-size:10px;color:var(--muted);font-weight:400;">· ${item.platform} · ${item.accountType}</span></div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;">💡 ${item.commentPrompt}</div>
+        <div class="engage-comment">${item.comment}</div>
+        <button class="engage-copy-btn" id="ecopy${i}" onclick="copyEngage(${i})">📋 Copy Comment</button>
+      </div>
+    </div>`).join('');
+}
+
+function toggleEngage(i){scEngageItems[i].done=!scEngageItems[i].done;updateSCStats();renderEngageList();}
+
+function copyEngage(i){
+  navigator.clipboard.writeText(scEngageItems[i].comment).then(()=>{
+    const btn=document.getElementById('ecopy'+i);
+    if(btn){btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent='📋 Copy Comment',2000);}
+  });
+}
+
+function updateSCStats(){
+  document.getElementById('scQueueCount').textContent=scQueue.length;
+  document.getElementById('scEngageCount').textContent=scEngageItems.filter(i=>!i.done).length;
+}
+
+// ══ RADIO ══
+const RADIO_KEY='lmw_radio_playlist';
+let playlist=[],currentTrackIndex=-1,radioPlaying=false,shuffle=false,repeat=false,radioAudio=null,progressTimer=null,streamConnected=false;
+
+function loadRadioPlaylist(){try{const s=localStorage.getItem(RADIO_KEY);if(s)playlist=JSON.parse(s);}catch(e){playlist=[];}}
+function saveRadioPlaylist(){try{localStorage.setItem(RADIO_KEY,JSON.stringify(playlist));}catch(e){}}
+
 function convertGDriveUrl(url){
-  if(!url) return '';
-  // Handle /file/d/FILE_ID/view format
-  const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-  if(match) return `https://drive.google.com/uc?export=download&id=${match[1]}`;
-  // Handle ?id=FILE_ID format
-  const match2 = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
-  if(match2) return `https://drive.google.com/uc?export=download&id=${match2[1]}`;
-  // Return as-is if not Google Drive
+  if(!url)return'';
+  const m=url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);if(m)return`https://drive.google.com/uc?export=download&id=${m[1]}`;
+  const m2=url.match(/[?&]id=([a-zA-Z0-9_-]+)/);if(m2)return`https://drive.google.com/uc?export=download&id=${m2[1]}`;
   return url;
 }
 
 function initRadio(){
   loadRadioPlaylist();
-  radioAudio = document.getElementById('radioAudio');
-  radioAudio.addEventListener('ended', nextTrack);
-  radioAudio.addEventListener('timeupdate', updateProgress);
-  radioAudio.addEventListener('loadedmetadata', updateDuration);
+  radioAudio=document.getElementById('radioAudio');
+  radioAudio.addEventListener('ended',nextTrack);
+  radioAudio.addEventListener('timeupdate',updateProgress);
+  radioAudio.addEventListener('loadedmetadata',updateDuration);
   renderPlaylist();
 }
 
 function renderPlaylist(){
-  const container = document.getElementById('playlistTracks');
-  document.getElementById('playlistCount').textContent = playlist.length + ' track' + (playlist.length!==1?'s':'');
-  document.getElementById('radioTracks').textContent = playlist.length;
-  if(!playlist.length){
-    container.innerHTML = `<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed rgba(201,168,76,0.15);border-radius:8px;">
-      <div style="font-size:28px;margin-bottom:8px;">📭</div>
-      <div style="font-weight:600;color:var(--text);margin-bottom:4px;">No tracks yet</div>
-      <div style="font-size:12px;line-height:1.6;">Upload your MP3s to Google Drive and add them below.<br>They'll be saved here permanently.</div>
-    </div>`;
-    return;
-  }
-  container.innerHTML = playlist.map((t,i) => `
-    <div class="track-row ${currentTrackIndex===i?'playing':''}" style="position:relative;">
-      <div onclick="playTrack(${i})" style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;cursor:pointer;">
-        <div class="track-num">${currentTrackIndex===i?'▶':i+1}</div>
-        <div class="track-details">
-          <div class="track-name">${t.name}</div>
-          <div class="track-meta">${t.bpm?t.bpm+' BPM':''}</div>
-        </div>
-        <div class="track-genre">${t.genre}</div>
-        <div class="track-duration">${t.duration}</div>
-      </div>
-      <button onclick="deleteTrack(${i})" style="background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;margin-left:8px;border-radius:4px;flex-shrink:0;" title="Remove track" onmouseover="this.style.color='#CC3520'" onmouseout="this.style.color='var(--muted)'">✕</button>
-    </div>`).join('');
+  const c=document.getElementById('playlistTracks');
+  document.getElementById('playlistCount').textContent=playlist.length+' track'+(playlist.length!==1?'s':'');
+  document.getElementById('radioTracks').textContent=playlist.length;
+  if(!playlist.length){c.innerHTML=`<div style="padding:24px;text-align:center;color:var(--muted);font-size:13px;border:1px dashed rgba(201,168,76,0.15);border-radius:8px;"><div style="font-size:28px;margin-bottom:8px;">📭</div><div style="font-weight:600;color:var(--text);margin-bottom:4px;">No tracks yet</div><div style="font-size:12px;line-height:1.6;">Upload your MP3s to Google Drive and add them below.<br>They'll be saved here permanently.</div></div>`;return;}
+  c.innerHTML=playlist.map((t,i)=>`<div class="track-row ${currentTrackIndex===i?'playing':''}" style="position:relative;"><div onclick="playTrack(${i})" style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;cursor:pointer;"><div class="track-num">${currentTrackIndex===i?'▶':i+1}</div><div class="track-details"><div class="track-name">${t.name}</div><div class="track-meta">${t.bpm?t.bpm+' BPM':''}</div></div><div class="track-genre">${t.genre}</div><div class="track-duration">${t.duration}</div></div><button onclick="deleteTrack(${i})" style="background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:4px 8px;margin-left:8px;border-radius:4px;flex-shrink:0;" onmouseover="this.style.color='#CC3520'" onmouseout="this.style.color='var(--muted)'">✕</button></div>`).join('');
 }
 
-function deleteTrack(index){
-  if(!confirm("Remove "+playlist[index].name+" from playlist?")) return;
-  const dbId = playlist[index].dbId || playlist[index].id;
-  deleteTrackFromSupabase(dbId);
-  if(currentTrackIndex === index){ pauseRadio(); currentTrackIndex = -1; document.getElementById('radioTrackName').textContent='Select a track to begin'; document.getElementById('radioProgressFill').style.width='0%'; }
-  else if(currentTrackIndex > index){ currentTrackIndex--; }
-  playlist.splice(index, 1);
-  saveRadioPlaylist();
-  renderPlaylist();
+function deleteTrack(i){
+  if(!confirm('Remove '+playlist[i].name+' from playlist?'))return;
+  deleteTrackFromSupabase(playlist[i].dbId||playlist[i].id);
+  if(currentTrackIndex===i){pauseRadio();currentTrackIndex=-1;document.getElementById('radioTrackName').textContent='Select a track to begin';document.getElementById('radioProgressFill').style.width='0%';}
+  else if(currentTrackIndex>i){currentTrackIndex--;}
+  playlist.splice(i,1);saveRadioPlaylist();renderPlaylist();
 }
 
-function playTrack(index){
-  if(index < 0 || index >= playlist.length) return;
-  currentTrackIndex = index;
-  const track = playlist[index];
-  document.getElementById('radioTrackName').textContent = track.name;
-  document.getElementById('radioTrackArtist').textContent = 'Lamb Music Works';
-  document.getElementById('radioTrackTag').textContent = (track.genre||'LMW RADIO').toUpperCase();
+function playTrack(i){
+  if(i<0||i>=playlist.length)return;
+  currentTrackIndex=i;const t=playlist[i];
+  document.getElementById('radioTrackName').textContent=t.name;
+  document.getElementById('radioTrackArtist').textContent='Lamb Music Works';
+  document.getElementById('radioTrackTag').textContent=(t.genre||'LMW RADIO').toUpperCase();
   clearInterval(progressTimer);
   document.getElementById('radioProgressFill').style.width='0%';
   document.getElementById('radioCurrentTime').textContent='0:00';
-  if(track.streamUrl){
-    radioAudio.src = track.streamUrl;
-    radioAudio.play().catch(e=>{ console.log('Audio error:',e); setRadioPlaying(true); simulateProgress(track.duration); });
-    setRadioPlaying(true);
-  } else {
-    setRadioPlaying(true);
-    simulateProgress(track.duration);
-  }
+  if(t.streamUrl){radioAudio.src=t.streamUrl;radioAudio.play().catch(()=>{setRadioPlaying(true);simulateProgress(t.duration);});setRadioPlaying(true);}
+  else{setRadioPlaying(true);simulateProgress(t.duration);}
   renderPlaylist();
 }
 
 function simulateProgress(duration){
   clearInterval(progressTimer);
-  if(!duration||duration==='0:00'){ document.getElementById('radioDuration').textContent='—'; return; }
-  const parts = duration.split(':');
-  const totalSecs = parseInt(parts[0]||0)*60 + parseInt(parts[1]||0);
-  if(!totalSecs) return;
-  let elapsed = 0;
-  document.getElementById('radioDuration').textContent = duration;
-  progressTimer = setInterval(()=>{
-    if(!radioPlaying) return;
-    elapsed++;
-    if(elapsed >= totalSecs){ clearInterval(progressTimer); nextTrack(); return; }
-    const pct = (elapsed/totalSecs)*100;
-    document.getElementById('radioProgressFill').style.width = pct+'%';
-    const m = Math.floor(elapsed/60);
-    const s = elapsed%60;
-    document.getElementById('radioCurrentTime').textContent = m+':'+(s<10?'0':'')+s;
-  },1000);
+  if(!duration||duration==='0:00'){document.getElementById('radioDuration').textContent='—';return;}
+  const parts=duration.split(':');const totalSecs=parseInt(parts[0]||0)*60+parseInt(parts[1]||0);if(!totalSecs)return;
+  let elapsed=0;document.getElementById('radioDuration').textContent=duration;
+  progressTimer=setInterval(()=>{if(!radioPlaying)return;elapsed++;if(elapsed>=totalSecs){clearInterval(progressTimer);nextTrack();return;}const pct=(elapsed/totalSecs)*100;document.getElementById('radioProgressFill').style.width=pct+'%';const m=Math.floor(elapsed/60);const s=elapsed%60;document.getElementById('radioCurrentTime').textContent=m+':'+(s<10?'0':'')+s;},1000);
 }
 
-function toggleRadio(){
-  if(!playlist.length){ alert('Add tracks to your playlist first.'); return; }
-  if(currentTrackIndex === -1){ playTrack(0); return; }
-  if(radioPlaying){ pauseRadio(); } else { resumeRadio(); }
-}
-
-function setRadioPlaying(playing){
-  radioPlaying = playing;
-  document.getElementById('radioPlayBtn').textContent = playing ? '⏸' : '▶';
-  document.querySelectorAll('.radio-bar').forEach(b => b.classList.toggle('paused', !playing));
-  document.getElementById('radioListeners').textContent = playing ? Math.floor(Math.random()*50)+1 : '—';
-}
-
-function pauseRadio(){ radioAudio.pause(); clearInterval(progressTimer); setRadioPlaying(false); }
-function resumeRadio(){
-  if(playlist[currentTrackIndex]?.streamUrl){ radioAudio.play().catch(()=>{}); }
-  else { simulateProgress(playlist[currentTrackIndex]?.duration || '3:30'); }
-  setRadioPlaying(true);
-}
-
-function nextTrack(){
-  if(!playlist.length) return;
-  if(repeat){ playTrack(currentTrackIndex); return; }
-  if(shuffle){ playTrack(Math.floor(Math.random()*playlist.length)); return; }
-  playTrack((currentTrackIndex+1) % playlist.length);
-}
-
-function toggleShuffle(){ shuffle=!shuffle; document.getElementById('radioShuffleBtn').classList.toggle('active',shuffle); }
-function toggleRepeat(){ repeat=!repeat; document.getElementById('radioRepeatBtn').classList.toggle('active',repeat); }
-function setVolume(v){ if(radioAudio) radioAudio.volume = parseFloat(v); }
-
-function updateProgress(){
-  if(!radioAudio.duration) return;
-  const pct = (radioAudio.currentTime/radioAudio.duration)*100;
-  document.getElementById('radioProgressFill').style.width = pct+'%';
-  const m = Math.floor(radioAudio.currentTime/60);
-  const s = Math.floor(radioAudio.currentTime%60);
-  document.getElementById('radioCurrentTime').textContent = m+':'+(s<10?'0':'')+s;
-}
-
-function updateDuration(){
-  const m = Math.floor(radioAudio.duration/60);
-  const s = Math.floor(radioAudio.duration%60);
-  document.getElementById('radioDuration').textContent = m+':'+(s<10?'0':'')+s;
-}
-
-function seekRadio(e, bar){
-  const rect = bar.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  if(radioAudio.duration){ radioAudio.currentTime = pct * radioAudio.duration; }
-}
-
+function toggleRadio(){if(!playlist.length){alert('Add tracks to your playlist first.');return;}if(currentTrackIndex===-1){playTrack(0);return;}if(radioPlaying){pauseRadio();}else{resumeRadio();}}
+function setRadioPlaying(playing){radioPlaying=playing;document.getElementById('radioPlayBtn').textContent=playing?'⏸':'▶';document.querySelectorAll('.radio-bar').forEach(b=>b.classList.toggle('paused',!playing));document.getElementById('radioListeners').textContent=playing?Math.floor(Math.random()*50)+1:'—';}
+function pauseRadio(){radioAudio.pause();clearInterval(progressTimer);setRadioPlaying(false);}
+function resumeRadio(){if(playlist[currentTrackIndex]?.streamUrl){radioAudio.play().catch(()=>{});}else{simulateProgress(playlist[currentTrackIndex]?.duration||'3:30');}setRadioPlaying(true);}
+function nextTrack(){if(!playlist.length)return;if(repeat){playTrack(currentTrackIndex);return;}if(shuffle){playTrack(Math.floor(Math.random()*playlist.length));return;}playTrack((currentTrackIndex+1)%playlist.length);}
+function toggleShuffle(){shuffle=!shuffle;document.getElementById('radioShuffleBtn').classList.toggle('active',shuffle);}
+function toggleRepeat(){repeat=!repeat;document.getElementById('radioRepeatBtn').classList.toggle('active',repeat);}
+function setVolume(v){if(radioAudio)radioAudio.volume=parseFloat(v);}
+function updateProgress(){if(!radioAudio.duration)return;const pct=(radioAudio.currentTime/radioAudio.duration)*100;document.getElementById('radioProgressFill').style.width=pct+'%';const m=Math.floor(radioAudio.currentTime/60);const s=Math.floor(radioAudio.currentTime%60);document.getElementById('radioCurrentTime').textContent=m+':'+(s<10?'0':'')+s;}
+function updateDuration(){const m=Math.floor(radioAudio.duration/60);const s=Math.floor(radioAudio.duration%60);document.getElementById('radioDuration').textContent=m+':'+(s<10?'0':'')+s;}
+function seekRadio(e,bar){const rect=bar.getBoundingClientRect();const pct=(e.clientX-rect.left)/rect.width;if(radioAudio.duration){radioAudio.currentTime=pct*radioAudio.duration;}}
 function connectStream(){
-  const url = document.getElementById('streamUrl').value.trim();
-  if(!url){ alert('Enter a stream URL first.'); return; }
-  streamConnected = true;
-  radioAudio.src = url;
-  radioAudio.play().then(()=>{
-    document.getElementById('streamStatus').textContent = '🟢 Live stream connected';
-    document.getElementById('streamStatus').style.color = '#5AB870';
-    document.getElementById('radioTrackName').textContent = 'LMW Radio — Live';
-    setRadioPlaying(true);
-  }).catch(()=>{ document.getElementById('streamStatus').textContent = '❌ Could not connect — check your URL'; document.getElementById('streamStatus').style.color = '#E07060'; streamConnected = false; });
+  const url=document.getElementById('streamUrl').value.trim();if(!url){alert('Enter a stream URL first.');return;}
+  streamConnected=true;radioAudio.src=url;
+  radioAudio.play().then(()=>{document.getElementById('streamStatus').textContent='🟢 Live stream connected';document.getElementById('streamStatus').style.color='#5AB870';document.getElementById('radioTrackName').textContent='LMW Radio — Live';setRadioPlaying(true);}).catch(()=>{document.getElementById('streamStatus').textContent='❌ Could not connect — check your URL';document.getElementById('streamStatus').style.color='#E07060';streamConnected=false;});
 }
-
 function addTrack(){
-  const name = document.getElementById('newTrackName').value.trim();
-  const genre = document.getElementById('newTrackGenre').value.trim();
-  const rawUrl = document.getElementById('newTrackUrl').value.trim();
-  const duration = document.getElementById('newTrackDuration').value.trim() || '0:00';
-  const bpm = document.getElementById('newTrackBpm').value.trim();
-  if(!name){ alert('Enter a track name.'); return; }
-  const streamUrl = convertGDriveUrl(rawUrl);
-  const newTrack = {id:Date.now(), name, genre:genre||'LMW', rawUrl, streamUrl, duration, bpm};
-  playlist.push(newTrack);
-  saveRadioPlaylist();
-  saveTrackToSupabase(newTrack).then(dbId=>{ if(dbId) newTrack.dbId=dbId; });
-  document.getElementById('newTrackName').value='';
-  document.getElementById('newTrackGenre').value='';
-  document.getElementById('newTrackUrl').value='';
-  document.getElementById('newTrackDuration').value='';
-  document.getElementById('newTrackBpm').value='';
+  const name=document.getElementById('newTrackName').value.trim();const genre=document.getElementById('newTrackGenre').value.trim();const rawUrl=document.getElementById('newTrackUrl').value.trim();const duration=document.getElementById('newTrackDuration').value.trim()||'0:00';const bpm=document.getElementById('newTrackBpm').value.trim();
+  if(!name){alert('Enter a track name.');return;}
+  const streamUrl=convertGDriveUrl(rawUrl);const newTrack={id:Date.now(),name,genre:genre||'LMW',rawUrl,streamUrl,duration,bpm};
+  playlist.push(newTrack);saveRadioPlaylist();saveTrackToSupabase(newTrack).then(dbId=>{if(dbId)newTrack.dbId=dbId;});
+  ['newTrackName','newTrackGenre','newTrackUrl','newTrackDuration','newTrackBpm'].forEach(id=>document.getElementById(id).value='');
   renderPlaylist();
 }
 
 // ══ DONE FOR YOU ══
 function submitDFY(){
-  const name = document.getElementById('dfyName').value.trim();
-  const email = document.getElementById('dfyEmail').value.trim();
-  const vision = document.getElementById('dfyVision').value.trim();
-  if(!name||!email||!vision){ alert('Please fill in all required fields.'); return; }
-  document.getElementById('dfySubmitBtn').disabled=true;
-  document.getElementById('dfyBtnText').style.display='none';
-  document.getElementById('dfySpinner').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('dfySubmitBtn').disabled=false;
-    document.getElementById('dfyBtnText').style.display='block';
-    document.getElementById('dfySpinner').style.display='none';
-    document.getElementById('dfySuccess').style.display='block';
-    document.getElementById('dfyName').value='';
-    document.getElementById('dfyEmail').value='';
-    document.getElementById('dfyVision').value='';
-  },1500);
+  const name=document.getElementById('dfyName').value.trim();const email=document.getElementById('dfyEmail').value.trim();const vision=document.getElementById('dfyVision').value.trim();
+  if(!name||!email||!vision){alert('Please fill in all required fields.');return;}
+  document.getElementById('dfySubmitBtn').disabled=true;document.getElementById('dfyBtnText').style.display='none';document.getElementById('dfySpinner').style.display='block';
+  setTimeout(()=>{document.getElementById('dfySubmitBtn').disabled=false;document.getElementById('dfyBtnText').style.display='block';document.getElementById('dfySpinner').style.display='none';document.getElementById('dfySuccess').style.display='block';document.getElementById('dfyName').value='';document.getElementById('dfyEmail').value='';document.getElementById('dfyVision').value='';},1500);
 }
 
 // ══ GLOBAL REACH LAB ══
-let selectedTerritories = ['USA'];
-let grlLoading = false;
-
-function toggleTerritory(el){
-  const t = el.dataset.territory;
-  el.classList.toggle('selected');
-  if(selectedTerritories.includes(t)){ selectedTerritories = selectedTerritories.filter(x=>x!==t); }
-  else { selectedTerritories.push(t); }
-}
-
-async function generateGlobalPitch(){
-  const key = getAnthropicKey();
-  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
-  if(!selectedTerritories.length){ alert('Select at least one territory.'); return; }
-  setGrlLoading('Pitch Generator','Generating territory pitch…');
-  const prompt = `You are a sync licensing expert for Warren Lamb, owner of Lamb Music Works — an independent producer with a catalog of sync-ready tracks (Soul, R&B, Cinematic, Blues, Inspirational). BMI registered.
-
-Write a professional sync licensing pitch optimized for these territories: ${selectedTerritories.join(', ')}
-
-Include:
-- Territory-specific cultural notes (what lands in each market)
-- Key buyers/platforms to target in each region
-- Pitch angle tailored to each territory's dominant media (TV, film, ads, streaming)
-- One punchy subject line for cold email outreach
-
-Keep it actionable. Warren pitches independently with no label backing.`;
-  await callGRL(prompt, 'Territory Pitch Generated');
-}
-
-async function analyzeCatalog(){
-  const key = getAnthropicKey();
-  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
-  setGrlLoading('Catalog Analyzer','Analyzing catalog…');
-  const prompt = `You are a sync licensing strategist for Warren Lamb, owner of Lamb Music Works. His catalog includes Soul, R&B, Cinematic, Blues, Gospel, Jazz, and Inspirational tracks. 100+ tracks. BMI registered.
-
-Analyze which genres and moods work best for sync in these territories: ${selectedTerritories.length ? selectedTerritories.join(', ') : 'USA, UK, Canada'}
-
-For each genre in Warren's catalog, give:
-- Best territory fit
-- Best use case (drama, comedy, ads, documentary, etc.)
-- Realistic placement potential (high/medium/low)
-- One specific platform or show that would be a great fit
-
-Be specific and practical. Warren is pitching independently.`;
-  await callGRL(prompt, 'Catalog Analysis Complete');
-}
-
-async function generateSupervisorEmail(){
-  const key = getAnthropicKey();
-  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
-  setGrlLoading('Supervisor Outreach','Writing supervisor email…');
-  const prompt = `Write a professional cold email from Warren Lamb (Lamb Music Works) to a music supervisor in: ${selectedTerritories[0] || 'USA'}
-
-Warren is an independent producer. Catalog includes Soul, R&B, Cinematic, Blues, Instrumental. BMI registered. lambmusicworks.com
-
-The email should:
-- Be under 150 words
-- Lead with value (the music) not biography
-- Have a punchy subject line
-- Reference the specific territory's media landscape
-- Include one clear call to action
-- Sound like a professional, not a fan
-
-Format:
-SUBJECT: [subject line]
-
-[email body]`;
-  await callGRL(prompt, 'Supervisor Email Ready');
-}
-
-async function generatePlaybook(){
-  const key = getAnthropicKey();
-  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
-  setGrlLoading('Release Playbook','Building playbook…');
-  const prompt = `Create a 72-hour algorithmic release playbook for Warren Lamb (Lamb Music Works) optimized for maximum global reach in: ${selectedTerritories.join(', ')}
-
-Warren is an independent producer with a sync-ready catalog (Soul, R&B, Cinematic, Blues). BMI registered. Has social presence.
-
-The playbook should cover:
-- Hour 0–6: Pre-release actions
-- Hour 6–24: Launch day moves (platform by platform)
-- Hour 24–48: Momentum building
-- Hour 48–72: Sync pitching window
-
-For each phase give specific actions, platforms, and copy examples. Be tactical and specific to the selected territories.`;
-  await callGRL(prompt, '72-Hour Playbook Generated');
-}
-
-async function callGRL(prompt, label){
-  const key = getAnthropicKey();
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,messages:[{role:'user',content:prompt}]})
-    });
-    const data = await res.json();
-    if(data.error) throw new Error(data.error.message);
-    const text = data.content.map(b=>b.text||'').join('');
-    document.getElementById('grlOutputLabel').textContent = label;
-    document.getElementById('grlOutputText').textContent = text;
-    document.getElementById('grlOutput').style.display = 'block';
-    document.getElementById('grlOutput').scrollIntoView({behavior:'smooth'});
-  } catch(e){ alert('Failed: '+e.message); }
-  finally { grlLoading = false; }
-}
-
-function setGrlLoading(tool, msg){
-  grlLoading = true;
-  document.getElementById('grlOutputLabel').textContent = msg;
-  document.getElementById('grlOutputText').textContent = 'Generating…';
-  document.getElementById('grlOutput').style.display = 'block';
-}
+let selectedTerritories=['USA'];let grlLoading=false;
+function toggleTerritory(el){const t=el.dataset.territory;el.classList.toggle('selected');if(selectedTerritories.includes(t)){selectedTerritories=selectedTerritories.filter(x=>x!==t);}else{selectedTerritories.push(t);}}
+async function generateGlobalPitch(){const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}if(!selectedTerritories.length){alert('Select at least one territory.');return;}setGrlLoading('Generating territory pitch…');const prompt=`You are a sync licensing expert for Warren Lamb, owner of Lamb Music Works — independent producer, BMI registered, catalog: Soul, R&B, Cinematic, Blues, Inspirational.\n\nWrite a professional sync licensing pitch for: ${selectedTerritories.join(', ')}\n\nInclude: territory-specific cultural notes, key buyers/platforms, pitch angle for dominant media, one punchy subject line. Keep it actionable.`;await callGRL(prompt,'Territory Pitch Generated');}
+async function analyzeCatalog(){const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}setGrlLoading('Analyzing catalog…');const prompt=`Sync licensing strategist for Warren Lamb (Lamb Music Works). Catalog: Soul, R&B, Cinematic, Blues, Gospel, Jazz, Inspirational. 100+ tracks. BMI registered.\n\nFor territories: ${selectedTerritories.length?selectedTerritories.join(', '):'USA, UK, Canada'}\n\nFor each genre: best territory fit, best use case, placement potential (high/medium/low), one specific platform or show.`;await callGRL(prompt,'Catalog Analysis Complete');}
+async function generateSupervisorEmail(){const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}setGrlLoading('Writing supervisor email…');const prompt=`Professional cold email from Warren Lamb (Lamb Music Works) to a music supervisor in: ${selectedTerritories[0]||'USA'}\n\nIndependent producer. Catalog: Soul, R&B, Cinematic, Blues, Instrumental. BMI registered. lambmusicworks.com\n\nUnder 150 words. Lead with value. Punchy subject line. Territory-specific media reference. One clear CTA.\n\nFormat:\nSUBJECT: [subject]\n\n[email body]`;await callGRL(prompt,'Supervisor Email Ready');}
+async function generatePlaybook(){const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}setGrlLoading('Building playbook…');const prompt=`72-hour release playbook for Warren Lamb (Lamb Music Works) for: ${selectedTerritories.join(', ')}\n\nCatalog: Soul, R&B, Cinematic. BMI registered. Social presence. Independent.\n\nCover: Hour 0-6 pre-release, 6-24 launch, 24-48 momentum, 48-72 sync pitch window. Specific actions, platforms, copy examples.`;await callGRL(prompt,'72-Hour Playbook Generated');}
+async function callGRL(prompt,label){const key=getAnthropicKey();try{const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,messages:[{role:'user',content:prompt}]})});const data=await res.json();if(data.error)throw new Error(data.error.message);const text=data.content.map(b=>b.text||'').join('');document.getElementById('grlOutputLabel').textContent=label;document.getElementById('grlOutputText').textContent=text;document.getElementById('grlOutput').style.display='block';document.getElementById('grlOutput').scrollIntoView({behavior:'smooth'});}catch(e){alert('Failed: '+e.message);}finally{grlLoading=false;}}
+function setGrlLoading(msg){grlLoading=true;document.getElementById('grlOutputLabel').textContent=msg;document.getElementById('grlOutputText').textContent='Generating…';document.getElementById('grlOutput').style.display='block';}
 
 // ══ API KEYS ══
-function getAnthropicKey(){ return localStorage.getItem('lmw_anthropic_key') || ''; }
-function getOpenAIKey(){ return localStorage.getItem('lmw_openai_key') || ''; }
-
-function saveApiKey(){
-  const k = document.getElementById('apiKeyInput').value.trim();
-  if(!k){ alert('Enter your API key.'); return; }
-  if(!k.startsWith('sk-ant-')){ alert('Should start with sk-ant-'); return; }
-  localStorage.setItem('lmw_anthropic_key', k);
-  document.getElementById('apiKeyInput').value = '';
-  saveSettingToSupabase('anthropic_key', k);
-  updateKeyUI(); alert('Anthropic key saved permanently!');
-}
-function clearApiKey(){ if(confirm('Remove Anthropic key?')){ localStorage.removeItem('lmw_anthropic_key'); updateKeyUI(); }}
-function saveOpenAIKey(){
-  const k = document.getElementById('openaiKeyInput').value.trim();
-  if(!k){ alert('Enter your OpenAI key.'); return; }
-  localStorage.setItem('lmw_openai_key', k);
-  document.getElementById('openaiKeyInput').value = '';
-  saveSettingToSupabase('openai_key', k);
-  updateKeyUI(); alert('OpenAI key saved permanently!');
-}
-function clearOpenAIKey(){ if(confirm('Remove OpenAI key?')){ localStorage.removeItem('lmw_openai_key'); updateKeyUI(); }}
-
+function getAnthropicKey(){return localStorage.getItem('lmw_anthropic_key')||'';}
+function getOpenAIKey(){return localStorage.getItem('lmw_openai_key')||'';}
+function saveApiKey(){const k=document.getElementById('apiKeyInput').value.trim();if(!k){alert('Enter your API key.');return;}if(!k.startsWith('sk-ant-')){alert('Should start with sk-ant-');return;}localStorage.setItem('lmw_anthropic_key',k);document.getElementById('apiKeyInput').value='';saveSettingToSupabase('anthropic_key',k);updateKeyUI();alert('Anthropic key saved permanently!');}
+function clearApiKey(){if(confirm('Remove Anthropic key?')){localStorage.removeItem('lmw_anthropic_key');updateKeyUI();}}
+function saveOpenAIKey(){const k=document.getElementById('openaiKeyInput').value.trim();if(!k){alert('Enter your OpenAI key.');return;}localStorage.setItem('lmw_openai_key',k);document.getElementById('openaiKeyInput').value='';saveSettingToSupabase('openai_key',k);updateKeyUI();alert('OpenAI key saved permanently!');}
+function clearOpenAIKey(){if(confirm('Remove OpenAI key?')){localStorage.removeItem('lmw_openai_key');updateKeyUI();}}
 function updateKeyUI(){
-  const has = !!getAnthropicKey(); const hasOAI = !!getOpenAIKey();
-  document.getElementById('globalKeyDot').className = 'key-dot '+(has?'on':'off');
-  document.getElementById('globalKeyLabel').textContent = has?'API active':'No API key';
-  document.getElementById('settingsKeyStatus').className = 'key-status-bar '+(has?'has-key':'no-key');
-  document.getElementById('settingsKeyDot').className = 'key-dot '+(has?'on':'off');
-  document.getElementById('settingsKeyText').textContent = has?'Anthropic key saved — AI enabled':'No key saved';
-  document.getElementById('openaiKeyStatus').className = 'key-status-bar '+(hasOAI?'has-key':'no-key');
-  document.getElementById('openaiKeyDot').className = 'key-dot '+(hasOAI?'on':'off');
-  document.getElementById('openaiKeyText').textContent = hasOAI?'OpenAI key saved — images enabled':'No OpenAI key saved';
-  document.getElementById('homeKeyAlert').style.display = has?'none':'block';
-  document.getElementById('homeKeyOk').style.display = has?'block':'none';
+  const has=!!getAnthropicKey();const hasOAI=!!getOpenAIKey();
+  document.getElementById('globalKeyDot').className='key-dot '+(has?'on':'off');
+  document.getElementById('globalKeyLabel').textContent=has?'API active':'No API key';
+  document.getElementById('settingsKeyStatus').className='key-status-bar '+(has?'has-key':'no-key');
+  document.getElementById('settingsKeyDot').className='key-dot '+(has?'on':'off');
+  document.getElementById('settingsKeyText').textContent=has?'Anthropic key saved — AI enabled':'No key saved';
+  document.getElementById('openaiKeyStatus').className='key-status-bar '+(hasOAI?'has-key':'no-key');
+  document.getElementById('openaiKeyDot').className='key-dot '+(hasOAI?'on':'off');
+  document.getElementById('openaiKeyText').textContent=hasOAI?'OpenAI key saved — images enabled':'No OpenAI key saved';
+  document.getElementById('homeKeyAlert').style.display=has?'none':'block';
+  document.getElementById('homeKeyOk').style.display=has?'block':'none';
 }
 
 // ══ NAVIGATION ══
-const pageTitles = {home:'LMW STUDIO',vault:'NETWORK VAULT',posts:'POST GENERATOR',images:'IMAGE GENERATOR',reels:'REEL STUDIO',radio:'LMW RADIO',dfy:'DONE FOR YOU',grl:'GLOBAL REACH LAB',viral:'VIRAL RELEASE ENGINE',settings:'SETTINGS'};
-const pageSubs = {home:'Lamb Music Works',vault:'Intelligence & Outreach',posts:'Social Content AI',images:'Visual Content AI',reels:'Script Generator',radio:'Broadcasting Worldwide',dfy:'Custom Music · $10K Minimum',grl:'Sync Intelligence · Territory Strategy',viral:'Algorithm-Engineered Release Campaigns',settings:'API Keys & Storage'};
+const pageTitles={home:'LMW STUDIO',vault:'NETWORK VAULT',posts:'POST GENERATOR',images:'IMAGE GENERATOR',reels:'REEL STUDIO',radio:'LMW RADIO',dfy:'DONE FOR YOU',grl:'GLOBAL REACH LAB',viral:'VIRAL RELEASE ENGINE',social:'SOCIAL COMMAND',settings:'SETTINGS'};
+const pageSubs={home:'Lamb Music Works',vault:'Intelligence & Outreach',posts:'Social Content AI',images:'Visual Content AI',reels:'Script Generator',radio:'Broadcasting Worldwide',dfy:'Custom Music · $10K Minimum',grl:'Sync Intelligence · Territory Strategy',viral:'Algorithm-Engineered Release Campaigns',social:'Multi-Brand Social OS',settings:'API Keys & Storage'};
 
-function showPage(id, navEl){
+function showPage(id,navEl){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item,.nav-settings').forEach(n=>n.classList.remove('active'));
   if(id==='vault-add'){
@@ -1317,106 +1570,55 @@ function showPage(id, navEl){
     document.getElementById('vaultToggle').style.display='none';
     return;
   }
-  const pg = document.getElementById('page-'+id);
-  if(pg) pg.classList.add('active');
-  if(navEl) navEl.classList.add('active');
-  document.getElementById('topbarTitle').textContent = pageTitles[id]||id.toUpperCase();
-  document.getElementById('topbarSub').textContent = pageSubs[id]||'';
-  document.getElementById('vaultToggle').style.display = id==='vault'?'flex':'none';
-  if(id==='vault'){ document.getElementById('vaultWelcome').style.display='flex'; document.getElementById('dossierView').style.display='none'; document.getElementById('vaultAddView').style.display='none'; renderTargetList(); }
-  if(id==='viral' && document.getElementById('page-viral')) document.getElementById('page-viral').classList.add('active');
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
+  if(navEl)navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent=pageTitles[id]||id.toUpperCase();
+  document.getElementById('topbarSub').textContent=pageSubs[id]||'';
+  document.getElementById('vaultToggle').style.display=id==='vault'?'flex':'none';
+  if(id==='vault'){document.getElementById('vaultWelcome').style.display='flex';document.getElementById('dossierView').style.display='none';document.getElementById('vaultAddView').style.display='none';renderTargetList();}
+  if(id==='social'){loadSCQueue();updateSCStats();}
 }
 
 // ══ VAULT ══
-function loadVaultStorage(){
-  try{ const saved=localStorage.getItem(VAULT_KEY); if(!saved)return; JSON.parse(saved).forEach(t=>{if(!TARGETS.find(x=>x.id===t.id))TARGETS.push(t);}); }catch(e){}
-}
-function persistVault(){ try{localStorage.setItem(VAULT_KEY,JSON.stringify(TARGETS.filter(t=>t.id.startsWith('gen_'))));}catch(e){} }
-function clearVaultStorage(){ if(confirm('Remove all AI-generated targets?')){localStorage.removeItem(VAULT_KEY);TARGETS=[...BUILT_IN_TARGETS];renderTargetList();updateVaultStats();alert('Cleared.');} }
-
-function getFilteredTargets(q=''){
-  return TARGETS.filter(t=>{
-    const mc=vaultFilter==='all'||t.category===vaultFilter;
-    const mq=!q||t.name.toLowerCase().includes(q.toLowerCase());
-    return mc&&mq;
-  });
-}
+function loadVaultStorage(){try{const s=localStorage.getItem(VAULT_KEY);if(!s)return;JSON.parse(s).forEach(t=>{if(!TARGETS.find(x=>x.id===t.id))TARGETS.push(t);});}catch(e){}}
+function persistVault(){try{localStorage.setItem(VAULT_KEY,JSON.stringify(TARGETS.filter(t=>t.id.startsWith('gen_'))));}catch(e){}}
+function clearVaultStorage(){if(confirm('Remove all AI-generated targets?')){localStorage.removeItem(VAULT_KEY);TARGETS=[...BUILT_IN_TARGETS];renderTargetList();updateVaultStats();alert('Cleared.');}}
+function getFilteredTargets(q=''){return TARGETS.filter(t=>{const mc=vaultFilter==='all'||t.category===vaultFilter;const mq=!q||t.name.toLowerCase().includes(q.toLowerCase());return mc&&mq;});}
 function filterTargets(q){renderTargetList(q);}
-function setVaultFilter(el,cat){
-  vaultFilter=cat;
-  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  renderTargetList();
-}
+function setVaultFilter(el,cat){vaultFilter=cat;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderTargetList();}
 function renderTargetList(q=''){
-  const list=document.getElementById('targetList');
-  const targets=getFilteredTargets(q);
+  const list=document.getElementById('targetList');const targets=getFilteredTargets(q);
   if(!targets.length){list.innerHTML='<div style="padding:16px;text-align:center;color:var(--muted);font-size:12px;">No targets found</div>';return;}
   list.innerHTML='';
-  targets.forEach(t=>{
-    const el=document.createElement('div');
-    el.className='target-item'+(currentTarget?.id===t.id?' active':'');
-    el.onclick=()=>openDossier(t);
-    const sc={new:'status-new',active:'status-active',contacted:'status-contacted',responded:'status-responded'}[t.status]||'status-new';
-    el.innerHTML=`<div class="t-avatar" style="background:${t.avatarBg};color:${t.avatarColor};">${t.initials}</div><div class="t-info"><div class="t-name">${t.name}</div><div class="t-role">${t.role}</div></div><div class="t-status ${sc}"></div>`;
-    list.appendChild(el);
-  });
+  targets.forEach(t=>{const el=document.createElement('div');el.className='target-item'+(currentTarget?.id===t.id?' active':'');el.onclick=()=>openDossier(t);el.innerHTML=`<div class="t-avatar" style="background:${t.avatarBg};color:${t.avatarColor};">${t.initials}</div><div class="t-info"><div class="t-name">${t.name}</div><div class="t-role">${t.role}</div></div><div class="t-status"></div>`;list.appendChild(el);});
 }
 function openDossier(t){
-  currentTarget=t;
-  document.getElementById('vaultWelcome').style.display='none';
-  document.getElementById('vaultAddView').style.display='none';
-  const dv=document.getElementById('dossierView'); dv.style.display='flex';
-  const av=document.getElementById('dosAvatar'); av.textContent=t.initials; av.style.background=t.avatarBg; av.style.color=t.avatarColor;
-  document.getElementById('dosName').textContent=t.name;
-  document.getElementById('dosMeta').textContent=t.role;
-  document.getElementById('dosStatus').value=t.status;
-  const tabs=document.getElementById('dossierTabs'); tabs.innerHTML='';
-  t.tabs.forEach((tab,i)=>{
-    const dt=document.createElement('div'); dt.className='dtab'+(i===0?' active':''); dt.textContent=tab;
-    dt.onclick=()=>{document.querySelectorAll('.dtab').forEach((x,j)=>x.classList.toggle('active',j===i));document.getElementById('dossierBody').innerHTML=t.content[i]||'';document.getElementById('dossierBody').scrollTop=0;};
-    tabs.appendChild(dt);
-  });
+  currentTarget=t;document.getElementById('vaultWelcome').style.display='none';document.getElementById('vaultAddView').style.display='none';
+  const dv=document.getElementById('dossierView');dv.style.display='flex';
+  const av=document.getElementById('dosAvatar');av.textContent=t.initials;av.style.background=t.avatarBg;av.style.color=t.avatarColor;
+  document.getElementById('dosName').textContent=t.name;document.getElementById('dosMeta').textContent=t.role;document.getElementById('dosStatus').value=t.status;
+  const tabs=document.getElementById('dossierTabs');tabs.innerHTML='';
+  t.tabs.forEach((tab,i)=>{const dt=document.createElement('div');dt.className='dtab'+(i===0?' active':'');dt.textContent=tab;dt.onclick=()=>{document.querySelectorAll('.dtab').forEach((x,j)=>x.classList.toggle('active',j===i));document.getElementById('dossierBody').innerHTML=t.content[i]||'';document.getElementById('dossierBody').scrollTop=0;};tabs.appendChild(dt);});
   document.getElementById('dossierBody').innerHTML=t.content[0]||'';
   renderTargetList(document.getElementById('vaultSearch').value);
-  document.getElementById('vaultSidebar').classList.remove('open');
-  document.getElementById('vaultOverlay').classList.remove('open');
+  document.getElementById('vaultSidebar').classList.remove('open');document.getElementById('vaultOverlay').classList.remove('open');
 }
-function updateTargetStatus(val){
-  if(!currentTarget)return;
-  const t=TARGETS.find(x=>x.id===currentTarget.id);
-  if(t){t.status=val;currentTarget.status=val;persistVault();renderTargetList();}
-}
-function updateVaultStats(){
-  document.getElementById('statTotal').textContent=TARGETS.length;
-  document.getElementById('statActive').textContent=TARGETS.filter(t=>t.status==='active'||t.status==='contacted').length;
-  document.getElementById('statContacts').textContent=TARGETS.length*6;
-}
-function toggleVaultSidebar(){ document.getElementById('vaultSidebar').classList.toggle('open'); document.getElementById('vaultOverlay').classList.toggle('open'); }
+function updateTargetStatus(val){if(!currentTarget)return;const t=TARGETS.find(x=>x.id===currentTarget.id);if(t){t.status=val;currentTarget.status=val;persistVault();renderTargetList();}}
+function updateVaultStats(){document.getElementById('statTotal').textContent=TARGETS.length;document.getElementById('statActive').textContent=TARGETS.filter(t=>t.status==='active'||t.status==='contacted').length;document.getElementById('statContacts').textContent=TARGETS.length*6;}
+function toggleVaultSidebar(){document.getElementById('vaultSidebar').classList.toggle('open');document.getElementById('vaultOverlay').classList.toggle('open');}
 
 // ══ AI DOSSIER ══
 let generatedDossierData=null;
 async function generateDossier(){
-  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
-  const name=document.getElementById('genName').value.trim(); if(!name){document.getElementById('genName').focus();return;}
-  const cat=document.getElementById('genCat').value;
-  const known=document.getElementById('genKnown').value.trim();
-  const angle=document.getElementById('genAngle').value.trim();
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const name=document.getElementById('genName').value.trim();if(!name){document.getElementById('genName').focus();return;}
+  const cat=document.getElementById('genCat').value;const known=document.getElementById('genKnown').value.trim();const angle=document.getElementById('genAngle').value.trim();
   setBtnLoading('genBtn','genBtnText','genSpinner',true);
-  const prompt=`You are a music industry network intelligence analyst for Warren Lamb, owner of Lamb Music Works.
-Generate a dossier for: ${name}. Known for: ${known||'not specified'}. Category: ${cat}. Warren's angle: ${angle||'sync licensing, brand music'}.
-Respond ONLY with valid JSON:
-{"why":"2-3 sentences on strategic relevance","priority_moves":["move1","move2","move3"],"inner_circle":[{"name":"Full Name","tier":"Tier 1","role":"Their role","why":"Why they matter","channels":["channel"]}],"direct_access":[{"label":"Channel","value":"contact","note":"How to approach"}],"proximity_plan":[{"weeks":"1-2","title":"Foundation","tasks":["task1","task2"]}],"email_subject":"Subject line","email_body":"Full email body 3 paragraphs"}`;
+  const prompt=`Music industry network intelligence analyst for Warren Lamb, owner of Lamb Music Works.\nGenerate dossier for: ${name}. Known for: ${known||'not specified'}. Category: ${cat}. Warren's angle: ${angle||'sync licensing, brand music'}.\nRespond ONLY with valid JSON:\n{"why":"2-3 sentences","priority_moves":["move1","move2","move3"],"inner_circle":[{"name":"Full Name","tier":"Tier 1","role":"Their role","why":"Why they matter","channels":["channel"]}],"direct_access":[{"label":"Channel","value":"contact","note":"How to approach"}],"proximity_plan":[{"weeks":"1-2","title":"Foundation","tasks":["task1","task2"]}],"email_subject":"Subject line","email_body":"Full email 3 paragraphs"}`;
   try{
-    const res=await callAnthropic(prompt,key,2000);
-    let clean=res.replace(/```json|```/g,'').trim();
-    const start=clean.indexOf('{'); const end=clean.lastIndexOf('}');
-    if(start!==-1&&end!==-1)clean=clean.slice(start,end+1);
-    const parsed=JSON.parse(clean);
-    generatedDossierData={name,cat,known,angle,parsed};
-    const out=document.getElementById('genOutput');
-    document.getElementById('genText').textContent=`✓ Dossier generated for ${name}\n\nInner circle: ${parsed.inner_circle?.length||0} contacts\nProximity plan: ${parsed.proximity_plan?.length||0} phases\nDirect access: ${parsed.direct_access?.length||0} channels\n\nClick "Save to Vault" to add.`;
-    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
+    const res=await callAnthropic(prompt,key,2000);let clean=res.replace(/```json|```/g,'').trim();const s=clean.indexOf('{');const e=clean.lastIndexOf('}');if(s!==-1&&e!==-1)clean=clean.slice(s,e+1);
+    const parsed=JSON.parse(clean);generatedDossierData={name,cat,known,angle,parsed};
+    const out=document.getElementById('genOutput');document.getElementById('genText').textContent=`✓ Dossier generated for ${name}\n\nInner circle: ${parsed.inner_circle?.length||0} contacts\nProximity plan: ${parsed.proximity_plan?.length||0} phases\nDirect access: ${parsed.direct_access?.length||0} channels\n\nClick "Save to Vault" to add.`;out.style.display='block';out.scrollIntoView({behavior:'smooth'});
   }catch(e){alert('Generation failed: '+e.message);}
   finally{setBtnLoading('genBtn','genBtnText','genSpinner',false);}
 }
@@ -1424,10 +1626,7 @@ Respond ONLY with valid JSON:
 function buildGeneratedContent(name,data){
   const moves=(data.priority_moves||[]).map((m,i)=>`<li><span class="anum">${i+1}</span>${m}</li>`).join('');
   const tab0=`<div class="page-intro">${data.why||''}</div><div class="action-block"><h3>Priority Moves</h3><ul class="alist">${moves}</ul></div>`;
-  const cards=(data.inner_circle||[]).map(c=>{
-    const tags=(c.channels||[]).map(ch=>{const cls=ch.includes('@')?'ig':ch.includes('.')?'web':ch.includes('gmail')?'email':'li';return`<span class="ctag ${cls}">${ch}</span>`;}).join('');
-    return`<div class="ccard cat-direct"><div class="cat-tag direct">${c.tier||'Contact'}</div><div class="ccard-name">${c.name}</div><div class="ccard-role">${c.role}</div><div class="ccard-why">${c.why}</div><div class="tag-row">${tags}</div></div>`;
-  }).join('');
+  const cards=(data.inner_circle||[]).map(c=>{const tags=(c.channels||[]).map(ch=>{const cls=ch.includes('@')?'ig':ch.includes('.')?'web':ch.includes('gmail')?'email':'li';return`<span class="ctag ${cls}">${ch}</span>`;}).join('');return`<div class="ccard cat-direct"><div class="cat-tag direct">${c.tier||'Contact'}</div><div class="ccard-name">${c.name}</div><div class="ccard-role">${c.role}</div><div class="ccard-why">${c.why}</div><div class="tag-row">${tags}</div></div>`;}).join('');
   const tab1=`<h2>Inner Circle</h2><div class="card-grid">${cards}</div>`;
   const boxes=(data.direct_access||[]).map(d=>`<div class="info-box"><div class="info-label">${d.label}</div><div class="info-val">${d.value}</div><div class="info-note">${d.note}</div></div>`).join('');
   const tab2=`<h2>Direct Access</h2>${boxes}`;
@@ -1445,436 +1644,124 @@ function saveGenerated(){
   const c=colors[TARGETS.length%colors.length];
   const content=buildGeneratedContent(name,parsed);
   const t={id:'gen_'+Date.now(),name,initials,role:known||cat,category:cat,status:'new',avatarBg:c.bg,avatarColor:c.color,tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content};
-  TARGETS.push(t); persistVault(); updateVaultStats(); saveTargetToSupabase(t);
-  document.getElementById('genName').value=''; document.getElementById('genKnown').value=''; document.getElementById('genAngle').value='';
-  document.getElementById('genOutput').style.display='none'; generatedDossierData=null;
-  showPage('vault',document.querySelector('[title="Network Vault"]')); openDossier(t);
+  TARGETS.push(t);persistVault();updateVaultStats();saveTargetToSupabase(t);
+  document.getElementById('genName').value='';document.getElementById('genKnown').value='';document.getElementById('genAngle').value='';document.getElementById('genOutput').style.display='none';generatedDossierData=null;
+  showPage('vault',document.querySelector('[title="Network Vault"]'));openDossier(t);
 }
 
 // ══ POST GENERATOR ══
 let selectedPlatforms=['Instagram'];
-function togglePlatform(el){
-  const p=el.dataset.platform; el.classList.toggle('selected');
-  selectedPlatforms=Array.from(document.querySelectorAll('.platform-chip.selected')).map(c=>c.dataset.platform);
-}
+function togglePlatform(el){el.classList.toggle('selected');selectedPlatforms=Array.from(document.querySelectorAll('.platform-chip.selected')).map(c=>c.dataset.platform);}
 async function generatePosts(){
-  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
-  const topic=document.getElementById('postTopic').value.trim(); if(!topic){document.getElementById('postTopic').focus();return;}
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const topic=document.getElementById('postTopic').value.trim();if(!topic){document.getElementById('postTopic').focus();return;}
   if(!selectedPlatforms.length){alert('Select at least one platform.');return;}
   setBtnLoading('postBtn','postBtnText','postSpinner',true);
-  const tone=document.getElementById('postTone').value;
-  const goal=document.getElementById('postGoal').value;
-  const hashtags=document.getElementById('postHashtags').value;
-  const prompt=`You are a social media expert for Warren Lamb, owner of Lamb Music Works — independent solo music producer offering jingles, sync licensing, beat sales, and brand music.
-Create optimized social media posts for: ${selectedPlatforms.join(', ')}
-Topic: ${topic}
-Tone: ${tone}
-Goal: ${goal}
-Hashtags: ${hashtags==='yes'?'Include relevant hashtags':'No hashtags'}
-For EACH platform write a separate post optimized for that platform. Label each clearly. Warren's brand voice: Independent, builder mentality, authentic, ownership-focused.`;
-  try{
-    const res=await callAnthropic(prompt,key,1200);
-    const out=document.getElementById('postOutput');
-    document.getElementById('postText').textContent=res;
-    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
-  }catch(e){alert('Failed: '+e.message);}
-  finally{setBtnLoading('postBtn','postBtnText','postSpinner',false);}
+  const prompt=`Social media expert for Warren Lamb, owner of Lamb Music Works — independent producer, jingles, sync licensing, beat sales, brand music.\nCreate posts for: ${selectedPlatforms.join(', ')}\nTopic: ${topic}\nTone: ${document.getElementById('postTone').value}\nGoal: ${document.getElementById('postGoal').value}\nHashtags: ${document.getElementById('postHashtags').value==='yes'?'Include relevant hashtags':'No hashtags'}\nLabel each platform clearly. Voice: independent, builder mentality, authentic, ownership-focused.`;
+  try{const res=await callAnthropic(prompt,key,1200);document.getElementById('postText').textContent=res;document.getElementById('postOutput').style.display='block';document.getElementById('postOutput').scrollIntoView({behavior:'smooth'});}
+  catch(e){alert('Failed: '+e.message);}finally{setBtnLoading('postBtn','postBtnText','postSpinner',false);}
 }
 
 // ══ IMAGE GENERATOR ══
 async function generateImage(){
-  const key=getOpenAIKey(); if(!key){alert('Add your OpenAI API key in Settings to generate images.');return;}
-  const desc=document.getElementById('imgPrompt').value.trim(); if(!desc){document.getElementById('imgPrompt').focus();return;}
-  const style=document.getElementById('imgStyle').value;
-  const format=document.getElementById('imgFormat').value;
-  const brand=document.getElementById('imgBrand').value.trim();
+  const key=getOpenAIKey();if(!key){alert('Add your OpenAI API key in Settings to generate images.');return;}
+  const desc=document.getElementById('imgPrompt').value.trim();if(!desc){document.getElementById('imgPrompt').focus();return;}
   setBtnLoading('imgBtn','imgBtnText','imgSpinner',true);
+  const style=document.getElementById('imgStyle').value;const format=document.getElementById('imgFormat').value;const brand=document.getElementById('imgBrand').value.trim();
   const fullPrompt=`${desc}. Style: ${style}. Format: ${format}. ${brand?'Brand: '+brand+'.':''} Professional music industry aesthetic, premium feel.`;
   const sizeMap={'square 1:1 social media post':'1024x1024','vertical 9:16 story':'1024x1792','horizontal 16:9 banner':'1792x1024'};
   try{
     const res=await fetch('https://api.openai.com/v1/images/generations',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},body:JSON.stringify({model:'dall-e-3',prompt:fullPrompt,n:1,size:sizeMap[format]||'1024x1024',quality:'standard'})});
-    const data=await res.json();
-    if(data.error)throw new Error(data.error.message);
+    const data=await res.json();if(data.error)throw new Error(data.error.message);
     const url=data.data[0].url;
-    const out=document.getElementById('imgOutput');
     document.getElementById('imgGrid').innerHTML=`<div><div class="image-card"><img src="${url}" alt="Generated"></div><div style="display:flex;gap:8px;margin-top:8px;"><a style="flex:1;padding:7px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:var(--gold);font-size:11px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;" href="${url}" download="lmw-image.png" target="_blank">Download</a></div></div>`;
-    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
-  }catch(e){alert('Image failed: '+e.message);}
-  finally{setBtnLoading('imgBtn','imgBtnText','imgSpinner',false);}
+    document.getElementById('imgOutput').style.display='block';document.getElementById('imgOutput').scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Image failed: '+e.message);}finally{setBtnLoading('imgBtn','imgBtnText','imgSpinner',false);}
 }
 
 // ══ REEL STUDIO ══
 let selectedFormat='TikTok / Instagram Reel (30–45 sec)';
-function selectFormat(el){
-  document.querySelectorAll('.format-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected'); selectedFormat=el.dataset.format;
-}
+function selectFormat(el){document.querySelectorAll('.format-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');selectedFormat=el.dataset.format;}
 async function generateReel(){
-  const key=getAnthropicKey(); if(!key){alert('Add your Anthropic API key in Settings first.');return;}
-  const topic=document.getElementById('reelTopic').value.trim(); if(!topic){document.getElementById('reelTopic').focus();return;}
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const topic=document.getElementById('reelTopic').value.trim();if(!topic){document.getElementById('reelTopic').focus();return;}
   setBtnLoading('reelBtn','reelBtnText','reelSpinner',true);
-  const vibe=document.getElementById('reelVibe').value;
-  const cta=document.getElementById('reelCTA').value;
-  const prompt=`Write a complete avatar-ready video script for Warren Lamb (Lamb Music Works) for: ${selectedFormat}
-Topic: ${topic}
-Vibe: ${vibe}
-CTA: ${cta}
-Format: FORMAT: [format] / ESTIMATED TIME: [time] / ---SCRIPT START--- / [HOOK] / [BODY] / [CTA] / ---SCRIPT END--- / HEDRA NOTES: [expression and pacing notes]
-Warren's voice: direct, authentic, builder mentality, independent music business owner.`;
-  try{
-    const res=await callAnthropic(prompt,key,1000);
-    const out=document.getElementById('reelOutput');
-    document.getElementById('reelText').textContent=res;
-    out.style.display='block'; out.scrollIntoView({behavior:'smooth'});
-  }catch(e){alert('Failed: '+e.message);}
-  finally{setBtnLoading('reelBtn','reelBtnText','reelSpinner',false);}
+  const prompt=`Avatar-ready video script for Warren Lamb (Lamb Music Works) for: ${selectedFormat}\nTopic: ${topic}\nVibe: ${document.getElementById('reelVibe').value}\nCTA: ${document.getElementById('reelCTA').value}\nFormat: FORMAT: [format] / ESTIMATED TIME: [time] / ---SCRIPT START--- / [HOOK] / [BODY] / [CTA] / ---SCRIPT END--- / HEDRA NOTES: [expression and pacing notes]\nVoice: direct, authentic, builder mentality, independent music business owner.`;
+  try{const res=await callAnthropic(prompt,key,1000);document.getElementById('reelText').textContent=res;document.getElementById('reelOutput').style.display='block';document.getElementById('reelOutput').scrollIntoView({behavior:'smooth'});}
+  catch(e){alert('Failed: '+e.message);}finally{setBtnLoading('reelBtn','reelBtnText','reelSpinner',false);}
 }
 
 // ══ SHARED UTILS ══
 async function callAnthropic(prompt,key,maxTokens=1500){
   const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})});
-  const data=await res.json();
-  if(data.error)throw new Error(data.error.message+' ('+data.error.type+')');
-  if(!data.content)throw new Error('Empty response');
+  const data=await res.json();if(data.error)throw new Error(data.error.message+' ('+data.error.type+')');if(!data.content)throw new Error('Empty response');
   return data.content.map(b=>b.text||'').join('');
 }
-function setBtnLoading(btnId,textId,spinnerId,loading){
-  document.getElementById(btnId).disabled=loading;
-  document.getElementById(textId).style.display=loading?'none':'block';
-  document.getElementById(spinnerId).style.display=loading?'block':'none';
-}
-function copyOutput(textId,btnId){
-  const text=document.getElementById(textId).textContent;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn=document.getElementById(btnId);
-    btn.textContent='Copied!'; btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  });
-}
+function setBtnLoading(btnId,textId,spinnerId,loading){document.getElementById(btnId).disabled=loading;document.getElementById(textId).style.display=loading?'none':'block';document.getElementById(spinnerId).style.display=loading?'block':'none';}
+function copyOutput(textId,btnId){const text=document.getElementById(textId).textContent;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById(btnId);btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
 
 // ══ VIRAL RELEASE ENGINE ══
-let viralPlatforms = ['TikTok','Instagram','YouTube'];
-
-function toggleViralPlatform(el){
-  const p = el.dataset.vp;
-  el.classList.toggle('selected');
-  viralPlatforms = Array.from(document.querySelectorAll('#viralPlatformGrid .platform-chip.selected')).map(c=>c.dataset.vp);
-}
-
+let viralPlatforms=['TikTok','Instagram','YouTube'];
+function toggleViralPlatform(el){el.classList.toggle('selected');viralPlatforms=Array.from(document.querySelectorAll('#viralPlatformGrid .platform-chip.selected')).map(c=>c.dataset.vp);}
 async function generateViralCampaign(){
-  const key = getAnthropicKey();
-  if(!key){ alert('Add your Anthropic API key in Settings first.'); return; }
-  const title = document.getElementById('viralTitle').value.trim();
-  if(!title){ alert('Enter your song title.'); return; }
-  const story = document.getElementById('viralStory').value.trim();
-  if(!story){ alert('Tell the story behind this song.'); return; }
-  const genre = document.getElementById('viralGenre').value.trim();
-  const bpm = document.getElementById('viralBpm').value.trim();
-  const audience = document.getElementById('viralAudience').value.trim();
-  const strategy = document.getElementById('viralStrategy').value;
-  const platforms = viralPlatforms.join(', ');
-
+  const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
+  const title=document.getElementById('viralTitle').value.trim();if(!title){alert('Enter your song title.');return;}
+  const story=document.getElementById('viralStory').value.trim();if(!story){alert('Tell the story behind this song.');return;}
+  const genre=document.getElementById('viralGenre').value.trim();const bpm=document.getElementById('viralBpm').value.trim();const audience=document.getElementById('viralAudience').value.trim();const strategy=document.getElementById('viralStrategy').value;const platforms=viralPlatforms.join(', ');
   setBtnLoading('viralBtn','viralBtnText','viralSpinner',true);
-
-  const strategyGuides = {
-    standard: 'Full identity release. Warren Lamb / Lamb Music Works front and center from day one.',
-    silent: 'Anonymous "Silent Virality" strategy. Release as unknown artist first. No name, no logo. Just "found this..." energy. Plan the reveal moment as a separate campaign event.',
-    challenge: 'Build a viral challenge around this song. The challenge must be simple enough for anyone to do, emotionally connected to the song theme, and shareable in under 15 seconds.',
-    story: '3-day story arc before the drop. Day 1: The struggle/backstory. Day 2: The turning point. Day 3: The song drops. Each day builds on the last and creates anticipation.'
-  };
-
-  const prompt = `You are a viral music marketing expert who has engineered campaigns for independent artists that broke through on social media without label budgets.
-
-Warren Lamb is releasing a new song for Lamb Music Works. Here are the details:
-
-SONG: "${title}"
-GENRE/MOOD: ${genre||'Soul/R&B/Cinematic'}
-ENERGY: ${bpm||'not specified'}
-STORY: ${story}
-TARGET AUDIENCE: ${audience||'entrepreneurs, faith community, music lovers'}
-PLATFORMS: ${platforms}
-STRATEGY: ${strategyGuides[strategy]}
-
-Create a complete 72-hour viral release campaign. For each section, be SPECIFIC, CREATIVE, and ACTIONABLE. Use the actual song title and story details.
-
-Structure your response exactly like this:
-
-## 🎯 VIRAL HOOKS (3 different angles)
-[3 distinct psychological hooks that make people stop scrolling and share. Label each: CURIOSITY / EMOTION / CONTROVERSY or CHALLENGE]
-
-## ⏰ 72-HOUR TIMELINE
-
-### HOUR 0-6: PRE-LAUNCH
-[Exact actions, exact post copy for each platform]
-
-### HOUR 6-24: LAUNCH DAY
-[Platform-by-platform launch sequence with exact post copy, timing, and what to pin/feature]
-
-### HOUR 24-48: MOMENTUM
-[Engagement tactics, comment responses to use, what to repost, algorithm signals to trigger]
-
-### HOUR 48-72: SYNC PITCH WINDOW
-[How to turn the momentum into sync licensing outreach — who to email, what to say, how to package the traction]
-
-## 📱 PLATFORM PLAYBOOK
-[For each selected platform, write the EXACT first post — caption, hashtags, and the psychological trigger being used]
-
-## 🔁 THE CHALLENGE (if applicable)
-[Design a specific challenge or participation hook tied to this song]
-
-## 📧 PRESS & SYNC OUTREACH
-[3 email subject lines and one paragraph pitch to send to blogs, playlists, and sync supervisors using the release momentum]
-
-## 🎭 THE REVEAL PLAN (if Silent Virality strategy)
-[When and how to reveal Warren Lamb / Lamb Music Works as the artist behind the track]
-
-Be specific. Use the song title. Reference the story. Make every piece of copy sound authentic to an independent builder, not a label.`;
-
-  try {
-    const res = await callAnthropic(prompt, key, 2500);
-    
-    // Format the output
-    const lines = res.split('\n');
-    let html = '';
-    lines.forEach(function(line) {
-      if(line.startsWith('## ')) {
-        html += '<div style="font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:1.5px;color:#C050E8;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(180,50,220,0.2);">' + line.substring(3) + '</div>';
-      } else if(line.startsWith('### ')) {
-        html += '<div style="font-weight:700;font-size:14px;color:#FFF;margin:16px 0 6px;">' + line.substring(4) + '</div>';
-      } else if(line.startsWith('**') && line.endsWith('**')) {
-        html += '<div style="font-weight:700;font-size:13px;color:#E8E4D8;margin:6px 0;">' + line.slice(2,-2) + '</div>';
-      } else if(line.trim() === '') {
-        html += '<div style="height:8px;"></div>';
-      } else {
-        html += '<div style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:4px;">' + line + '</div>';
-      }
-    });
-        document.getElementById('viralOutputContent').innerHTML = html;
-    document.getElementById('viralOutput').style.display = 'block';
-    document.getElementById('viralOutput').scrollIntoView({behavior:'smooth'});
-  } catch(e) { alert('Failed: ' + e.message); }
-  finally { setBtnLoading('viralBtn','viralBtnText','viralSpinner',false); }
+  const sg={standard:'Full identity. Warren Lamb / LMW front and center from day one.',silent:'Anonymous first. No name, no logo. "Found this..." energy. Plan the reveal separately.',challenge:'Build a viral challenge. Simple, emotionally connected, shareable in under 15 seconds.',story:'3-day arc. Day 1: The struggle. Day 2: The turning point. Day 3: The drop.'};
+  const prompt=`Viral music marketing expert.\n\nSong: "${title}"\nGenre: ${genre||'Soul/R&B/Cinematic'}\nEnergy: ${bpm||'not specified'}\nStory: ${story}\nAudience: ${audience||'entrepreneurs, faith community, music lovers'}\nPlatforms: ${platforms}\nStrategy: ${sg[strategy]}\n\nCreate a complete 72-hour viral release campaign:\n\n## 🎯 VIRAL HOOKS (3 angles)\n## ⏰ 72-HOUR TIMELINE\n### HOUR 0-6: PRE-LAUNCH\n### HOUR 6-24: LAUNCH DAY\n### HOUR 24-48: MOMENTUM\n### HOUR 48-72: SYNC PITCH WINDOW\n## 📱 PLATFORM PLAYBOOK\n## 📧 PRESS & SYNC OUTREACH\n\nBe specific. Use the song title. Reference the story.`;
+  try{
+    const res=await callAnthropic(prompt,key,2500);
+    const lines=res.split('\n');let html='';
+    lines.forEach(line=>{if(line.startsWith('## ')){html+='<div style="font-family:Bebas Neue,sans-serif;font-size:16px;letter-spacing:1.5px;color:#C050E8;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(180,50,220,0.2);">'+line.substring(3)+'</div>';}else if(line.startsWith('### ')){html+='<div style="font-weight:700;font-size:14px;color:#FFF;margin:16px 0 6px;">'+line.substring(4)+'</div>';}else if(line.trim()===''){html+='<div style="height:8px;"></div>';}else{html+='<div style="font-size:13px;color:#CCC;line-height:1.8;margin-bottom:4px;">'+line+'</div>';}});
+    document.getElementById('viralOutputContent').innerHTML=html;document.getElementById('viralOutput').style.display='block';document.getElementById('viralOutput').scrollIntoView({behavior:'smooth'});
+  }catch(e){alert('Failed: '+e.message);}finally{setBtnLoading('viralBtn','viralBtnText','viralSpinner',false);}
 }
-
-function copyViralOutput(){
-  const text = document.getElementById('viralOutputContent').innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn = document.getElementById('viralCopyBtn');
-    btn.textContent = 'Copied!';
-    setTimeout(()=>{ btn.textContent = 'Copy Full Campaign'; }, 2000);
-  });
-}
+function copyViralOutput(){const text=document.getElementById('viralOutputContent').innerText;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById('viralCopyBtn');btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy Full Campaign',2000);});}
 
 // ══ EXPORT ══
-const EXPORT_PWD_KEY = 'lmw_export_password';
-
-function openExportModal(){
-  document.getElementById('exportModal').classList.add('open');
-  document.getElementById('exportPasswordInput').value='';
-  document.getElementById('exportNewPassword').value='';
-  document.getElementById('exportError').style.display='none';
-}
-
-function closeExportModal(){
-  document.getElementById('exportModal').classList.remove('open');
-}
-
+const EXPORT_PWD_KEY='lmw_export_password';
+function openExportModal(){document.getElementById('exportModal').classList.add('open');document.getElementById('exportPasswordInput').value='';document.getElementById('exportNewPassword').value='';document.getElementById('exportError').style.display='none';}
+function closeExportModal(){document.getElementById('exportModal').classList.remove('open');}
 function generateExport(){
-  const entered = document.getElementById('exportPasswordInput').value.trim();
-  const newPwd = document.getElementById('exportNewPassword').value.trim();
-  const stored = localStorage.getItem(EXPORT_PWD_KEY);
-
-  // First time — no password set yet
-  if(!stored){
-    if(!newPwd){ alert('No password set yet. Enter a new password in the "Set New Password" field.'); return; }
-    localStorage.setItem(EXPORT_PWD_KEY, newPwd);
-    saveSettingToSupabase('export_password', newPwd);
-    buildAndDownloadExport();
-    closeExportModal();
-    return;
-  }
-
-  // Update password if new one provided
-  if(newPwd && entered === stored){
-    localStorage.setItem(EXPORT_PWD_KEY, newPwd);
-    saveSettingToSupabase('export_password', newPwd);
-  }
-
-  // Verify password
-  if(entered !== stored){
-    document.getElementById('exportError').style.display='block';
-    return;
-  }
-
-  document.getElementById('exportError').style.display='none';
-  buildAndDownloadExport();
-  closeExportModal();
+  const entered=document.getElementById('exportPasswordInput').value.trim();const newPwd=document.getElementById('exportNewPassword').value.trim();const stored=localStorage.getItem(EXPORT_PWD_KEY);
+  if(!stored){if(!newPwd){alert('No password set yet. Enter a new password in the "Set New Password" field.');return;}localStorage.setItem(EXPORT_PWD_KEY,newPwd);saveSettingToSupabase('export_password',newPwd);buildAndDownloadExport();closeExportModal();return;}
+  if(newPwd&&entered===stored){localStorage.setItem(EXPORT_PWD_KEY,newPwd);saveSettingToSupabase('export_password',newPwd);}
+  if(entered!==stored){document.getElementById('exportError').style.display='block';return;}
+  document.getElementById('exportError').style.display='none';buildAndDownloadExport();closeExportModal();
 }
-
 function buildAndDownloadExport(){
-  const date = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  let html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
-<title>LMW Contact Pack — ${date}</title>
-<style>
-body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.6;}
-h1{font-size:28px;border-bottom:3px solid #C9A84C;padding-bottom:10px;color:#1a1a1a;}
-h2{font-size:20px;color:#C9A84C;margin-top:40px;margin-bottom:4px;}
-.meta{font-size:13px;color:#666;margin-bottom:16px;}
-.section{margin-bottom:12px;}
-.section-title{font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:4px;}
-.section-body{font-size:14px;color:#222;padding:10px 14px;background:#f9f7f2;border-left:3px solid #C9A84C;border-radius:4px;}
-.move{padding:4px 0;font-size:13px;border-bottom:1px solid #eee;}
-.move:last-child{border-bottom:none;}
-.contact{background:#fff;border:1px solid #ddd;border-radius:6px;padding:12px;margin-bottom:8px;}
-.contact-name{font-weight:bold;font-size:14px;}
-.contact-role{font-size:12px;color:#666;margin-bottom:4px;}
-.contact-channel{font-size:13px;color:#C9A84C;font-family:monospace;}
-.divider{border:none;border-top:1px solid #eee;margin:30px 0;}
-.footer{font-size:11px;color:#999;text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;}
-.badge{display:inline-block;background:#C9A84C;color:#fff;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:3px;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
-</style></head><body>
-<h1>🎵 LMW Outreach Pack</h1>
-<p style="color:#666;font-size:14px;">Generated: ${date} &nbsp;|&nbsp; Lamb Music Works &nbsp;|&nbsp; lambmusicworks.com &nbsp;|&nbsp; Confidential — For Authorized Use Only</p>
-<hr style="border:none;border-top:2px solid #C9A84C;margin:20px 0;">
-<p style="font-size:13px;color:#444;padding:12px 16px;background:#fffdf5;border:1px solid #f0e8c8;border-radius:6px;">
-<strong>Instructions:</strong> This document contains contact intelligence for Lamb Music Works outreach. 
-Use the priority moves and email templates as your guide. Always reach out professionally and represent the LMW brand with excellence. 
-Questions? Contact Warren Lamb directly.
-</p>`;
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LMW Contact Pack — ${date}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.6;}h1{font-size:28px;border-bottom:3px solid #C9A84C;padding-bottom:10px;}h2{font-size:20px;color:#C9A84C;margin-top:40px;}.meta{font-size:13px;color:#666;margin-bottom:16px;}.section-body{font-size:14px;color:#222;padding:10px 14px;background:#f9f7f2;border-left:3px solid #C9A84C;border-radius:4px;margin-bottom:12px;}.footer{font-size:11px;color:#999;text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;}</style></head><body><h1>🎵 LMW Outreach Pack</h1><p style="color:#666;font-size:14px;">Generated: ${date} | Lamb Music Works | lambmusicworks.com | Confidential</p>`;
 
-  TARGETS.forEach((t,i) => {
-    const statusColors = {new:'#C9A84C',active:'#3A9A5A',contacted:'#2A7ACC',responded:'#7A4ABA'};
-    const statusColor = statusColors[t.status]||'#C9A84C';
-    html += `<h2>${i+1}. ${t.name}</h2>
-<div class="meta"><span style="background:${statusColor};color:#fff;font-size:10px;font-weight:bold;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:1px;">${t.status||'New'}</span> &nbsp; ${t.role}</div>`;
-
-    if(t.why){ html += `<div class="section"><div class="section-title">Why This Target</div><div class="section-body">${t.why}</div></div>`; }
-
-    const moves = t.priorityMoves || [];
-    if(moves.length){
-      html += `<div class="section"><div class="section-title">Priority Moves</div><div class="section-body">`;
-      moves.forEach((m,j) => { html += `<div class="move"><strong>${j+1}.</strong> ${m}</div>`; });
-      html += `</div></div>`;
-    }
-
-    const contacts = t.contacts || [];
-    if(contacts.length){
-      html += `<div class="section"><div class="section-title">Contacts</div>`;
-      contacts.forEach(c => {
-        html += `<div class="contact"><div class="contact-name">${c.name}</div><div class="contact-role">${c.role}</div><div class="contact-channel">${c.channel}</div></div>`;
-      });
-      html += `</div>`;
-    }
-
-    // Get email from tabs if available
-    if(t.content && t.content.length >= 5){
-      const emailTab = t.content[t.content.length-1];
-      const emailMatch = emailTab.match(/Subject:(.*?)\n\n([\s\S]*?)<\/div>/);
-      if(emailMatch){
-        html += `<div class="section"><div class="section-title">Email Template</div><div class="section-body" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${emailMatch[0].replace(/<[^>]+>/g,'').trim()}</div></div>`;
-      }
-    }
-
-    if(i < TARGETS.length-1) html += '<hr class="divider">';
-  });
-
-  html += `<div class="footer">LMW Contact Pack &nbsp;|&nbsp; Generated ${date} &nbsp;|&nbsp; Confidential<br>Lamb Music Works &nbsp;|&nbsp; lambmusicworks.com</div></body></html>`;
-
-  const blob = new Blob([html], {type:'text/html'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'LMW-Contact-Pack-'+date.replace(/,/g,'').replace(/ /g,'-')+'.html';
-  a.click();
-  URL.revokeObjectURL(url);
+TARGETS.forEach((t,i)=>{html+=`<h2>${i+1}. ${t.name}</h2><div class="meta">${t.role}</div><div class="section-body">${t.why||'See dossier for full intelligence.'}</div>`;if(i<TARGETS.length-1)html+=’<hr style="border:none;border-top:1px solid #eee;margin:20px 0;">’;});
+html+=`<div class="footer">LMW Contact Pack | ${date} | Lamb Music Works | lambmusicworks.com</div></body></html>`;
+const blob=new Blob([html],{type:‘text/html’});const url=URL.createObjectURL(blob);const a=document.createElement(‘a’);a.href=url;a.download=‘LMW-Contact-Pack-’+date.replace(/,/g,’’).replace(/ /g,’-’)+’.html’;a.click();URL.revokeObjectURL(url);
 }
 
 // ══ SUPABASE ══
-const SUPABASE_URL = 'https://ptgatsxuexmudteqzxmc.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs';
-
-async function sbFetch(table, method, body, filter){
-  method = method||'GET'; filter = filter||'';
-  const url = SUPABASE_URL+'/rest/v1/'+table+filter;
-  const opts = {
-    method,
-    headers:{
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer '+SUPABASE_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': method==='POST' ? 'return=representation' : ''
-    }
-  };
-  if(body) opts.body = JSON.stringify(body);
-  const res = await fetch(url, opts);
-  if(!res.ok){ const err = await res.text(); throw new Error(err); }
-  if(method==='DELETE') return true;
-  const text = await res.text();
-  return text ? JSON.parse(text) : [];
+const SUPABASE_URL=‘https://ptgatsxuexmudteqzxmc.supabase.co’;
+const SUPABASE_KEY=‘eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs’;
+async function sbFetch(table,method,body,filter){
+method=method||‘GET’;filter=filter||’’;
+const url=SUPABASE_URL+’/rest/v1/’+table+filter;
+const opts={method,headers:{‘apikey’:SUPABASE_KEY,‘Authorization’:‘Bearer ‘+SUPABASE_KEY,‘Content-Type’:‘application/json’,‘Prefer’:method===‘POST’?‘return=representation’:’’}};
+if(body)opts.body=JSON.stringify(body);
+const res=await fetch(url,opts);if(!res.ok){const err=await res.text();throw new Error(err);}
+if(method===‘DELETE’)return true;const text=await res.text();return text?JSON.parse(text):[];
 }
-
-// ── Settings Supabase ──
 async function loadSettingsFromSupabase(){
-  try{
-    const data = await sbFetch('app_settings','GET',null,'?order=created_at.asc');
-    if(data && data.length){
-      data.forEach(s=>{
-        if(s.key==='anthropic_key' && s.value){ localStorage.setItem('lmw_anthropic_key',s.value); }
-        if(s.key==='openai_key' && s.value){ localStorage.setItem('lmw_openai_key',s.value); }
-        if(s.key==='export_password' && s.value){ localStorage.setItem('lmw_export_password',s.value); }
-      });
-      updateKeyUI();
-    }
-  }catch(e){ console.log('Settings load error:',e); }
+try{const data=await sbFetch(‘app_settings’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){data.forEach(s=>{if(s.key===‘anthropic_key’&&s.value)localStorage.setItem(‘lmw_anthropic_key’,s.value);if(s.key===‘openai_key’&&s.value)localStorage.setItem(‘lmw_openai_key’,s.value);if(s.key===‘export_password’&&s.value)localStorage.setItem(‘lmw_export_password’,s.value);});updateKeyUI();}}catch(e){console.log(‘Settings load error:’,e);}
 }
-
-async function saveSettingToSupabase(key, value){
-  try{
-    // Delete existing then insert
-    await sbFetch('app_settings','DELETE',null,'?key=eq.'+key);
-    await sbFetch('app_settings','POST',{key:key,value:value});
-  }catch(e){ console.log('Settings save error:',e); }
-}
-
-async function loadRadioFromSupabase(){
-  try{
-    const data = await sbFetch('radio_playlist','GET',null,'?order=created_at.asc');
-    if(data && data.length){ playlist = data.map(t=>({id:t.id,name:t.name,genre:t.genre,rawUrl:t.raw_url,streamUrl:t.stream_url,duration:t.duration,bpm:t.bpm})); renderPlaylist(); }
-  }catch(e){ console.log('Radio load error:',e); }
-}
-
-async function saveTrackToSupabase(track){
-  try{
-    const saved = await sbFetch('radio_playlist','POST',{name:track.name,genre:track.genre,raw_url:track.rawUrl||'',stream_url:track.streamUrl||'',duration:track.duration,bpm:track.bpm||''});
-    if(saved && saved[0]) return saved[0].id;
-  }catch(e){ console.log('Supabase save error:',e); }
-  return null;
-}
-
-async function deleteTrackFromSupabase(dbId){
-  try{ await sbFetch('radio_playlist','DELETE',null,'?id=eq.'+dbId); }catch(e){ console.log('Delete error:',e); }
-}
-
+async function saveSettingToSupabase(key,value){try{await sbFetch(‘app_settings’,‘DELETE’,null,’?key=eq.’+key);await sbFetch(‘app_settings’,‘POST’,{key:key,value:value});}catch(e){console.log(‘Settings save error:’,e);}}
+async function loadRadioFromSupabase(){try{const data=await sbFetch(‘radio_playlist’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){playlist=data.map(t=>({id:t.id,name:t.name,genre:t.genre,rawUrl:t.raw_url,streamUrl:t.stream_url,duration:t.duration,bpm:t.bpm}));renderPlaylist();}}catch(e){console.log(‘Radio load error:’,e);}}
+async function saveTrackToSupabase(track){try{const saved=await sbFetch(‘radio_playlist’,‘POST’,{name:track.name,genre:track.genre,raw_url:track.rawUrl||’’,stream_url:track.streamUrl||’’,duration:track.duration,bpm:track.bpm||’’});if(saved&&saved[0])return saved[0].id;}catch(e){console.log(‘Supabase save error:’,e);}return null;}
+async function deleteTrackFromSupabase(dbId){try{await sbFetch(‘radio_playlist’,‘DELETE’,null,’?id=eq.’+dbId);}catch(e){console.log(‘Delete error:’,e);}}
 async function loadVaultFromSupabase(){
-  try{
-    const data = await sbFetch('vault_targets','GET',null,'?order=created_at.asc');
-    if(data && data.length){
-      data.forEach(t=>{
-        if(!TARGETS.find(x=>x.id===t.id)){
-          const parsed = {why:t.why,priority_moves:t.priority_moves||[],inner_circle:(t.contacts||[]).map(c=>({name:c.name,tier:'Contact',role:c.role,why:'',channels:[c.channel]})),direct_access:[],proximity_plan:[],email_subject:'',email_body:''};
-          TARGETS.push({id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status,avatarBg:t.avatar_bg,avatarColor:t.avatar_color,why:t.why,priorityMoves:t.priority_moves||[],contacts:t.contacts||[],tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content:buildGeneratedContent(t.name,parsed)});
-        }
-      });
-      renderTargetList(); updateVaultStats();
-    }
-  }catch(e){ console.log('Vault load error:',e); }
+try{const data=await sbFetch(‘vault_targets’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){data.forEach(t=>{if(!TARGETS.find(x=>x.id===t.id)){const parsed={why:t.why,priority_moves:t.priority_moves||[],inner_circle:(t.contacts||[]).map(c=>({name:c.name,tier:‘Contact’,role:c.role,why:’’,channels:[c.channel]})),direct_access:[],proximity_plan:[],email_subject:’’,email_body:’’};TARGETS.push({id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status,avatarBg:t.avatar_bg,avatarColor:t.avatar_color,why:t.why,priorityMoves:t.priority_moves||[],contacts:t.contacts||[],tabs:[‘Overview’,‘Inner Circle’,‘Direct Access’,‘Social Plan’,‘Email’],content:buildGeneratedContent(t.name,parsed)});}});renderTargetList();updateVaultStats();}}catch(e){console.log(‘Vault load error:’,e);}
 }
-
-async function saveTargetToSupabase(t){
-  try{
-    await sbFetch('vault_targets','POST',{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||'new',avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});
-  }catch(e){ console.log('Vault save error:',e); }
-}
+async function saveTargetToSupabase(t){try{await sbFetch(‘vault_targets’,‘POST’,{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||‘new’,avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});}catch(e){console.log(‘Vault save error:’,e);}}
 
 // ══ INIT ══
 loadVaultStorage();
@@ -1882,10 +1769,14 @@ renderTargetList();
 updateVaultStats();
 updateKeyUI();
 initRadio();
+loadBrandProfiles();
+loadSCQueue();
+updateSCStats();
 loadSettingsFromSupabase();
 loadRadioFromSupabase();
 loadVaultFromSupabase();
-if(!localStorage.getItem('lmw_radio_v2')){ localStorage.removeItem('lmw_radio_playlist'); localStorage.setItem('lmw_radio_v2','1'); }
+if(!localStorage.getItem(‘lmw_radio_v2’)){localStorage.removeItem(‘lmw_radio_playlist’);localStorage.setItem(‘lmw_radio_v2’,‘1’);}
 </script>
+
 </body>
 </html>
