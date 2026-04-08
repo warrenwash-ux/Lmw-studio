@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -12,353 +11,353 @@
 html,body{height:100%;overflow:hidden;}
 
 :root{
-–gold:#C9A84C;–gold2:#F0CC60;–gold-dim:rgba(201,168,76,0.1);
-–bg:#090909;–s1:#111111;–s2:#191919;–s3:#222222;
-–text:#E8E4D8;–muted:#686860;–faint:#333330;–line:rgba(201,168,76,0.1);
-–red:#CC3520;–green:#3A9A5A;–blue:#2A7ACC;–purple:#7A4ABA;
-–social:#1A7A5A;–social-dim:rgba(26,122,90,0.1);–social2:#2ECC8A;
-–nav-w:64px;
+  --gold:#C9A84C;--gold2:#F0CC60;--gold-dim:rgba(201,168,76,0.1);
+  --bg:#090909;--s1:#111111;--s2:#191919;--s3:#222222;
+  --text:#E8E4D8;--muted:#686860;--faint:#333330;--line:rgba(201,168,76,0.1);
+  --red:#CC3520;--green:#3A9A5A;--blue:#2A7ACC;--purple:#7A4ABA;
+  --social:#1A7A5A;--social-dim:rgba(26,122,90,0.1);--social2:#2ECC8A;
+  --nav-w:64px;
 }
 
-body{font-family:‘DM Sans’,sans-serif;background:var(–bg);color:var(–text);font-size:14px;display:flex;height:100dvh;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;display:flex;height:100dvh;}
 
-.nav-rail{width:var(–nav-w);min-width:var(–nav-w);background:var(–s1);border-right:1px solid var(–line);display:flex;flex-direction:column;align-items:center;padding:12px 0;z-index:200;flex-shrink:0;}
-.nav-logo{font-family:‘Bebas Neue’,sans-serif;font-size:11px;letter-spacing:2px;color:var(–gold);margin-bottom:20px;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1;}
+.nav-rail{width:var(--nav-w);min-width:var(--nav-w);background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:12px 0;z-index:200;flex-shrink:0;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:20px;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);line-height:1;}
 .nav-items{display:flex;flex-direction:column;gap:4px;flex:1;width:100%;padding:0 8px;}
 .nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;border:1px solid transparent;}
-.nav-item:hover{background:var(–s2);}
-.nav-item.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
-.nav-item.sc-nav.active{background:var(–social-dim);border-color:rgba(26,122,90,0.3);}
+.nav-item:hover{background:var(--s2);}
+.nav-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-item.sc-nav.active{background:var(--social-dim);border-color:rgba(26,122,90,0.3);}
 .nav-icon{font-size:18px;line-height:1;}
-.nav-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(–muted);text-align:center;line-height:1.2;}
-.nav-item.active .nav-label{color:var(–gold);}
-.nav-item.sc-nav.active .nav-label{color:var(–social2);}
+.nav-label{font-size:9px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2;}
+.nav-item.active .nav-label{color:var(--gold);}
+.nav-item.sc-nav.active .nav-label{color:var(--social2);}
 .nav-bottom{margin-top:auto;width:100%;padding:0 8px;}
 .nav-settings{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.15s;width:100%;border:1px solid transparent;background:none;}
-.nav-settings:hover{background:var(–s2);}
-.nav-settings.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
+.nav-settings:hover{background:var(--s2);}
+.nav-settings.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
 
 .app-main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0;}
-.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:50px;min-height:50px;border-bottom:1px solid var(–line);background:var(–bg);flex-shrink:0;}
-.topbar-title{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:2px;color:#FFF;}
-.topbar-sub{font-size:11px;color:var(–muted);letter-spacing:1px;}
+.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:50px;min-height:50px;border-bottom:1px solid var(--line);background:var(--bg);flex-shrink:0;}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#FFF;}
+.topbar-sub{font-size:11px;color:var(--muted);letter-spacing:1px;}
 .topbar-spacer{flex:1;}
-.topbar-key-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(–muted);}
+.topbar-key-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
 .key-dot{width:6px;height:6px;border-radius:50%;}
-.key-dot.on{background:var(–green);}.key-dot.off{background:var(–red);}
+.key-dot.on{background:var(--green);}.key-dot.off{background:var(--red);}
 
 .page{display:none;flex:1;overflow:hidden;flex-direction:column;}
 .page.active{display:flex;}
 .page-body{flex:1;overflow-y:auto;padding:20px;}
 .page-body::-webkit-scrollbar{width:4px;}
-.page-body::-webkit-scrollbar-thumb{background:var(–s3);border-radius:2px;}
+.page-body::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
 
-.page-intro{border-left:3px solid var(–gold);padding-left:14px;font-size:13px;color:var(–muted);line-height:1.75;max-width:600px;margin-bottom:24px;}
-.page-intro em{color:var(–text);font-style:normal;}
+.page-intro{border-left:3px solid var(--gold);padding-left:14px;font-size:13px;color:var(--muted);line-height:1.75;max-width:600px;margin-bottom:24px;}
+.page-intro em{color:var(--text);font-style:normal;}
 
-h2{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1.5px;color:var(–gold);margin:24px 0 14px;}
+h2{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin:24px 0 14px;}
 h2:first-of-type{margin-top:0;}
 p{font-size:13px;color:#AAA;line-height:1.7;margin-bottom:12px;}
-p strong{color:var(–text);font-weight:600;}
-hr{border:none;border-top:1px solid var(–line);margin:20px 0;}
+p strong{color:var(--text);font-weight:600;}
+hr{border:none;border-top:1px solid var(--line);margin:20px 0;}
 
 .field{margin-bottom:14px;}
-.label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–muted);margin-bottom:7px;}
-.input{width:100%;padding:10px 14px;background:var(–s1);border:1px solid var(–line);border-radius:8px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;}
+.label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.input{width:100%;padding:10px 14px;background:var(--s1);border:1px solid var(--line);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s;}
 .input:focus{border-color:rgba(201,168,76,0.4);}
-.input::placeholder{color:var(–muted);}
+.input::placeholder{color:var(--muted);}
 textarea.input{resize:vertical;min-height:80px;line-height:1.6;}
 select.input{cursor:pointer;}
 
-.btn-gold{width:100%;padding:12px;background:var(–gold);color:#000;border:none;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
+.btn-gold{width:100%;padding:12px;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
 .btn-gold:hover{opacity:0.85;}
 .btn-gold:disabled{opacity:0.35;cursor:not-allowed;}
-.btn-outline{width:100%;padding:10px;background:transparent;color:var(–gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.15s;}
-.btn-outline:hover{background:var(–gold-dim);}
-.btn-social{width:100%;padding:12px;background:var(–social);color:#fff;border:none;border-radius:8px;font-family:‘DM Sans’,sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
+.btn-outline{width:100%;padding:10px;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,0.3);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;transition:all 0.15s;}
+.btn-outline:hover{background:var(--gold-dim);}
+.btn-social{width:100%;padding:12px;background:var(--social);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.15s;letter-spacing:0.3px;}
 .btn-social:hover{opacity:0.85;}
 .btn-social:disabled{opacity:0.35;cursor:not-allowed;}
 
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
 
-.output-box{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:18px;margin-top:16px;display:none;}
-.output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:10px;}
+.output-box{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
 .output-text{font-size:13px;color:#DDD;line-height:1.75;white-space:pre-wrap;}
-.copy-btn{margin-top:12px;padding:8px 16px;background:var(–s2);border:1px solid var(–line);border-radius:6px;color:var(–muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;}
-.copy-btn:hover{color:var(–text);border-color:rgba(255,255,255,0.2);}
-.copy-btn.copied{color:var(–green);border-color:rgba(58,154,90,0.4);}
+.copy-btn{margin-top:12px;padding:8px 16px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.copy-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.copy-btn.copied{color:var(--green);border-color:rgba(58,154,90,0.4);}
 
 .alert{padding:12px 15px;border-radius:7px;font-size:12px;line-height:1.5;margin-bottom:16px;}
 .alert-gold{background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);color:#C8A840;}
 .alert-green{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
 .alert-red{background:rgba(204,53,32,0.1);border:1px solid rgba(204,53,32,0.3);color:#E08070;}
 .alert-blue{background:rgba(42,122,204,0.08);border:1px solid rgba(42,122,204,0.25);color:#6AABE0;}
-.alert-social{background:rgba(26,122,90,0.08);border:1px solid rgba(26,122,90,0.3);color:var(–social2);}
+.alert-social{background:rgba(26,122,90,0.08);border:1px solid rgba(26,122,90,0.3);color:var(--social2);}
 
 .spinner{display:none;width:18px;height:18px;border:2px solid rgba(0,0,0,0.15);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;}
 .spinner-white{border:2px solid rgba(255,255,255,0.2);border-top-color:#fff;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
 .platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:16px;}
-.platform-chip{padding:8px 10px;border-radius:8px;border:1px solid var(–line);background:var(–s1);cursor:pointer;text-align:center;transition:all 0.15s;}
+.platform-chip{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--s1);cursor:pointer;text-align:center;transition:all 0.15s;}
 .platform-chip:hover{border-color:rgba(201,168,76,0.3);}
-.platform-chip.selected{background:var(–gold-dim);border-color:rgba(201,168,76,0.4);}
+.platform-chip.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
 .platform-chip .chip-icon{font-size:16px;margin-bottom:3px;}
-.platform-chip .chip-name{font-size:10px;font-weight:600;color:var(–muted);text-transform:uppercase;letter-spacing:0.5px;}
-.platform-chip.selected .chip-name{color:var(–gold);}
+.platform-chip .chip-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.platform-chip.selected .chip-name{color:var(--gold);}
 
 /* EXPORT MODAL */
 .export-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;align-items:center;justify-content:center;}
 .export-modal.open{display:flex;}
 .export-box{background:#111;border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:28px;width:90%;max-width:420px;}
-.export-title{font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;color:var(–gold);margin-bottom:6px;}
-.export-sub{font-size:12px;color:var(–muted);margin-bottom:20px;line-height:1.6;}
-.export-close{float:right;background:none;border:none;color:var(–muted);font-size:20px;cursor:pointer;margin-top:-4px;}
+.export-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold);margin-bottom:6px;}
+.export-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.export-close{float:right;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;margin-top:-4px;}
 
 /* VAULT */
 .vault-layout{display:flex;flex:1;overflow:hidden;}
-.vault-sidebar{width:240px;min-width:240px;background:var(–s1);border-right:1px solid var(–line);display:flex;flex-direction:column;overflow:hidden;}
-.vault-sidebar-head{padding:12px;border-bottom:1px solid var(–line);flex-shrink:0;}
+.vault-sidebar{width:240px;min-width:240px;background:var(--s1);border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;}
+.vault-sidebar-head{padding:12px;border-bottom:1px solid var(--line);flex-shrink:0;}
 .search-wrap{position:relative;}
-.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(–muted);}
-.search-input{width:100%;padding:7px 9px 7px 28px;background:var(–s2);border:1px solid var(–line);border-radius:6px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:12px;outline:none;}
-.search-input::placeholder{color:var(–muted);}
+.search-wrap svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--muted);}
+.search-input{width:100%;padding:7px 9px 7px 28px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;}
+.search-input::placeholder{color:var(--muted);}
 .filter-row{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
-.filter-chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(–muted);background:var(–s3);transition:all 0.15s;}
-.filter-chip.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.3);color:var(–gold);}
+.filter-chip{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border-radius:4px;cursor:pointer;border:1px solid transparent;color:var(--muted);background:var(--s3);transition:all 0.15s;}
+.filter-chip.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.3);color:var(--gold);}
 .target-list{flex:1;overflow-y:auto;padding:6px;}
 .target-item{display:flex;align-items:center;gap:9px;padding:9px;border-radius:7px;cursor:pointer;transition:background 0.15s;margin-bottom:3px;border:1px solid transparent;}
-.target-item:hover{background:var(–s2);}
-.target-item.active{background:var(–gold-dim);border-color:rgba(201,168,76,0.15);}
-.t-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,sans-serif;font-size:13px;background:var(–s3);color:var(–gold);border:1px solid var(–line);}
+.target-item:hover{background:var(--s2);}
+.target-item.active{background:var(--gold-dim);border-color:rgba(201,168,76,0.15);}
+.t-avatar{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;background:var(--s3);color:var(--gold);border:1px solid var(--line);}
 .t-info{flex:1;min-width:0;}
-.t-name{font-weight:600;font-size:12px;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.t-role{font-size:10px;color:var(–muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-name{font-weight:600;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-role{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .t-status{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.vault-footer{padding:10px;border-top:1px solid var(–line);flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap;}
-.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(–muted);}
+.vault-footer{padding:10px;border-top:1px solid var(--line);flex-shrink:0;display:flex;gap:6px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);}
 .legend-dot{width:5px;height:5px;border-radius:50%;}
 .vault-main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
 .vault-welcome{flex:1;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;}
 .vault-welcome-inner{max-width:400px;}
-.welcome-icon{font-family:‘Bebas Neue’,sans-serif;font-size:56px;color:rgba(201,168,76,0.1);letter-spacing:4px;margin-bottom:20px;line-height:1;}
-.welcome-title{font-family:‘Bebas Neue’,sans-serif;font-size:24px;letter-spacing:2px;color:var(–text);margin-bottom:8px;}
-.welcome-sub{font-size:12px;color:var(–muted);line-height:1.7;margin-bottom:20px;}
+.welcome-icon{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(201,168,76,0.1);letter-spacing:4px;margin-bottom:20px;line-height:1;}
+.welcome-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text);margin-bottom:8px;}
+.welcome-sub{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:20px;}
 .welcome-stats{display:flex;gap:24px;justify-content:center;}
-.wstat-num{font-family:‘Bebas Neue’,sans-serif;font-size:28px;color:var(–gold);}
-.wstat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
+.wstat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);}
+.wstat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
 .dossier-view{flex:1;overflow:hidden;display:none;flex-direction:column;}
-.dossier-header{padding:12px 16px;border-bottom:1px solid var(–line);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(–s1);}
-.dossier-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:‘Bebas Neue’,sans-serif;font-size:16px;}
-.dossier-name{font-family:‘Bebas Neue’,sans-serif;font-size:19px;letter-spacing:1px;color:#FFF;}
-.dossier-meta{font-size:11px;color:var(–muted);margin-top:1px;}
+.dossier-header{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-shrink:0;background:var(--s1);}
+.dossier-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;}
+.dossier-name{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1px;color:#FFF;}
+.dossier-meta{font-size:11px;color:var(--muted);margin-top:1px;}
 .dossier-spacer{flex:1;}
-.status-select{background:var(–s2);border:1px solid var(–line);color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:11px;padding:4px 8px;border-radius:5px;cursor:pointer;outline:none;}
-.dossier-tabs{display:flex;border-bottom:1px solid var(–line);flex-shrink:0;background:var(–bg);overflow-x:auto;scrollbar-width:none;}
+.status-select{background:var(--s2);border:1px solid var(--line);color:var(--text);font-family:'DM Sans',sans-serif;font-size:11px;padding:4px 8px;border-radius:5px;cursor:pointer;outline:none;}
+.dossier-tabs{display:flex;border-bottom:1px solid var(--line);flex-shrink:0;background:var(--bg);overflow-x:auto;scrollbar-width:none;}
 .dossier-tabs::-webkit-scrollbar{display:none;}
-.dtab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
-.dtab.active{color:var(–gold);border-bottom-color:var(–gold);}
+.dtab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.dtab.active{color:var(--gold);border-bottom-color:var(--gold);}
 .dossier-body{flex:1;overflow-y:auto;padding:16px;}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-bottom:20px;}
-.ccard{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:14px;transition:border-color 0.15s;}
-.ccard.cat-direct{border-left:3px solid var(–gold);}
+.ccard{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:14px;transition:border-color 0.15s;}
+.ccard.cat-direct{border-left:3px solid var(--gold);}
 .ccard.cat-family{border-left:3px solid #5AB870;}
 .ccard.cat-biz{border-left:3px solid #3A90D5;}
 .ccard.cat-music{border-left:3px solid #A050D5;}
 .cat-tag{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
-.cat-tag.direct{color:var(–gold);}.cat-tag.family{color:#5AB870;}.cat-tag.biz{color:#3A90D5;}.cat-tag.music{color:#A050D5;}
+.cat-tag.direct{color:var(--gold);}.cat-tag.family{color:#5AB870;}.cat-tag.biz{color:#3A90D5;}.cat-tag.music{color:#A050D5;}
 .ccard-name{font-weight:700;font-size:13px;color:#FFF;margin-bottom:2px;}
-.ccard-role{font-size:11px;color:var(–muted);margin-bottom:8px;line-height:1.4;}
+.ccard-role{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.4;}
 .ccard-why{font-size:11px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;margin-bottom:8px;}
 .tag-row{display:flex;gap:4px;flex-wrap:wrap;}
 .ctag{font-size:9px;padding:2px 6px;border-radius:3px;font-weight:600;}
 .ctag.ig{background:rgba(200,80,50,0.12);color:#E07860;}
-.ctag.email{background:rgba(201,168,76,0.1);color:var(–gold);}
+.ctag.email{background:rgba(201,168,76,0.1);color:var(--gold);}
 .ctag.web{background:rgba(100,180,100,0.1);color:#70C080;}
 .ctag.li{background:rgba(60,120,200,0.1);color:#6090D0;}
-.info-box{background:var(–s2);border:1px solid var(–line);border-radius:7px;padding:12px 16px;margin-bottom:10px;}
-.info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:5px;}
-.info-val{font-size:13px;color:#DDD;word-break:break-all;font-family:‘DM Mono’,monospace;}
-.info-note{font-size:11px;color:var(–muted);margin-top:6px;line-height:1.5;}
+.info-box{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:12px 16px;margin-bottom:10px;}
+.info-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.info-val{font-size:13px;color:#DDD;word-break:break-all;font-family:'DM Mono',monospace;}
+.info-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5;}
 .action-block{background:linear-gradient(135deg,rgba(201,168,76,0.07),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.18);border-radius:9px;padding:18px;margin-top:20px;}
-.action-block h3{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1.5px;color:var(–gold);margin-bottom:10px;}
+.action-block h3{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;}
 .alist{list-style:none;}
 .alist li{font-size:12px;color:#CCC;padding:4px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.5;}
-.anum{font-family:‘Bebas Neue’,sans-serif;font-size:13px;color:var(–gold);flex-shrink:0;width:14px;}
+.anum{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;width:14px;}
 .week-row{display:grid;grid-template-columns:70px 1fr;gap:12px;margin-bottom:14px;align-items:start;}
-.week-num{background:var(–s2);border:1px solid var(–line);border-radius:7px;padding:7px;text-align:center;font-family:‘Bebas Neue’,sans-serif;font-size:22px;color:var(–gold);line-height:1;}
-.week-sub{font-size:9px;font-weight:600;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
-.week-body{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:7px;padding:11px 13px;}
+.week-num{background:var(--s2);border:1px solid var(--line);border-radius:7px;padding:7px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);line-height:1;}
+.week-sub{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.week-body{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:7px;padding:11px 13px;}
 .week-title{font-weight:700;font-size:12px;color:#FFF;margin-bottom:7px;}
 .week-tasks{list-style:none;}
 .week-tasks li{font-size:11px;color:#BBB;padding:3px 0;display:flex;gap:6px;line-height:1.4;border-bottom:1px solid rgba(255,255,255,0.04);}
 .week-tasks li:last-child{border-bottom:none;}
-.week-tasks li::before{content:‘→’;color:var(–gold);flex-shrink:0;font-size:10px;margin-top:2px;}
-.post-card{background:var(–s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:16px;margin-bottom:12px;}
+.week-tasks li::before{content:'→';color:var(--gold);flex-shrink:0;font-size:10px;margin-top:2px;}
+.post-card{background:var(--s1);border:1px solid rgba(255,255,255,0.04);border-radius:9px;padding:16px;margin-bottom:12px;}
 .post-platform{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
 .pp-ig{color:#E07860;}.pp-tw{color:#7090CC;}.pp-reel{color:#E08030;}
-.post-body{font-size:12px;color:#DDD;line-height:1.75;padding:11px 13px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(–gold);white-space:pre-line;}
+.post-body{font-size:12px;color:#DDD;line-height:1.75;padding:11px 13px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--gold);white-space:pre-line;}
 
 /* IMAGE GENERATOR */
 .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;}
-.image-card{background:var(–s1);border:1px solid var(–line);border-radius:10px;overflow:hidden;aspect-ratio:1;}
+.image-card{background:var(--s1);border:1px solid var(--line);border-radius:10px;overflow:hidden;aspect-ratio:1;}
 .image-card img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* REEL STUDIO */
 .reel-format-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
-.format-card{background:var(–s1);border:1px solid var(–line);border-radius:9px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
+.format-card{background:var(--s1);border:1px solid var(--line);border-radius:9px;padding:14px 10px;text-align:center;cursor:pointer;transition:all 0.15s;}
 .format-card:hover{border-color:rgba(201,168,76,0.3);}
-.format-card.selected{background:var(–gold-dim);border-color:rgba(201,168,76,0.4);}
+.format-card.selected{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);}
 .format-icon{font-size:22px;margin-bottom:6px;}
-.format-name{font-size:11px;font-weight:700;color:var(–text);margin-bottom:2px;}
-.format-desc{font-size:10px;color:var(–muted);}
-.format-card.selected .format-desc{color:var(–gold);}
+.format-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.format-desc{font-size:10px;color:var(--muted);}
+.format-card.selected .format-desc{color:var(--gold);}
 
 /* SETTINGS */
-.settings-section{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:18px;margin-bottom:16px;}
-.settings-section-title{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:1.5px;color:var(–gold);margin-bottom:14px;}
+.settings-section{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:16px;}
+.settings-section-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1.5px;color:var(--gold);margin-bottom:14px;}
 .key-status-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:7px;font-size:12px;margin-bottom:12px;}
 .key-status-bar.has-key{background:rgba(58,154,90,0.08);border:1px solid rgba(58,154,90,0.25);color:#5AB870;}
 .key-status-bar.no-key{background:rgba(204,53,32,0.08);border:1px solid rgba(204,53,32,0.25);color:#E07060;}
 
 /* LMW RADIO */
 .radio-hero{background:linear-gradient(135deg,#0A0A0A,#1A1008);border:1px solid rgba(201,168,76,0.2);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.radio-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
-.radio-title{font-family:‘Bebas Neue’,sans-serif;font-size:36px;letter-spacing:4px;color:var(–gold);margin-bottom:4px;}
-.radio-sub{font-size:12px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.radio-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,0.05) 0%,transparent 70%);pointer-events:none;}
+.radio-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:4px;color:var(--gold);margin-bottom:4px;}
+.radio-sub{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
 .radio-visualizer{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:40px;margin-bottom:20px;}
-.radio-bar{width:4px;border-radius:2px;background:var(–gold);opacity:0.7;animation:radioBar 1.2s ease-in-out infinite;}
+.radio-bar{width:4px;border-radius:2px;background:var(--gold);opacity:0.7;animation:radioBar 1.2s ease-in-out infinite;}
 .radio-bar:nth-child(1){height:20px;animation-delay:0s;}.radio-bar:nth-child(2){height:35px;animation-delay:0.1s;}.radio-bar:nth-child(3){height:28px;animation-delay:0.2s;}.radio-bar:nth-child(4){height:40px;animation-delay:0.3s;}.radio-bar:nth-child(5){height:22px;animation-delay:0.4s;}.radio-bar:nth-child(6){height:38px;animation-delay:0.5s;}.radio-bar:nth-child(7){height:15px;animation-delay:0.6s;}.radio-bar:nth-child(8){height:32px;animation-delay:0.7s;}.radio-bar:nth-child(9){height:25px;animation-delay:0.8s;}
 .radio-bar.paused{animation-play-state:paused;opacity:0.3;}
 @keyframes radioBar{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
 .radio-player{display:flex;align-items:center;gap:16px;background:rgba(0,0,0,0.4);border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:14px 18px;margin-bottom:20px;}
-.radio-btn{width:48px;height:48px;border-radius:50%;background:var(–gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:opacity 0.15s;}
+.radio-btn{width:48px;height:48px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:opacity 0.15s;}
 .radio-btn:hover{opacity:0.85;}
 .radio-track-info{flex:1;min-width:0;}
 .radio-track-name{font-weight:700;font-size:14px;color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.radio-track-artist{font-size:11px;color:var(–muted);margin-top:2px;}
-.radio-track-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–gold);margin-top:4px;}
+.radio-track-artist{font-size:11px;color:var(--muted);margin-top:2px;}
+.radio-track-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-top:4px;}
 .radio-progress{flex:1;}
-.radio-progress-bar{width:100%;height:3px;background:var(–s3);border-radius:2px;margin-bottom:4px;cursor:pointer;position:relative;}
-.radio-progress-fill{height:100%;background:var(–gold);border-radius:2px;transition:width 0.5s linear;}
-.radio-time{display:flex;justify-content:space-between;font-size:10px;color:var(–muted);font-family:‘DM Mono’,monospace;}
+.radio-progress-bar{width:100%;height:3px;background:var(--s3);border-radius:2px;margin-bottom:4px;cursor:pointer;position:relative;}
+.radio-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s linear;}
+.radio-time{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;}
 .radio-controls{display:flex;gap:8px;align-items:center;}
-.radio-ctrl-btn{background:none;border:1px solid var(–line);color:var(–muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:‘DM Sans’,sans-serif;transition:all 0.15s;}
-.radio-ctrl-btn:hover{color:var(–text);border-color:rgba(255,255,255,0.2);}
-.radio-ctrl-btn.active{color:var(–gold);border-color:rgba(201,168,76,0.3);background:var(–gold-dim);}
+.radio-ctrl-btn{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.radio-ctrl-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
+.radio-ctrl-btn.active{color:var(--gold);border-color:rgba(201,168,76,0.3);background:var(--gold-dim);}
 .playlist-section{margin-bottom:20px;}
 .playlist-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.playlist-title{font-family:‘Bebas Neue’,sans-serif;font-size:16px;letter-spacing:1.5px;color:var(–gold);}
-.playlist-count{font-size:11px;color:var(–muted);}
+.playlist-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--gold);}
+.playlist-count{font-size:11px;color:var(--muted);}
 .track-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;border:1px solid transparent;}
-.track-row:hover{background:var(–s2);}
-.track-row.playing{background:var(–gold-dim);border-color:rgba(201,168,76,0.2);}
-.track-num{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);width:20px;text-align:center;flex-shrink:0;}
-.track-row.playing .track-num{color:var(–gold);}
+.track-row:hover{background:var(--s2);}
+.track-row.playing{background:var(--gold-dim);border-color:rgba(201,168,76,0.2);}
+.track-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);width:20px;text-align:center;flex-shrink:0;}
+.track-row.playing .track-num{color:var(--gold);}
 .track-details{flex:1;min-width:0;}
-.track-name{font-weight:600;font-size:13px;color:var(–text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.track-row.playing .track-name{color:var(–gold);}
-.track-meta{font-size:10px;color:var(–muted);margin-top:2px;}
-.track-genre{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(–s3);color:var(–muted);}
-.track-duration{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);flex-shrink:0;}
-.radio-stream-box{background:var(–s2);border:1px solid var(–line);border-radius:8px;padding:14px;margin-bottom:16px;}
-.stream-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(–gold);margin-bottom:8px;}
+.track-name{font-weight:600;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.track-row.playing .track-name{color:var(--gold);}
+.track-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+.track-genre{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--s3);color:var(--muted);}
+.track-duration{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;}
+.radio-stream-box{background:var(--s2);border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:16px;}
+.stream-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
 .stream-url-row{display:flex;gap:8px;align-items:center;}
-.stream-url-input{flex:1;padding:8px 12px;background:var(–s1);border:1px solid var(–line);border-radius:6px;color:var(–text);font-family:‘DM Mono’,monospace;font-size:12px;outline:none;}
-.stream-url-input::placeholder{color:var(–muted);}
-.stream-connect-btn{padding:8px 14px;background:var(–gold);color:#000;border:none;border-radius:6px;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.stream-url-input{flex:1;padding:8px 12px;background:var(--s1);border:1px solid var(--line);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;outline:none;}
+.stream-url-input::placeholder{color:var(--muted);}
+.stream-connect-btn{padding:8px 14px;background:var(--gold);color:#000;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
 
 /* DONE FOR YOU */
 .dfy-hero{background:linear-gradient(135deg,#0D0A00,#1A1200);border:1px solid rgba(201,168,76,0.3);border-radius:14px;padding:32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
-.dfy-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(201,168,76,0.08) 0%,transparent 60%);}
+.dfy-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(201,168,76,0.08) 0%,transparent 60%);}
 .dfy-crown{font-size:40px;margin-bottom:12px;}
-.dfy-title{font-family:‘Bebas Neue’,sans-serif;font-size:38px;letter-spacing:3px;color:#FFF;margin-bottom:6px;}
-.dfy-title span{color:var(–gold);}
-.dfy-tagline{font-size:13px;color:var(–muted);line-height:1.7;max-width:480px;margin:0 auto 20px;}
-.dfy-price-badge{display:inline-block;background:var(–gold);color:#000;font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;padding:8px 24px;border-radius:50px;margin-bottom:8px;}
-.dfy-price-note{font-size:11px;color:var(–muted);letter-spacing:1px;}
+.dfy-title{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:#FFF;margin-bottom:6px;}
+.dfy-title span{color:var(--gold);}
+.dfy-tagline{font-size:13px;color:var(--muted);line-height:1.7;max-width:480px;margin:0 auto 20px;}
+.dfy-price-badge{display:inline-block;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:8px 24px;border-radius:50px;margin-bottom:8px;}
+.dfy-price-note{font-size:11px;color:var(--muted);letter-spacing:1px;}
 .dfy-includes{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px;}
-.dfy-include-card{background:var(–s1);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:16px;}
+.dfy-include-card{background:var(--s1);border:1px solid rgba(201,168,76,0.12);border-radius:10px;padding:16px;}
 .dfy-include-icon{font-size:24px;margin-bottom:8px;}
-.dfy-include-title{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1px;color:var(–gold);margin-bottom:4px;}
-.dfy-include-desc{font-size:11px;color:var(–muted);line-height:1.6;}
-.dfy-form{background:var(–s1);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:24px;margin-bottom:20px;}
-.dfy-form-title{font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:1.5px;color:var(–gold);margin-bottom:6px;}
-.dfy-form-sub{font-size:12px;color:var(–muted);margin-bottom:20px;line-height:1.6;}
+.dfy-include-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--gold);margin-bottom:4px;}
+.dfy-include-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+.dfy-form{background:var(--s1);border:1px solid rgba(201,168,76,0.15);border-radius:12px;padding:24px;margin-bottom:20px;}
+.dfy-form-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;}
+.dfy-form-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
 .dfy-process{margin-bottom:24px;}
 .dfy-step{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;}
-.dfy-step-num{width:32px;height:32px;border-radius:50%;background:var(–gold);color:#000;font-family:‘Bebas Neue’,sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dfy-step-num{width:32px;height:32px;border-radius:50%;background:var(--gold);color:#000;font-family:'Bebas Neue',sans-serif;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .dfy-step-body{flex:1;}
 .dfy-step-title{font-weight:700;font-size:13px;color:#FFF;margin-bottom:3px;}
-.dfy-step-desc{font-size:12px;color:var(–muted);line-height:1.5;}
+.dfy-step-desc{font-size:12px;color:var(--muted);line-height:1.5;}
 .dfy-testimonial{background:linear-gradient(135deg,rgba(201,168,76,0.05),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.15);border-radius:10px;padding:18px;margin-bottom:20px;}
 .dfy-quote{font-size:13px;color:#CCC;line-height:1.8;font-style:italic;margin-bottom:10px;}
-.dfy-quote-attr{font-size:11px;color:var(–gold);font-weight:600;}
+.dfy-quote-attr{font-size:11px;color:var(--gold);font-weight:600;}
 
 /* GLOBAL REACH LAB */
 .grl-hero{background:linear-gradient(135deg,#050A14,#0A1520);border:1px solid rgba(42,122,204,0.25);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.grl-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(42,122,204,0.06) 0%,transparent 70%);}
+.grl-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(42,122,204,0.06) 0%,transparent 70%);}
 .grl-globe{font-size:48px;margin-bottom:12px;}
-.grl-title{font-family:‘Bebas Neue’,sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
+.grl-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
 .grl-title span{color:#6AABE0;}
-.grl-sub{font-size:12px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.grl-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
 .grl-stats{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
 .grl-stat{text-align:center;}
-.grl-stat-num{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:#6AABE0;}
-.grl-stat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
+.grl-stat-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#6AABE0;}
+.grl-stat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
 .territory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:20px;}
-.territory-card{background:var(–s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;}
+.territory-card{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.15s;}
 .territory-card:hover{border-color:rgba(42,122,204,0.3);}
 .territory-card.selected{background:rgba(42,122,204,0.08);border-color:rgba(42,122,204,0.4);}
 .territory-flag{font-size:22px;margin-bottom:6px;}
 .territory-name{font-weight:700;font-size:12px;color:#FFF;margin-bottom:2px;}
-.territory-desc{font-size:10px;color:var(–muted);line-height:1.5;}
+.territory-desc{font-size:10px;color:var(--muted);line-height:1.5;}
 .territory-card.selected .territory-desc{color:#6AABE0;}
 .grl-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
-.grl-tool{background:var(–s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:16px;}
+.grl-tool{background:var(--s1);border:1px solid rgba(42,122,204,0.12);border-radius:10px;padding:16px;}
 .grl-tool-icon{font-size:24px;margin-bottom:8px;}
-.grl-tool-title{font-family:‘Bebas Neue’,sans-serif;font-size:13px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;}
-.grl-tool-desc{font-size:11px;color:var(–muted);line-height:1.5;margin-bottom:10px;}
-.grl-tool-btn{width:100%;padding:8px;background:rgba(42,122,204,0.1);border:1px solid rgba(42,122,204,0.25);border-radius:6px;color:#6AABE0;font-family:‘DM Sans’,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.grl-tool-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:#6AABE0;margin-bottom:4px;}
+.grl-tool-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+.grl-tool-btn{width:100%;padding:8px;background:rgba(42,122,204,0.1);border:1px solid rgba(42,122,204,0.25);border-radius:6px;color:#6AABE0;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .grl-tool-btn:hover{background:rgba(42,122,204,0.2);}
-.grl-output{background:var(–s1);border:1px solid rgba(42,122,204,0.15);border-radius:10px;padding:18px;margin-top:16px;display:none;}
+.grl-output{background:var(--s1);border:1px solid rgba(42,122,204,0.15);border-radius:10px;padding:18px;margin-top:16px;display:none;}
 .grl-output-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6AABE0;margin-bottom:10px;}
-.sync-library-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(–s2);border:1px solid var(–line);margin-bottom:8px;}
-.sync-lib-rank{font-family:‘Bebas Neue’,sans-serif;font-size:18px;color:var(–gold);width:24px;flex-shrink:0;}
+.sync-library-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:var(--s2);border:1px solid var(--line);margin-bottom:8px;}
+.sync-lib-rank{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold);width:24px;flex-shrink:0;}
 .sync-lib-info{flex:1;}
 .sync-lib-name{font-weight:700;font-size:13px;color:#FFF;}
-.sync-lib-desc{font-size:11px;color:var(–muted);margin-top:1px;}
+.sync-lib-desc{font-size:11px;color:var(--muted);margin-top:1px;}
 .sync-lib-status{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
 .sync-lib-status.open{background:rgba(58,154,90,0.12);color:#5AB870;}
-.sync-lib-status.selective{background:rgba(201,168,76,0.1);color:var(–gold);}
+.sync-lib-status.selective{background:rgba(201,168,76,0.1);color:var(--gold);}
 .sync-lib-status.invite{background:rgba(204,53,32,0.1);color:#E07060;}
 
 /* SOCIAL COMMAND */
 .sc-hero{background:linear-gradient(135deg,#050F0A,#0A1F14);border:1px solid rgba(26,122,90,0.3);border-radius:14px;padding:28px;margin-bottom:20px;text-align:center;position:relative;overflow:hidden;}
-.sc-hero::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(46,204,138,0.06) 0%,transparent 70%);pointer-events:none;}
-.sc-title{font-family:‘Bebas Neue’,sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
-.sc-title span{color:var(–social2);}
-.sc-sub{font-size:12px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.sc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(46,204,138,0.06) 0%,transparent 70%);pointer-events:none;}
+.sc-title{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:#FFF;margin-bottom:4px;}
+.sc-title span{color:var(--social2);}
+.sc-sub{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
 .sc-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
-.sc-stat-num{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:var(–social2);}
-.sc-stat-label{font-size:10px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;}
-.brand-switcher{display:flex;gap:8px;margin-bottom:20px;padding:6px;background:var(–s1);border:1px solid var(–line);border-radius:10px;}
-.brand-btn{flex:1;padding:10px 14px;border-radius:7px;border:1px solid transparent;background:transparent;cursor:pointer;text-align:left;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;}
-.brand-btn.active-lmw{background:var(–gold-dim);border-color:rgba(201,168,76,0.3);}
-.brand-btn.active-artist{background:var(–social-dim);border-color:rgba(26,122,90,0.3);}
-.brand-btn:not(.active-lmw):not(.active-artist):hover{background:var(–s2);}
-.brand-btn-name{font-weight:700;font-size:13px;color:var(–text);}
-.brand-btn-type{font-size:10px;color:var(–muted);margin-top:1px;}
-.brand-btn.active-lmw .brand-btn-type{color:var(–gold);}
-.brand-btn.active-artist .brand-btn-type{color:var(–social2);}
-.sc-tabs{display:flex;border-bottom:1px solid var(–line);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
+.sc-stat-num{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--social2);}
+.sc-stat-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.brand-switcher{display:flex;gap:8px;margin-bottom:20px;padding:6px;background:var(--s1);border:1px solid var(--line);border-radius:10px;}
+.brand-btn{flex:1;padding:10px 14px;border-radius:7px;border:1px solid transparent;background:transparent;cursor:pointer;text-align:left;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
+.brand-btn.active-lmw{background:var(--gold-dim);border-color:rgba(201,168,76,0.3);}
+.brand-btn.active-artist{background:var(--social-dim);border-color:rgba(26,122,90,0.3);}
+.brand-btn:not(.active-lmw):not(.active-artist):hover{background:var(--s2);}
+.brand-btn-name{font-weight:700;font-size:13px;color:var(--text);}
+.brand-btn-type{font-size:10px;color:var(--muted);margin-top:1px;}
+.brand-btn.active-lmw .brand-btn-type{color:var(--gold);}
+.brand-btn.active-artist .brand-btn-type{color:var(--social2);}
+.sc-tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
 .sc-tabs::-webkit-scrollbar{display:none;}
-.sc-tab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
-.sc-tab.active{color:var(–social2);border-bottom-color:var(–social2);}
+.sc-tab{padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.15s;white-space:nowrap;flex-shrink:0;}
+.sc-tab.active{color:var(--social2);border-bottom-color:var(--social2);}
 .sc-panel{display:none;}
 .sc-panel.active{display:block;}
-.queue-card{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:16px;margin-bottom:10px;position:relative;}
+.queue-card{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:10px;position:relative;}
 .queue-card-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .queue-platform-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:4px;}
 .qp-ig{background:rgba(200,80,50,0.12);color:#E07860;}
@@ -367,64 +366,63 @@ select.input{cursor:pointer;}
 .qp-li{background:rgba(60,120,200,0.12);color:#6090D0;}
 .qp-yt{background:rgba(200,50,50,0.12);color:#E06060;}
 .qp-fb{background:rgba(60,100,200,0.12);color:#6080D0;}
-.queue-time{font-size:10px;color:var(–muted);font-family:‘DM Mono’,monospace;margin-left:auto;}
-.queue-caption{font-size:12px;color:#DDD;line-height:1.7;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(–social);margin-bottom:10px;white-space:pre-line;}
+.queue-time{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-left:auto;}
+.queue-caption{font-size:12px;color:#DDD;line-height:1.7;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:2px solid var(--social);margin-bottom:10px;white-space:pre-line;}
 .queue-actions{display:flex;gap:8px;flex-wrap:wrap;}
-.queue-btn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:‘DM Sans’,sans-serif;border:none;}
-.queue-btn-approve{background:rgba(26,122,90,0.15);color:var(–social2);border:1px solid rgba(26,122,90,0.3);}
+.queue-btn{padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;border:none;}
+.queue-btn-approve{background:rgba(26,122,90,0.15);color:var(--social2);border:1px solid rgba(26,122,90,0.3);}
 .queue-btn-approve:hover{background:rgba(26,122,90,0.25);}
-.queue-btn-copy{background:var(–s2);color:var(–muted);border:1px solid var(–line);}
-.queue-btn-copy:hover{color:var(–text);}
-.queue-btn-remove{background:transparent;color:var(–muted);border:1px solid var(–line);}
-.queue-approved{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(–social2);background:rgba(26,122,90,0.12);border:1px solid rgba(26,122,90,0.3);padding:2px 8px;border-radius:4px;text-transform:uppercase;}
-.engage-item{background:var(–s1);border:1px solid var(–line);border-radius:10px;padding:14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;}
-.engage-check{width:20px;height:20px;border-radius:4px;border:1px solid var(–line);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;font-size:12px;color:#fff;}
-.engage-check.done{background:var(–social);border-color:var(–social);}
+.queue-btn-copy{background:var(--s2);color:var(--muted);border:1px solid var(--line);}
+.queue-btn-copy:hover{color:var(--text);}
+.queue-btn-remove{background:transparent;color:var(--muted);border:1px solid var(--line);}
+.queue-approved{position:absolute;top:12px;right:12px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--social2);background:rgba(26,122,90,0.12);border:1px solid rgba(26,122,90,0.3);padding:2px 8px;border-radius:4px;text-transform:uppercase;}
+.engage-item{background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;}
+.engage-check{width:20px;height:20px;border-radius:4px;border:1px solid var(--line);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;font-size:12px;color:#fff;}
+.engage-check.done{background:var(--social);border-color:var(--social);}
 .engage-body{flex:1;min-width:0;}
-.engage-account{font-weight:600;font-size:12px;color:var(–text);margin-bottom:3px;}
-.engage-comment{font-size:12px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;border-left:2px solid var(–social);margin-bottom:8px;}
-.engage-copy-btn{padding:5px 10px;background:var(–s2);border:1px solid var(–line);border-radius:5px;color:var(–muted);font-size:11px;font-weight:600;cursor:pointer;font-family:‘DM Sans’,sans-serif;transition:all 0.15s;}
-.engage-copy-btn:hover{color:var(–text);}
-.schedule-row{display:grid;grid-template-columns:90px 1fr 70px;gap:10px;align-items:center;padding:10px 12px;border-radius:8px;background:var(–s1);border:1px solid var(–line);margin-bottom:6px;}
-.schedule-time{font-family:‘DM Mono’,monospace;font-size:12px;color:var(–social2);}
-.schedule-info{font-size:12px;color:var(–text);}
-.schedule-platform-label{font-size:10px;color:var(–muted);}
+.engage-account{font-weight:600;font-size:12px;color:var(--text);margin-bottom:3px;}
+.engage-comment{font-size:12px;color:#AAA;line-height:1.6;padding:8px 10px;background:rgba(255,255,255,0.03);border-radius:5px;border-left:2px solid var(--social);margin-bottom:8px;}
+.engage-copy-btn{padding:5px 10px;background:var(--s2);border:1px solid var(--line);border-radius:5px;color:var(--muted);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.engage-copy-btn:hover{color:var(--text);}
+.schedule-row{display:grid;grid-template-columns:90px 1fr 70px;gap:10px;align-items:center;padding:10px 12px;border-radius:8px;background:var(--s1);border:1px solid var(--line);margin-bottom:6px;}
+.schedule-time{font-family:'DM Mono',monospace;font-size:12px;color:var(--social2);}
+.schedule-info{font-size:12px;color:var(--text);}
+.schedule-platform-label{font-size:10px;color:var(--muted);}
 .schedule-status{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:right;}
-.ss-pending{color:var(–muted);}.ss-live{color:var(–social2);}.ss-posted{color:var(–green);}
-.brand-setup-card{background:var(–s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:18px;margin-bottom:14px;}
-.brand-setup-title{font-family:‘Bebas Neue’,sans-serif;font-size:14px;letter-spacing:1px;color:var(–social2);margin-bottom:12px;}
+.ss-pending{color:var(--muted);}.ss-live{color:var(--social2);}.ss-posted{color:var(--green);}
+.brand-setup-card{background:var(--s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:18px;margin-bottom:14px;}
+.brand-setup-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;}
 
 @media(max-width:700px){
-:root{–nav-w:54px;}
-.nav-logo{display:none;}
-.nav-label{font-size:8px;}
-.topbar{padding:0 12px;}
-.topbar-sub{display:none;}
-.vault-sidebar{width:200px;min-width:200px;}
-.row2,.row3{grid-template-columns:1fr;}
-.reel-format-grid{grid-template-columns:1fr 1fr;}
-.platform-grid{grid-template-columns:repeat(3,1fr);}
-.card-grid{grid-template-columns:1fr;}
-.dfy-includes{grid-template-columns:1fr 1fr;}
-.grl-tool-grid{grid-template-columns:1fr;}
-.territory-grid{grid-template-columns:1fr 1fr;}
-.page-body{padding:14px;}
-.dossier-body{padding:12px;}
-.radio-player{flex-wrap:wrap;}
-.brand-switcher{flex-direction:column;}
-.schedule-row{grid-template-columns:70px 1fr 60px;}
+  :root{--nav-w:54px;}
+  .nav-logo{display:none;}
+  .nav-label{font-size:8px;}
+  .topbar{padding:0 12px;}
+  .topbar-sub{display:none;}
+  .vault-sidebar{width:200px;min-width:200px;}
+  .row2,.row3{grid-template-columns:1fr;}
+  .reel-format-grid{grid-template-columns:1fr 1fr;}
+  .platform-grid{grid-template-columns:repeat(3,1fr);}
+  .card-grid{grid-template-columns:1fr;}
+  .dfy-includes{grid-template-columns:1fr 1fr;}
+  .grl-tool-grid{grid-template-columns:1fr;}
+  .territory-grid{grid-template-columns:1fr 1fr;}
+  .page-body{padding:14px;}
+  .dossier-body{padding:12px;}
+  .radio-player{flex-wrap:wrap;}
+  .brand-switcher{flex-direction:column;}
+  .schedule-row{grid-template-columns:70px 1fr 60px;}
 }
 @media(max-width:500px){
-.vault-sidebar{position:fixed;top:0;left:var(–nav-w);bottom:0;transform:translateX(-110%);transition:transform 0.3s;z-index:150;}
-.vault-sidebar.open{transform:translateX(0);}
-.vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:140;}
-.vault-overlay.open{display:block;}
-.show-sidebar-btn{display:flex;}
-.dfy-includes{grid-template-columns:1fr;}
+  .vault-sidebar{position:fixed;top:0;left:var(--nav-w);bottom:0;transform:translateX(-110%);transition:transform 0.3s;z-index:150;}
+  .vault-sidebar.open{transform:translateX(0);}
+  .vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:140;}
+  .vault-overlay.open{display:block;}
+  .show-sidebar-btn{display:flex;}
+  .dfy-includes{grid-template-columns:1fr;}
 }
-.show-sidebar-btn{display:none;background:none;border:1px solid var(–line);color:var(–muted);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:‘DM Sans’,sans-serif;}
+.show-sidebar-btn{display:none;background:none;border:1px solid var(--line);color:var(--muted);padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 </style>
-
 </head>
 <body>
 
@@ -460,7 +458,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- HOME -->
-
   <div class="page active" id="page-home">
     <div class="page-body">
       <div style="max-width:680px;margin:0 auto;padding-top:16px;">
@@ -520,7 +517,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- NETWORK VAULT -->
-
   <div class="page" id="page-vault">
     <div class="vault-layout">
       <div class="vault-overlay" id="vaultOverlay" onclick="toggleVaultSidebar()"></div>
@@ -592,7 +588,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- POST GENERATOR -->
-
   <div class="page" id="page-posts">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate platform-optimized social posts for any occasion.</div>
@@ -618,7 +613,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- IMAGE GENERATOR -->
-
   <div class="page" id="page-images">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate AI promo graphics, album art, and social visuals.</div>
@@ -635,7 +629,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- REEL STUDIO -->
-
   <div class="page" id="page-reels">
     <div class="page-body" style="max-width:640px;">
       <div class="page-intro">Generate complete Hedra-ready scripts for your avatar.</div>
@@ -658,7 +651,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- LMW RADIO -->
-
   <div class="page" id="page-radio">
     <div class="page-body" style="max-width:700px;">
       <div class="radio-hero">
@@ -733,7 +725,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- DONE FOR YOU -->
-
   <div class="page" id="page-dfy">
     <div class="page-body" style="max-width:700px;">
       <div class="dfy-hero">
@@ -802,7 +793,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- GLOBAL REACH LAB -->
-
   <div class="page" id="page-grl">
     <div class="page-body" style="max-width:700px;">
       <div class="grl-hero">
@@ -855,7 +845,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- VIRAL RELEASE ENGINE -->
-
   <div class="page" id="page-viral">
     <div class="page-body" style="max-width:700px;">
       <div style="background:linear-gradient(135deg,#0A0514,#140A1A);border:1px solid rgba(180,50,220,0.25);border-radius:14px;padding:28px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;">
@@ -911,7 +900,6 @@ select.input{cursor:pointer;}
   </div>
 
   <!-- SOCIAL COMMAND -->
-
   <div class="page" id="page-social">
     <div class="page-body" style="max-width:760px;">
       <div class="sc-hero">
@@ -925,221 +913,217 @@ select.input{cursor:pointer;}
         </div>
       </div>
 
-```
-  <div class="brand-switcher">
-    <button class="brand-btn active-lmw" id="brandLMW" onclick="switchBrand('lmw')">
-      <div class="brand-btn-name">Lamb Music Works</div>
-      <div class="brand-btn-type">Sync · Beats · Brand Music</div>
-    </button>
-    <button class="brand-btn" id="brandArtist" onclick="switchBrand('artist')">
-      <div class="brand-btn-name" id="artistBrandName">The Artist</div>
-      <div class="brand-btn-type">Soul / R&B · Hip-Hop</div>
-    </button>
-  </div>
+      <div class="brand-switcher">
+        <button class="brand-btn active-lmw" id="brandLMW" onclick="switchBrand('lmw')">
+          <div class="brand-btn-name">Lamb Music Works</div>
+          <div class="brand-btn-type">Sync · Beats · Brand Music</div>
+        </button>
+        <button class="brand-btn" id="brandArtist" onclick="switchBrand('artist')">
+          <div class="brand-btn-name" id="artistBrandName">The Artist</div>
+          <div class="brand-btn-type">Soul / R&B · Hip-Hop</div>
+        </button>
+      </div>
 
-  <div class="sc-tabs">
-    <div class="sc-tab active" onclick="showSCTab('generate',this)">🤖 Content Engine</div>
-    <div class="sc-tab" onclick="showSCTab('queue',this)">📋 Daily Queue</div>
-    <div class="sc-tab" onclick="showSCTab('engage',this)">💬 Engagement List</div>
-    <div class="sc-tab" onclick="showSCTab('schedule',this)">🕐 Schedule</div>
-    <div class="sc-tab" onclick="showSCTab('setup',this)">⚙️ Brand Setup</div>
-  </div>
+      <div class="sc-tabs">
+        <div class="sc-tab active" onclick="showSCTab('generate',this)">🤖 Content Engine</div>
+        <div class="sc-tab" onclick="showSCTab('queue',this)">📋 Daily Queue</div>
+        <div class="sc-tab" onclick="showSCTab('engage',this)">💬 Engagement List</div>
+        <div class="sc-tab" onclick="showSCTab('schedule',this)">🕐 Schedule</div>
+        <div class="sc-tab" onclick="showSCTab('setup',this)">⚙️ Brand Setup</div>
+      </div>
 
-  <!-- CONTENT ENGINE -->
-  <div class="sc-panel active" id="sc-generate">
-    <div class="alert alert-social">🤖 AI writes every post. You review, approve, copy-paste to post. Safe, manual, undetectable.</div>
-    <div class="row2">
-      <div class="field"><div class="label">What's happening today?</div>
-        <textarea class="input" id="scTopic" rows="3" placeholder="e.g. New track release, sync placement landed, studio session behind the scenes…"></textarea>
-      </div>
-      <div class="field"><div class="label">Content Goal</div>
-        <select class="input" id="scGoal">
-          <option value="awareness">Brand Awareness</option>
-          <option value="engagement">Drive Engagement</option>
-          <option value="sync">Sync / Business Pitch</option>
-          <option value="artist_promo">Artist Promo</option>
-          <option value="community">Community Building</option>
-          <option value="education">Educational / Value</option>
-        </select>
-      </div>
-    </div>
-    <div class="field"><div class="label">Platforms</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:4px;" id="scPlatformGrid">
-        <div class="platform-chip selected" data-sp="Instagram" onclick="toggleSCPlatform(this)"><div class="chip-icon">📸</div><div class="chip-name">Instagram</div></div>
-        <div class="platform-chip selected" data-sp="TikTok" onclick="toggleSCPlatform(this)"><div class="chip-icon">🎵</div><div class="chip-name">TikTok</div></div>
-        <div class="platform-chip selected" data-sp="Twitter/X" onclick="toggleSCPlatform(this)"><div class="chip-icon">𝕏</div><div class="chip-name">Twitter/X</div></div>
-        <div class="platform-chip" data-sp="LinkedIn" onclick="toggleSCPlatform(this)"><div class="chip-icon">💼</div><div class="chip-name">LinkedIn</div></div>
-        <div class="platform-chip" data-sp="YouTube" onclick="toggleSCPlatform(this)"><div class="chip-icon">▶</div><div class="chip-name">YouTube</div></div>
-        <div class="platform-chip" data-sp="Facebook" onclick="toggleSCPlatform(this)"><div class="chip-icon">👥</div><div class="chip-name">Facebook</div></div>
-      </div>
-    </div>
-    <div class="row2">
-      <div class="field"><div class="label">Tone</div>
-        <select class="input" id="scTone">
-          <option value="authentic and real">Authentic & Real</option>
-          <option value="motivational">Motivational</option>
-          <option value="professional">Professional</option>
-          <option value="hype and energy">Hype & Energy</option>
-          <option value="educational">Educational</option>
-        </select>
-      </div>
-      <div class="field"><div class="label">Hashtags?</div>
-        <select class="input" id="scHashtags">
-          <option value="yes">Yes — rotated set</option>
-          <option value="no">No hashtags</option>
-        </select>
-      </div>
-    </div>
-    <button class="btn-social" id="scGenBtn" onclick="generateSCContent()">
-      <span id="scGenBtnText">⚡ Generate Today's Content</span>
-      <div class="spinner spinner-white" id="scGenSpinner"></div>
-    </button>
-    <div id="scGeneratedOutput" style="display:none;margin-top:20px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--social2);">GENERATED CONTENT</div>
-        <button onclick="approveAllSC()" style="padding:6px 14px;background:rgba(26,122,90,0.15);border:1px solid rgba(26,122,90,0.3);border-radius:6px;color:var(--social2);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Approve All</button>
-      </div>
-      <div id="scPostCards"></div>
-    </div>
-  </div>
-
-  <!-- DAILY QUEUE -->
-  <div class="sc-panel" id="sc-queue">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">TODAY'S QUEUE</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="queueDate"></div>
-      </div>
-      <button onclick="clearSCQueue()" style="padding:6px 12px;background:transparent;border:1px solid rgba(204,53,32,0.3);border-radius:6px;color:#E07060;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">Clear Queue</button>
-    </div>
-    <div id="queueList">
-      <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
-        <div style="font-size:32px;margin-bottom:10px;">📭</div>
-        <div style="font-weight:600;color:var(--text);margin-bottom:4px;">Queue is empty</div>
-        <div style="font-size:12px;line-height:1.6;">Go to Content Engine → generate posts → approve to add</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ENGAGEMENT LIST -->
-  <div class="sc-panel" id="sc-engage">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">ENGAGEMENT CHECKLIST</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Copy-paste comments. You post manually.</div>
-      </div>
-      <button onclick="generateEngageList()" id="engageGenBtn" style="padding:8px 14px;background:var(--social);border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;">
-        <span id="engageGenText">⚡ Generate List</span>
-      </button>
-    </div>
-    <div id="engageList">
-      <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
-        <div style="font-size:32px;margin-bottom:10px;">💬</div>
-        <div style="font-weight:600;color:var(--text);margin-bottom:4px;">No engagement tasks yet</div>
-        <div style="font-size:12px;line-height:1.6;">Click Generate List to create today's checklist with copy-paste comments</div>
-      </div>
-    </div>
-    <div class="alert alert-social" style="margin-top:16px;">✋ <strong>You post manually.</strong> Copy the comment, go to the account, paste and post. Keeps your account safe from automation flags.</div>
-  </div>
-
-  <!-- SCHEDULE -->
-  <div class="sc-panel" id="sc-schedule">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);margin-bottom:6px;">OPTIMAL POSTING SCHEDULE</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Optimized for LA/PST audience. Each time has ±15 min randomization built in. LMW and Artist posts staggered 45+ min apart.</div>
-    <div style="background:var(--s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:16px;margin-bottom:16px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">LAMB MUSIC WORKS — WEEKDAY</div>
-      <div class="schedule-row"><div class="schedule-time">8:47 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Brand awareness · Sync catalog</div></div><div class="schedule-status ss-live">● LIVE</div></div>
-      <div class="schedule-row"><div class="schedule-time">12:03 PM</div><div class="schedule-info"><div>TikTok / Reel</div><div class="schedule-platform-label">Behind the scenes</div></div><div class="schedule-status ss-pending">Pending</div></div>
-      <div class="schedule-row"><div class="schedule-time">3:22 PM</div><div class="schedule-info"><div>Twitter/X</div><div class="schedule-platform-label">Industry insight</div></div><div class="schedule-status ss-pending">Pending</div></div>
-      <div class="schedule-row"><div class="schedule-time">6:11 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Engagement · Poll or Q&A</div></div><div class="schedule-status ss-pending">Pending</div></div>
-      <div class="schedule-row"><div class="schedule-time">8:34 PM</div><div class="schedule-info"><div>LinkedIn</div><div class="schedule-platform-label">Sync licensing · Professional</div></div><div class="schedule-status ss-pending">Pending</div></div>
-    </div>
-    <div style="background:var(--s1);border:1px solid rgba(46,204,138,0.15);border-radius:10px;padding:16px;margin-bottom:16px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">THE ARTIST — WEEKDAY</div>
-      <div class="schedule-row"><div class="schedule-time">9:15 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Artist lifestyle · Music journey</div></div><div class="schedule-status ss-pending">Pending</div></div>
-      <div class="schedule-row"><div class="schedule-time">1:44 PM</div><div class="schedule-info"><div>TikTok</div><div class="schedule-platform-label">Music snippet · Vibe content</div></div><div class="schedule-status ss-pending">Pending</div></div>
-      <div class="schedule-row"><div class="schedule-time">7:27 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Fan connection · Personal</div></div><div class="schedule-status ss-pending">Pending</div></div>
-    </div>
-    <div class="alert alert-gold">📌 <strong>Red flags to avoid:</strong> Never post both brands at same time. No identical content across platforms. No consistent exact timing daily. No 100+ likes in one hour.</div>
-    <div style="background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:16px;">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--gold);margin-bottom:10px;">BEST DAYS BY PLATFORM</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Instagram</strong><br>Tue, Wed, Thu · 9am, 12pm, 6pm</div>
-        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">TikTok</strong><br>Tue–Fri · 12pm, 3pm, 7pm</div>
-        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Twitter/X</strong><br>Mon–Thu · 8am, 12pm, 5pm</div>
-        <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">LinkedIn</strong><br>Tue, Wed · 8am, 12pm, 6pm</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BRAND SETUP -->
-  <div class="sc-panel" id="sc-setup">
-    <div class="alert alert-social">⚙️ Set each brand's voice. AI uses these profiles to write content that sounds authentically like each brand — not generic AI copy.</div>
-    <div class="brand-setup-card">
-      <div class="brand-setup-title">🎵 LAMB MUSIC WORKS — Brand Profile</div>
-      <div class="row2">
-        <div class="field"><div class="label">Brand Voice</div>
-          <select class="input" id="lmwVoice">
-            <option value="independent builder, ownership-first, no cosign needed">Independent Builder</option>
-            <option value="professional and credible music business">Professional & Credible</option>
-            <option value="educator and guide for other producers">Educator & Guide</option>
-          </select>
+      <!-- CONTENT ENGINE -->
+      <div class="sc-panel active" id="sc-generate">
+        <div class="alert alert-social">🤖 AI writes every post. You review, approve, copy-paste to post. Safe, manual, undetectable.</div>
+        <div class="row2">
+          <div class="field"><div class="label">What's happening today?</div>
+            <textarea class="input" id="scTopic" rows="3" placeholder="e.g. New track release, sync placement landed, studio session behind the scenes…"></textarea>
+          </div>
+          <div class="field"><div class="label">Content Goal</div>
+            <select class="input" id="scGoal">
+              <option value="awareness">Brand Awareness</option>
+              <option value="engagement">Drive Engagement</option>
+              <option value="sync">Sync / Business Pitch</option>
+              <option value="artist_promo">Artist Promo</option>
+              <option value="community">Community Building</option>
+              <option value="education">Educational / Value</option>
+            </select>
+          </div>
         </div>
-        <div class="field"><div class="label">Primary Goal</div>
-          <select class="input" id="lmwGoal">
-            <option value="sync licensing clients and film/TV placements">Sync Licensing</option>
-            <option value="beat sales and producer networking">Beat Sales</option>
-            <option value="brand music and jingle clients">Brand Music</option>
-          </select>
+        <div class="field"><div class="label">Platforms</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:4px;" id="scPlatformGrid">
+            <div class="platform-chip selected" data-sp="Instagram" onclick="toggleSCPlatform(this)"><div class="chip-icon">📸</div><div class="chip-name">Instagram</div></div>
+            <div class="platform-chip selected" data-sp="TikTok" onclick="toggleSCPlatform(this)"><div class="chip-icon">🎵</div><div class="chip-name">TikTok</div></div>
+            <div class="platform-chip selected" data-sp="Twitter/X" onclick="toggleSCPlatform(this)"><div class="chip-icon">𝕏</div><div class="chip-name">Twitter/X</div></div>
+            <div class="platform-chip" data-sp="LinkedIn" onclick="toggleSCPlatform(this)"><div class="chip-icon">💼</div><div class="chip-name">LinkedIn</div></div>
+            <div class="platform-chip" data-sp="YouTube" onclick="toggleSCPlatform(this)"><div class="chip-icon">▶</div><div class="chip-name">YouTube</div></div>
+            <div class="platform-chip" data-sp="Facebook" onclick="toggleSCPlatform(this)"><div class="chip-icon">👥</div><div class="chip-name">Facebook</div></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field"><div class="label">Tone</div>
+            <select class="input" id="scTone">
+              <option value="authentic and real">Authentic & Real</option>
+              <option value="motivational">Motivational</option>
+              <option value="professional">Professional</option>
+              <option value="hype and energy">Hype & Energy</option>
+              <option value="educational">Educational</option>
+            </select>
+          </div>
+          <div class="field"><div class="label">Hashtags?</div>
+            <select class="input" id="scHashtags">
+              <option value="yes">Yes — rotated set</option>
+              <option value="no">No hashtags</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-social" id="scGenBtn" onclick="generateSCContent()">
+          <span id="scGenBtnText">⚡ Generate Today's Content</span>
+          <div class="spinner spinner-white" id="scGenSpinner"></div>
+        </button>
+        <div id="scGeneratedOutput" style="display:none;margin-top:20px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--social2);">GENERATED CONTENT</div>
+            <button onclick="approveAllSC()" style="padding:6px 14px;background:rgba(26,122,90,0.15);border:1px solid rgba(26,122,90,0.3);border-radius:6px;color:var(--social2);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Approve All</button>
+          </div>
+          <div id="scPostCards"></div>
         </div>
       </div>
-      <div class="field"><div class="label">Key Messages (comma separated)</div>
-        <input class="input" id="lmwMessages" type="text" value="Full ownership, independent, music built for picture, sync-ready catalog, no label needed">
-      </div>
-      <div class="field"><div class="label">Website / CTA</div>
-        <input class="input" id="lmwCTA" type="text" value="lambmusicworks.com">
-      </div>
-    </div>
-    <div class="brand-setup-card" style="border-color:rgba(46,204,138,0.2);">
-      <div class="brand-setup-title">🎤 THE ARTIST — Brand Profile</div>
-      <div class="field"><div class="label">Artist Name (enter when ready)</div>
-        <input class="input" id="artistName" type="text" placeholder="TBD — enter when name is chosen" oninput="updateArtistName(this.value)">
-      </div>
-      <div class="row2">
-        <div class="field"><div class="label">Genre</div>
-          <select class="input" id="artistGenre">
-            <option value="Soul / R&B">Soul / R&B</option>
-            <option value="Soul / R&B / Hip-Hop">Soul / R&B / Hip-Hop</option>
-            <option value="Hip-Hop / R&B">Hip-Hop / R&B</option>
-            <option value="Gospel / Inspirational">Gospel / Inspirational</option>
-          </select>
-        </div>
-        <div class="field"><div class="label">Vibe</div>
-          <select class="input" id="artistVibe">
-            <option value="gentle, compassionate, uplifting, warm">Gentle & Uplifting</option>
-            <option value="smooth and sophisticated">Smooth & Sophisticated</option>
-            <option value="raw and authentic">Raw & Authentic</option>
-            <option value="powerful and commanding">Powerful & Commanding</option>
-          </select>
-        </div>
-      </div>
-      <div class="field"><div class="label">Artist Story / Narrative</div>
-        <textarea class="input" id="artistStory" rows="3" placeholder="e.g. A soulful voice from LA building an independent career on their own terms. Music rooted in faith, love, and the human experience…"></textarea>
-      </div>
-      <div class="field"><div class="label">Key Themes</div>
-        <input class="input" id="artistThemes" type="text" placeholder="e.g. Faith, love, resilience, real life, growth, redemption">
-      </div>
-    </div>
-    <button class="btn-social" onclick="saveBrandProfiles()">💾 Save Brand Profiles</button>
-    <div class="alert alert-green" id="brandSaveOK" style="display:none;margin-top:12px;">✓ Brand profiles saved. Content Engine will now generate brand-specific content.</div>
-  </div>
-</div>
-```
 
+      <!-- DAILY QUEUE -->
+      <div class="sc-panel" id="sc-queue">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">TODAY'S QUEUE</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="queueDate"></div>
+          </div>
+          <button onclick="clearSCQueue()" style="padding:6px 12px;background:transparent;border:1px solid rgba(204,53,32,0.3);border-radius:6px;color:#E07060;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">Clear Queue</button>
+        </div>
+        <div id="queueList">
+          <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
+            <div style="font-size:32px;margin-bottom:10px;">📭</div>
+            <div style="font-weight:600;color:var(--text);margin-bottom:4px;">Queue is empty</div>
+            <div style="font-size:12px;line-height:1.6;">Go to Content Engine → generate posts → approve to add</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGAGEMENT LIST -->
+      <div class="sc-panel" id="sc-engage">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);">ENGAGEMENT CHECKLIST</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px;">Copy-paste comments. You post manually.</div>
+          </div>
+          <button onclick="generateEngageList()" id="engageGenBtn" style="padding:8px 14px;background:var(--social);border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;">
+            <span id="engageGenText">⚡ Generate List</span>
+          </button>
+        </div>
+        <div id="engageList">
+          <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
+            <div style="font-size:32px;margin-bottom:10px;">💬</div>
+            <div style="font-weight:600;color:var(--text);margin-bottom:4px;">No engagement tasks yet</div>
+            <div style="font-size:12px;line-height:1.6;">Click Generate List to create today's checklist with copy-paste comments</div>
+          </div>
+        </div>
+        <div class="alert alert-social" style="margin-top:16px;">✋ <strong>You post manually.</strong> Copy the comment, go to the account, paste and post. Keeps your account safe from automation flags.</div>
+      </div>
+
+      <!-- SCHEDULE -->
+      <div class="sc-panel" id="sc-schedule">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:var(--social2);margin-bottom:6px;">OPTIMAL POSTING SCHEDULE</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6;">Optimized for LA/PST audience. Each time has ±15 min randomization built in. LMW and Artist posts staggered 45+ min apart.</div>
+        <div style="background:var(--s1);border:1px solid rgba(26,122,90,0.2);border-radius:10px;padding:16px;margin-bottom:16px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">LAMB MUSIC WORKS — WEEKDAY</div>
+          <div class="schedule-row"><div class="schedule-time">8:47 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Brand awareness · Sync catalog</div></div><div class="schedule-status ss-live">● LIVE</div></div>
+          <div class="schedule-row"><div class="schedule-time">12:03 PM</div><div class="schedule-info"><div>TikTok / Reel</div><div class="schedule-platform-label">Behind the scenes</div></div><div class="schedule-status ss-pending">Pending</div></div>
+          <div class="schedule-row"><div class="schedule-time">3:22 PM</div><div class="schedule-info"><div>Twitter/X</div><div class="schedule-platform-label">Industry insight</div></div><div class="schedule-status ss-pending">Pending</div></div>
+          <div class="schedule-row"><div class="schedule-time">6:11 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Engagement · Poll or Q&A</div></div><div class="schedule-status ss-pending">Pending</div></div>
+          <div class="schedule-row"><div class="schedule-time">8:34 PM</div><div class="schedule-info"><div>LinkedIn</div><div class="schedule-platform-label">Sync licensing · Professional</div></div><div class="schedule-status ss-pending">Pending</div></div>
+        </div>
+        <div style="background:var(--s1);border:1px solid rgba(46,204,138,0.15);border-radius:10px;padding:16px;margin-bottom:16px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--social2);margin-bottom:12px;">THE ARTIST — WEEKDAY</div>
+          <div class="schedule-row"><div class="schedule-time">9:15 AM</div><div class="schedule-info"><div>Instagram Feed Post</div><div class="schedule-platform-label">Artist lifestyle · Music journey</div></div><div class="schedule-status ss-pending">Pending</div></div>
+          <div class="schedule-row"><div class="schedule-time">1:44 PM</div><div class="schedule-info"><div>TikTok</div><div class="schedule-platform-label">Music snippet · Vibe content</div></div><div class="schedule-status ss-pending">Pending</div></div>
+          <div class="schedule-row"><div class="schedule-time">7:27 PM</div><div class="schedule-info"><div>Instagram Story</div><div class="schedule-platform-label">Fan connection · Personal</div></div><div class="schedule-status ss-pending">Pending</div></div>
+        </div>
+        <div class="alert alert-gold">📌 <strong>Red flags to avoid:</strong> Never post both brands at same time. No identical content across platforms. No consistent exact timing daily. No 100+ likes in one hour.</div>
+        <div style="background:var(--s1);border:1px solid var(--line);border-radius:10px;padding:16px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--gold);margin-bottom:10px;">BEST DAYS BY PLATFORM</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Instagram</strong><br>Tue, Wed, Thu · 9am, 12pm, 6pm</div>
+            <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">TikTok</strong><br>Tue–Fri · 12pm, 3pm, 7pm</div>
+            <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">Twitter/X</strong><br>Mon–Thu · 8am, 12pm, 5pm</div>
+            <div style="font-size:11px;color:#AAA;padding:8px 10px;background:var(--s2);border-radius:6px;"><strong style="color:#FFF;">LinkedIn</strong><br>Tue, Wed · 8am, 12pm, 6pm</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRAND SETUP -->
+      <div class="sc-panel" id="sc-setup">
+        <div class="alert alert-social">⚙️ Set each brand's voice. AI uses these profiles to write content that sounds authentically like each brand — not generic AI copy.</div>
+        <div class="brand-setup-card">
+          <div class="brand-setup-title">🎵 LAMB MUSIC WORKS — Brand Profile</div>
+          <div class="row2">
+            <div class="field"><div class="label">Brand Voice</div>
+              <select class="input" id="lmwVoice">
+                <option value="independent builder, ownership-first, no cosign needed">Independent Builder</option>
+                <option value="professional and credible music business">Professional & Credible</option>
+                <option value="educator and guide for other producers">Educator & Guide</option>
+              </select>
+            </div>
+            <div class="field"><div class="label">Primary Goal</div>
+              <select class="input" id="lmwGoal">
+                <option value="sync licensing clients and film/TV placements">Sync Licensing</option>
+                <option value="beat sales and producer networking">Beat Sales</option>
+                <option value="brand music and jingle clients">Brand Music</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><div class="label">Key Messages (comma separated)</div>
+            <input class="input" id="lmwMessages" type="text" value="Full ownership, independent, music built for picture, sync-ready catalog, no label needed">
+          </div>
+          <div class="field"><div class="label">Website / CTA</div>
+            <input class="input" id="lmwCTA" type="text" value="lambmusicworks.com">
+          </div>
+        </div>
+        <div class="brand-setup-card" style="border-color:rgba(46,204,138,0.2);">
+          <div class="brand-setup-title">🎤 THE ARTIST — Brand Profile</div>
+          <div class="field"><div class="label">Artist Name (enter when ready)</div>
+            <input class="input" id="artistName" type="text" placeholder="TBD — enter when name is chosen" oninput="updateArtistName(this.value)">
+          </div>
+          <div class="row2">
+            <div class="field"><div class="label">Genre</div>
+              <select class="input" id="artistGenre">
+                <option value="Soul / R&B">Soul / R&B</option>
+                <option value="Soul / R&B / Hip-Hop">Soul / R&B / Hip-Hop</option>
+                <option value="Hip-Hop / R&B">Hip-Hop / R&B</option>
+                <option value="Gospel / Inspirational">Gospel / Inspirational</option>
+              </select>
+            </div>
+            <div class="field"><div class="label">Vibe</div>
+              <select class="input" id="artistVibe">
+                <option value="gentle, compassionate, uplifting, warm">Gentle & Uplifting</option>
+                <option value="smooth and sophisticated">Smooth & Sophisticated</option>
+                <option value="raw and authentic">Raw & Authentic</option>
+                <option value="powerful and commanding">Powerful & Commanding</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><div class="label">Artist Story / Narrative</div>
+            <textarea class="input" id="artistStory" rows="3" placeholder="e.g. A soulful voice from LA building an independent career on their own terms. Music rooted in faith, love, and the human experience…"></textarea>
+          </div>
+          <div class="field"><div class="label">Key Themes</div>
+            <input class="input" id="artistThemes" type="text" placeholder="e.g. Faith, love, resilience, real life, growth, redemption">
+          </div>
+        </div>
+        <button class="btn-social" onclick="saveBrandProfiles()">💾 Save Brand Profiles</button>
+        <div class="alert alert-green" id="brandSaveOK" style="display:none;margin-top:12px;">✓ Brand profiles saved. Content Engine will now generate brand-specific content.</div>
+      </div>
+    </div>
   </div>
 
   <!-- SETTINGS -->
-
   <div class="page" id="page-settings">
     <div class="page-body" style="max-width:500px;">
       <div class="settings-section">
@@ -1169,7 +1153,6 @@ select.input{cursor:pointer;}
 </div>
 
 <!-- EXPORT MODAL -->
-
 <div class="export-modal" id="exportModal">
   <div class="export-box">
     <button class="export-close" onclick="closeExportModal()">✕</button>
@@ -1734,34 +1717,33 @@ function generateExport(){
 function buildAndDownloadExport(){
   const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   let html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LMW Contact Pack — ${date}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;color:#1a1a1a;line-height:1.6;}h1{font-size:28px;border-bottom:3px solid #C9A84C;padding-bottom:10px;}h2{font-size:20px;color:#C9A84C;margin-top:40px;}.meta{font-size:13px;color:#666;margin-bottom:16px;}.section-body{font-size:14px;color:#222;padding:10px 14px;background:#f9f7f2;border-left:3px solid #C9A84C;border-radius:4px;margin-bottom:12px;}.footer{font-size:11px;color:#999;text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid #eee;}</style></head><body><h1>🎵 LMW Outreach Pack</h1><p style="color:#666;font-size:14px;">Generated: ${date} | Lamb Music Works | lambmusicworks.com | Confidential</p>`;
-
-TARGETS.forEach((t,i)=>{html+=`<h2>${i+1}. ${t.name}</h2><div class="meta">${t.role}</div><div class="section-body">${t.why||'See dossier for full intelligence.'}</div>`;if(i<TARGETS.length-1)html+=’<hr style="border:none;border-top:1px solid #eee;margin:20px 0;">’;});
-html+=`<div class="footer">LMW Contact Pack | ${date} | Lamb Music Works | lambmusicworks.com</div></body></html>`;
-const blob=new Blob([html],{type:‘text/html’});const url=URL.createObjectURL(blob);const a=document.createElement(‘a’);a.href=url;a.download=‘LMW-Contact-Pack-’+date.replace(/,/g,’’).replace(/ /g,’-’)+’.html’;a.click();URL.revokeObjectURL(url);
+  TARGETS.forEach((t,i)=>{html+=`<h2>${i+1}. ${t.name}</h2><div class="meta">${t.role}</div><div class="section-body">${t.why||'See dossier for full intelligence.'}</div>`;if(i<TARGETS.length-1)html+='<hr style="border:none;border-top:1px solid #eee;margin:20px 0;">';});
+  html+=`<div class="footer">LMW Contact Pack | ${date} | Lamb Music Works | lambmusicworks.com</div></body></html>`;
+  const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LMW-Contact-Pack-'+date.replace(/,/g,'').replace(/ /g,'-')+'.html';a.click();URL.revokeObjectURL(url);
 }
 
 // ══ SUPABASE ══
-const SUPABASE_URL=‘https://ptgatsxuexmudteqzxmc.supabase.co’;
-const SUPABASE_KEY=‘eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs’;
+const SUPABASE_URL='https://ptgatsxuexmudteqzxmc.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB0Z2F0c3h1ZXhtdWR0ZXF6eG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNDM5OTEsImV4cCI6MjA5MDgxOTk5MX0.7erckLvJY2VgUWUeaLG0foY94pLfiXC_Dz61kAXi0Rs';
 async function sbFetch(table,method,body,filter){
-method=method||‘GET’;filter=filter||’’;
-const url=SUPABASE_URL+’/rest/v1/’+table+filter;
-const opts={method,headers:{‘apikey’:SUPABASE_KEY,‘Authorization’:‘Bearer ‘+SUPABASE_KEY,‘Content-Type’:‘application/json’,‘Prefer’:method===‘POST’?‘return=representation’:’’}};
-if(body)opts.body=JSON.stringify(body);
-const res=await fetch(url,opts);if(!res.ok){const err=await res.text();throw new Error(err);}
-if(method===‘DELETE’)return true;const text=await res.text();return text?JSON.parse(text):[];
+  method=method||'GET';filter=filter||'';
+  const url=SUPABASE_URL+'/rest/v1/'+table+filter;
+  const opts={method,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':method==='POST'?'return=representation':''}};
+  if(body)opts.body=JSON.stringify(body);
+  const res=await fetch(url,opts);if(!res.ok){const err=await res.text();throw new Error(err);}
+  if(method==='DELETE')return true;const text=await res.text();return text?JSON.parse(text):[];
 }
 async function loadSettingsFromSupabase(){
-try{const data=await sbFetch(‘app_settings’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){data.forEach(s=>{if(s.key===‘anthropic_key’&&s.value)localStorage.setItem(‘lmw_anthropic_key’,s.value);if(s.key===‘openai_key’&&s.value)localStorage.setItem(‘lmw_openai_key’,s.value);if(s.key===‘export_password’&&s.value)localStorage.setItem(‘lmw_export_password’,s.value);});updateKeyUI();}}catch(e){console.log(‘Settings load error:’,e);}
+  try{const data=await sbFetch('app_settings','GET',null,'?order=created_at.asc');if(data&&data.length){data.forEach(s=>{if(s.key==='anthropic_key'&&s.value)localStorage.setItem('lmw_anthropic_key',s.value);if(s.key==='openai_key'&&s.value)localStorage.setItem('lmw_openai_key',s.value);if(s.key==='export_password'&&s.value)localStorage.setItem('lmw_export_password',s.value);});updateKeyUI();}}catch(e){console.log('Settings load error:',e);}
 }
-async function saveSettingToSupabase(key,value){try{await sbFetch(‘app_settings’,‘DELETE’,null,’?key=eq.’+key);await sbFetch(‘app_settings’,‘POST’,{key:key,value:value});}catch(e){console.log(‘Settings save error:’,e);}}
-async function loadRadioFromSupabase(){try{const data=await sbFetch(‘radio_playlist’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){playlist=data.map(t=>({id:t.id,name:t.name,genre:t.genre,rawUrl:t.raw_url,streamUrl:t.stream_url,duration:t.duration,bpm:t.bpm}));renderPlaylist();}}catch(e){console.log(‘Radio load error:’,e);}}
-async function saveTrackToSupabase(track){try{const saved=await sbFetch(‘radio_playlist’,‘POST’,{name:track.name,genre:track.genre,raw_url:track.rawUrl||’’,stream_url:track.streamUrl||’’,duration:track.duration,bpm:track.bpm||’’});if(saved&&saved[0])return saved[0].id;}catch(e){console.log(‘Supabase save error:’,e);}return null;}
-async function deleteTrackFromSupabase(dbId){try{await sbFetch(‘radio_playlist’,‘DELETE’,null,’?id=eq.’+dbId);}catch(e){console.log(‘Delete error:’,e);}}
+async function saveSettingToSupabase(key,value){try{await sbFetch('app_settings','DELETE',null,'?key=eq.'+key);await sbFetch('app_settings','POST',{key:key,value:value});}catch(e){console.log('Settings save error:',e);}}
+async function loadRadioFromSupabase(){try{const data=await sbFetch('radio_playlist','GET',null,'?order=created_at.asc');if(data&&data.length){playlist=data.map(t=>({id:t.id,name:t.name,genre:t.genre,rawUrl:t.raw_url,streamUrl:t.stream_url,duration:t.duration,bpm:t.bpm}));renderPlaylist();}}catch(e){console.log('Radio load error:',e);}}
+async function saveTrackToSupabase(track){try{const saved=await sbFetch('radio_playlist','POST',{name:track.name,genre:track.genre,raw_url:track.rawUrl||'',stream_url:track.streamUrl||'',duration:track.duration,bpm:track.bpm||''});if(saved&&saved[0])return saved[0].id;}catch(e){console.log('Supabase save error:',e);}return null;}
+async function deleteTrackFromSupabase(dbId){try{await sbFetch('radio_playlist','DELETE',null,'?id=eq.'+dbId);}catch(e){console.log('Delete error:',e);}}
 async function loadVaultFromSupabase(){
-try{const data=await sbFetch(‘vault_targets’,‘GET’,null,’?order=created_at.asc’);if(data&&data.length){data.forEach(t=>{if(!TARGETS.find(x=>x.id===t.id)){const parsed={why:t.why,priority_moves:t.priority_moves||[],inner_circle:(t.contacts||[]).map(c=>({name:c.name,tier:‘Contact’,role:c.role,why:’’,channels:[c.channel]})),direct_access:[],proximity_plan:[],email_subject:’’,email_body:’’};TARGETS.push({id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status,avatarBg:t.avatar_bg,avatarColor:t.avatar_color,why:t.why,priorityMoves:t.priority_moves||[],contacts:t.contacts||[],tabs:[‘Overview’,‘Inner Circle’,‘Direct Access’,‘Social Plan’,‘Email’],content:buildGeneratedContent(t.name,parsed)});}});renderTargetList();updateVaultStats();}}catch(e){console.log(‘Vault load error:’,e);}
+  try{const data=await sbFetch('vault_targets','GET',null,'?order=created_at.asc');if(data&&data.length){data.forEach(t=>{if(!TARGETS.find(x=>x.id===t.id)){const parsed={why:t.why,priority_moves:t.priority_moves||[],inner_circle:(t.contacts||[]).map(c=>({name:c.name,tier:'Contact',role:c.role,why:'',channels:[c.channel]})),direct_access:[],proximity_plan:[],email_subject:'',email_body:''};TARGETS.push({id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status,avatarBg:t.avatar_bg,avatarColor:t.avatar_color,why:t.why,priorityMoves:t.priority_moves||[],contacts:t.contacts||[],tabs:['Overview','Inner Circle','Direct Access','Social Plan','Email'],content:buildGeneratedContent(t.name,parsed)});}});renderTargetList();updateVaultStats();}}catch(e){console.log('Vault load error:',e);}
 }
-async function saveTargetToSupabase(t){try{await sbFetch(‘vault_targets’,‘POST’,{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||‘new’,avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});}catch(e){console.log(‘Vault save error:’,e);}}
+async function saveTargetToSupabase(t){try{await sbFetch('vault_targets','POST',{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||'new',avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});}catch(e){console.log('Vault save error:',e);}}
 
 // ══ INIT ══
 loadVaultStorage();
@@ -1775,8 +1757,7 @@ updateSCStats();
 loadSettingsFromSupabase();
 loadRadioFromSupabase();
 loadVaultFromSupabase();
-if(!localStorage.getItem(‘lmw_radio_v2’)){localStorage.removeItem(‘lmw_radio_playlist’);localStorage.setItem(‘lmw_radio_v2’,‘1’);}
+if(!localStorage.getItem('lmw_radio_v2')){localStorage.removeItem('lmw_radio_playlist');localStorage.setItem('lmw_radio_v2','1');}
 </script>
-
 </body>
 </html>
