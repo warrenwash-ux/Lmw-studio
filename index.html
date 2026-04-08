@@ -608,7 +608,7 @@ select.input{cursor:pointer;}
       </div>
       <div class="field"><div class="label">Include Hashtags?</div><select class="input" id="postHashtags"><option value="yes">Yes — include hashtags</option><option value="no">No hashtags</option></select></div>
       <button class="btn-gold" id="postBtn" onclick="generatePosts()"><span id="postBtnText">Generate Posts</span><div class="spinner" id="postSpinner"></div></button>
-      <div class="output-box" id="postOutput"><div class="output-label">Generated Posts</div><div class="output-text" id="postText"></div><button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button></div>
+      <div class="output-box" id="postOutput"><div class="output-label">Generated Posts</div><div class="output-text" id="postText"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button><button class="copy-btn" onclick="downloadTxt('postText','LMW-Posts')">⬇ Download</button></div></div>
     </div>
   </div>
 
@@ -645,7 +645,7 @@ select.input{cursor:pointer;}
         <div class="field"><div class="label">Call to Action</div><select class="input" id="reelCTA"><option value="visit lambmusicworks.com">Visit lambmusicworks.com</option><option value="follow for more">Follow for more</option><option value="DM me to work together">DM to work together</option><option value="comment your thoughts">Comment your thoughts</option></select></div>
       </div>
       <button class="btn-gold" id="reelBtn" onclick="generateReel()"><span id="reelBtnText">Generate Script</span><div class="spinner" id="reelSpinner"></div></button>
-      <div class="output-box" id="reelOutput"><div class="output-label">Hedra-Ready Script</div><div class="output-text" id="reelText"></div><button class="copy-btn" id="reelCopyBtn" onclick="copyOutput('reelText','reelCopyBtn')">Copy Script</button></div>
+      <div class="output-box" id="reelOutput"><div class="output-label">Hedra-Ready Script</div><div class="output-text" id="reelText"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="copy-btn" id="reelCopyBtn" onclick="copyOutput('reelText','reelCopyBtn')">Copy Script</button><button class="copy-btn" onclick="downloadTxt('reelText','LMW-Script')">⬇ Download</button></div></div>
       <div class="alert alert-gold" style="margin-top:16px;">📋 Copy this script → paste into Hedra with your avatar photo → download your finished reel.</div>
     </div>
   </div>
@@ -839,7 +839,7 @@ select.input{cursor:pointer;}
       <div class="grl-output" id="grlOutput">
         <div class="grl-output-label" id="grlOutputLabel">Output</div>
         <div class="output-text" id="grlOutputText"></div>
-        <button class="copy-btn" id="grlCopyBtn" onclick="copyOutput('grlOutputText','grlCopyBtn')">Copy</button>
+        <div style="display:flex;gap:8px;margin-top:12px;"><button class="copy-btn" id="grlCopyBtn" onclick="copyOutput('grlOutputText','grlCopyBtn')">Copy</button><button class="copy-btn" onclick="downloadTxt('grlOutputText','LMW-Global')">⬇ Download</button></div>
       </div>
     </div>
   </div>
@@ -894,7 +894,7 @@ select.input{cursor:pointer;}
       <div id="viralOutput" style="display:none;">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#C050E8;margin-bottom:16px;">YOUR VIRAL CAMPAIGN</div>
         <div id="viralOutputContent"></div>
-        <button class="copy-btn" id="viralCopyBtn" onclick="copyViralOutput()" style="margin-top:16px;width:100%;padding:10px;text-align:center;">Copy Full Campaign</button>
+        <div style="display:flex;gap:8px;margin-top:16px;"><button class="copy-btn" id="viralCopyBtn" onclick="copyViralOutput()" style="flex:1;padding:10px;text-align:center;">Copy Full Campaign</button><button class="copy-btn" onclick="downloadTxt('viralOutputContent','LMW-Campaign')" style="padding:10px;">⬇ Download</button></div>
       </div>
     </div>
   </div>
@@ -1682,6 +1682,7 @@ async function callAnthropic(prompt,key,maxTokens=1500){
 }
 function setBtnLoading(btnId,textId,spinnerId,loading){document.getElementById(btnId).disabled=loading;document.getElementById(textId).style.display=loading?'none':'block';document.getElementById(spinnerId).style.display=loading?'block':'none';}
 function copyOutput(textId,btnId){const text=document.getElementById(textId).textContent;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById(btnId);btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
+function downloadTxt(textId,filename){const text=document.getElementById(textId).textContent||document.getElementById(textId).innerText;if(!text.trim()){return;}const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);}
 
 // ══ VIRAL RELEASE ENGINE ══
 let viralPlatforms=['TikTok','Instagram','YouTube'];
