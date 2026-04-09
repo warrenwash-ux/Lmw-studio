@@ -1307,7 +1307,8 @@ function renderSCPosts(posts){
       +`<div class="queue-caption" id="gcap${i}">${fullCap}</div>`
       +(post.tip?`<div style="font-size:11px;color:var(--muted);margin-bottom:10px;padding:6px 10px;background:rgba(26,122,90,0.05);border-radius:5px;border-left:2px solid var(--social);">💡 ${post.tip}</div>`:'')
       +`<div class="queue-actions"><button class="queue-btn queue-btn-approve" id="gapprove${i}" onclick="approveSCPost(${i},'${post.platform}')">✓ Add to Queue</button>`
-      +`<button class="queue-btn queue-btn-copy" onclick="copySCPost(${i})">📋 Copy</button></div>`;
+      +`<button class="queue-btn queue-btn-copy" onclick="copySCPost(${i})">📋 Copy</button>`
+      +`<button class="queue-btn queue-btn-copy" onclick="downloadSCPost(${i},'${post.platform}')">⬇ Download</button></div>`;
     c.appendChild(card);
   });
   document.getElementById('scGeneratedOutput').style.display='block';
@@ -1693,6 +1694,14 @@ async function callAnthropic(prompt,key,maxTokens=1500){
 }
 function setBtnLoading(btnId,textId,spinnerId,loading){document.getElementById(btnId).disabled=loading;document.getElementById(textId).style.display=loading?'none':'block';document.getElementById(spinnerId).style.display=loading?'block':'none';}
 function copyOutput(textId,btnId){const text=document.getElementById(textId).textContent;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById(btnId);btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
+function downloadSCPost(i,platform){
+  const cap=document.getElementById('gcap'+i).textContent;
+  if(!cap.trim())return;
+  const blob=new Blob([platform+'\n\n'+cap],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download='LMW-'+platform+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';
+  a.click();URL.revokeObjectURL(url);
+}
 function downloadSCGenerated(){
   const cards=document.querySelectorAll('#scPostCards .queue-caption');
   if(!cards.length){alert('Generate content first.');return;}
