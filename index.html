@@ -1721,7 +1721,8 @@ function downloadEngageList(){
   let text='LMW ENGAGEMENT CHECKLIST\n'+new Date().toLocaleDateString()+'\n\n';
   scEngageItems.forEach((item,i)=>{text+=`${item.done?'[DONE]':'[TODO]'} ${item.account} (${item.platform})\nPrompt: ${item.commentPrompt}\nComment: ${item.comment}\n\n`;});
   const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LMW-Engagement-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);
-}const text=document.getElementById(textId).textContent||document.getElementById(textId).innerText;if(!text.trim()){return;}const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);}
+}
+function downloadTxt(textId,filename){const text=document.getElementById(textId).textContent||document.getElementById(textId).innerText;if(!text.trim()){return;}const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);}
 
 // ══ VIRAL RELEASE ENGINE ══
 let viralPlatforms=['TikTok','Instagram','YouTube'];
