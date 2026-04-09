@@ -1653,24 +1653,15 @@ async function generatePosts(){
 
 // ══ IMAGE GENERATOR ══
 async function generateImage(){
-  const hfKey=localStorage.getItem('lmw_hf_key');
-  if(!hfKey){alert('Add your Hugging Face API key in Settings first.');return;}
   const desc=document.getElementById('imgPrompt').value.trim();if(!desc){document.getElementById('imgPrompt').focus();return;}
   setBtnLoading('imgBtn','imgBtnText','imgSpinner',true);
   const style=document.getElementById('imgStyle').value;const brand=document.getElementById('imgBrand').value.trim();
-  const fullPrompt=`${desc}. Style: ${style}. ${brand?'Include branding: '+brand+'.':''} Professional music industry aesthetic, premium cinematic feel, high quality.`;
+  const fullPrompt=encodeURIComponent(`${desc}. Style: ${style}. ${brand?'Include branding: '+brand+'.':''} Professional music industry aesthetic, premium cinematic feel, high quality.`);
   try{
-    const res=await fetch('https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0',{
-      method:'POST',
-      headers:{'Authorization':'Bearer '+hfKey,'Content-Type':'application/json'},
-      body:JSON.stringify({inputs:fullPrompt,parameters:{width:1024,height:1024}})
-    });
-    if(!res.ok){const err=await res.text();throw new Error('HF Error: '+err);}
-    const blob=await res.blob();
-    const url=URL.createObjectURL(blob);
-    document.getElementById('imgGrid').innerHTML=`<div><div class="image-card"><img src="${url}" alt="Generated"></div><div style="display:flex;gap:8px;margin-top:8px;"><a style="flex:1;padding:7px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:var(--gold);font-size:11px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;" href="${url}" download="lmw-image.png">⬇ Download</a></div></div>`;
-    document.getElementById('imgOutput').style.display='block';document.getElementById('imgOutput').scrollIntoView({behavior:'smooth'});
-  }catch(e){alert('Image failed: '+e.message+'. The model may be loading — wait 20 seconds and try again.');}
+    const url=`https://image.pollinations.ai/prompt/${fullPrompt}?width=1024&height=1024&nologo=true&enhance=true`;
+    document.getElementById('imgGrid').innerHTML=`<div><div class="image-card"><img src="${url}" alt="Generated" onload="document.getElementById('imgOutput').scrollIntoView({behavior:'smooth'})" onerror="this.parentElement.innerHTML='<div style=padding:20px;color:var(--muted);text-align:center;>Generation failed — try again</div>'"></div><div style="display:flex;gap:8px;margin-top:8px;"><a style="flex:1;padding:7px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:var(--gold);font-size:11px;font-weight:600;cursor:pointer;text-align:center;text-decoration:none;" href="${url}" download="lmw-image.png" target="_blank">⬇ Download</a></div></div>`;
+    document.getElementById('imgOutput').style.display='block';
+  }catch(e){alert('Image failed: '+e.message);}
   finally{setBtnLoading('imgBtn','imgBtnText','imgSpinner',false);}
 }
 
