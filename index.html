@@ -982,9 +982,12 @@ select.input{cursor:pointer;}
           <div class="spinner spinner-white" id="scGenSpinner"></div>
         </button>
         <div id="scGeneratedOutput" style="display:none;margin-top:20px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
             <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1.5px;color:var(--social2);">GENERATED CONTENT</div>
-            <button onclick="approveAllSC()" style="padding:6px 14px;background:rgba(26,122,90,0.15);border:1px solid rgba(26,122,90,0.3);border-radius:6px;color:var(--social2);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Approve All</button>
+            <div style="display:flex;gap:8px;">
+              <button onclick="approveAllSC()" style="padding:6px 14px;background:rgba(26,122,90,0.15);border:1px solid rgba(26,122,90,0.3);border-radius:6px;color:var(--social2);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✓ Approve All</button>
+              <button onclick="downloadSCGenerated()" style="padding:6px 14px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⬇ Download All</button>
+            </div>
           </div>
           <div id="scPostCards"></div>
         </div>
@@ -998,6 +1001,7 @@ select.input{cursor:pointer;}
             <div style="font-size:11px;color:var(--muted);margin-top:2px;" id="queueDate"></div>
           </div>
           <button onclick="clearSCQueue()" style="padding:6px 12px;background:transparent;border:1px solid rgba(204,53,32,0.3);border-radius:6px;color:#E07060;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">Clear Queue</button>
+          <button onclick="downloadSCQueue()" style="padding:6px 12px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">⬇ Download Queue</button>
         </div>
         <div id="queueList">
           <div style="padding:40px;text-align:center;color:var(--muted);border:1px dashed rgba(26,122,90,0.2);border-radius:10px;">
@@ -1026,6 +1030,7 @@ select.input{cursor:pointer;}
             <div style="font-size:12px;line-height:1.6;">Click Generate List to create today's checklist with copy-paste comments</div>
           </div>
         </div>
+        <button onclick="downloadEngageList()" style="margin-top:12px;padding:8px 16px;background:var(--s2);border:1px solid var(--line);border-radius:6px;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">⬇ Download Engagement List</button>
         <div class="alert alert-social" style="margin-top:16px;">✋ <strong>You post manually.</strong> Copy the comment, go to the account, paste and post. Keeps your account safe from automation flags.</div>
       </div>
 
@@ -1688,7 +1693,26 @@ async function callAnthropic(prompt,key,maxTokens=1500){
 }
 function setBtnLoading(btnId,textId,spinnerId,loading){document.getElementById(btnId).disabled=loading;document.getElementById(textId).style.display=loading?'none':'block';document.getElementById(spinnerId).style.display=loading?'block':'none';}
 function copyOutput(textId,btnId){const text=document.getElementById(textId).textContent;navigator.clipboard.writeText(text).then(()=>{const btn=document.getElementById(btnId);btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
-function downloadTxt(textId,filename){const text=document.getElementById(textId).textContent||document.getElementById(textId).innerText;if(!text.trim()){return;}const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);}
+function downloadSCGenerated(){
+  const cards=document.querySelectorAll('#scPostCards .queue-caption');
+  if(!cards.length){alert('Generate content first.');return;}
+  const platforms=document.querySelectorAll('#scPostCards .queue-platform-badge');
+  let text='LMW SOCIAL COMMAND — GENERATED CONTENT\n'+new Date().toLocaleDateString()+'\n\n';
+  cards.forEach((c,i)=>{const p=platforms[i]?platforms[i].textContent:'';text+=`== ${p} ==\n${c.textContent}\n\n`;});
+  const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LMW-Content-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);
+}
+function downloadSCQueue(){
+  if(!scQueue.length){alert('Queue is empty.');return;}
+  let text='LMW DAILY QUEUE\n'+new Date().toLocaleDateString()+'\n\n';
+  scQueue.forEach((item,i)=>{text+=`== ${item.platform} | ${item.brand.toUpperCase()} | ${item.time} ==\n${item.caption}\n\n`;});
+  const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LMW-Queue-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);
+}
+function downloadEngageList(){
+  if(!scEngageItems.length){alert('Generate engagement list first.');return;}
+  let text='LMW ENGAGEMENT CHECKLIST\n'+new Date().toLocaleDateString()+'\n\n';
+  scEngageItems.forEach((item,i)=>{text+=`${item.done?'[DONE]':'[TODO]'} ${item.account} (${item.platform})\nPrompt: ${item.commentPrompt}\nComment: ${item.comment}\n\n`;});
+  const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LMW-Engagement-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);
+}const text=document.getElementById(textId).textContent||document.getElementById(textId).innerText;if(!text.trim()){return;}const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';a.click();URL.revokeObjectURL(url);}
 
 // ══ VIRAL RELEASE ENGINE ══
 let viralPlatforms=['TikTok','Instagram','YouTube'];
