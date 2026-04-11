@@ -608,7 +608,7 @@ select.input{cursor:pointer;}
       </div>
       <div class="field"><div class="label">Include Hashtags?</div><select class="input" id="postHashtags"><option value="yes">Yes — include hashtags</option><option value="no">No hashtags</option></select></div>
       <button class="btn-gold" id="postBtn" onclick="generatePosts()"><span id="postBtnText">Generate Posts</span><div class="spinner" id="postSpinner"></div></button>
-      <div class="output-box" id="postOutput"><div class="output-label">Generated Posts</div><div class="output-text" id="postText"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button><button class="copy-btn" onclick="downloadTxt('postText','LMW-Posts''")">⬇ Download .txt</button><button class="copy-btn" onclick="showImagePlatformPicker()" style="color:var(--gold);border-color:rgba(201,168,76,0.3);">🖼 Save as Image</button></div>)">⬇ Download</button></div></div>
+      <div class="output-box" id="postOutput"><div class="output-label">Generated Posts</div><div class="output-text" id="postText"></div><div style="display:flex;gap:8px;margin-top:12px;"><button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button><button class="copy-btn" onclick="downloadTxt('postText','LMW-Posts')">⬇ Download</button></div></div>
     </div>
   </div>
 
@@ -1277,7 +1277,7 @@ async function generateSCContent() {
   const tone=document.getElementById('scTone').value;
   const hashtags=document.getElementById('scHashtags').value;
   setSCBtnLoading(true);
-  const prompt=`You are a social media content expert for Warren Lamb.\n${getBrandCtx()}\n\nCreate posts for: ${scPlatforms.join(', ')}\nTopic: ${topic}\nGoal: ${goal}\nTone: ${tone}\nHashtags: ${hashtags==='yes'?'Include platform-specific hashtags (rotate sets, never repeat)':'No hashtags'}\n\nRules:\n- Each post uniquely formatted for its platform — no copy-pasting between platforms\n- Instagram: visual, emotional, 150-220 words, line breaks for readability\n- TikTok: hooky first line, conversational, trend-aware\n- Twitter/X: punchy standalone thought, 240 chars max\n- LinkedIn: professional insight angle, value-driven\n- YouTube: community-post style with engaging question\n- Facebook: warm, community-oriented\n- Sound like a real human, not a brand robot\n\nRespond ONLY with valid JSON, no markdown:\n{"posts":[{"platform":"Instagram","caption":"...","hashtags":"...","bestTime":"8:47 AM","tip":"..."}]}`;
+  const prompt=`You are a social media content expert for Warren Lamb.\n${getBrandCtx()}\n\nCreate posts ONLY for these exact platforms (no others): ${scPlatforms.join(', ')}\nTopic: ${topic}\nGoal: ${goal}\nTone: ${tone}\nHashtags: ${hashtags==='yes'?'Include platform-specific hashtags (rotate sets, never repeat)':'No hashtags'}\n\nRules:\n- Generate ONLY the platforms listed above — do not add any others\n- Each post uniquely formatted for its platform\n- Instagram: visual, emotional, 150-220 words, line breaks\n- TikTok: hooky first line, conversational, trend-aware\n- Twitter/X: punchy, 240 chars max\n- LinkedIn: professional insight, value-driven\n- YouTube: community-post style with question\n- Facebook: warm, community-oriented\n- Sound like a real human, not a brand robot\n\nRespond ONLY with valid JSON, no markdown:\n{"posts":[{"platform":"Instagram","caption":"...","hashtags":"...","bestTime":"8:47 AM","tip":"..."}]}`;
   try{
     const res=await callAnthropic(prompt,key,2000);
     let clean=res.replace(/```json|```/g,'').trim();
@@ -1640,15 +1640,50 @@ function saveGenerated(){
 
 // ══ POST GENERATOR ══
 let selectedPlatforms=['Instagram'];
-function togglePlatform(el){el.classList.toggle('selected');selectedPlatforms=Array.from(document.querySelectorAll('.platform-chip.selected')).map(c=>c.dataset.platform);}
+function togglePlatform(el){el.classList.toggle('selected');selectedPlatforms=Array.from(document.querySelectorAll('#platformGrid .platform-chip.selected')).map(c=>c.dataset.platform);}
 async function generatePosts(){
   const key=getAnthropicKey();if(!key){alert('Add your Anthropic API key in Settings first.');return;}
   const topic=document.getElementById('postTopic').value.trim();if(!topic){document.getElementById('postTopic').focus();return;}
   if(!selectedPlatforms.length){alert('Select at least one platform.');return;}
   setBtnLoading('postBtn','postBtnText','postSpinner',true);
-  const prompt=`Social media expert for Warren Lamb, owner of Lamb Music Works — independent producer, jingles, sync licensing, beat sales, brand music.\nCreate posts for: ${selectedPlatforms.join(', ')}\nTopic: ${topic}\nTone: ${document.getElementById('postTone').value}\nGoal: ${document.getElementById('postGoal').value}\nHashtags: ${document.getElementById('postHashtags').value==='yes'?'Include relevant hashtags':'No hashtags'}\nLabel each platform clearly. Voice: independent, builder mentality, authentic, ownership-focused.`;
-  try{const res=await callAnthropic(prompt,key,1200);document.getElementById('postText').textContent=res;document.getElementById('postOutput').style.display='block';document.getElementById('postOutput').scrollIntoView({behavior:'smooth'});}
+  const tone=document.getElementById('postTone').value;
+  const goal=document.getElementById('postGoal').value;
+  const hashtags=document.getElementById('postHashtags').value==='yes'?'Include relevant hashtags':'No hashtags';
+  const prompt=`You are a social media expert for Warren Lamb, owner of Lamb Music Works.\n\nCreate posts ONLY for these platforms (do not add any others): ${selectedPlatforms.join(', ')}\n\nTopic: ${topic}\nTone: ${tone}\nGoal: ${goal}\nHashtags: ${hashtags}\n\nVoice: independent, builder mentality, authentic, ownership-focused.\n\nIMPORTANT: Generate ONLY the platforms listed above. Format each post exactly like this:\n\n[PLATFORM NAME]\n[post content]\n---\n\nDo not include any other platforms.`;
+  try{
+    const res=await callAnthropic(prompt,key,1200);
+    // Render with per-platform download buttons
+    const postOutput=document.getElementById('postOutput');
+    const postText=document.getElementById('postText');
+    postText.textContent=res;
+    // Add per-platform download buttons
+    const sections=res.split('---').filter(s=>s.trim());
+    let buttonsHtml='<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">';
+    buttonsHtml+=`<button class="copy-btn" id="postCopyBtn" onclick="copyOutput('postText','postCopyBtn')">Copy All</button>`;
+    buttonsHtml+=`<button class="copy-btn" onclick="downloadTxt('postText','LMW-Posts')">⬇ Download All</button>`;
+    sections.forEach((section,i)=>{
+      const firstLine=section.trim().split('\n')[0].replace(/[\[\]]/g,'').trim();
+      if(firstLine&&firstLine.length<30){
+        buttonsHtml+=`<button class="copy-btn" onclick="downloadSection(${i})">⬇ ${firstLine}</button>`;
+      }
+    });
+    buttonsHtml+='</div>';
+    postOutput.querySelector('.copy-btn')&&postOutput.querySelector('.copy-btn').remove();
+    const existing=postOutput.querySelector('.post-btn-row');if(existing)existing.remove();
+    const btnDiv=document.createElement('div');btnDiv.className='post-btn-row';btnDiv.innerHTML=buttonsHtml;
+    postOutput.appendChild(btnDiv);
+    postOutput.style.display='block';postOutput.scrollIntoView({behavior:'smooth'});
+    window._postSections=sections;
+  }
   catch(e){alert('Failed: '+e.message);}finally{setBtnLoading('postBtn','postBtnText','postSpinner',false);}
+}
+function downloadSection(i){
+  if(!window._postSections||!window._postSections[i])return;
+  const text=window._postSections[i].trim();
+  const firstLine=text.split('\n')[0].replace(/[\[\]]/g,'').trim()||'Post';
+  const blob=new Blob([text],{type:'text/plain'});const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download='LMW-'+firstLine+'-'+new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-')+'.txt';
+  a.click();URL.revokeObjectURL(url);
 }
 
 // ══ IMAGE GENERATOR ══
@@ -1777,108 +1812,7 @@ async function loadVaultFromSupabase(){
 }
 async function saveTargetToSupabase(t){try{await sbFetch('vault_targets','POST',{id:t.id,name:t.name,initials:t.initials,role:t.role,category:t.category,status:t.status||'new',avatar_bg:t.avatarBg,avatar_color:t.avatarColor,why:t.why,priority_moves:t.priorityMoves||[],contacts:t.contacts||[]});}catch(e){console.log('Vault save error:',e);}}
 
-// ══ POST IMAGE EXPORT ══
-function downloadPostAsImage(platform) {
-  var postText = document.getElementById('postText').textContent.trim();
-  if (!postText) { alert('Generate a post first.'); return; }
-  var content = postText;
-  if (platform) {
-    var lines = postText.split('\n'), inSection = false, sectionLines = [];
-    var platLower = platform.toLowerCase();
-    for (var i = 0; i < lines.length; i++) {
-      var l = lines[i];
-      var isHeader = l.toLowerCase().indexOf(platLower) !== -1 && (l.indexOf('**') === 0 || l.indexOf('#') === 0 || l === l.toUpperCase().trim() || l.indexOf('---') !== -1);
-      if (isHeader) { inSection = true; sectionLines = []; continue; }
-      if (inSection) {
-        var isNew = (l.indexOf('**') === 0 || l.indexOf('##') === 0 || l.indexOf('---') !== -1) && l.trim().length > 3 && l.toLowerCase().indexOf(platLower) === -1;
-        if (isNew && sectionLines.length > 2) break;
-        sectionLines.push(l);
-      }
-    }
-    if (sectionLines.length > 3) content = sectionLines.join('\n').trim();
-  }
-  content = content.replace(/\*\*(.*?)\*\*/g,'$1').replace(/#{1,3} /g,'').replace(/---+/g,'').trim();
-  var W=1080, H=1920;
-  var canvas = document.createElement('canvas');
-  canvas.width=W; canvas.height=H;
-  var ctx = canvas.getContext('2d');
-  var grad = ctx.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,'#0D0D1F'); grad.addColorStop(1,'#1A1A2E');
-  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
-  var glow = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.7);
-  glow.addColorStop(0,'rgba(201,168,76,0.05)'); glow.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.fillStyle=glow; ctx.fillRect(0,0,W,H);
-  ctx.fillStyle='#C9A84C';
-  ctx.fillRect(0,0,W,14); ctx.fillRect(0,H-12,W,12); ctx.fillRect(0,0,10,H);
-  ctx.fillStyle='#C9A84C'; ctx.font='bold 52px Arial,sans-serif';
-  ctx.fillText('LAMB MUSIC WORKS',90,110);
-  ctx.fillStyle='#555'; ctx.font='28px Arial,sans-serif';
-  ctx.fillText('lambmusicworks.com',92,155);
-  if (platform) {
-    var pc={'Instagram':'#C13584','TikTok':'#111','Twitter/X':'#1DA1F2','LinkedIn':'#0A66C2','YouTube':'#FF0000','Facebook':'#1877F2'};
-    var pi={'Instagram':'IG','TikTok':'TT','Twitter/X':'X','LinkedIn':'in','YouTube':'YT','Facebook':'FB'};
-    ctx.fillStyle=pc[platform]||'#333';
-    var bx=90,by=185,bw=290,bh=52,br=10;
-    ctx.beginPath(); ctx.moveTo(bx+br,by); ctx.lineTo(bx+bw-br,by);
-    ctx.quadraticCurveTo(bx+bw,by,bx+bw,by+br); ctx.lineTo(bx+bw,by+bh-br);
-    ctx.quadraticCurveTo(bx+bw,by+bh,bx+bw-br,by+bh); ctx.lineTo(bx+br,by+bh);
-    ctx.quadraticCurveTo(bx,by+bh,bx,by+bh-br); ctx.lineTo(bx,by+br);
-    ctx.quadraticCurveTo(bx,by,bx+br,by); ctx.closePath(); ctx.fill();
-    ctx.fillStyle='#FFF'; ctx.font='bold 28px Arial,sans-serif';
-    ctx.fillText((pi[platform]||'') + '  ' + platform.toUpperCase(), 115, 224);
-  }
-  ctx.fillStyle='#C9A84C'; ctx.fillRect(90,260,900,2);
-  function wrapLine(text,x,startY,maxW,lineH,color,font) {
-    ctx.fillStyle=color; ctx.font=font;
-    var words=text.split(' '), line='', cy=startY;
-    for (var wi=0; wi<words.length; wi++) {
-      var test=line+words[wi]+' ';
-      if (ctx.measureText(test).width>maxW && line) { ctx.fillText(line.trim(),x,cy); cy+=lineH; line=words[wi]+' '; }
-      else { line=test; }
-    }
-    if (line.trim()) { ctx.fillText(line.trim(),x,cy); cy+=lineH; }
-    return cy;
-  }
-  var contentLines=content.split('\n'), y=310, maxW=W-200;
-  for (var ci=0; ci<contentLines.length; ci++) {
-    if (y>H-320) break;
-    var t=contentLines[ci].trim(); if(!t){y+=20;continue;}
-    var isCaps=(t===t.toUpperCase()&&t.length>4&&/[A-Z]/.test(t));
-    if (isCaps) { y=wrapLine(t,90,y,maxW,52,'#C9A84C','bold 42px Arial,sans-serif'); y+=10; }
-    else if (/^[✓•]/.test(t)) { y=wrapLine(t,90,y,maxW,44,'#C8C8C8','34px Arial,sans-serif'); y+=6; }
-    else { y=wrapLine(t,90,y,maxW,44,'#BBBBBB','34px Arial,sans-serif'); y+=8; }
-  }
-  var hashMatch=content.match(/#\w[\w\d]*/g);
-  if (hashMatch) {
-    var hy=Math.max(y+30,H-270);
-    ctx.fillStyle='#C9A84C'; ctx.fillRect(90,hy,900,2);
-    ctx.font='bold 24px Arial,sans-serif'; ctx.fillText('HASHTAGS',90,hy+38);
-    wrapLine(hashMatch.join(' '),90,hy+72,900,30,'#555','italic 22px Arial,sans-serif');
-  }
-  var pn=platform?platform.replace('/',''):'Post';
-  var ds=new Date().toLocaleDateString('en-US',{month:'2-digit',day:'2-digit',year:'2-digit'}).replace(/\//g,'-');
-  canvas.toBlob(function(blob){
-    var url=URL.createObjectURL(blob), a=document.createElement('a');
-    a.href=url; a.download='LMW-'+pn+'-'+ds+'.png'; a.click(); URL.revokeObjectURL(url);
-  },'image/png');
-}
-function showImagePlatformPicker() {
-  var existing=document.getElementById('imgPlatformPicker');
-  if(existing){existing.remove();return;}
-  var platforms=['Instagram','TikTok','Twitter/X','LinkedIn','YouTube','Facebook'];
-  var picker=document.createElement('div');
-  picker.id='imgPlatformPicker';
-  picker.style.cssText='display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding:12px;background:var(--s2);border:1px solid var(--line);border-radius:8px;';
-  var html='<div style="width:100%;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--gold);margin-bottom:6px;text-transform:uppercase;">Choose platform for your story graphic (1080x1920):</div>';
-  platforms.forEach(function(p){
-    html+='<button onclick="downloadPostAsImage(\''+p+'\');document.getElementById(\'imgPlatformPicker\').remove();" style="padding:7px 14px;background:var(--s1);border:1px solid var(--line);border-radius:6px;color:var(--text);font-size:12px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;" onmouseover="this.style.borderColor=\'rgba(201,168,76,0.5)\'" onmouseout="this.style.borderColor=\'var(--line)\'">'+p+'</button>';
-  });
-  html+='<button onclick="downloadPostAsImage(null);document.getElementById(\'imgPlatformPicker\').remove();" style="padding:7px 14px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:6px;color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;font-family:DM Sans,sans-serif;">Full Text</button>';
-  picker.innerHTML=html;
-  document.getElementById('postOutput').appendChild(picker);
-  picker.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-  // ══ INIT ══
+// ══ INIT ══
 loadVaultStorage();
 renderTargetList();
 updateVaultStats();
