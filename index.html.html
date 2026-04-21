@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Market Kings — Learn to Trade</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+:root{
+  --bg:#04080F;--s1:#080D17;--s2:#0D1420;--s3:#141B2B;
+  --text:#E8EDF5;--muted:#6B7A99;--faint:#1E2840;
+  --gold:#F0B429;--gold2:#FFD166;--gold-dim:rgba(240,180,41,0.1);
+  --green:#00D4AA;--green-dim:rgba(0,212,170,0.1);
+  --red:#FF4444;--red-dim:rgba(255,68,68,0.1);
+  --blue:#4A90E2;--blue-dim:rgba(74,144,226,0.1);
+  --purple:#9B59B6;--purple-dim:rgba(155,89,182,0.1);
+  --orange:#FF8C42;--orange-dim:rgba(255,140,66,0.1);
+  --nav-w:60px;
+}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;display:flex;height:100dvh;}
+
+/* NAV */
+.nav{width:var(--nav-w);min-width:var(--nav-w);background:var(--s1);border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;padding:16px 0;z-index:100;flex-shrink:0;}
+.nav-logo{font-family:'Syne',sans-serif;font-size:10px;font-weight:800;letter-spacing:3px;color:var(--gold);writing-mode:vertical-rl;transform:rotate(180deg);margin-bottom:24px;}
+.nav-items{display:flex;flex-direction:column;gap:4px;width:100%;padding:0 8px;flex:1;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px;border-radius:8px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+.nav-item:hover{background:var(--s2);}
+.nav-item.active{background:var(--gold-dim);border-color:rgba(240,180,41,0.2);}
+.nav-icon{font-size:16px;line-height:1;}
+.nav-label{font-size:8px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);text-align:center;}
+.nav-item.active .nav-label{color:var(--gold);}
+
+/* MAIN */
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column;min-width:0;}
+.topbar{display:flex;align-items:center;gap:12px;padding:0 20px;height:52px;border-bottom:1px solid rgba(255,255,255,0.06);background:var(--s1);flex-shrink:0;}
+.topbar-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;letter-spacing:1px;color:#FFF;}
+.topbar-sub{font-size:11px;color:var(--muted);}
+.topbar-spacer{flex:1;}
+.level-badge{display:flex;align-items:center;gap:6px;padding:4px 10px;background:var(--gold-dim);border:1px solid rgba(240,180,41,0.25);border-radius:20px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+
+/* PAGES */
+.page{display:none;flex:1;overflow:hidden;flex-direction:column;}
+.page.active{display:flex;}
+.page-body{flex:1;overflow-y:auto;padding:24px;}
+.page-body::-webkit-scrollbar{width:4px;}
+.page-body::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px;}
+
+/* HOME */
+.home-hero{background:linear-gradient(135deg,var(--s1),var(--s2));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden;}
+.home-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(240,180,41,0.08) 0%,transparent 70%);pointer-events:none;}
+.home-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;letter-spacing:-0.5px;color:#FFF;line-height:1.1;margin-bottom:8px;}
+.home-title span{color:var(--gold);}
+.home-sub{font-size:13px;color:var(--muted);line-height:1.7;max-width:500px;margin-bottom:24px;}
+.track-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.track-card{background:var(--s1);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:18px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
+.track-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.15);}
+.track-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.track-card.day::before{background:var(--gold);}
+.track-card.forex::before{background:var(--green);}
+.track-card.candles::before{background:var(--orange);}
+.track-card.etf::before{background:var(--blue);}
+.track-card.options::before{background:var(--purple);}
+.track-emoji{font-size:24px;margin-bottom:10px;}
+.track-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#FFF;margin-bottom:4px;}
+.track-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px;}
+.track-meta{display:flex;align-items:center;gap:8px;}
+.track-lessons{font-size:10px;font-weight:600;color:var(--muted);}
+.track-level{font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:3px;text-transform:uppercase;}
+.level-beginner{background:var(--green-dim);color:var(--green);}
+.level-intermediate{background:var(--gold-dim);color:var(--gold);}
+
+/* TRACK PAGE */
+.track-header{padding:24px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
+.track-header-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#FFF;margin-bottom:4px;}
+.track-header-sub{font-size:12px;color:var(--muted);}
+.progress-bar{width:100%;height:4px;background:var(--faint);border-radius:2px;margin-top:12px;}
+.progress-fill{height:100%;border-radius:2px;background:var(--gold);transition:width 0.5s;}
+
+.lesson-list{padding:16px;}
+.lesson-item{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;cursor:pointer;transition:all 0.15s;margin-bottom:6px;border:1px solid transparent;}
+.lesson-item:hover{background:var(--s2);}
+.lesson-item.active{background:var(--gold-dim);border-color:rgba(240,180,41,0.2);}
+.lesson-item.completed{opacity:0.7;}
+.lesson-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;background:var(--s3);color:var(--muted);}
+.lesson-item.active .lesson-num{background:var(--gold);color:#000;}
+.lesson-item.completed .lesson-num{background:var(--green-dim);color:var(--green);}
+.lesson-info{flex:1;}
+.lesson-title{font-weight:600;font-size:13px;color:var(--text);}
+.lesson-item.active .lesson-title{color:var(--gold);}
+.lesson-meta{font-size:10px;color:var(--muted);margin-top:2px;}
+.lesson-check{width:16px;height:16px;border-radius:50%;border:1px solid var(--faint);flex-shrink:0;}
+.lesson-item.completed .lesson-check{background:var(--green);border-color:var(--green);}
+
+/* LESSON VIEW */
+.lesson-view{flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.lesson-topbar{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;background:var(--s1);}
+.lesson-back{background:none;border:1px solid rgba(255,255,255,0.1);color:var(--muted);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;}
+.lesson-back:hover{color:var(--text);}
+.lesson-title-bar{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#FFF;}
+.lesson-spacer{flex:1;}
+.lesson-nav-btns{display:flex;gap:8px;}
+.lesson-nav-btn{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;border:none;}
+.btn-prev{background:var(--s3);color:var(--muted);}
+.btn-next{background:var(--gold);color:#000;}
+.btn-next:hover{opacity:0.85;}
+
+.lesson-content{flex:1;overflow-y:auto;padding:28px;}
+.lesson-content::-webkit-scrollbar{width:4px;}
+.lesson-content::-webkit-scrollbar-thumb{background:var(--s3);}
+.lesson-h1{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#FFF;margin-bottom:6px;line-height:1.2;}
+.lesson-h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--gold);margin:24px 0 10px;}
+.lesson-p{font-size:13px;color:#B0BFDD;line-height:1.8;margin-bottom:14px;}
+.lesson-p strong{color:#FFF;font-weight:600;}
+.callout{padding:14px 16px;border-radius:8px;margin:16px 0;font-size:13px;line-height:1.6;}
+.callout-gold{background:var(--gold-dim);border-left:3px solid var(--gold);color:#D4A827;}
+.callout-green{background:var(--green-dim);border-left:3px solid var(--green);color:var(--green);}
+.callout-red{background:var(--red-dim);border-left:3px solid var(--red);color:#FF8888;}
+.callout-blue{background:var(--blue-dim);border-left:3px solid var(--blue);color:#7AB4EE;}
+.term-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:16px 0;}
+.term-card{background:var(--s2);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px;}
+.term-word{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:5px;}
+.term-def{font-size:12px;color:var(--muted);line-height:1.6;}
+.candle-visual{display:flex;align-items:flex-end;gap:8px;padding:20px;background:var(--s2);border-radius:10px;margin:16px 0;justify-content:center;}
+.candle{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.candle-wick{width:2px;background:#686868;border-radius:1px;}
+.candle-body{width:24px;border-radius:3px;}
+.candle-label{font-size:9px;color:var(--muted);text-align:center;margin-top:6px;font-family:'JetBrains Mono',monospace;}
+.quiz-section{background:var(--s2);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;margin-top:24px;}
+.quiz-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#FFF;margin-bottom:14px;}
+.quiz-q{font-size:13px;color:var(--text);margin-bottom:12px;line-height:1.6;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{padding:10px 14px;border-radius:7px;border:1px solid rgba(255,255,255,0.1);cursor:pointer;font-size:13px;color:var(--muted);transition:all 0.15s;text-align:left;background:none;font-family:'Inter',sans-serif;width:100%;}
+.quiz-opt:hover{border-color:rgba(240,180,41,0.4);color:var(--text);}
+.quiz-opt.correct{background:var(--green-dim);border-color:var(--green);color:var(--green);}
+.quiz-opt.wrong{background:var(--red-dim);border-color:var(--red);color:var(--red);}
+.complete-btn{width:100%;padding:14px;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:20px;letter-spacing:0.5px;}
+.complete-btn:hover{opacity:0.9;}
+
+/* SIMULATOR CTA */
+.sim-cta{background:linear-gradient(135deg,#0A1A0A,#0F240F);border:1px solid rgba(0,212,170,0.3);border-radius:14px;padding:28px;text-align:center;margin-top:24px;}
+.sim-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#FFF;margin-bottom:6px;}
+.sim-sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.7;}
+.sim-btn{display:inline-block;padding:12px 32px;background:var(--green);color:#000;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;border:none;}
+.sim-btn:hover{opacity:0.9;}
+
+@media(max-width:600px){
+  :root{--nav-w:52px;}
+  .nav-label{display:none;}
+  .track-grid{grid-template-columns:1fr 1fr;}
+  .term-grid{grid-template-columns:1fr;}
+  .page-body{padding:14px;}
+  .lesson-content{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">MK</div>
+  <div class="nav-items">
+    <div class="nav-item active" onclick="showPage('home',this)" title="Home"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+    <div class="nav-item" onclick="showTrack('day',this)" title="Day Trading"><div class="nav-icon">📈</div><div class="nav-label">Day</div></div>
+    <div class="nav-item" onclick="showTrack('forex',this)" title="Forex"><div class="nav-icon">💱</div><div class="nav-label">Forex</div></div>
+    <div class="nav-item" onclick="showTrack('candles',this)" title="Candlesticks"><div class="nav-icon">🕯</div><div class="nav-label">Candles</div></div>
+    <div class="nav-item" onclick="showTrack('etf',this)" title="ETFs"><div class="nav-icon">📦</div><div class="nav-label">ETFs</div></div>
+    <div class="nav-item" onclick="showTrack('options',this)" title="Options"><div class="nav-icon">⚡</div><div class="nav-label">Options</div></div>
+  </div>
+</nav>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbarTitle">MARKET KINGS</div>
+    <div class="topbar-sub" id="topbarSub">Learn to Trade</div>
+    <div class="topbar-spacer"></div>
+    <div class="level-badge">👑 BEGINNER</div>
+  </div>
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="page-body">
+      <div class="home-hero">
+        <div class="home-title">Learn to Trade<br><span>Like a King.</span></div>
+        <div class="home-sub">No jargon. No fluff. Five tracks that take you from zero to the simulator fast. Built for beginners who want to move quick and learn by doing.</div>
+      </div>
+      <div class="track-grid">
+        <div class="track-card day" onclick="showTrack('day',null)">
+          <div class="track-emoji">📈</div>
+          <div class="track-name">Day Trading</div>
+          <div class="track-desc">Buy and sell within one day. High energy, real money moves. The basics you need to start.</div>
+          <div class="track-meta"><span class="track-lessons">8 lessons</span><span class="track-level level-beginner">Beginner</span></div>
+        </div>
+        <div class="track-card forex" onclick="showTrack('forex',null)">
+          <div class="track-emoji">💱</div>
+          <div class="track-name">Forex</div>
+          <div class="track-desc">Trade currencies. No PDT rule. Best starting point for small accounts under $25K.</div>
+          <div class="track-meta"><span class="track-lessons">7 lessons</span><span class="track-level level-beginner">Beginner</span></div>
+        </div>
+        <div class="track-card candles" onclick="showTrack('candles',null)">
+          <div class="track-emoji">🕯</div>
+          <div class="track-name">Candlesticks</div>
+          <div class="track-desc">Read any chart. Know what every candle means. The language every trader must speak.</div>
+          <div class="track-meta"><span class="track-lessons">6 lessons</span><span class="track-level level-beginner">Beginner</span></div>
+        </div>
+        <div class="track-card etf" onclick="showTrack('etf',null)">
+          <div class="track-emoji">📦</div>
+          <div class="track-name">ETFs</div>
+          <div class="track-desc">Long term, low stress. Invest in baskets of stocks. Set it, forget it, watch it grow.</div>
+          <div class="track-meta"><span class="track-lessons">5 lessons</span><span class="track-level level-beginner">Beginner</span></div>
+        </div>
+        <div class="track-card options" onclick="showTrack('options',null)">
+          <div class="track-emoji">⚡</div>
+          <div class="track-name">Options</div>
+          <div class="track-desc">The power move. Higher risk, higher reward. Learn the basics before you touch these.</div>
+          <div class="track-meta"><span class="track-lessons">6 lessons</span><span class="track-level level-intermediate">Intermediate</span></div>
+        </div>
+      </div>
+      <div class="sim-cta" style="margin-top:20px;">
+        <div class="sim-title">Ready to Practice?</div>
+        <div class="sim-sub">After any track — jump to the free simulator. Real charts, fake money. No risk, real learning.</div>
+        <a href="https://www.investopedia.com/simulator/" target="_blank" class="sim-btn">🎮 Open Free Simulator</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRACK PAGE -->
+  <div class="page" id="page-track">
+    <div class="track-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button onclick="showPage('home',document.querySelector('.nav-item'))" style="background:none;border:1px solid rgba(255,255,255,0.1);color:var(--muted);padding:5px 10px;border-radius:5px;cursor:pointer;font-size:11px;font-family:Inter,sans-serif;">← Back</button>
+        <div>
+          <div class="track-header-title" id="trackTitle">Day Trading</div>
+          <div class="track-header-sub" id="trackSub">8 lessons · Beginner</div>
+        </div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="trackProgress" style="width:0%"></div></div>
+    </div>
+    <div class="lesson-list" id="lessonList" style="overflow-y:auto;flex:1;"></div>
+  </div>
+
+  <!-- LESSON VIEW -->
+  <div class="page" id="page-lesson">
+    <div class="lesson-topbar">
+      <button class="lesson-back" id="lessonBackBtn" onclick="backToTrack()">← Track</button>
+      <div class="lesson-title-bar" id="lessonTitleBar">Lesson</div>
+      <div class="lesson-spacer"></div>
+      <div class="lesson-nav-btns">
+        <button class="lesson-nav-btn btn-prev" onclick="prevLesson()">← Prev</button>
+        <button class="lesson-nav-btn btn-next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+    <div class="lesson-content" id="lessonContent"></div>
+  </div>
+</div>
+
+<script>
+// ══ DATA ══
+const TRACKS = {
+  day: {
+    name:'Day Trading',color:'var(--gold)',emoji:'📈',
+    sub:'8 lessons · Beginner',
+    lessons:[
+      {title:'What Is Day Trading?',duration:'3 min',content:`
+        <div class="lesson-h1">What Is Day Trading?</div>
+        <p class="lesson-p">Day trading means you <strong>buy and sell stocks (or other assets) within the same day.</strong> You never hold anything overnight. You open a trade in the morning, close it before the market closes, and go to sleep with cash — not positions.</p>
+        <div class="callout callout-gold">💡 Think of it like flipping sneakers. You buy low in the morning, sell higher by afternoon. Same idea — just with stocks.</div>
+        <div class="lesson-h2">Why Do People Day Trade?</div>
+        <p class="lesson-p">Because the market moves <strong>every single day</strong> — up and down, sometimes wildly. Day traders make money from those moves. They don't care if a company is good long-term. They only care about the next few hours.</p>
+        <div class="lesson-h2">What Do You Need?</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Brokerage Account</div><div class="term-def">Where you buy and sell. Think TD Ameritrade, Webull, or Robinhood.</div></div>
+          <div class="term-card"><div class="term-word">Capital</div><div class="term-def">The money you trade with. You can start with as little as $100 on some platforms.</div></div>
+          <div class="term-card"><div class="term-word">Charts</div><div class="term-def">Visual maps of price movement. This is how you decide when to buy and sell.</div></div>
+          <div class="term-card"><div class="term-word">Discipline</div><div class="term-def">The most important tool. Most beginners lose because of emotion, not strategy.</div></div>
+        </div>
+        <div class="callout callout-red">⚠️ Day trading is real risk. Most beginners lose money at first. The goal is to learn on a simulator before using real money.</div>
+        <div class="quiz-section">
+          <div class="quiz-title">Quick Check</div>
+          <div class="quiz-q">What does a day trader do with their positions overnight?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="checkAnswer(this,false)">Hold them and wait for gains</button>
+            <button class="quiz-opt" onclick="checkAnswer(this,true)">Close all positions before the day ends</button>
+            <button class="quiz-opt" onclick="checkAnswer(this,false)">Transfer them to another account</button>
+          </div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'The PDT Rule — Why It Matters',duration:'4 min',content:`
+        <div class="lesson-h1">The PDT Rule</div>
+        <p class="lesson-p">PDT stands for <strong>Pattern Day Trader.</strong> This is a US government rule that limits how often you can day trade with a small account.</p>
+        <div class="callout callout-red">⚠️ The Rule: If you make <strong>4 or more day trades in 5 business days</strong> with an account under $25,000 — your broker flags you as a Pattern Day Trader and restricts your trading.</div>
+        <div class="lesson-h2">What Happens If You Get Flagged?</div>
+        <p class="lesson-p">Your broker will restrict you from making day trades for <strong>90 days</strong> — or until you bring your account above $25,000. That's brutal if you're just starting.</p>
+        <div class="lesson-h2">How Do You Avoid It?</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Use Forex</div><div class="term-def">The forex market has NO PDT rule. You can trade as many times as you want. This is why beginners start there.</div></div>
+          <div class="term-card"><div class="term-word">Use Cash Account</div><div class="term-def">PDT only applies to margin accounts. A cash account has no PDT rule — but you can only use settled funds.</div></div>
+          <div class="term-card"><div class="term-word">Stay Under 4 Trades</div><div class="term-def">If you have a margin account under $25K — just make 3 or fewer day trades per 5-day window.</div></div>
+          <div class="term-card"><div class="term-word">Fund to $25K</div><div class="term-def">Once your account hits $25,000 the PDT rule no longer restricts you.</div></div>
+        </div>
+        <div class="callout callout-green">✅ Bottom line: Start with Forex or a cash account. No PDT headaches.</div>
+        <div class="quiz-section">
+          <div class="quiz-title">Quick Check</div>
+          <div class="quiz-q">How many day trades can you make in 5 days before PDT kicks in on a margin account under $25K?</div>
+          <div class="quiz-options">
+            <button class="quiz-opt" onclick="checkAnswer(this,false)">2</button>
+            <button class="quiz-opt" onclick="checkAnswer(this,true)">3 (the 4th triggers PDT)</button>
+            <button class="quiz-opt" onclick="checkAnswer(this,false)">10</button>
+          </div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'How to Read a Stock Chart',duration:'5 min',content:`
+        <div class="lesson-h1">Reading a Stock Chart</div>
+        <p class="lesson-p">A stock chart shows you the <strong>price of a stock over time.</strong> The X-axis is time. The Y-axis is price. Simple as that.</p>
+        <div class="lesson-h2">The Two Basic Chart Types</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Line Chart</div><div class="term-def">Just a line connecting closing prices over time. Simple but limited — doesn't show the full picture of each period.</div></div>
+          <div class="term-card"><div class="term-word">Candlestick Chart</div><div class="term-def">The professional standard. Shows open, close, high, and low for each time period. Way more information. Learn this one.</div></div>
+        </div>
+        <div class="lesson-h2">Timeframes</div>
+        <p class="lesson-p">Every chart has a timeframe — how much time each candle or data point represents. Day traders mostly use:</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">1-minute chart</div><div class="term-def">Each candle = 1 minute. Very fast, very noisy. Used for quick scalp trades.</div></div>
+          <div class="term-card"><div class="term-word">5-minute chart</div><div class="term-def">Most popular for day trading. Good balance of detail and signal.</div></div>
+          <div class="term-card"><div class="term-word">15-minute chart</div><div class="term-def">Smoother view. Good for spotting trends within a day.</div></div>
+          <div class="term-card"><div class="term-word">Daily chart</div><div class="term-def">Each candle = one full day. Used by swing traders and for big picture context.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 Start with the 5-minute chart. It's the sweet spot for beginners learning day trading.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Support & Resistance',duration:'4 min',content:`
+        <div class="lesson-h1">Support & Resistance</div>
+        <p class="lesson-p">These are the two most important concepts in all of trading. Once you understand them, charts start making sense.</p>
+        <div class="lesson-h2">Support — The Floor</div>
+        <p class="lesson-p"><strong>Support</strong> is a price level where a stock keeps bouncing back up from. Think of it as the floor. Every time the price drops to that level, buyers step in and push it back up.</p>
+        <div class="callout callout-green">✅ Rule: Buy near support. The price has a history of bouncing from here.</div>
+        <div class="lesson-h2">Resistance — The Ceiling</div>
+        <p class="lesson-p"><strong>Resistance</strong> is a price level where a stock keeps getting pushed back down from. The ceiling. Every time it reaches that level, sellers take profits and push it down.</p>
+        <div class="callout callout-red">⚠️ Rule: Be careful buying near resistance. The price has a history of reversing here.</div>
+        <div class="lesson-h2">When Support or Resistance Breaks</div>
+        <p class="lesson-p">When price <strong>breaks through resistance</strong> — that old ceiling becomes the new floor. This is called a <strong>breakout</strong> and it's one of the best trade signals.</p>
+        <div class="callout callout-gold">💡 Breakouts are where most day trading opportunities live. Price breaks resistance → momentum carries it higher.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Risk Management — The #1 Skill',duration:'5 min',content:`
+        <div class="lesson-h1">Risk Management</div>
+        <p class="lesson-p">This is the most important lesson in this entire course. More traders blow up their accounts from bad risk management than from bad strategy.</p>
+        <div class="lesson-h2">The 1% Rule</div>
+        <p class="lesson-p">Never risk more than <strong>1% of your account on a single trade.</strong> If you have $1,000 — never risk more than $10 on any one trade. This keeps you in the game even after losing streaks.</p>
+        <div class="callout callout-gold">💡 Even if you lose 10 trades in a row (unlikely) — you've only lost 10% of your account. You can recover. Blow 50% in one bad trade and recovery is brutal.</div>
+        <div class="lesson-h2">Stop Loss</div>
+        <p class="lesson-p">A <strong>stop loss</strong> is an automatic order that closes your trade if the price drops to a certain level. It's your safety net. You set it before you enter the trade — not after things go bad.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Stop Loss</div><div class="term-def">The price where you automatically exit a losing trade. Non-negotiable — always set one.</div></div>
+          <div class="term-card"><div class="term-word">Take Profit</div><div class="term-def">The price where you automatically exit a winning trade. Lock in gains before they disappear.</div></div>
+          <div class="term-card"><div class="term-word">Risk/Reward Ratio</div><div class="term-def">Compare your potential loss vs potential gain. Minimum 1:2 — risk $1 to make $2.</div></div>
+        </div>
+        <div class="callout callout-red">⚠️ The #1 mistake beginners make: moving their stop loss when a trade goes against them. Never do this. Set it and respect it.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Entry & Exit Strategy',duration:'4 min',content:`
+        <div class="lesson-h1">Entry & Exit Strategy</div>
+        <p class="lesson-p">Knowing <strong>when to get in and when to get out</strong> is the whole game. Most beginners enter randomly and exit emotionally. You need a plan before every trade.</p>
+        <div class="lesson-h2">Before You Enter Any Trade — Ask These</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Why am I entering?</div><div class="term-def">There must be a clear reason — breakout, bounce off support, pattern signal. Not just "it looks like it's going up."</div></div>
+          <div class="term-card"><div class="term-word">Where is my stop?</div><div class="term-def">Know exactly where you'll exit if wrong. Set it before you enter.</div></div>
+          <div class="term-card"><div class="term-word">Where is my target?</div><div class="term-def">Know exactly where you'll take profits. Have a number — not just "when it feels right."</div></div>
+          <div class="term-card"><div class="term-word">What's my risk?</div><div class="term-def">Calculate the dollar amount you're risking. Make sure it's within your 1% rule.</div></div>
+        </div>
+        <div class="callout callout-green">✅ A trade without a plan is a gamble. A trade with a plan — even if it loses — is trading.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Paper Trading — Practice Without Risk',duration:'3 min',content:`
+        <div class="lesson-h1">Paper Trading</div>
+        <p class="lesson-p"><strong>Paper trading</strong> means trading with fake money on real charts. The prices are real. The market is real. The money is not. It's the safest way to practice.</p>
+        <div class="lesson-h2">Why Paper Trade First?</div>
+        <p class="lesson-p">Because every beginner thinks they have it figured out until real money is on the line. When it's your actual money, emotions take over — fear, greed, panic. Paper trading lets you build the habit of following your plan without financial pressure.</p>
+        <div class="callout callout-gold">💡 Rule: Paper trade until you're consistently profitable for 30 days. Then and only then consider real money.</div>
+        <div class="lesson-h2">Free Simulators</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Investopedia Simulator</div><div class="term-def">Free. Real stocks. $100K virtual money to practice with. Best starting point.</div></div>
+          <div class="term-card"><div class="term-word">Webull Paper Trading</div><div class="term-def">Built into the Webull app. Uses real-time data. Can switch to real money anytime.</div></div>
+          <div class="term-card"><div class="term-word">ThinkorSwim</div><div class="term-def">TD Ameritrade's platform. Professional grade. Free paper trading included.</div></div>
+        </div>
+        <div class="sim-cta">
+          <div class="sim-title">You Know Enough.</div>
+          <div class="sim-sub">Go practice on a simulator right now. Real charts. Fake money. Zero risk.</div>
+          <a href="https://www.investopedia.com/simulator/" target="_blank" class="sim-btn">🎮 Open Simulator Now</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `},
+      {title:'Your First Trade Checklist',duration:'3 min',content:`
+        <div class="lesson-h1">Your First Trade Checklist</div>
+        <p class="lesson-p">Before you ever place a real trade — run through this list every single time.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">✓ I have a reason</div><div class="term-def">Clear signal — breakout, support bounce, or pattern. Not a hunch.</div></div>
+          <div class="term-card"><div class="term-word">✓ Stop loss is set</div><div class="term-def">I know exactly where I exit if wrong. It's already placed.</div></div>
+          <div class="term-card"><div class="term-word">✓ Target is set</div><div class="term-def">I know exactly where I take profits. It's already placed.</div></div>
+          <div class="term-card"><div class="term-word">✓ Risk is 1% or less</div><div class="term-def">I calculated it. The dollar amount I can lose is acceptable.</div></div>
+          <div class="term-card"><div class="term-word">✓ I'm not emotional</div><div class="term-def">I'm not revenge trading after a loss. I'm not chasing a pump. I'm calm.</div></div>
+          <div class="term-card"><div class="term-word">✓ I've paper traded this</div><div class="term-def">I've practiced this strategy on a simulator and it works for me.</div></div>
+        </div>
+        <div class="callout callout-green">✅ If you can check all 6 — you're ready to trade. If not — go back to the simulator.</div>
+        <div class="sim-cta">
+          <div class="sim-title">Day Trading Track Complete! 🎉</div>
+          <div class="sim-sub">You know the fundamentals. Now go build the habit on a simulator before risking real money.</div>
+          <a href="https://www.investopedia.com/simulator/" target="_blank" class="sim-btn">🎮 Open Simulator</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `}
+    ]
+  },
+  forex: {
+    name:'Forex',color:'var(--green)',emoji:'💱',
+    sub:'7 lessons · Beginner',
+    lessons:[
+      {title:'What Is Forex?',duration:'3 min',content:`
+        <div class="lesson-h1">What Is Forex?</div>
+        <p class="lesson-p">Forex stands for <strong>Foreign Exchange.</strong> It's the market where currencies are traded. When you buy euros with US dollars — that's forex.</p>
+        <div class="callout callout-green">✅ Forex is the largest financial market in the world. Over $7 trillion traded every single day. It never sleeps.</div>
+        <div class="lesson-h2">Why Forex for Beginners?</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">No PDT Rule</div><div class="term-def">Unlike stocks, forex has no Pattern Day Trader rule. You can trade as many times as you want — even with a small account.</div></div>
+          <div class="term-card"><div class="term-word">24/5 Market</div><div class="term-def">Forex trades 24 hours a day, 5 days a week. Trade before work, after work, whenever.</div></div>
+          <div class="term-card"><div class="term-word">Low Starting Capital</div><div class="term-def">You can open a forex account with as little as $10-$100 with some brokers.</div></div>
+          <div class="term-card"><div class="term-word">High Liquidity</div><div class="term-def">With $7 trillion daily volume, you can always find a buyer or seller. You're never stuck.</div></div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Currency Pairs Explained',duration:'4 min',content:`
+        <div class="lesson-h1">Currency Pairs</div>
+        <p class="lesson-p">In forex you always trade <strong>one currency against another.</strong> That's called a currency pair. You're betting that one currency will get stronger or weaker relative to the other.</p>
+        <div class="lesson-h2">How to Read a Pair</div>
+        <p class="lesson-p">EUR/USD means Euros vs US Dollars. The first currency (EUR) is the <strong>base</strong>. The second (USD) is the <strong>quote.</strong> If EUR/USD is 1.10 — it costs $1.10 to buy 1 Euro.</p>
+        <div class="lesson-h2">The Major Pairs</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">EUR/USD</div><div class="term-def">Euro vs Dollar. Most traded pair in the world. Tight spreads, great liquidity. Start here.</div></div>
+          <div class="term-card"><div class="term-word">GBP/USD</div><div class="term-def">British Pound vs Dollar. More volatile than EUR/USD. Good for experienced beginners.</div></div>
+          <div class="term-card"><div class="term-word">USD/JPY</div><div class="term-def">Dollar vs Japanese Yen. Very popular. Moves in a predictable way often.</div></div>
+          <div class="term-card"><div class="term-word">USD/CAD</div><div class="term-def">Dollar vs Canadian Dollar. Influenced heavily by oil prices.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 Start with EUR/USD. It's the most beginner-friendly pair — low cost to trade, very liquid, well documented.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'What Are Pips?',duration:'3 min',content:`
+        <div class="lesson-h1">What Are Pips?</div>
+        <p class="lesson-p">A <strong>pip</strong> is the smallest price move a currency pair can make. It's how forex traders measure profit and loss.</p>
+        <div class="callout callout-blue">📊 For most pairs: 1 pip = 0.0001. So if EUR/USD moves from 1.1000 to 1.1001 — that's 1 pip.</div>
+        <div class="lesson-h2">How Much Is a Pip Worth?</div>
+        <p class="lesson-p">It depends on your lot size — how much currency you're trading.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Standard Lot</div><div class="term-def">100,000 units. 1 pip = ~$10. For experienced traders.</div></div>
+          <div class="term-card"><div class="term-word">Mini Lot</div><div class="term-def">10,000 units. 1 pip = ~$1. Good for learning with real money.</div></div>
+          <div class="term-card"><div class="term-word">Micro Lot</div><div class="term-def">1,000 units. 1 pip = ~$0.10. Perfect for absolute beginners.</div></div>
+        </div>
+        <div class="callout callout-green">✅ Start with micro lots. Learn the game with minimal risk while your skills develop.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Forex Market Sessions',duration:'3 min',content:`
+        <div class="lesson-h1">Forex Market Sessions</div>
+        <p class="lesson-p">Forex runs 24/5 but not all hours are equal. The market is divided into four major sessions based on which financial centers are open.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Sydney Session</div><div class="term-def">5pm–2am EST. Quietest session. Low volatility. Good for learning.</div></div>
+          <div class="term-card"><div class="term-word">Tokyo Session</div><div class="term-def">7pm–4am EST. JPY pairs are most active. Moderate volatility.</div></div>
+          <div class="term-card"><div class="term-word">London Session</div><div class="term-def">3am–12pm EST. Highest volume. EUR and GBP pairs most active. Best setups.</div></div>
+          <div class="term-card"><div class="term-word">New York Session</div><div class="term-def">8am–5pm EST. Second highest volume. USD pairs most active.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 The best time to trade: London–New York overlap (8am–12pm EST). Both sessions are open — maximum volume and volatility.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Leverage — Power and Danger',duration:'4 min',content:`
+        <div class="lesson-h1">Leverage</div>
+        <p class="lesson-p">Leverage lets you control a large position with a small amount of money. Forex brokers offer very high leverage — sometimes 50:1 or even 500:1.</p>
+        <div class="callout callout-gold">💡 Example: With 50:1 leverage and $100 — you control $5,000 worth of currency. A 1% move = $50 profit OR $50 loss.</div>
+        <div class="lesson-h2">The Double Edge</div>
+        <p class="lesson-p">Leverage <strong>amplifies both gains AND losses.</strong> This is where most beginners blow up their accounts. They use too much leverage, the market moves against them slightly, and their account is wiped.</p>
+        <div class="callout callout-red">⚠️ Rule: Start with the lowest leverage your broker offers. 10:1 or less while learning. Never use maximum leverage as a beginner.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Choosing a Forex Broker',duration:'3 min',content:`
+        <div class="lesson-h1">Choosing a Forex Broker</div>
+        <p class="lesson-p">Your broker is where you actually trade. Choosing the right one matters — fees, regulations, and tools vary widely.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Regulated</div><div class="term-def">Only use brokers regulated by CFTC/NFA (US) or FCA (UK). This protects your money.</div></div>
+          <div class="term-card"><div class="term-word">Spread</div><div class="term-def">The difference between buy and sell price. This is how the broker makes money. Lower is better.</div></div>
+          <div class="term-card"><div class="term-word">Demo Account</div><div class="term-def">Free practice account with fake money. Every good broker offers one. Use it first.</div></div>
+          <div class="term-card"><div class="term-word">Platform</div><div class="term-def">MetaTrader 4 (MT4) is the most popular forex platform. Most brokers support it.</div></div>
+        </div>
+        <div class="callout callout-green">✅ Good starting brokers: OANDA, TD Ameritrade (for Forex), or Interactive Brokers. All regulated, all offer demo accounts.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Your Forex Action Plan',duration:'3 min',content:`
+        <div class="lesson-h1">Your Forex Action Plan</div>
+        <p class="lesson-p">You know enough to start practicing. Here's your step-by-step plan:</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Step 1</div><div class="term-def">Open a FREE demo account at OANDA or TD Ameritrade. Takes 5 minutes.</div></div>
+          <div class="term-card"><div class="term-word">Step 2</div><div class="term-def">Practice trading EUR/USD only. One pair. Master it before expanding.</div></div>
+          <div class="term-card"><div class="term-word">Step 3</div><div class="term-def">Trade micro lots only. Focus on learning — not profit.</div></div>
+          <div class="term-card"><div class="term-word">Step 4</div><div class="term-def">Journal every trade. Write why you entered, what happened, what you learned.</div></div>
+          <div class="term-card"><div class="term-word">Step 5</div><div class="term-def">After 30 profitable demo days — consider a real micro account with $100.</div></div>
+        </div>
+        <div class="sim-cta">
+          <div class="sim-title">Forex Track Complete! 🎉</div>
+          <div class="sim-sub">Open your demo account and start practicing. EUR/USD. Micro lots. One trade at a time.</div>
+          <a href="https://www.investopedia.com/simulator/" target="_blank" class="sim-btn">🎮 Practice Now</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `}
+    ]
+  },
+  candles: {
+    name:'Candlesticks',color:'var(--orange)',emoji:'🕯',
+    sub:'6 lessons · Beginner',
+    lessons:[
+      {title:'What Is a Candlestick?',duration:'4 min',content:`
+        <div class="lesson-h1">What Is a Candlestick?</div>
+        <p class="lesson-p">A candlestick is a visual representation of price movement over a specific time period. One candle tells you <strong>4 pieces of information</strong> at once.</p>
+        <div class="candle-visual">
+          <div class="candle">
+            <div class="candle-wick" style="height:30px;"></div>
+            <div class="candle-body" style="height:60px;background:#00D4AA;"></div>
+            <div class="candle-wick" style="height:20px;"></div>
+            <div class="candle-label">Bullish<br>(Green)</div>
+          </div>
+          <div style="width:60px;"></div>
+          <div class="candle">
+            <div class="candle-wick" style="height:25px;"></div>
+            <div class="candle-body" style="height:50px;background:#FF4444;"></div>
+            <div class="candle-wick" style="height:35px;"></div>
+            <div class="candle-label">Bearish<br>(Red)</div>
+          </div>
+        </div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Open</div><div class="term-def">Where the price started at the beginning of the time period.</div></div>
+          <div class="term-card"><div class="term-word">Close</div><div class="term-def">Where the price ended at the end of the time period.</div></div>
+          <div class="term-card"><div class="term-word">High</div><div class="term-def">The highest price reached during the period. Top of the wick.</div></div>
+          <div class="term-card"><div class="term-word">Low</div><div class="term-def">The lowest price reached during the period. Bottom of the wick.</div></div>
+        </div>
+        <div class="callout callout-green">✅ Green candle = price went UP (close higher than open). Red candle = price went DOWN (close lower than open).</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Bullish Candle Patterns',duration:'5 min',content:`
+        <div class="lesson-h1">Bullish Candle Patterns</div>
+        <p class="lesson-p"><strong>Bullish</strong> means price is likely going UP. These patterns signal buying opportunities.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Hammer 🔨</div><div class="term-def">Small body at top, long lower wick. Means sellers pushed price down but buyers fought back hard. Bullish reversal signal.</div></div>
+          <div class="term-card"><div class="term-word">Bullish Engulfing</div><div class="term-def">A large green candle that completely covers the previous red candle. Strong signal that buyers took over.</div></div>
+          <div class="term-card"><div class="term-word">Morning Star</div><div class="term-def">3-candle pattern: red candle, tiny candle, big green candle. Signals the end of a downtrend.</div></div>
+          <div class="term-card"><div class="term-word">Doji</div><div class="term-def">Open and close are nearly the same. Looks like a cross. Signals indecision — often precedes a reversal.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 No single candle is 100% reliable. Always confirm with the surrounding context — where is the price? Near support? After a downtrend?</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Bearish Candle Patterns',duration:'5 min',content:`
+        <div class="lesson-h1">Bearish Candle Patterns</div>
+        <p class="lesson-p"><strong>Bearish</strong> means price is likely going DOWN. These patterns signal selling opportunities or times to exit longs.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Shooting Star ⭐</div><div class="term-def">Small body at bottom, long upper wick. Buyers pushed price up but sellers crushed it back. Bearish reversal.</div></div>
+          <div class="term-card"><div class="term-word">Bearish Engulfing</div><div class="term-def">Large red candle covers previous green candle completely. Sellers took full control.</div></div>
+          <div class="term-card"><div class="term-word">Evening Star</div><div class="term-def">3-candle pattern: green candle, tiny candle, big red candle. End of uptrend signal.</div></div>
+          <div class="term-card"><div class="term-word">Hanging Man</div><div class="term-def">Same shape as hammer but appears at the TOP of an uptrend. Bearish signal.</div></div>
+        </div>
+        <div class="callout callout-red">⚠️ Context is everything. A shooting star at resistance after a long uptrend = strong sell signal. Same candle in the middle of nowhere = weak signal.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'The 5 Most Important Patterns',duration:'5 min',content:`
+        <div class="lesson-h1">The 5 Patterns That Matter Most</div>
+        <p class="lesson-p">Out of dozens of candlestick patterns — these 5 are the ones every trader uses daily.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">1. Hammer / Shooting Star</div><div class="term-def">The most reliable reversal signals. Hammer at support = buy. Shooting star at resistance = sell.</div></div>
+          <div class="term-card"><div class="term-word">2. Engulfing Patterns</div><div class="term-def">Bullish or bearish. When one candle swallows the previous — momentum shifted. High probability signal.</div></div>
+          <div class="term-card"><div class="term-word">3. Doji</div><div class="term-def">Indecision. Watch the next candle carefully — it often tells you which direction wins.</div></div>
+          <div class="term-card"><div class="term-word">4. Long Wicks</div><div class="term-def">A very long wick in any direction shows rejection. Price tried to go there but was pushed back hard.</div></div>
+          <div class="term-card"><div class="term-word">5. Inside Bar</div><div class="term-def">A small candle completely inside the previous candle's range. Market is coiling — a big move is coming.</div></div>
+        </div>
+        <div class="callout callout-green">✅ Master these 5 before learning any others. They cover 80% of what you'll see on real charts.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Reading Candles in Context',duration:'4 min',content:`
+        <div class="lesson-h1">Reading Candles in Context</div>
+        <p class="lesson-p">A single candle means nothing on its own. <strong>Where it appears on the chart is everything.</strong></p>
+        <div class="lesson-h2">The 3 Questions to Ask</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">What's the trend?</div><div class="term-def">Is price generally going up, down, or sideways? Trade with the trend — not against it as a beginner.</div></div>
+          <div class="term-card"><div class="term-word">Where is price?</div><div class="term-def">Near support? Near resistance? At a key level? Candles at key levels carry much more weight.</div></div>
+          <div class="term-card"><div class="term-word">What's the volume?</div><div class="term-def">High volume confirms the pattern. A hammer on high volume is far more reliable than a hammer on low volume.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 The best trades happen when multiple signals align — a hammer at support with high volume after a downtrend. That's a high-probability setup.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Practice Reading Live Charts',duration:'3 min',content:`
+        <div class="lesson-h1">Now Go Read Live Charts</div>
+        <p class="lesson-p">The only way to truly learn candlesticks is to look at thousands of them. No amount of reading replaces practice.</p>
+        <div class="lesson-h2">Your Practice Routine</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Daily Habit</div><div class="term-def">Open TradingView every day. Look at EUR/USD on a 5-min chart. Identify every pattern you see.</div></div>
+          <div class="term-card"><div class="term-word">Replay Mode</div><div class="term-def">TradingView has a bar replay feature. You can rewind any chart and practice reading candles in real time.</div></div>
+          <div class="term-card"><div class="term-word">Annotate</div><div class="term-def">Draw on the chart. Mark your support/resistance. Circle patterns you recognize. This builds your eye.</div></div>
+        </div>
+        <div class="sim-cta">
+          <div class="sim-title">Candlesticks Track Complete! 🎉</div>
+          <div class="sim-sub">Go to TradingView right now. Pull up EUR/USD on a 5-min chart. Find 3 patterns you just learned.</div>
+          <a href="https://www.tradingview.com" target="_blank" class="sim-btn">📊 Open TradingView</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `}
+    ]
+  },
+  etf: {
+    name:'ETFs',color:'var(--blue)',emoji:'📦',
+    sub:'5 lessons · Beginner',
+    lessons:[
+      {title:'What Is an ETF?',duration:'3 min',content:`
+        <div class="lesson-h1">What Is an ETF?</div>
+        <p class="lesson-p">ETF stands for <strong>Exchange-Traded Fund.</strong> It's a basket of stocks, bonds, or assets that you buy as one investment — like buying a whole grocery store instead of one item at a time.</p>
+        <div class="callout callout-blue">💡 Example: SPY is an ETF that contains all 500 stocks in the S&P 500. When you buy one share of SPY — you own a tiny piece of 500 companies at once.</div>
+        <div class="lesson-h2">Why ETFs?</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Instant Diversification</div><div class="term-def">Instead of betting on one company — you're spread across hundreds. One company fails — doesn't matter much.</div></div>
+          <div class="term-card"><div class="term-word">Low Cost</div><div class="term-def">Most ETFs have very low fees. Some are as low as 0.03% annually. Basically free.</div></div>
+          <div class="term-card"><div class="term-word">Simple</div><div class="term-def">No need to research individual companies. Buy the whole market and let it grow.</div></div>
+          <div class="term-card"><div class="term-word">Proven Returns</div><div class="term-def">The S&P 500 has averaged ~10% annual returns over the last 50+ years. ETFs track this.</div></div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'The Best ETFs to Start With',duration:'4 min',content:`
+        <div class="lesson-h1">The Best Starter ETFs</div>
+        <p class="lesson-p">You don't need to research hundreds of ETFs. These three cover 90% of what most long-term investors need.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">SPY / VOO</div><div class="term-def">Tracks the S&P 500 — 500 biggest US companies. The gold standard. If America grows, this grows.</div></div>
+          <div class="term-card"><div class="term-word">QQQ</div><div class="term-def">Tracks the top 100 Nasdaq companies — mostly tech (Apple, Google, Amazon, etc.). Higher growth potential, more volatile.</div></div>
+          <div class="term-card"><div class="term-word">VTI</div><div class="term-def">Total US stock market — over 4,000 companies. The most diversified single ETF you can buy.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 Warren Buffett's advice for most people: Just buy VOO (S&P 500 ETF) every month and don't touch it. That's it. That's the strategy.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Dollar Cost Averaging',duration:'3 min',content:`
+        <div class="lesson-h1">Dollar Cost Averaging</div>
+        <p class="lesson-p"><strong>Dollar Cost Averaging (DCA)</strong> means investing a fixed amount at regular intervals — regardless of what the market is doing.</p>
+        <div class="callout callout-blue">💡 Example: Invest $100 in VOO every month no matter what. When prices are high you buy less shares. When prices are low you buy more. Over time your average cost smooths out.</div>
+        <div class="lesson-h2">Why DCA Works</div>
+        <p class="lesson-p">Nobody can predict the market. DCA removes the need to time it. You just invest consistently and let time do the work. This is how regular people build real wealth.</p>
+        <div class="callout callout-green">✅ $100/month in VOO for 30 years at 10% average return = approximately $200,000. Without ever trying to time the market.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Where to Buy ETFs',duration:'3 min',content:`
+        <div class="lesson-h1">Where to Buy ETFs</div>
+        <p class="lesson-p">ETFs trade on stock exchanges just like regular stocks. You need a brokerage account to buy them.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Fidelity</div><div class="term-def">Zero commission ETFs. No account minimums. Excellent for beginners. Highly recommended.</div></div>
+          <div class="term-card"><div class="term-word">Charles Schwab</div><div class="term-def">No minimums. Great research tools. Also offers fractional shares of ETFs.</div></div>
+          <div class="term-card"><div class="term-word">Robinhood</div><div class="term-def">Simple app. Good for beginners. Commission free. Limited research tools.</div></div>
+          <div class="term-card"><div class="term-word">Vanguard</div><div class="term-def">Best for long-term investors. They created many of the best ETFs (VOO, VTI). Investor-owned structure.</div></div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Your ETF Action Plan',duration:'3 min',content:`
+        <div class="lesson-h1">Your ETF Action Plan</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Step 1</div><div class="term-def">Open a free brokerage account at Fidelity or Schwab. Takes 10 minutes online.</div></div>
+          <div class="term-card"><div class="term-word">Step 2</div><div class="term-def">Decide on a monthly amount you can invest consistently. Even $25/month is a start.</div></div>
+          <div class="term-card"><div class="term-word">Step 3</div><div class="term-def">Buy VOO or VTI. That's it. Don't overthink it.</div></div>
+          <div class="term-card"><div class="term-word">Step 4</div><div class="term-def">Set up automatic monthly investing if your broker allows it. Then forget about it.</div></div>
+          <div class="term-card"><div class="term-word">Step 5</div><div class="term-def">Check it quarterly — not daily. ETFs are long game investments. Watching daily creates anxiety.</div></div>
+        </div>
+        <div class="sim-cta">
+          <div class="sim-title">ETF Track Complete! 🎉</div>
+          <div class="sim-sub">Simple. Consistent. Proven. Open your account and start your first monthly investment.</div>
+          <a href="https://www.fidelity.com" target="_blank" class="sim-btn">🏦 Open Fidelity Account</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `}
+    ]
+  },
+  options: {
+    name:'Options',color:'var(--purple)',emoji:'⚡',
+    sub:'6 lessons · Intermediate',
+    lessons:[
+      {title:'What Are Options?',duration:'4 min',content:`
+        <div class="lesson-h1">What Are Options?</div>
+        <p class="lesson-p">An option is a <strong>contract that gives you the right — but not the obligation</strong> — to buy or sell a stock at a specific price before a specific date.</p>
+        <div class="callout callout-red">⚠️ Options are more complex than stocks or forex. Complete the Day Trading and Candlesticks tracks first. Do not trade options with real money until you deeply understand them.</div>
+        <div class="lesson-h2">Two Types of Options</div>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Call Option</div><div class="term-def">The right to BUY a stock at a set price. You buy calls when you think the price will go UP.</div></div>
+          <div class="term-card"><div class="term-word">Put Option</div><div class="term-def">The right to SELL a stock at a set price. You buy puts when you think the price will go DOWN.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 Simple way to remember: Call = up. Put = down.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Strike Price & Expiration',duration:'4 min',content:`
+        <div class="lesson-h1">Strike Price & Expiration</div>
+        <p class="lesson-p">Every options contract has two key components that define it.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Strike Price</div><div class="term-def">The price at which you can buy (call) or sell (put) the stock. You pick this when buying the contract.</div></div>
+          <div class="term-card"><div class="term-word">Expiration Date</div><div class="term-def">The date the contract expires. If your prediction doesn't come true by this date — the option expires worthless.</div></div>
+          <div class="term-card"><div class="term-word">Premium</div><div class="term-def">The price you pay for the option contract. This is your maximum loss if the option expires worthless.</div></div>
+          <div class="term-card"><div class="term-word">In The Money</div><div class="term-def">When the stock price has moved past your strike price in the direction you predicted. Your option has real value.</div></div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Why Options Are Powerful',duration:'3 min',content:`
+        <div class="lesson-h1">Why Options Are Powerful</div>
+        <p class="lesson-p">Options can deliver massive percentage returns on small amounts of capital. This is the main reason traders are attracted to them.</p>
+        <div class="callout callout-blue">📊 Example: Apple stock at $150. You buy a call option for $2 (controlling 100 shares = $200 total). Stock moves to $160. Your option might be worth $12 — a 500% return on your $200.</div>
+        <div class="lesson-h2">The Risk</div>
+        <p class="lesson-p">If Apple stays at $150 or goes down — your $200 option could expire worth $0. You lose 100% of what you paid. This is why options are considered high risk.</p>
+        <div class="callout callout-red">⚠️ Never put money into options that you can't afford to lose completely. Options can go to zero.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'The Greeks — Simple Version',duration:'4 min',content:`
+        <div class="lesson-h1">The Greeks — Simple Version</div>
+        <p class="lesson-p">Options have variables called "the Greeks" that tell you how the option price will behave. You only need to know two to start.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Delta</div><div class="term-def">How much the option price moves when the stock moves $1. A delta of 0.5 means the option gains $0.50 for every $1 the stock goes up.</div></div>
+          <div class="term-card"><div class="term-word">Theta (Time Decay)</div><div class="term-def">Options lose value every day as expiration approaches — even if the stock doesn't move. This works against option buyers.</div></div>
+        </div>
+        <div class="callout callout-gold">💡 Time decay is the biggest enemy of beginners buying options. The longer to expiration, the more time value. Always give yourself more time than you think you need.</div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Simple Options Strategy',duration:'4 min',content:`
+        <div class="lesson-h1">Simple Options Strategy for Beginners</div>
+        <p class="lesson-p">There are hundreds of options strategies. Start with just one until you master it.</p>
+        <div class="lesson-h2">Buying Calls on Strong Stocks</div>
+        <p class="lesson-p">Find a strong stock in an uptrend. Buy a call option with a strike price slightly above current price. Give yourself 30-60 days expiration. Set a rule to exit if you lose 50% or gain 100%.</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">Entry Rule</div><div class="term-def">Only buy calls when the stock is clearly trending up and near support.</div></div>
+          <div class="term-card"><div class="term-word">Exit at -50%</div><div class="term-def">If your option loses half its value — sell it. Don't let it go to zero.</div></div>
+          <div class="term-card"><div class="term-word">Exit at +100%</div><div class="term-def">If your option doubles — take profits. Greed kills option traders.</div></div>
+          <div class="term-card"><div class="term-word">Position Size</div><div class="term-def">Never put more than 2-5% of your account in a single option. They can go to zero.</div></div>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Got It — Next Lesson</button>
+      `},
+      {title:'Are You Ready for Options?',duration:'3 min',content:`
+        <div class="lesson-h1">Are You Ready for Options?</div>
+        <p class="lesson-p">Before trading options with real money — answer these honestly:</p>
+        <div class="term-grid">
+          <div class="term-card"><div class="term-word">✓ Chart Reading</div><div class="term-def">Can you identify trends, support/resistance, and key candlestick patterns confidently?</div></div>
+          <div class="term-card"><div class="term-word">✓ Paper Traded</div><div class="term-def">Have you practiced options on a simulator for at least 30 days?</div></div>
+          <div class="term-card"><div class="term-word">✓ Risk Rules</div><div class="term-def">Do you have strict rules for how much you'll risk and when you'll exit?</div></div>
+          <div class="term-card"><div class="term-word">✓ Emotion Check</div><div class="term-def">Can you watch an option lose 40% without panic-selling or revenge-trading?</div></div>
+        </div>
+        <div class="callout callout-green">✅ If you answered yes to all 4 — you're ready to start with real money. Start small. Learn fast.</div>
+        <div class="sim-cta">
+          <div class="sim-title">Options Track Complete! 🎉</div>
+          <div class="sim-sub">Practice on a simulator before going live. Options move fast — know your plan before you enter.</div>
+          <a href="https://www.investopedia.com/simulator/" target="_blank" class="sim-btn">🎮 Practice Options</a>
+        </div>
+        <button class="complete-btn" onclick="completeLesson()">✓ Track Complete!</button>
+      `}
+    ]
+  }
+};
+
+// ══ STATE ══
+let currentTrack = null;
+let currentLessonIndex = 0;
+let progress = JSON.parse(localStorage.getItem('mk_progress') || '{}');
+
+// ══ NAVIGATION ══
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent = id === 'home' ? 'MARKET KINGS' : (currentTrack ? TRACKS[currentTrack].name.toUpperCase() : 'MARKET KINGS');
+  document.getElementById('topbarSub').textContent = id === 'home' ? 'Learn to Trade' : (currentTrack ? TRACKS[currentTrack].sub : '');
+}
+
+function showTrack(trackId, navEl) {
+  currentTrack = trackId;
+  const track = TRACKS[trackId];
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-track').classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('topbarTitle').textContent = track.name.toUpperCase();
+  document.getElementById('topbarSub').textContent = track.sub;
+  document.getElementById('trackTitle').textContent = track.emoji + ' ' + track.name;
+  document.getElementById('trackSub').textContent = track.sub;
+  const completed = (progress[trackId] || []).length;
+  const total = track.lessons.length;
+  document.getElementById('trackProgress').style.width = (completed / total * 100) + '%';
+  renderLessonList(trackId);
+}
+
+function renderLessonList(trackId) {
+  const track = TRACKS[trackId];
+  const completed = progress[trackId] || [];
+  const list = document.getElementById('lessonList');
+  list.innerHTML = track.lessons.map((lesson, i) => {
+    const isCompleted = completed.includes(i);
+    const isActive = i === (completed.length < track.lessons.length ? completed.length : 0);
+    return `<div class="lesson-item ${isActive?'active':''} ${isCompleted?'completed':''}" onclick="openLesson(${i})">
+      <div class="lesson-num">${isCompleted ? '✓' : i + 1}</div>
+      <div class="lesson-info">
+        <div class="lesson-title">${lesson.title}</div>
+        <div class="lesson-meta">${lesson.duration} read</div>
+      </div>
+      <div class="lesson-check"></div>
+    </div>`;
+  }).join('');
+}
+
+function openLesson(index) {
+  currentLessonIndex = index;
+  const lesson = TRACKS[currentTrack].lessons[index];
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-lesson').classList.add('active');
+  document.getElementById('lessonTitleBar').textContent = lesson.title;
+  document.getElementById('lessonContent').innerHTML = lesson.content;
+  document.getElementById('lessonContent').scrollTop = 0;
+}
+
+function backToTrack() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-track').classList.add('active');
+}
+
+function prevLesson() {
+  if (currentLessonIndex > 0) openLesson(currentLessonIndex - 1);
+}
+
+function nextLesson() {
+  const track = TRACKS[currentTrack];
+  if (currentLessonIndex < track.lessons.length - 1) openLesson(currentLessonIndex + 1);
+  else backToTrack();
+}
+
+function completeLesson() {
+  if (!progress[currentTrack]) progress[currentTrack] = [];
+  if (!progress[currentTrack].includes(currentLessonIndex)) {
+    progress[currentTrack].push(currentLessonIndex);
+    localStorage.setItem('mk_progress', JSON.stringify(progress));
+  }
+  nextLesson();
+}
+
+function checkAnswer(btn, isCorrect) {
+  const opts = btn.parentElement.querySelectorAll('.quiz-opt');
+  opts.forEach(o => o.disabled = true);
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  if (!isCorrect) {
+    opts.forEach(o => { if (o.onclick.toString().includes('true')) o.classList.add('correct'); });
+  }
+}
+
+// Init
+document.querySelector('.nav-item').classList.add('active');
+</script>
+</body>
+</html>
