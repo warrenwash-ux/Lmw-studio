@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMW Command Center — Super Agent Phase 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04060a;
+  --s1: #080c14;
+  --s2: #0d1220;
+  --s3: #111828;
+  --b1: #1a2235;
+  --b2: #243048;
+  --gold: #f0a500;
+  --gold2: #ffc844;
+  --gold3: rgba(240,165,0,0.08);
+  --green: #05d68a;
+  --green2: rgba(5,214,138,0.08);
+  --red: #ff3d5a;
+  --red2: rgba(255,61,90,0.08);
+  --blue: #3d9eff;
+  --blue2: rgba(61,158,255,0.08);
+  --amber: #ffb830;
+  --text: #dde4f0;
+  --t2: #7e8fa8;
+  --t3: #3d4d66;
+  --ig: #e1306c;
+  --fb: #1877f2;
+  --tt: #ff2d55;
+  --sp: #1db954;
+  --am: #fc3c44;
+  --yt: #ff0000;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND ATMOSPHERE */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 100% 60% at 0% 0%, rgba(240,165,0,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, rgba(5,214,138,0.04) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(255,255,255,0.012) 50px),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(255,255,255,0.012) 50px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap {
+  position:relative;
+  z-index:1;
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 20px 80px;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 0 18px;
+  border-bottom:1px solid var(--b1);
+  margin-bottom:20px;
+  animation: fadeD .5s ease both;
+}
+
+.logo h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.9rem;
+  letter-spacing:5px;
+  background:linear-gradient(135deg, var(--gold), var(--gold2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.logo span {
+  display:block;
+  font-size:.6rem;
+  letter-spacing:3px;
+  color:var(--t3);
+  text-transform:uppercase;
+  margin-top:2px;
+}
+
+.topbar-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+
+.pill {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border-radius:20px;
+  padding:5px 13px;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.pill-green { background:var(--green2); border:1px solid rgba(5,214,138,.2); color:var(--green); }
+.pill-amber { background:rgba(255,184,48,.08); border:1px solid rgba(255,184,48,.2); color:var(--amber); }
+.pill-red { background:var(--red2); border:1px solid rgba(255,61,90,.2); color:var(--red); }
+
+.dot { width:7px;height:7px;border-radius:50%; }
+.dot-green { background:var(--green); animation:pulse 2s infinite; }
+.dot-amber { background:var(--amber); }
+.dot-red { background:var(--red); }
+
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 currentColor;} 50%{opacity:.5;} }
+
+/* ── KEYS STRIP ── */
+.keys-strip {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  padding:16px 20px;
+  margin-bottom:18px;
+  animation: fadeU .4s .1s ease both;
+}
+
+.keys-strip h3 {
+  font-size:.6rem;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+
+.keys-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:10px;
+}
+
+.key-field label {
+  display:block;
+  font-size:.58rem;
+  letter-spacing:1.5px;
+  color:var(--t3);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.key-field input {
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--b2);
+  border-radius:7px;
+  padding:8px 11px;
+  color:var(--text);
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;
+  outline:none;
+  transition:border-color .2s;
+}
+.key-field input:focus { border-color:var(--gold); }
+.key-field input::placeholder { color:var(--t3); }
+
+.keys-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+
+/* ── BUTTONS ── */
+.btn {
+  border:none;
+  border-radius:7px;
+  padding:9px 18px;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  font-size:.72rem;
+  letter-spacing:.8px;
+  cursor:pointer;
+  transition:all .2s;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+.btn-gold { background:var(--gold); color:#000; }
+.btn-gold:hover { background:var(--gold2); transform:translateY(-1px); box-shadow:0 4px 18px rgba(240,165,0,.3); }
+.btn-ghost { background:transparent; border:1px solid var(--b2); color:var(--t2); }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
+.btn-green { background:var(--green); color:#000; }
+.btn-green:hover { filter:brightness(1.1); transform:translateY(-1px); }
+.btn-red { background:var(--red2); border:1px solid rgba(255,61,90,.3); color:var(--red); }
+.btn-red:hover { background:rgba(255,61,90,.15); }
+.btn:disabled { opacity:.3; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+/* ── TABS ── */
+.tabs {
+  display:flex;
+  gap:2px;
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:10px;
+  padding:4px;
+  margin-bottom:20px;
+  overflow-x:auto;
+  animation: fadeU .4s .15s ease both;
+}
+
+.tab {
+  flex:1;
+  min-width:fit-content;
+  padding:8px 15px;
+  border:none;
+  background:transparent;
+  color:var(--t3);
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:600;
+  font-size:.68rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  cursor:pointer;
+  border-radius:7px;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.tab:hover { color:var(--t2); background:var(--s2); }
+.tab.on {
+  background:linear-gradient(135deg, rgba(240,165,0,.14), rgba(240,165,0,.05));
+  color:var(--gold);
+  border:1px solid rgba(240,165,0,.18);
+}
+
+/* ── PANELS ── */
+.panel { display:none; }
+.panel.on { display:block; animation:fadeU .3s ease both; }
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  font-size:.58rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--t3);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.sec-label::after { content:''; flex:1; height:1px; background:var(--b1); }
+
+/* ── CARD ── */
+.card {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  padding:18px 20px;
+  transition:border-color .2s;
+}
+.card:hover { border-color:var(--b2); }
+
+/* ── GRID LAYOUTS ── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.gauto { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px; }
+
+@media(max-width:900px) { .g4{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:1fr 1fr;} }
+@media(max-width:600px) { .g2,.g3,.g4{grid-template-columns:1fr;} }
+
+/* ── PLATFORM CARDS ── */
+.platform-card {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+}
+
+.platform-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+}
+
+.pc-ig::before { background:linear-gradient(90deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.pc-fb::before { background:var(--fb); }
+.pc-tt::before { background:linear-gradient(90deg,#ff2d55,#00f2ea); }
+.pc-sp::before { background:var(--sp); }
+.pc-am::before { background:linear-gradient(90deg,#fc3c44,#ff6b6b); }
+.pc-yt::before { background:var(--yt); }
+
+.pc-inner { padding:16px 18px; }
+
+.pc-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+
+.pc-name {
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--t2);
+}
+
+.pc-badge {
+  font-size:.58rem;
+  letter-spacing:1px;
+  padding:3px 8px;
+  border-radius:10px;
+}
+
+.badge-live { background:var(--green2); color:var(--green); border:1px solid rgba(5,214,138,.2); }
+.badge-ready { background:rgba(240,165,0,.1); color:var(--gold); border:1px solid rgba(240,165,0,.2); }
+.badge-manual { background:var(--blue2); color:var(--blue); border:1px solid rgba(61,158,255,.2); }
+.badge-off { background:var(--s2); color:var(--t3); border:1px solid var(--b1); }
+
+.pc-stats {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+.pc-stat {
+  background:var(--bg);
+  border-radius:7px;
+  padding:8px 10px;
+}
+
+.pc-stat-l {
+  font-size:.55rem;
+  color:var(--t3);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:3px;
+}
+
+.pc-stat-v {
+  font-family:'JetBrains Mono',monospace;
+  font-size:.9rem;
+  color:var(--text);
+  font-weight:500;
+}
+
+.pc-stat-v.loading {
+  background:linear-gradient(90deg, var(--s1) 25%, var(--s2) 50%, var(--s1) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:4px;
+  height:18px;
+  width:70%;
+}
+
+.pc-delta {
+  font-size:.62rem;
+  font-family:'JetBrains Mono',monospace;
+  margin-top:2px;
+}
+.up { color:var(--green); }
+.dn { color:var(--red); }
+.nt { color:var(--t3); }
+
+.pc-action {
+  width:100%;
+  padding:8px;
+  background:var(--bg);
+  border:1px dashed var(--b2);
+  border-radius:7px;
+  color:var(--t3);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:all .2s;
+  text-transform:uppercase;
+}
+.pc-action:hover { border-color:var(--gold); color:var(--gold); border-style:solid; }
+.pc-action.connected { border-color:rgba(5,214,138,.3); color:var(--green); border-style:solid; cursor:default; }
+
+/* ── METRIC BANNER ── */
+.metric-banner {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.metric-tile {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:10px;
+  padding:14px 16px;
+}
+
+.mt-label { font-size:.58rem; letter-spacing:2px; text-transform:uppercase; color:var(--t3); margin-bottom:7px; }
+
+.mt-value {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.1rem;
+  letter-spacing:2px;
+  line-height:1;
+  color:var(--text);
+}
+
+.mt-delta { font-size:.65rem; font-family:'JetBrains Mono',monospace; margin-top:4px; }
+
+/* ── BRIEFING ── */
+.briefing-box {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  padding:22px;
+  min-height:280px;
+  font-size:.85rem;
+  line-height:1.85;
+  color:var(--t2);
+  white-space:pre-wrap;
+  position:relative;
+  overflow:hidden;
+}
+
+.briefing-box.scanning::after {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:scan 1.4s infinite;
+}
+
+.briefing-empty {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:240px;
+  gap:12px;
+  color:var(--t3);
+  text-align:center;
+}
+
+.briefing-empty .icon { font-size:2.5rem; opacity:.25; }
+.briefing-empty p { font-size:.78rem; }
+.briefing-empty small { font-size:.65rem; color:var(--t3); max-width:320px; line-height:1.6; }
+
+/* ── VERDICT ITEMS ── */
+.verdict-row {
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 16px;
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:9px;
+  margin-bottom:7px;
+  transition:all .2s;
+}
+.verdict-row:hover { border-color:var(--b2); transform:translateX(2px); }
+
+.vbadge {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:.72rem;
+  letter-spacing:2px;
+  padding:3px 10px;
+  border-radius:5px;
+  white-space:nowrap;
+  min-width:58px;
+  text-align:center;
+  flex-shrink:0;
+}
+.vb-push { background:var(--green2); border:1px solid rgba(5,214,138,.25); color:var(--green); }
+.vb-cease { background:var(--red2); border:1px solid rgba(255,61,90,.25); color:var(--red); }
+.vb-test { background:rgba(255,184,48,.08); border:1px solid rgba(255,184,48,.25); color:var(--amber); }
+
+.verdict-body h4 { font-size:.8rem; font-weight:700; color:var(--text); margin-bottom:2px; }
+.verdict-body p { font-size:.73rem; color:var(--t2); line-height:1.5; }
+
+/* ── POST BUILDER ── */
+.post-textarea {
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--b2);
+  border-radius:8px;
+  padding:12px 14px;
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.83rem;
+  line-height:1.65;
+  resize:vertical;
+  min-height:110px;
+  outline:none;
+  transition:border-color .2s;
+  margin-bottom:12px;
+}
+.post-textarea:focus { border-color:var(--gold); }
+.post-textarea::placeholder { color:var(--t3); }
+
+.platform-pills {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.pp {
+  display:flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 13px;
+  border:1px solid var(--b2);
+  border-radius:20px;
+  cursor:pointer;
+  font-size:.68rem;
+  font-weight:600;
+  transition:all .2s;
+  background:transparent;
+  color:var(--t3);
+  user-select:none;
+}
+
+.pp.on-ig { border-color:rgba(225,48,108,.5); color:var(--ig); background:rgba(225,48,108,.07); }
+.pp.on-fb { border-color:rgba(24,119,242,.5); color:var(--fb); background:rgba(24,119,242,.07); }
+.pp.on-tt { border-color:rgba(255,45,85,.5); color:var(--tt); background:rgba(255,45,85,.07); }
+.pp.on-yt { border-color:rgba(255,0,0,.5); color:var(--yt); background:rgba(255,0,0,.07); }
+
+.post-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+@media(max-width:500px){.post-row{grid-template-columns:1fr;}}
+
+.field-label {
+  font-size:.58rem;
+  color:var(--t3);
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.field-input {
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--b2);
+  border-radius:7px;
+  padding:8px 11px;
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.78rem;
+  outline:none;
+  transition:border-color .2s;
+}
+.field-input:focus { border-color:var(--gold); }
+
+/* ── SCHEDULE QUEUE ── */
+.queue-item {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:11px 15px;
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:9px;
+  margin-bottom:7px;
+  transition:all .2s;
+}
+.queue-item:hover { border-color:var(--b2); }
+
+.qi-time {
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;
+  color:var(--gold);
+  min-width:130px;
+  flex-shrink:0;
+}
+
+.qi-platforms { display:flex; gap:4px; flex-shrink:0; }
+
+.qi-dot {
+  width:20px;height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.55rem;
+  font-weight:700;
+}
+
+.qi-preview {
+  flex:1;
+  font-size:.75rem;
+  color:var(--t2);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.qi-status-pending { font-size:.58rem; color:var(--amber); letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+.qi-status-live { font-size:.58rem; color:var(--green); letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+.qi-status-failed { font-size:.58rem; color:var(--red); letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+
+/* ── CONTENT GEN ── */
+.gen-controls {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.gen-output {
+  background:var(--bg);
+  border:1px solid var(--b2);
+  border-radius:8px;
+  padding:14px;
+  min-height:90px;
+  font-size:.82rem;
+  color:var(--t2);
+  line-height:1.7;
+  white-space:pre-wrap;
+  margin-top:12px;
+  position:relative;
+}
+
+/* ── ACCOUNTABILITY ── */
+.goal-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 0;
+  border-bottom:1px solid var(--b1);
+}
+.goal-row:last-child { border-bottom:none; }
+
+.gcheck {
+  width:17px;height:17px;
+  border-radius:4px;
+  border:2px solid var(--b2);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.6rem;
+  transition:all .2s;
+  flex-shrink:0;
+}
+.gcheck.done { background:var(--green); border-color:var(--green); color:#000; }
+
+.gtext { font-size:.78rem; color:var(--t2); flex:1; }
+.gtext.done { text-decoration:line-through; color:var(--t3); }
+
+/* ── PROGRESS ── */
+.pbar { height:3px; background:var(--b1); border-radius:2px; overflow:hidden; margin-top:5px; }
+.pfill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--gold),var(--gold2)); transition:width .5s ease; }
+
+/* ── COACH ── */
+.coach-wrap {
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.coach-head {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 16px;
+  border-bottom:1px solid var(--b1);
+  background:var(--s2);
+}
+
+.coach-av {
+  width:30px;height:30px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.85rem;
+  flex-shrink:0;
+}
+
+.coach-head-text .name { font-size:.78rem; font-weight:700; color:var(--text); }
+.coach-head-text .role { font-size:.58rem; color:var(--t3); letter-spacing:.5px; }
+
+.coach-msgs {
+  padding:14px 16px;
+  min-height:200px;
+  max-height:300px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.coach-msgs::-webkit-scrollbar{width:3px;}
+.coach-msgs::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+
+.cmsg {
+  padding:9px 13px;
+  border-radius:9px;
+  font-size:.78rem;
+  line-height:1.6;
+  max-width:88%;
+}
+.cmsg-a {
+  background:var(--gold3);
+  border:1px solid rgba(240,165,0,.12);
+  color:var(--text);
+  align-self:flex-start;
+  border-bottom-left-radius:2px;
+}
+.cmsg-u {
+  background:var(--s2);
+  border:1px solid var(--b2);
+  color:var(--t2);
+  align-self:flex-end;
+  border-bottom-right-radius:2px;
+}
+
+.coach-foot {
+  display:flex;
+  gap:8px;
+  padding:12px 14px;
+  border-top:1px solid var(--b1);
+}
+
+.coach-foot input {
+  flex:1;
+  background:var(--bg);
+  border:1px solid var(--b2);
+  border-radius:7px;
+  padding:8px 11px;
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.8rem;
+  outline:none;
+  transition:border-color .2s;
+}
+.coach-foot input:focus { border-color:var(--gold); }
+.coach-foot input::placeholder { color:var(--t3); }
+
+/* ── PERSONA SWITCH ── */
+.persona-sw { display:flex; gap:7px; margin-bottom:14px; }
+
+.psw-btn {
+  padding:6px 17px;
+  border-radius:20px;
+  border:1px solid var(--b2);
+  background:transparent;
+  color:var(--t3);
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:all .2s;
+  text-transform:uppercase;
+}
+.psw-lmw { background:var(--gold3); border-color:rgba(240,165,0,.35); color:var(--gold); }
+.psw-zaire { background:var(--blue2); border-color:rgba(61,158,255,.3); color:var(--blue); }
+
+/* ── TOAST ── */
+.toast-wrap { position:fixed; top:18px; right:18px; z-index:9999; display:flex; flex-direction:column; gap:7px; }
+
+.toast {
+  background:var(--s2);
+  border:1px solid var(--b2);
+  border-radius:9px;
+  padding:11px 15px;
+  font-size:.75rem;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:9px;
+  animation:slideIn .3s ease both;
+  max-width:290px;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.toast.ok { border-color:rgba(5,214,138,.3); }
+.toast.err { border-color:rgba(255,61,90,.3); }
+.toast.inf { border-color:rgba(240,165,0,.3); }
+
+/* ── API STATUS BANNER ── */
+.api-status-row {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+  padding:12px 16px;
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:10px;
+}
+
+.api-chip {
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:.62rem;
+  font-weight:600;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:12px;
+}
+
+.chip-live { background:var(--green2); color:var(--green); }
+.chip-waiting { background:rgba(255,184,48,.08); color:var(--amber); }
+.chip-off { background:var(--s2); color:var(--t3); }
+
+/* ── POSTING STATUS LIVE FEED ── */
+.live-feed {
+  background:var(--bg);
+  border:1px solid var(--b1);
+  border-radius:9px;
+  padding:14px;
+  height:160px;
+  overflow-y:auto;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.68rem;
+  color:var(--t2);
+  line-height:1.8;
+}
+.live-feed::-webkit-scrollbar{width:3px;}
+.live-feed::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+
+.lf-line { display:flex; gap:10px; }
+.lf-time { color:var(--t3); flex-shrink:0; }
+.lf-ok { color:var(--green); }
+.lf-warn { color:var(--amber); }
+.lf-err { color:var(--red); }
+.lf-info { color:var(--blue); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeU { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+@keyframes fadeD { from{opacity:0;transform:translateY(-8px);} to{opacity:1;transform:translateY(0);} }
+@keyframes slideIn { from{transform:translateX(110%);opacity:0;} to{transform:translateX(0);opacity:1;} }
+@keyframes scan { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
+@keyframes shimmer { 0%{background-position:200% 0;} 100%{background-position:-200% 0;} }
+
+.spin {
+  display:inline-block;
+  width:12px;height:12px;
+  border:2px solid rgba(0,0,0,.15);
+  border-top-color:currentColor;
+  border-radius:50%;
+  animation:sp .7s linear infinite;
+}
+@keyframes sp { to{transform:rotate(360deg);} }
+
+/* ── WEEKLY TRACKER ── */
+.wt-row {
+  margin-bottom:14px;
+}
+.wt-head { display:flex; justify-content:space-between; margin-bottom:5px; }
+.wt-name { font-size:.75rem; color:var(--t2); }
+.wt-val { font-family:'JetBrains Mono',monospace; font-size:.75rem; color:var(--gold); }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top:40px;
+  padding-top:18px;
+  border-top:1px solid var(--b1);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.footer-l { font-family:'Bebas Neue',sans-serif; font-size:.85rem; letter-spacing:3px; color:var(--t3); }
+.footer-r { font-family:'JetBrains Mono',monospace; font-size:.58rem; color:var(--t3); }
+</style>
+</head>
+<body>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<div class="wrap">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">
+      <h1>LMW Command Center</h1>
+      <span>Super Agent Phase 2 · Live API Edition</span>
+    </div>
+    <div class="topbar-right">
+      <div class="pill pill-green" id="agentPill">
+        <div class="dot dot-green"></div>
+        <span id="agentPillText">Agent Ready</span>
+      </div>
+      <div class="pill pill-amber" id="postingPill" style="display:none">
+        <div class="dot dot-amber"></div>
+        <span>Posting</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEYS STRIP -->
+  <div class="keys-strip">
+    <h3>⚙ API Keys — Required for Live Operation</h3>
+    <div class="keys-grid">
+      <div class="key-field">
+        <label>Anthropic API Key (Brain)</label>
+        <input type="password" id="kAnthropic" placeholder="sk-ant-..." />
+      </div>
+      <div class="key-field">
+        <label>Meta Access Token (IG + FB)</label>
+        <input type="password" id="kMeta" placeholder="EAAxxxxxxxx..." />
+      </div>
+      <div class="key-field">
+        <label>Meta Page ID (Facebook Page)</label>
+        <input type="text" id="kPageId" placeholder="Your Facebook Page ID" />
+      </div>
+      <div class="key-field">
+        <label>Instagram Business Account ID</label>
+        <input type="text" id="kIgId" placeholder="Your IG Business Account ID" />
+      </div>
+      <div class="key-field">
+        <label>TikTok Access Token</label>
+        <input type="password" id="kTiktok" placeholder="act.xxxxxxxx..." />
+      </div>
+      <div class="key-field">
+        <label>Spotify Client ID</label>
+        <input type="text" id="kSpotifyId" placeholder="Spotify Client ID" />
+      </div>
+      <div class="key-field">
+        <label>Spotify Client Secret</label>
+        <input type="password" id="kSpotifySecret" placeholder="Spotify Client Secret" />
+      </div>
+      <div class="key-field">
+        <label>Artist Name</label>
+        <input type="text" id="kArtist" placeholder="Warren Lamb / LMW" value="Warren Lamb" />
+      </div>
+    </div>
+    <div class="keys-actions">
+      <button class="btn btn-gold" onclick="saveKeys()">💾 Save All Keys</button>
+      <button class="btn btn-ghost" onclick="testAllConnections()">⚡ Test All Connections</button>
+      <button class="btn btn-ghost" onclick="clearKeys()">🗑 Clear</button>
+    </div>
+  </div>
+
+  <!-- API STATUS ROW -->
+  <div class="api-status-row" id="apiStatusRow">
+    <div class="api-chip chip-waiting" id="chip-anthropic">◦ Anthropic</div>
+    <div class="api-chip chip-off" id="chip-meta">◦ Meta (IG+FB)</div>
+    <div class="api-chip chip-off" id="chip-tiktok">◦ TikTok</div>
+    <div class="api-chip chip-off" id="chip-spotify">◦ Spotify</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab on" onclick="tab('briefing',this)">📋 Briefing</button>
+    <button class="tab" onclick="tab('post',this)">📤 Post Engine</button>
+    <button class="tab" onclick="tab('content',this)">✍ Content Gen</button>
+    <button class="tab" onclick="tab('analytics',this)">📊 Analytics</button>
+    <button class="tab" onclick="tab('accountability',this)">🎯 Goals</button>
+    <button class="tab" onclick="tab('log',this)">🖥 Live Log</button>
+  </div>
+
+  <!-- ══════════════════ BRIEFING ══════════════════ -->
+  <div id="p-briefing" class="panel on">
+
+    <div class="persona-sw">
+      <button class="psw-btn psw-lmw" id="psw-lmw" onclick="setPersona('lmw',this)">LMW</button>
+      <button class="psw-btn" id="psw-zaire" onclick="setPersona('zaire',this)">Zaire</button>
+    </div>
+
+    <!-- LIVE METRIC TILES -->
+    <div class="metric-banner" id="metricBanner">
+      <div class="metric-tile">
+        <div class="mt-label">IG Reach (7d)</div>
+        <div class="mt-value" id="mt-igreach">—</div>
+        <div class="mt-delta nt" id="mt-igreach-d">Pull data to populate</div>
+      </div>
+      <div class="metric-tile">
+        <div class="mt-label">TikTok Views (7d)</div>
+        <div class="mt-value" id="mt-ttviews">—</div>
+        <div class="mt-delta nt" id="mt-ttviews-d">Pull data to populate</div>
+      </div>
+      <div class="metric-tile">
+        <div class="mt-label">Spotify Streams (7d)</div>
+        <div class="mt-value" id="mt-streams">—</div>
+        <div class="mt-delta nt" id="mt-streams-d">Pull data to populate</div>
+      </div>
+      <div class="metric-tile">
+        <div class="mt-label">Apple Shazams (7d)</div>
+        <div class="mt-value" id="mt-shazams">—</div>
+        <div class="mt-delta nt" id="mt-shazams-d">Pull data to populate</div>
+      </div>
+      <div class="metric-tile">
+        <div class="mt-label">FB Page Reach</div>
+        <div class="mt-value" id="mt-fbreach">—</div>
+        <div class="mt-delta nt">—</div>
+      </div>
+      <div class="metric-tile">
+        <div class="mt-label">Posts Scheduled</div>
+        <div class="mt-value" id="mt-scheduled">0</div>
+        <div class="mt-delta nt" id="mt-scheduled-d">In queue</div>
+      </div>
+    </div>
+
+    <!-- PULL + GENERATE -->
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center;">
+      <button class="btn btn-gold" onclick="pullAllData()">
+        <span id="pullBtnTxt">🔄 Pull Live Data from All Platforms</span>
+      </button>
+      <button class="btn btn-ghost" onclick="generateBriefing()">
+        <span id="briefBtnTxt">🧠 Generate Briefing from Live Data</span>
+      </button>
+      <div style="font-size:.62rem;color:var(--t3);font-family:'JetBrains Mono',monospace;" id="lastPull">Last pull: never</div>
+    </div>
+
+    <!-- BRIEFING OUTPUT -->
+    <div class="briefing-box" id="briefingBox">
+      <div class="briefing-empty">
+        <div class="icon">📡</div>
+        <p>No data pulled yet</p>
+        <small>Add your API keys above, hit "Pull Live Data" — the agent pulls your real numbers from every platform and generates your briefing automatically. No manual entry.</small>
+      </div>
+    </div>
+
+    <!-- VERDICTS -->
+    <div id="verdictsWrap" style="display:none;margin-top:18px;">
+      <div class="sec-label">Agent Verdicts</div>
+      <div id="verdictsList"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════ POST ENGINE ══════════════════ -->
+  <div id="p-post" class="panel">
+
+    <div class="persona-sw">
+      <button class="psw-btn psw-lmw" onclick="setPersona('lmw',this)">LMW</button>
+      <button class="psw-btn" onclick="setPersona('zaire',this)">Zaire</button>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+      <div class="sec-label" style="margin-bottom:14px;">Build Your Post</div>
+
+      <textarea class="post-textarea" id="postText" placeholder="Write your post here — or use Content Gen tab to create it with AI, then paste it here..."></textarea>
+
+      <div style="font-size:.58px;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;font-size:.6rem;margin-bottom:8px;">Publish To</div>
+      <div class="platform-pills">
+        <div class="pp" id="pp-ig" onclick="togglePP('ig')">📸 Instagram</div>
+        <div class="pp" id="pp-fb" onclick="togglePP('fb')">👍 Facebook</div>
+        <div class="pp" id="pp-tt" onclick="togglePP('tt')">🎵 TikTok</div>
+        <div class="pp" id="pp-yt" onclick="togglePP('yt')">▶️ YouTube</div>
+      </div>
+
+      <div class="post-row">
+        <div>
+          <div class="field-label">Schedule Date & Time</div>
+          <input type="datetime-local" class="field-input" id="postSchedule" />
+        </div>
+        <div>
+          <div class="field-label">Content Type</div>
+          <select class="field-input" id="postType">
+            <option value="feed">Feed Post</option>
+            <option value="reel">Reel / Short Video</option>
+            <option value="story">Story</option>
+            <option value="carousel">Carousel</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- MEDIA URL for video/image hosting -->
+      <div style="margin-bottom:12px;">
+        <div class="field-label">Media URL (image or video — must be publicly hosted)</div>
+        <input type="url" class="field-input" id="postMediaUrl" placeholder="https://your-server.com/your-video.mp4 or image.jpg" />
+        <div style="font-size:.6rem;color:var(--t3);margin-top:4px;">For reels/videos: upload to your GitHub, cloud storage, or CDN first. Then paste the public URL here.</div>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="schedulePost()">📅 Schedule Post</button>
+        <button class="btn btn-green" onclick="postNow()">⚡ Post Now (Live)</button>
+        <button class="btn btn-ghost" onclick="optimizeCaption()">🧠 AI Optimize Caption</button>
+      </div>
+    </div>
+
+    <!-- QUEUE -->
+    <div class="sec-label">Scheduled Queue</div>
+    <div id="postQueue">
+      <div style="padding:18px;text-align:center;color:var(--t3);font-size:.75rem;">Queue is empty — schedule your first post above</div>
+    </div>
+
+    <!-- POSTING LOG -->
+    <div style="margin-top:14px;">
+      <div class="sec-label">Post Activity Log</div>
+      <div class="live-feed" id="postLog">
+        <div class="lf-line"><span class="lf-time">--:--:--</span><span class="lf-info">Post engine initialized. Waiting for posts.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════ CONTENT GEN ══════════════════ -->
+  <div id="p-content" class="panel">
+
+    <div class="persona-sw">
+      <button class="psw-btn psw-lmw" onclick="setPersona('lmw',this)">LMW</button>
+      <button class="psw-btn" onclick="setPersona('zaire',this)">Zaire</button>
+    </div>
+
+    <div class="card">
+      <div class="sec-label" style="margin-bottom:14px;">AI Content Generator</div>
+      <div class="gen-controls">
+        <div>
+          <div class="field-label">Content Type</div>
+          <select class="field-input" id="genType">
+            <option value="promo">Music Promo</option>
+            <option value="sync">Sync Pitch Announcement</option>
+            <option value="bts">Behind The Scenes</option>
+            <option value="release">New Release Drop</option>
+            <option value="zaire_tease">Zaire Mystery Tease</option>
+            <option value="engage">Engagement Question</option>
+            <option value="milestone">Milestone / Achievement</option>
+            <option value="quote">Motivational Quote</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Platform</div>
+          <select class="field-input" id="genPlatform">
+            <option value="all">All Platforms</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="facebook">Facebook</option>
+            <option value="twitter">X / Twitter</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Tone</div>
+          <select class="field-input" id="genTone">
+            <option value="professional">Professional</option>
+            <option value="hype">Hype / Energy</option>
+            <option value="spiritual">Spiritual / Deep</option>
+            <option value="mysterious">Mysterious</option>
+            <option value="raw">Raw / Real</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Topic / Track Name</div>
+          <input type="text" class="field-input" id="genTopic" placeholder="e.g. cinematic soul, Zaire drop..." />
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="genContent()"><span id="genBtnTxt">✨ Generate Content</span></button>
+        <button class="btn btn-ghost" onclick="genContent(true)">🔄 Regenerate</button>
+        <button class="btn btn-ghost" onclick="sendToPostEngine()">→ Send to Post Engine</button>
+      </div>
+      <div class="gen-output" id="genOut" style="display:none;"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════ ANALYTICS ══════════════════ -->
+  <div id="p-analytics" class="panel">
+
+    <div class="persona-sw">
+      <button class="psw-btn psw-lmw" onclick="setPersona('lmw',this)">LMW</button>
+      <button class="psw-btn" onclick="setPersona('zaire',this)">Zaire</button>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="btn btn-gold" onclick="pullAllData()"><span>🔄 Pull All Platform Data</span></button>
+      <button class="btn btn-ghost" onclick="runDeepAnalysis()">🧠 Run Deep Analysis</button>
+    </div>
+
+    <!-- PLATFORM CARDS -->
+    <div class="gauto" id="platformCards">
+
+      <div class="platform-card pc-ig">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">Instagram</div>
+            <div class="pc-badge badge-ready" id="ig-badge">Ready</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Reach (7d)</div><div class="pc-stat-v" id="ig-reach">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Impressions</div><div class="pc-stat-v" id="ig-imp">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Followers</div><div class="pc-stat-v" id="ig-fol">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Eng Rate</div><div class="pc-stat-v" id="ig-eng">—</div></div>
+          </div>
+          <button class="pc-action" id="ig-connect-btn" onclick="pullInstagram()">Pull Instagram Data</button>
+        </div>
+      </div>
+
+      <div class="platform-card pc-fb">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">Facebook</div>
+            <div class="pc-badge badge-ready" id="fb-badge">Ready</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Page Reach</div><div class="pc-stat-v" id="fb-reach">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Post Likes</div><div class="pc-stat-v" id="fb-likes">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Followers</div><div class="pc-stat-v" id="fb-fol">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Shares</div><div class="pc-stat-v" id="fb-shares">—</div></div>
+          </div>
+          <button class="pc-action" id="fb-connect-btn" onclick="pullFacebook()">Pull Facebook Data</button>
+        </div>
+      </div>
+
+      <div class="platform-card pc-tt">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">TikTok</div>
+            <div class="pc-badge badge-ready" id="tt-badge">Ready</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Video Views</div><div class="pc-stat-v" id="tt-views">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Likes</div><div class="pc-stat-v" id="tt-likes">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Followers</div><div class="pc-stat-v" id="tt-fol">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Profile Views</div><div class="pc-stat-v" id="tt-prof">—</div></div>
+          </div>
+          <button class="pc-action" id="tt-connect-btn" onclick="pullTikTok()">Pull TikTok Data</button>
+        </div>
+      </div>
+
+      <div class="platform-card pc-sp">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">Spotify</div>
+            <div class="pc-badge badge-ready" id="sp-badge">Ready</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Streams (30d)</div><div class="pc-stat-v" id="sp-streams">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Listeners</div><div class="pc-stat-v" id="sp-listeners">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Followers</div><div class="pc-stat-v" id="sp-followers">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Popularity</div><div class="pc-stat-v" id="sp-pop">—</div></div>
+          </div>
+          <button class="pc-action" id="sp-connect-btn" onclick="pullSpotify()">Pull Spotify Data</button>
+        </div>
+      </div>
+
+      <div class="platform-card pc-am">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">Apple Music</div>
+            <div class="pc-badge badge-manual" id="am-badge">Manual Import</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Streams</div><div class="pc-stat-v" id="am-streams">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Shazams</div><div class="pc-stat-v" id="am-shazams">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Listeners</div><div class="pc-stat-v" id="am-listeners">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Top City</div><div class="pc-stat-v" id="am-city">—</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
+            <input type="number" class="field-input" id="am-in-streams" placeholder="Streams" style="font-size:.68rem;padding:6px 8px;" />
+            <input type="number" class="field-input" id="am-in-shazams" placeholder="Shazams" style="font-size:.68rem;padding:6px 8px;" />
+          </div>
+          <button class="pc-action" style="margin-top:8px;" onclick="saveAppleData()">Save Apple Music Data</button>
+        </div>
+      </div>
+
+      <div class="platform-card pc-yt">
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div class="pc-name">YouTube</div>
+            <div class="pc-badge badge-off" id="yt-badge">Setup Needed</div>
+          </div>
+          <div class="pc-stats">
+            <div class="pc-stat"><div class="pc-stat-l">Views (28d)</div><div class="pc-stat-v" id="yt-views">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Watch Time</div><div class="pc-stat-v" id="yt-watch">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Subscribers</div><div class="pc-stat-v" id="yt-subs">—</div></div>
+            <div class="pc-stat"><div class="pc-stat-l">Avg View %</div><div class="pc-stat-v" id="yt-avd">—</div></div>
+          </div>
+          <button class="pc-action" onclick="toast('YouTube API: Add your YouTube Data API key to Settings to connect','inf')">Connect YouTube API</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- DEEP ANALYSIS -->
+    <div id="deepAnalysisWrap" style="display:none;margin-top:16px;">
+      <div class="sec-label">Deep Analysis Report</div>
+      <div class="briefing-box" id="deepAnalysisBox" style="min-height:180px;"></div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════ ACCOUNTABILITY ══════════════════ -->
+  <div id="p-accountability" class="panel">
+
+    <div class="g2" style="margin-bottom:14px;">
+
+      <!-- DAILY -->
+      <div class="card">
+        <div class="sec-label" style="margin-bottom:12px;">Today's Mission</div>
+        <div id="dailyGoals">
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Post 1 piece of content</div></div>
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Respond to 5 comments / DMs</div></div>
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Review analytics dashboard</div></div>
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Send 1 sync pitch</div></div>
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Work on Zaire content</div></div>
+          <div class="goal-row"><div class="gcheck" onclick="checkGoal(this)"></div><div class="gtext">Check scheduled post queue</div></div>
+        </div>
+        <div style="margin-top:12px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-size:.68rem;color:var(--t3);">Daily Progress</span>
+            <span style="font-size:.68rem;color:var(--gold);font-family:'JetBrains Mono',monospace;" id="dailyPct">0%</span>
+          </div>
+          <div class="pbar"><div class="pfill" id="dailyBar" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <!-- WEEKLY -->
+      <div class="card">
+        <div class="sec-label" style="margin-bottom:12px;">Weekly Targets</div>
+        <div class="wt-row">
+          <div class="wt-head"><span class="wt-name">Posts Published</span><span class="wt-val" id="wt-posts">0 / 7</span></div>
+          <div class="pbar"><div class="pfill" id="wb-posts" style="width:0%"></div></div>
+        </div>
+        <div class="wt-row">
+          <div class="wt-head"><span class="wt-name">Sync Pitches Sent</span><span class="wt-val" id="wt-pitches">0 / 5</span></div>
+          <div class="pbar"><div class="pfill" id="wb-pitches" style="width:0%"></div></div>
+        </div>
+        <div class="wt-row">
+          <div class="wt-head"><span class="wt-name">New Connections</span><span class="wt-val" id="wt-connects">0 / 3</span></div>
+          <div class="pbar"><div class="pfill" id="wb-connects" style="width:0%"></div></div>
+        </div>
+        <div class="wt-row">
+          <div class="wt-head"><span class="wt-name">Tracks Finished</span><span class="wt-val" id="wt-tracks">0 / 2</span></div>
+          <div class="pbar"><div class="pfill" id="wb-tracks" style="width:0%"></div></div>
+        </div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;">
+          <button class="btn btn-ghost" style="font-size:.62rem;padding:6px 11px;" onclick="bump('posts',7)">+Post</button>
+          <button class="btn btn-ghost" style="font-size:.62rem;padding:6px 11px;" onclick="bump('pitches',5)">+Pitch</button>
+          <button class="btn btn-ghost" style="font-size:.62rem;padding:6px 11px;" onclick="bump('connects',3)">+Connect</button>
+          <button class="btn btn-ghost" style="font-size:.62rem;padding:6px 11px;" onclick="bump('tracks',2)">+Track</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- COACH -->
+    <div class="coach-wrap">
+      <div class="coach-head">
+        <div class="coach-av">🤖</div>
+        <div class="coach-head-text">
+          <div class="name">LMW Super Agent</div>
+          <div class="role">Accountability Coach · Business Strategist · Analytics Advisor</div>
+        </div>
+      </div>
+      <div class="coach-msgs" id="coachMsgs">
+        <div class="cmsg cmsg-a">What's good Warren. I'm your Super Agent. I see your numbers, your schedule, your goals. Talk to me — what do we need to handle today?</div>
+      </div>
+      <div class="coach-foot">
+        <input type="text" id="coachIn" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')chat()" />
+        <button class="btn btn-gold" onclick="chat()">Send</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════ LIVE LOG ══════════════════ -->
+  <div id="p-log" class="panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+      <div class="sec-label" style="margin-bottom:0;">System Activity Log</div>
+      <button class="btn btn-ghost" style="font-size:.65rem;" onclick="clearLog()">Clear Log</button>
+    </div>
+    <div class="live-feed" id="mainLog" style="height:420px;">
+      <div class="lf-line"><span class="lf-time" id="initTime">--:--:--</span><span class="lf-info">LMW Command Center Super Agent Phase 2 initialized.</span></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-l">LMW Command Center</div>
+    <div class="footer-r" id="footerClock">Super Agent Phase 2 · lambmusicworks.com</div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let cfg = { anthropic:'', meta:'', pageId:'', igId:'', tiktok:'', spotifyId:'', spotifySecret:'', artist:'Warren Lamb' };
+let persona = 'lmw';
+let queue = [];
+let weekly = { posts:0, pitches:0, connects:0, tracks:0 };
+let activePPs = new Set();
+let liveData = {};
+let spotifyToken = '';
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+window.onload = () => {
+  loadKeys();
+  tick();
+  setInterval(tick, 10000);
+  setInterval(checkScheduledPosts, 60000);
+  log('LMW Super Agent Phase 2 online.', 'info');
+  document.getElementById('initTime').textContent = now();
+};
+
+function tick() {
+  const t = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('footerClock').textContent = `Super Agent Phase 2 · ${t} · lambmusicworks.com`;
+}
+
+function now() {
+  return new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+
+// ═══════════════════════════════════════════════════════
+// KEYS
+// ═══════════════════════════════════════════════════════
+function saveKeys() {
+  cfg.anthropic = document.getElementById('kAnthropic').value.trim();
+  cfg.meta = document.getElementById('kMeta').value.trim();
+  cfg.pageId = document.getElementById('kPageId').value.trim();
+  cfg.igId = document.getElementById('kIgId').value.trim();
+  cfg.tiktok = document.getElementById('kTiktok').value.trim();
+  cfg.spotifyId = document.getElementById('kSpotifyId').value.trim();
+  cfg.spotifySecret = document.getElementById('kSpotifySecret').value.trim();
+  cfg.artist = document.getElementById('kArtist').value.trim() || 'Warren Lamb';
+  localStorage.setItem('lmw2_cfg', JSON.stringify(cfg));
+  updateChips();
+  toast('Keys saved ✓', 'ok');
+  log('API keys saved.', 'info');
+}
+
+function loadKeys() {
+  const s = localStorage.getItem('lmw2_cfg');
+  if (s) {
+    cfg = { ...cfg, ...JSON.parse(s) };
+    if (cfg.anthropic) document.getElementById('kAnthropic').value = cfg.anthropic;
+    if (cfg.meta) document.getElementById('kMeta').value = cfg.meta;
+    if (cfg.pageId) document.getElementById('kPageId').value = cfg.pageId;
+    if (cfg.igId) document.getElementById('kIgId').value = cfg.igId;
+    if (cfg.tiktok) document.getElementById('kTiktok').value = cfg.tiktok;
+    if (cfg.spotifyId) document.getElementById('kSpotifyId').value = cfg.spotifyId;
+    if (cfg.spotifySecret) document.getElementById('kSpotifySecret').value = cfg.spotifySecret;
+    if (cfg.artist) document.getElementById('kArtist').value = cfg.artist;
+    updateChips();
+  }
+}
+
+function clearKeys() {
+  localStorage.removeItem('lmw2_cfg');
+  location.reload();
+}
+
+function updateChips() {
+  setChip('chip-anthropic', cfg.anthropic ? 'live' : 'waiting', cfg.anthropic ? '✓ Anthropic' : '◦ Anthropic');
+  setChip('chip-meta', cfg.meta ? 'live' : 'off', cfg.meta ? '✓ Meta (IG+FB)' : '◦ Meta (IG+FB)');
+  setChip('chip-tiktok', cfg.tiktok ? 'live' : 'off', cfg.tiktok ? '✓ TikTok' : '◦ TikTok');
+  setChip('chip-spotify', cfg.spotifyId ? 'live' : 'off', cfg.spotifyId ? '✓ Spotify' : '◦ Spotify');
+}
+
+function setChip(id, state, label) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = `api-chip chip-${state}`;
+  el.textContent = label;
+}
+
+async function testAllConnections() {
+  // Always re-read key directly from field before testing
+  cfg.anthropic = document.getElementById('kAnthropic').value.trim();
+  cfg.meta = document.getElementById('kMeta').value.trim();
+  toast('Testing all connections...', 'inf');
+  log('Running connection tests...', 'info');
+  log('Anthropic key length: ' + cfg.anthropic.length, 'info');
+  if (cfg.anthropic) {
+    try {
+      await claude('Say "LMW Super Agent Phase 2 online."');
+      setChip('chip-anthropic', 'live', '✓ Anthropic');
+      log('Anthropic API: connected', 'ok');
+      toast('Anthropic ✓', 'ok');
+    } catch(e) { log('Anthropic API: FAILED — ' + e.message, 'err'); toast('Anthropic failed: ' + e.message, 'err'); }
+  }
+  if (cfg.meta && cfg.igId) {
+    try {
+      const r = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}?fields=name,followers_count&access_token=${cfg.meta}`);
+      const d = await r.json();
+      if (d.error) throw new Error(d.error.message);
+      setChip('chip-meta', 'live', '✓ Meta (IG+FB)');
+      log(`Meta API: connected — IG account: ${d.name}`, 'ok');
+      toast('Meta ✓', 'ok');
+    } catch(e) { log('Meta API: FAILED — ' + e.message, 'err'); toast('Meta failed: ' + e.message, 'err'); }
+  }
+  if (cfg.spotifyId && cfg.spotifySecret) {
+    try {
+      await getSpotifyToken();
+      setChip('chip-spotify', 'live', '✓ Spotify');
+      log('Spotify API: connected', 'ok');
+      toast('Spotify ✓', 'ok');
+    } catch(e) { log('Spotify API: FAILED — ' + e.message, 'err'); toast('Spotify failed', 'err'); }
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// CLAUDE API
+// ═══════════════════════════════════════════════════════
+async function claude(prompt, system = '') {
+  if (!cfg.anthropic) throw new Error('No Anthropic key');
+  const body = {
+    model: 'claude-haiku-4-5',
+    max_tokens: 1000,
+    messages: [{ role:'user', content:prompt }]
+  };
+  if (system) body.system = system;
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{ 'Content-Type':'application/json', 'x-api-key':cfg.anthropic, 'anthropic-version':'2023-06-01', 'anthropic-dangerous-direct-browser-access':'true' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  const d = await r.json();
+  return d.content?.[0]?.text || '';
+}
+
+// ═══════════════════════════════════════════════════════
+// INSTAGRAM — LIVE DATA PULL
+// ═══════════════════════════════════════════════════════
+async function pullInstagram() {
+  if (!cfg.meta || !cfg.igId) { toast('Add Meta token + IG Account ID in Settings', 'err'); return; }
+  log('Pulling Instagram data...', 'info');
+  setLoading('ig-reach'); setLoading('ig-imp'); setLoading('ig-fol'); setLoading('ig-eng');
+  try {
+    // Account info
+    const acct = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}?fields=name,biography,followers_count,media_count,profile_picture_url&access_token=${cfg.meta}`);
+    const ad = await acct.json();
+    if (ad.error) throw new Error(ad.error.message);
+
+    // Insights
+    const ins = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}/insights?metric=reach,impressions,profile_views&period=week&access_token=${cfg.meta}`);
+    const id = await ins.json();
+
+    let reach = '—', impressions = '—', profileViews = '—';
+    if (id.data) {
+      id.data.forEach(m => {
+        const v = m.values?.[m.values.length-1]?.value || 0;
+        if (m.name === 'reach') reach = fmt(v);
+        if (m.name === 'impressions') impressions = fmt(v);
+        if (m.name === 'profile_views') profileViews = fmt(v);
+      });
+    }
+
+    const followers = fmt(ad.followers_count || 0);
+
+    // Update cards
+    setValue('ig-reach', reach); setValue('ig-imp', impressions);
+    setValue('ig-fol', followers); setValue('ig-eng', profileViews);
+    setValue('ig-reach', reach); setValue('mt-igreach', reach);
+
+    liveData.ig = { reach, impressions, followers, profileViews, name: ad.name };
+    document.getElementById('ig-badge').className = 'pc-badge badge-live';
+    document.getElementById('ig-badge').textContent = 'Live';
+    document.getElementById('ig-connect-btn').textContent = '✓ Data Pulled';
+    document.getElementById('ig-connect-btn').className = 'pc-action connected';
+
+    log(`Instagram pulled: followers=${followers}, reach=${reach}`, 'ok');
+    toast('Instagram data pulled ✓', 'ok');
+  } catch(e) {
+    log('Instagram pull failed: ' + e.message, 'err');
+    toast('Instagram: ' + e.message, 'err');
+    clearLoading('ig-reach'); clearLoading('ig-imp'); clearLoading('ig-fol'); clearLoading('ig-eng');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// FACEBOOK — LIVE DATA PULL
+// ═══════════════════════════════════════════════════════
+async function pullFacebook() {
+  if (!cfg.meta || !cfg.pageId) { toast('Add Meta token + Page ID in Settings', 'err'); return; }
+  log('Pulling Facebook Page data...', 'info');
+  setLoading('fb-reach'); setLoading('fb-likes'); setLoading('fb-fol'); setLoading('fb-shares');
+  try {
+    const page = await fetch(`https://graph.facebook.com/v19.0/${cfg.pageId}?fields=name,fan_count,followers_count&access_token=${cfg.meta}`);
+    const pd = await page.json();
+    if (pd.error) throw new Error(pd.error.message);
+
+    const ins = await fetch(`https://graph.facebook.com/v19.0/${cfg.pageId}/insights?metric=page_impressions_unique,page_post_engagements&period=week&access_token=${cfg.meta}`);
+    const id = await ins.json();
+
+    let reach = '—', engagement = '—';
+    if (id.data) {
+      id.data.forEach(m => {
+        const v = m.values?.[m.values.length-1]?.value || 0;
+        if (m.name === 'page_impressions_unique') reach = fmt(v);
+        if (m.name === 'page_post_engagements') engagement = fmt(v);
+      });
+    }
+
+    const fans = fmt(pd.fan_count || pd.followers_count || 0);
+    setValue('fb-reach', reach); setValue('fb-likes', engagement);
+    setValue('fb-fol', fans); setValue('fb-shares', '—');
+    setValue('mt-fbreach', reach);
+
+    liveData.fb = { reach, engagement, fans, name: pd.name };
+    document.getElementById('fb-badge').className = 'pc-badge badge-live';
+    document.getElementById('fb-badge').textContent = 'Live';
+    document.getElementById('fb-connect-btn').textContent = '✓ Data Pulled';
+    document.getElementById('fb-connect-btn').className = 'pc-action connected';
+
+    log(`Facebook pulled: fans=${fans}, reach=${reach}`, 'ok');
+    toast('Facebook data pulled ✓', 'ok');
+  } catch(e) {
+    log('Facebook pull failed: ' + e.message, 'err');
+    toast('Facebook: ' + e.message, 'err');
+    clearLoading('fb-reach'); clearLoading('fb-likes'); clearLoading('fb-fol'); clearLoading('fb-shares');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TIKTOK — LIVE DATA PULL
+// ═══════════════════════════════════════════════════════
+async function pullTikTok() {
+  if (!cfg.tiktok) { toast('Add TikTok token in Settings', 'err'); return; }
+  log('Pulling TikTok data...', 'info');
+  setLoading('tt-views'); setLoading('tt-likes'); setLoading('tt-fol'); setLoading('tt-prof');
+  try {
+    const r = await fetch('https://open.tiktokapis.com/v2/user/info/?fields=display_name,follower_count,following_count,likes_count,video_count', {
+      headers:{ 'Authorization': `Bearer ${cfg.tiktok}`, 'Content-Type':'application/json' }
+    });
+    const d = await r.json();
+    if (d.error?.code && d.error.code !== 'ok') throw new Error(d.error.message || 'TikTok API error');
+
+    const u = d.data?.user || {};
+    const followers = fmt(u.follower_count || 0);
+    const likes = fmt(u.likes_count || 0);
+
+    setValue('tt-fol', followers); setValue('tt-likes', likes);
+    setValue('tt-views', '—'); setValue('tt-prof', fmt(u.video_count || 0));
+    setValue('mt-ttviews', likes);
+
+    liveData.tt = { followers, likes, name: u.display_name };
+    document.getElementById('tt-badge').className = 'pc-badge badge-live';
+    document.getElementById('tt-badge').textContent = 'Live';
+    document.getElementById('tt-connect-btn').textContent = '✓ Data Pulled';
+    document.getElementById('tt-connect-btn').className = 'pc-action connected';
+
+    log(`TikTok pulled: followers=${followers}, likes=${likes}`, 'ok');
+    toast('TikTok data pulled ✓', 'ok');
+  } catch(e) {
+    log('TikTok pull failed: ' + e.message, 'err');
+    toast('TikTok: ' + e.message, 'err');
+    clearLoading('tt-views'); clearLoading('tt-likes'); clearLoading('tt-fol'); clearLoading('tt-prof');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SPOTIFY — LIVE DATA PULL
+// ═══════════════════════════════════════════════════════
+async function getSpotifyToken() {
+  const r = await fetch('https://accounts.spotify.com/api/token', {
+    method:'POST',
+    headers:{ 'Content-Type':'application/x-www-form-urlencoded', 'Authorization':'Basic ' + btoa(cfg.spotifyId + ':' + cfg.spotifySecret) },
+    body:'grant_type=client_credentials'
+  });
+  const d = await r.json();
+  if (!d.access_token) throw new Error('Spotify auth failed');
+  spotifyToken = d.access_token;
+  return spotifyToken;
+}
+
+async function pullSpotify() {
+  if (!cfg.spotifyId || !cfg.spotifySecret) { toast('Add Spotify Client ID + Secret in Settings', 'err'); return; }
+  log('Pulling Spotify data...', 'info');
+  setLoading('sp-streams'); setLoading('sp-listeners'); setLoading('sp-followers'); setLoading('sp-pop');
+  try {
+    await getSpotifyToken();
+    // Search for the artist
+    const search = await fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(cfg.artist)}&type=artist&limit=1`, {
+      headers:{ 'Authorization': `Bearer ${spotifyToken}` }
+    });
+    const sd = await search.json();
+    const artist = sd.artists?.items?.[0];
+    if (!artist) throw new Error('Artist not found on Spotify');
+
+    const followers = fmt(artist.followers?.total || 0);
+    const popularity = artist.popularity || 0;
+
+    setValue('sp-followers', followers);
+    setValue('sp-pop', popularity + '/100');
+    setValue('sp-streams', '—');
+    setValue('sp-listeners', '—');
+    setValue('mt-streams', followers);
+
+    liveData.sp = { followers, popularity, genres: artist.genres, name: artist.name, id: artist.id };
+    document.getElementById('sp-badge').className = 'pc-badge badge-live';
+    document.getElementById('sp-badge').textContent = 'Live';
+    document.getElementById('sp-connect-btn').textContent = '✓ Data Pulled';
+    document.getElementById('sp-connect-btn').className = 'pc-action connected';
+
+    log(`Spotify pulled: artist=${artist.name}, followers=${followers}, popularity=${popularity}`, 'ok');
+    toast('Spotify data pulled ✓', 'ok');
+  } catch(e) {
+    log('Spotify pull failed: ' + e.message, 'err');
+    toast('Spotify: ' + e.message, 'err');
+    clearLoading('sp-streams'); clearLoading('sp-listeners'); clearLoading('sp-followers'); clearLoading('sp-pop');
+  }
+}
+
+function saveAppleData() {
+  const streams = document.getElementById('am-in-streams').value;
+  const shazams = document.getElementById('am-in-shazams').value;
+  if (streams) { setValue('am-streams', fmt(Number(streams))); setValue('mt-shazams', fmt(Number(shazams || 0))); }
+  if (shazams) setValue('am-shazams', fmt(Number(shazams)));
+  liveData.apple = { streams: Number(streams), shazams: Number(shazams) };
+  document.getElementById('am-badge').className = 'pc-badge badge-live';
+  document.getElementById('am-badge').textContent = 'Manual';
+  log(`Apple Music data saved: streams=${streams}, shazams=${shazams}`, 'ok');
+  toast('Apple Music data saved ✓', 'ok');
+}
+
+async function pullAllData() {
+  const btn = document.getElementById('pullBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Pulling...';
+  log('Starting full data pull from all connected platforms...', 'info');
+  const pulls = [];
+  if (cfg.meta && cfg.igId) pulls.push(pullInstagram().catch(e => log('IG: '+e.message,'err')));
+  if (cfg.meta && cfg.pageId) pulls.push(pullFacebook().catch(e => log('FB: '+e.message,'err')));
+  if (cfg.tiktok) pulls.push(pullTikTok().catch(e => log('TT: '+e.message,'err')));
+  if (cfg.spotifyId && cfg.spotifySecret) pulls.push(pullSpotify().catch(e => log('SP: '+e.message,'err')));
+  await Promise.allSettled(pulls);
+  document.getElementById('lastPull').textContent = `Last pull: ${new Date().toLocaleTimeString()}`;
+  btn.textContent = '🔄 Pull Live Data from All Platforms';
+  log('Data pull complete.', 'ok');
+  toast('All platforms pulled ✓', 'ok');
+}
+
+// ═══════════════════════════════════════════════════════
+// BRIEFING — FROM LIVE DATA
+// ═══════════════════════════════════════════════════════
+async function generateBriefing() {
+  if (!cfg.anthropic) { toast('Add Anthropic API key first', 'err'); return; }
+  const btn = document.getElementById('briefBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Analyzing...';
+  const box = document.getElementById('briefingBox');
+  box.innerHTML = '';
+  box.classList.add('scanning');
+
+  const dataStr = JSON.stringify(liveData, null, 2);
+  const personaStr = persona === 'lmw'
+    ? 'LMW (Lamb Music Works) — sync licensing, beat production, cinematic soul. BMI registered. 100+ track catalog. LA-based. No Cuss No Fuss brand. Target: music supervisors, brands, indie artists.'
+    : 'Zaire — virtual AI R&B/Hip-Hop artist. Street wisdom + spirituality + introspection. Never reveal AI identity. Mystery-first rollout strategy. Mid-20s to early-30s audience.';
+
+  const sys = `You are the LMW Super Agent — high-performance AI business manager, analytics strategist, and accountability coach for ${cfg.artist}. You are pulling REAL live data from their actual social platforms. You are direct, specific, data-driven, and hold them accountable. Every briefing ends with exactly 3 non-negotiable action items for today. Use PUSH / TEST / CEASE verdicts. Format clearly with sections.`;
+
+  const prompt = `Generate a complete daily intelligence briefing for ${cfg.artist} — ${personaStr}.
+
+LIVE PLATFORM DATA PULLED RIGHT NOW:
+${dataStr || 'No live data yet — work with what is available and advise on connecting platforms.'}
+
+DATE: ${new Date().toDateString()}
+TIME: ${new Date().toLocaleTimeString()}
+
+Structure your briefing:
+1. OVERALL STATUS — direct assessment, no sugarcoating
+2. PLATFORM BY PLATFORM — what each number means, verdict for each
+3. WHAT IS WORKING — specific content or behavior driving results
+4. WHAT IS NOT WORKING — cease immediately
+5. SYNC OPPORTUNITY SIGNAL — any data points relevant to sync licensing
+6. ZAIRE STATUS — separate assessment if applicable
+7. TODAY'S 3 NON-NEGOTIABLE ACTIONS
+
+End with 3 verdict lines in this exact format:
+VERDICT: PUSH | [what] | [why in one sentence]`;
+
+  try {
+    const result = await claude(prompt, sys);
+    box.classList.remove('scanning');
+    box.textContent = result;
+    btn.textContent = '🧠 Generate Briefing from Live Data';
+    parseVerdicts(result);
+    log('Daily briefing generated from live data.', 'ok');
+    toast('Briefing ready ✓', 'ok');
+  } catch(e) {
+    box.classList.remove('scanning');
+    box.textContent = 'Error: ' + e.message;
+    btn.textContent = '🧠 Generate Briefing from Live Data';
+    log('Briefing generation failed: ' + e.message, 'err');
+    toast('Briefing failed: ' + e.message, 'err');
+  }
+}
+
+function parseVerdicts(text) {
+  const lines = text.split('\n').filter(l => l.toUpperCase().includes('VERDICT:'));
+  if (!lines.length) return;
+  const wrap = document.getElementById('verdictsWrap');
+  const list = document.getElementById('verdictsList');
+  list.innerHTML = '';
+  wrap.style.display = 'block';
+  lines.forEach(v => {
+    const p = v.replace(/VERDICT:/i,'').split('|');
+    if (p.length < 3) return;
+    const type = p[0].trim().toUpperCase();
+    const what = p[1]?.trim() || '';
+    const why = p[2]?.trim() || '';
+    const cls = type.includes('PUSH') ? 'vb-push' : type.includes('CEASE') ? 'vb-cease' : 'vb-test';
+    const lbl = type.includes('PUSH') ? '🟢 PUSH' : type.includes('CEASE') ? '🔴 CEASE' : '🟡 TEST';
+    list.innerHTML += `<div class="verdict-row"><div class="vbadge ${cls}">${lbl}</div><div class="verdict-body"><h4>${what}</h4><p>${why}</p></div></div>`;
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// POST ENGINE — REAL POSTING
+// ═══════════════════════════════════════════════════════
+function togglePP(id) {
+  const el = document.getElementById('pp-'+id);
+  if (activePPs.has(id)) { activePPs.delete(id); el.className='pp'; }
+  else { activePPs.add(id); el.className=`pp on-${id}`; }
+}
+
+async function postToInstagram(caption, mediaUrl, type) {
+  if (!cfg.meta || !cfg.igId) throw new Error('No Meta credentials');
+  log(`Instagram: preparing ${type} post...`, 'info');
+
+  let containerId;
+
+  if (type === 'reel' && mediaUrl) {
+    const r = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}/media`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ video_url:mediaUrl, media_type:'REELS', caption, access_token:cfg.meta })
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error.message);
+    containerId = d.id;
+    // Wait for video processing
+    await new Promise(res => setTimeout(res, 8000));
+  } else if (mediaUrl) {
+    const r = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}/media`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ image_url:mediaUrl, caption, access_token:cfg.meta })
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error.message);
+    containerId = d.id;
+  } else {
+    throw new Error('Instagram requires a media URL (image or video)');
+  }
+
+  // Publish
+  const pub = await fetch(`https://graph.facebook.com/v19.0/${cfg.igId}/media_publish`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({ creation_id:containerId, access_token:cfg.meta })
+  });
+  const pd = await pub.json();
+  if (pd.error) throw new Error(pd.error.message);
+  log(`Instagram: posted successfully. ID: ${pd.id}`, 'ok');
+  return pd.id;
+}
+
+async function postToFacebook(message, mediaUrl) {
+  if (!cfg.meta || !cfg.pageId) throw new Error('No Meta/Page credentials');
+  log('Facebook: posting...', 'info');
+
+  let endpoint = `https://graph.facebook.com/v19.0/${cfg.pageId}/feed`;
+  let body = { message, access_token:cfg.meta };
+
+  if (mediaUrl) {
+    endpoint = `https://graph.facebook.com/v19.0/${cfg.pageId}/photos`;
+    body = { url:mediaUrl, caption:message, access_token:cfg.meta };
+  }
+
+  const r = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  const d = await r.json();
+  if (d.error) throw new Error(d.error.message);
+  log(`Facebook: posted successfully. ID: ${d.id || d.post_id}`, 'ok');
+  return d.id;
+}
+
+async function postToTikTok(caption, videoUrl) {
+  if (!cfg.tiktok) throw new Error('No TikTok token');
+  if (!videoUrl) throw new Error('TikTok requires a video URL');
+  log('TikTok: initiating post...', 'info');
+
+  const r = await fetch('https://open.tiktokapis.com/v2/post/publish/video/init/', {
+    method:'POST',
+    headers:{ 'Authorization':`Bearer ${cfg.tiktok}`, 'Content-Type':'application/json; charset=UTF-8' },
+    body:JSON.stringify({
+      post_info:{ title:caption, privacy_level:'PUBLIC_TO_EVERYONE', disable_duet:false, disable_comment:false, disable_stitch:false },
+      source_info:{ source:'PULL_FROM_URL', video_url:videoUrl }
+    })
+  });
+  const d = await r.json();
+  if (d.error?.code && d.error.code !== 'ok') throw new Error(d.error.message);
+  log(`TikTok: post initiated. Publish ID: ${d.data?.publish_id}`, 'ok');
+  return d.data?.publish_id;
+}
+
+async function executePost(post) {
+  const results = [];
+  log(`Executing post to: ${post.platforms.join(', ')}`, 'info');
+  document.getElementById('postingPill').style.display = 'flex';
+
+  for (const p of post.platforms) {
+    try {
+      if (p === 'ig') {
+        await postToInstagram(post.content, post.mediaUrl, post.type);
+        results.push({ platform:'Instagram', status:'ok' });
+        toast('Posted to Instagram ✓', 'ok');
+      } else if (p === 'fb') {
+        await postToFacebook(post.content, post.mediaUrl);
+        results.push({ platform:'Facebook', status:'ok' });
+        toast('Posted to Facebook ✓', 'ok');
+      } else if (p === 'tt') {
+        await postToTikTok(post.content, post.mediaUrl);
+        results.push({ platform:'TikTok', status:'ok' });
+        toast('TikTok post initiated ✓', 'ok');
+      } else if (p === 'yt') {
+        log('YouTube posting: requires YouTube Data API v3 setup — add YouTube API key to Settings', 'warn');
+        toast('YouTube: setup API key in Settings', 'inf');
+      }
+    } catch(e) {
+      results.push({ platform:p, status:'failed', error:e.message });
+      log(`${p} post FAILED: ${e.message}`, 'err');
+      toast(`${p} failed: ${e.message}`, 'err');
+    }
+  }
+
+  document.getElementById('postingPill').style.display = 'none';
+  post.status = results.some(r => r.status === 'ok') ? 'live' : 'failed';
+  renderQueue();
+  return results;
+}
+
+async function postNow() {
+  const content = document.getElementById('postText').value.trim();
+  const mediaUrl = document.getElementById('postMediaUrl').value.trim();
+  const type = document.getElementById('postType').value;
+  if (!content) { toast('Write your post first', 'err'); return; }
+  if (activePPs.size === 0) { toast('Select at least one platform', 'err'); return; }
+
+  const post = { id:Date.now(), content, mediaUrl, platforms:[...activePPs], type, status:'live', persona, scheduledTime:null };
+  queue.push(post);
+  renderQueue();
+  await executePost(post);
+}
+
+function schedulePost() {
+  const content = document.getElementById('postText').value.trim();
+  const mediaUrl = document.getElementById('postMediaUrl').value.trim();
+  const type = document.getElementById('postType').value;
+  const schedTime = document.getElementById('postSchedule').value;
+  if (!content) { toast('Write your post first', 'err'); return; }
+  if (!schedTime) { toast('Set a schedule time', 'err'); return; }
+  if (activePPs.size === 0) { toast('Select at least one platform', 'err'); return; }
+
+  const post = { id:Date.now(), content, mediaUrl, platforms:[...activePPs], type, status:'pending', persona, scheduledTime:new Date(schedTime) };
+  queue.push(post);
+  renderQueue();
+  updateScheduledCount();
+  log(`Post scheduled for ${post.scheduledTime.toLocaleString()} on ${post.platforms.join(', ')}`, 'ok');
+  toast(`Scheduled for ${post.scheduledTime.toLocaleString()} ✓`, 'ok');
+  document.getElementById('postText').value = '';
+}
+
+function checkScheduledPosts() {
+  const now = new Date();
+  queue.forEach(p => {
+    if (p.status === 'pending' && p.scheduledTime && p.scheduledTime <= now) {
+      log(`Scheduled post firing: ${p.scheduledTime.toLocaleString()}`, 'info');
+      executePost(p);
+    }
+  });
+}
+
+function renderQueue() {
+  const el = document.getElementById('postQueue');
+  if (!queue.length) { el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--t3);font-size:.75rem;">Queue is empty</div>'; return; }
+  const pColors = { ig:'#e1306c', fb:'#1877f2', tt:'#ff2d55', yt:'#ff0000' };
+  const pLabels = { ig:'IG', fb:'FB', tt:'TT', yt:'YT' };
+  el.innerHTML = queue.map(p => `
+    <div class="queue-item">
+      <div class="qi-time">${p.scheduledTime ? p.scheduledTime.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : 'Now'}</div>
+      <div class="qi-platforms">${p.platforms.map(pl=>`<div class="qi-dot" style="background:${pColors[pl]}18;border:1px solid ${pColors[pl]}40;color:${pColors[pl]}">${pLabels[pl]}</div>`).join('')}</div>
+      <div class="qi-preview">${p.content.substring(0,70)}${p.content.length>70?'...':''}</div>
+      <div class="qi-status-${p.status}">${p.status.toUpperCase()}</div>
+      <button class="btn btn-red" style="padding:4px 9px;font-size:.6rem;" onclick="removePost(${p.id})">✕</button>
+    </div>`).join('');
+  updateScheduledCount();
+}
+
+function removePost(id) { queue = queue.filter(p => p.id !== id); renderQueue(); }
+
+function updateScheduledCount() {
+  const c = queue.filter(p=>p.status==='pending').length;
+  setValue('mt-scheduled', c);
+  document.getElementById('mt-scheduled-d').textContent = c === 1 ? '1 post in queue' : `${c} posts in queue`;
+}
+
+async function optimizeCaption() {
+  const content = document.getElementById('postText').value.trim();
+  if (!content) { toast('Write your post first', 'err'); return; }
+  if (!cfg.anthropic) { toast('Add Anthropic key first', 'err'); return; }
+  toast('Optimizing...', 'inf');
+  try {
+    const platforms = activePPs.size > 0 ? [...activePPs].map(p=>({ig:'Instagram',fb:'Facebook',tt:'TikTok',yt:'YouTube'}[p])).join(', ') : 'Instagram and TikTok';
+    const result = await claude(
+      `Optimize this caption for ${cfg.artist} on ${platforms}. Persona: ${persona === 'lmw' ? 'LMW professional sync/beat brand' : 'Zaire mysterious R&B artist'}. Make the hook stronger, optimize hashtags, keep it authentic. Return only the optimized caption.\n\n${content}`,
+      'Expert music marketing copywriter. Platform-native. No generic AI writing.'
+    );
+    document.getElementById('postText').value = result;
+    log('Caption optimized by AI', 'ok');
+    toast('Caption optimized ✓', 'ok');
+  } catch(e) { toast('Error: '+e.message,'err'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// CONTENT GEN
+// ═══════════════════════════════════════════════════════
+async function genContent(regen = false) {
+  if (!cfg.anthropic) { toast('Add Anthropic key first', 'err'); return; }
+  const type = document.getElementById('genType').value;
+  const platform = document.getElementById('genPlatform').value;
+  const tone = document.getElementById('genTone').value;
+  const topic = document.getElementById('genTopic').value;
+  const btn = document.getElementById('genBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Writing...';
+  const out = document.getElementById('genOut');
+  out.style.display = 'block';
+  out.textContent = 'Generating...';
+
+  const typeMap = {
+    promo:'music promotion', sync:'sync licensing pitch announcement',
+    bts:'behind the scenes look', release:'new music release announcement',
+    zaire_tease:'mysterious Zaire teaser (build mystique, never reveal AI)',
+    engage:'engagement question for fans', milestone:'milestone celebration',
+    quote:'motivational/spiritual quote'
+  };
+
+  const personaDesc = persona === 'lmw'
+    ? 'LMW (Lamb Music Works) — sync licensing, cinematic soul, beat production, LA-based, BMI registered, No Cuss No Fuss brand, professional yet creative'
+    : 'Zaire — mysterious virtual R&B/Hip-Hop artist, street wisdom meets spirituality, dark introspective energy, never reveal AI, build mystique every post';
+
+  try {
+    const result = await claude(
+      `Create ${platform === 'all' ? 'platform-optimized social media content (3 versions: Instagram, TikTok, Facebook)' : platform + ' content'} for ${cfg.artist}.
+
+Persona: ${personaDesc}
+Content Type: ${typeMap[type]}
+Tone: ${tone}
+Topic/Context: ${topic || 'general music journey and brand'}
+${regen ? 'REGENERATION — make this completely different from typical outputs.' : ''}
+
+Make it authentic, non-generic, and platform-native. Strong hook. Real engagement potential. ${platform==='all'?'Label each platform version clearly.':''}`,
+      'Expert music industry copywriter and social media strategist. You write posts that actually convert. No filler. No corporate speak.'
+    );
+    out.textContent = result;
+    btn.textContent = '✨ Generate Content';
+    log('Content generated for '+platform, 'ok');
+    toast('Content ready ✓', 'ok');
+  } catch(e) {
+    out.textContent = 'Error: ' + e.message;
+    btn.textContent = '✨ Generate Content';
+    toast('Error: '+e.message,'err');
+  }
+}
+
+function sendToPostEngine() {
+  const content = document.getElementById('genOut').textContent;
+  if (!content || content === 'Generating...') { toast('Generate content first', 'err'); return; }
+  document.getElementById('postText').value = content;
+  tab('post', document.querySelector('.tab:nth-child(2)'));
+  toast('Sent to Post Engine ✓', 'ok');
+}
+
+// ═══════════════════════════════════════════════════════
+// DEEP ANALYSIS
+// ═══════════════════════════════════════════════════════
+async function runDeepAnalysis() {
+  if (!cfg.anthropic) { toast('Add Anthropic key first', 'err'); return; }
+  toast('Running deep analysis...', 'inf');
+  const wrap = document.getElementById('deepAnalysisWrap');
+  const box = document.getElementById('deepAnalysisBox');
+  wrap.style.display = 'block';
+  box.classList.add('scanning');
+  box.textContent = 'Analyzing cross-platform patterns...';
+
+  try {
+    const result = await claude(
+      `Deep cross-platform analysis for ${cfg.artist} (${persona === 'lmw' ? 'LMW sync/beat brand' : 'Zaire virtual artist'}).
+
+Live data: ${JSON.stringify(liveData)}
+
+Provide:
+1. Cross-platform audience pattern — who is actually engaging
+2. Which platform has the strongest momentum RIGHT NOW
+3. Content format intelligence — what type of content is winning
+4. Revenue opportunity analysis — where is the money signal
+5. Sync licensing intelligence — any data supporting sync pitching
+6. Competitive positioning — what this data says about market position
+7. 30-day growth projection — if current trajectory continues
+8. One thing to STOP immediately
+9. One thing to START immediately`,
+      'You are a music industry data scientist and business strategist. Be specific. Use the numbers. No generic advice.'
+    );
+    box.classList.remove('scanning');
+    box.textContent = result;
+    log('Deep analysis complete', 'ok');
+    toast('Analysis complete ✓', 'ok');
+  } catch(e) {
+    box.classList.remove('scanning');
+    box.textContent = 'Error: ' + e.message;
+    toast('Analysis failed', 'err');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// ACCOUNTABILITY
+// ═══════════════════════════════════════════════════════
+function checkGoal(el) {
+  el.classList.toggle('done');
+  el.nextElementSibling.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+  updateDailyProgress();
+}
+
+function updateDailyProgress() {
+  const total = document.querySelectorAll('.gcheck').length;
+  const done = document.querySelectorAll('.gcheck.done').length;
+  const pct = Math.round((done/total)*100);
+  document.getElementById('dailyBar').style.width = pct + '%';
+  document.getElementById('dailyPct').textContent = pct + '%';
+  if (pct === 100) { toast('Daily mission complete! 🔥', 'ok'); log('All daily goals completed.', 'ok'); }
+}
+
+function bump(type, target) {
+  weekly[type] = Math.min((weekly[type]||0) + 1, target);
+  const pct = Math.round((weekly[type]/target)*100);
+  document.getElementById(`wt-${type}`).textContent = `${weekly[type]} / ${target}`;
+  document.getElementById(`wb-${type}`).style.width = pct + '%';
+  if (weekly[type] >= target) { toast(`${type} target hit! 🔥`, 'ok'); log(`Weekly ${type} target reached!`, 'ok'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// COACH
+// ═══════════════════════════════════════════════════════
+async function chat() {
+  const input = document.getElementById('coachIn');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const msgs = document.getElementById('coachMsgs');
+  msgs.innerHTML += `<div class="cmsg cmsg-u">${msg}</div>`;
+  input.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+
+  if (!cfg.anthropic) {
+    msgs.innerHTML += `<div class="cmsg cmsg-a">Add your Anthropic API key to activate me.</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+    return;
+  }
+
+  const thinking = document.createElement('div');
+  thinking.className = 'cmsg cmsg-a';
+  thinking.innerHTML = '<span class="spin"></span>';
+  msgs.appendChild(thinking);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const dataContext = Object.keys(liveData).length > 0 ? `\n\nCurrent live platform data: ${JSON.stringify(liveData)}` : '';
+
+  try {
+    const r = await claude(msg,
+      `You are the LMW Super Agent — accountability coach, business strategist, and analytics advisor for ${cfg.artist}. Independent music producer and sync licensing specialist, LA. You know: LMW brand, Zaire virtual artist persona, sync licensing business, content strategy, music analytics. You have access to live platform data. Direct, firm, motivating, no fluff. 3-5 sentences max unless detail is needed.${dataContext}`
+    );
+    thinking.innerHTML = r;
+    msgs.scrollTop = msgs.scrollHeight;
+  } catch(e) {
+    thinking.innerHTML = 'Error: ' + e.message;
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════════════════
+function tab(name, el) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('p-'+name).classList.add('on');
+  el.classList.add('on');
+}
+
+function setPersona(p, el) {
+  persona = p;
+  document.querySelectorAll('.psw-btn').forEach(b => b.className = 'psw-btn');
+  el.className = `psw-btn psw-${p}`;
+  toast(`Switched to ${p==='lmw'?'LMW':'Zaire'} mode`, 'inf');
+}
+
+function setValue(id, val) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = val; el.classList.remove('loading'); }
+}
+
+function setLoading(id) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = ''; el.classList.add('loading'); }
+}
+
+function clearLoading(id) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = '—'; el.classList.remove('loading'); }
+}
+
+function fmt(n) {
+  if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+  if (n >= 1000) return (n/1000).toFixed(1)+'K';
+  return n.toString();
+}
+
+function log(msg, type='info') {
+  const feed = document.getElementById('mainLog');
+  const pLog = document.getElementById('postLog');
+  const cls = {ok:'lf-ok', err:'lf-err', warn:'lf-warn', info:'lf-info'}[type] || 'lf-info';
+  const line = `<div class="lf-line"><span class="lf-time">${now()}</span><span class="${cls}">${msg}</span></div>`;
+  if (feed) { feed.innerHTML += line; feed.scrollTop = feed.scrollHeight; }
+  if (pLog && (type==='ok'||type==='err')) { pLog.innerHTML += line; pLog.scrollTop = pLog.scrollHeight; }
+}
+
+function clearLog() {
+  const feed = document.getElementById('mainLog');
+  if (feed) feed.innerHTML = '';
+  log('Log cleared.', 'info');
+}
+
+function toast(message, type='inf') {
+  const c = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  const icons = { ok:'✓', err:'✕', inf:'→' };
+  t.innerHTML = `<span style="font-weight:700">${icons[type]||'•'}</span><span>${message}</span>`;
+  c.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(110%)'; t.style.transition='.25s'; setTimeout(()=>t.remove(),250); }, 3200);
+}
+</script>
+</body>
+</html>
