@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMW Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070809;
+  --s1: #0c0e10;
+  --s2: #111416;
+  --s3: #161a1e;
+  --b1: #1e2428;
+  --b2: #262d33;
+  --gold: #c8960a;
+  --gold2: #f0b800;
+  --gold3: rgba(200,150,10,0.1);
+  --text: #e8edf2;
+  --t2: #8a9aaa;
+  --t3: #3d4d5a;
+  --green: #00c97a;
+  --red: #ff3d5a;
+  --blue: #4db8ff;
+  --nav-w: 64px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+/* NAV */
+.nav {
+  width: var(--nav-w);
+  min-height: 100vh;
+  background: var(--s1);
+  border-right: 1px solid var(--b1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nav::-webkit-scrollbar { width: 0; }
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: #000;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 0 8px;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.nav-item:hover { background: var(--s2); }
+
+.nav-item.active {
+  background: var(--gold3);
+  border-color: rgba(200,150,10,0.3);
+}
+
+.nav-item .icon { font-size: 1.2rem; }
+
+.nav-item .label {
+  font-size: 0.48rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--t3);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.nav-item.active .label { color: var(--gold); }
+
+/* MAIN */
+.main {
+  margin-left: var(--nav-w);
+  flex: 1;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.main::-webkit-scrollbar { width: 4px; }
+.main::-webkit-scrollbar-thumb { background: var(--b2); border-radius: 2px; }
+
+/* PAGE HEADER */
+.page-header {
+  position: sticky;
+  top: 0;
+  background: rgba(7,8,9,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--b1);
+  padding: 14px 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-sub {
+  font-size: 0.65rem;
+  color: var(--t3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.api-dot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.65rem;
+  color: var(--green);
+  letter-spacing: 1px;
+}
+
+.api-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+
+/* PAGE CONTENT */
+.page { display: none; padding: 24px; max-width: 1000px; }
+.page.active { display: block; animation: fadeUp 0.3s ease both; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+
+/* CARDS */
+.card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--b2); }
+
+.card-title {
+  font-size: 0.6rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+/* GRID */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.gauto { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px; }
+
+@media(max-width:700px) { .g2,.g3{grid-template-columns:1fr;} }
+
+/* BUTTONS */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-gold { background: var(--gold); color: #000; }
+.btn-gold:hover { background: var(--gold2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(200,150,10,0.3); }
+.btn-ghost { background: transparent; border: 1px solid var(--b2); color: var(--t2); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+/* INPUTS */
+.inp {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inp:focus { border-color: var(--gold); }
+.inp::placeholder { color: var(--t3); }
+
+textarea.inp { resize: vertical; min-height: 100px; line-height: 1.6; }
+
+select.inp { cursor: pointer; }
+
+.field-label {
+  font-size: 0.6rem;
+  color: var(--t3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+/* OUTPUT BOX */
+.output {
+  background: var(--bg);
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--t2);
+  white-space: pre-wrap;
+  min-height: 80px;
+  position: relative;
+}
+
+.output.loading { border-color: var(--gold); }
+
+/* SECTION LABEL */
+.sec {
+  font-size: 0.58rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--t3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.sec::after { content:''; flex:1; height:1px; background:var(--b1); }
+
+/* SPINNER */
+.spin {
+  display: inline-block;
+  width: 13px; height: 13px;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: sp 0.7s linear infinite;
+}
+
+@keyframes sp { to { transform: rotate(360deg); } }
+
+/* HOME CARDS */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.home-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 12px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.home-card:hover { border-color: rgba(200,150,10,0.4); transform: translateY(-2px); }
+.home-card:hover::before { opacity: 1; }
+
+.home-card-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.home-card-name { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
+.home-card-desc { font-size: 0.72rem; color: var(--t2); line-height: 1.4; }
+
+/* PLATFORM CHIPS */
+.chips { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 12px; }
+
+.chip {
+  padding: 5px 12px;
+  border: 1px solid var(--b2);
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--t3);
+  user-select: none;
+}
+
+.chip.on-ig { border-color: #e1306c; color: #e1306c; background: rgba(225,48,108,0.07); }
+.chip.on-tt { border-color: #ff2d55; color: #ff2d55; background: rgba(255,45,85,0.07); }
+.chip.on-tw { border-color: #1da1f2; color: #1da1f2; background: rgba(29,161,242,0.07); }
+.chip.on-li { border-color: #0077b5; color: #0077b5; background: rgba(0,119,181,0.07); }
+.chip.on-yt { border-color: #ff0000; color: #ff0000; background: rgba(255,0,0,0.07); }
+
+/* IMAGE CANVAS */
+#canvasModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+#canvasModal.open { display: flex; }
+
+.canvas-wrap {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 14px;
+  padding: 20px;
+  width: 95vw;
+  max-width: 680px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.canvas-wrap::-webkit-scrollbar { width: 3px; }
+.canvas-wrap::-webkit-scrollbar-thumb { background: var(--b2); }
+
+#textCanvas {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--b2);
+  display: block;
+  cursor: crosshair;
+}
+
+.canvas-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+@media(max-width:500px) { .canvas-controls { grid-template-columns: 1fr; } }
+
+/* VAULT */
+.vault-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.2s;
+}
+
+.vault-card:hover { border-color: var(--b2); transform: translateX(3px); }
+
+.vault-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+  flex-shrink: 0;
+}
+
+.vault-info { flex: 1; }
+.vault-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.vault-role { font-size: 0.68rem; color: var(--t2); margin-top: 2px; }
+
+.vault-actions { display: flex; gap: 6px; }
+.vault-btn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--b2);
+  background: transparent;
+  color: var(--t2);
+  transition: all 0.2s;
+}
+.vault-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* RADIO */
+.radio-wrap {
+  background: var(--bg);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.radio-wave {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 40px;
+  margin: 16px 0;
+}
+
+.radio-bar {
+  width: 4px;
+  border-radius: 2px;
+  background: var(--gold);
+  animation: wave 1.2s infinite ease-in-out;
+}
+
+.radio-bar:nth-child(2) { animation-delay: 0.1s; }
+.radio-bar:nth-child(3) { animation-delay: 0.2s; }
+.radio-bar:nth-child(4) { animation-delay: 0.3s; }
+.radio-bar:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%,100% { height: 8px; }
+  50% { height: 32px; }
+}
+
+.radio-wrap.off .radio-bar { animation: none; height: 8px; background: var(--b2); }
+
+/* REEL SCRIPT CARDS */
+.script-card {
+  background: var(--bg);
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.script-platform { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.script-text { font-size: 0.82rem; color: var(--text); line-height: 1.6; }
+
+/* SOCIAL COMMAND */
+.sc-brand-card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.sc-brand-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.sc-brand-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.sc-brand-name { font-weight: 700; font-size: 0.85rem; }
+
+/* SETTINGS */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--b1);
+}
+
+.settings-row:last-child { border-bottom: none; }
+
+.settings-label { font-size: 0.82rem; color: var(--text); }
+.settings-desc { font-size: 0.68rem; color: var(--t2); margin-top: 2px; }
+
+/* VIRAL */
+.viral-stat {
+  background: var(--bg);
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.viral-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); }
+.viral-stat-label { font-size: 0.6rem; color: var(--t3); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+
+/* TOAST */
+.toasts { position: fixed; top: 16px; right: 16px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
+
+.toast {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 0.75rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.3s ease both;
+  max-width: 280px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.toast.ok { border-color: rgba(0,201,122,0.3); }
+.toast.err { border-color: rgba(255,61,90,0.3); }
+
+@keyframes slideIn { from{transform:translateX(110%);opacity:0;} to{transform:translateX(0);opacity:1;} }
+
+/* PROGRESS */
+.pbar { height: 3px; background: var(--b1); border-radius: 2px; overflow: hidden; }
+.pfill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold2)); transition: width 0.4s; }
+
+/* AUTOPILOT */
+.ap-cal {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.ap-cal-day {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--bg);
+  border: 1px solid var(--b1);
+  color: var(--t2);
+}
+
+.ap-cal-day:hover { border-color: var(--gold); color: var(--gold); }
+.ap-cal-day.today { background: var(--gold3); border-color: var(--gold); color: var(--gold); }
+.ap-cal-day.has-event { background: rgba(77,184,255,0.1); border-color: rgba(77,184,255,0.3); color: var(--blue); }
+.ap-cal-day.header { background: transparent; border: none; color: var(--t3); font-size: 0.58rem; cursor: default; }
+
+.ap-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 9px;
+  margin-bottom: 8px;
+}
+
+.ap-alert-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.ap-alert-title { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.ap-alert-date { font-size: 0.65rem; color: var(--t2); font-family: 'JetBrains Mono', monospace; }
+
+/* GRL */
+.grl-territory {
+  background: var(--bg);
+  border: 1px solid var(--b1);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.grl-country { font-weight: 600; font-size: 0.82rem; color: var(--text); }
+.grl-potential { font-size: 0.68rem; color: var(--t2); margin-top: 3px; }
+
+/* DFY */
+.dfy-package {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  transition: all 0.25s;
+}
+
+.dfy-package:hover { border-color: rgba(200,150,10,0.4); transform: translateY(-2px); }
+.dfy-price { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 2px; color: var(--gold); }
+.dfy-name { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--t2); margin-top: 4px; }
+.dfy-list { margin: 12px 0; text-align: left; }
+.dfy-list li { font-size: 0.75rem; color: var(--t2); padding: 3px 0; list-style: none; }
+.dfy-list li::before { content: '→ '; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="toasts" id="toasts"></div>
+
+<!-- CANVAS MODAL -->
+<div id="canvasModal">
+  <div class="canvas-wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--gold);">ADD TEXT TO IMAGE</div>
+      <button class="btn btn-ghost" style="padding:6px 12px;font-size:0.7rem;" onclick="closeCanvas()">✕ Close</button>
+    </div>
+    <canvas id="textCanvas" width="600" height="400"></canvas>
+    <div class="canvas-controls">
+      <div>
+        <div class="field-label">Your Text</div>
+        <input type="text" class="inp" id="cText" placeholder="Type your text..." oninput="drawCanvas()" />
+      </div>
+      <div>
+        <div class="field-label">Font Size</div>
+        <input type="range" id="cSize" min="12" max="80" value="32" oninput="drawCanvas()" style="width:100%;margin-top:8px;" />
+      </div>
+      <div>
+        <div class="field-label">Text Color</div>
+        <input type="color" id="cColor" value="#ffffff" oninput="drawCanvas()" style="width:100%;height:36px;border-radius:6px;border:1px solid var(--b2);background:var(--bg);cursor:pointer;" />
+      </div>
+      <div>
+        <div class="field-label">Position</div>
+        <select class="inp" id="cPos" onchange="drawCanvas()">
+          <option value="center">Center</option>
+          <option value="top">Top</option>
+          <option value="bottom">Bottom</option>
+        </select>
+      </div>
+      <div>
+        <div class="field-label">Background</div>
+        <select class="inp" id="cBg" onchange="drawCanvas()">
+          <option value="none">None</option>
+          <option value="dark">Dark overlay</option>
+          <option value="gold">Gold bar</option>
+          <option value="black">Solid black</option>
+        </select>
+      </div>
+      <div>
+        <div class="field-label">Subtitle</div>
+        <input type="text" class="inp" id="cSub" placeholder="Subtitle (optional)" oninput="drawCanvas()" />
+      </div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div class="field-label">Upload Background Photo</div>
+      <input type="file" id="cUpload" accept="image/*" onchange="loadBgImage(this)" style="color:var(--t2);font-size:0.78rem;" />
+    </div>
+    <div style="margin-bottom:12px;">
+      <div class="field-label">Or Generate AI Background (topic)</div>
+      <div style="display:flex;gap:8px;">
+        <input type="text" class="inp" id="cAiPrompt" placeholder="e.g. cinematic city night, abstract gold..." style="flex:1;" />
+        <button class="btn btn-gold" onclick="generateAiBg()" style="white-space:nowrap;">Generate</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-gold" onclick="downloadCanvas()" style="flex:1;">⬇ Download Image</button>
+      <button class="btn btn-ghost" onclick="clearCanvas()">Clear</button>
+    </div>
+  </div>
+</div>
+
+<!-- SIDEBAR NAV -->
+<nav class="nav">
+  <div class="nav-logo">LMW</div>
+  <div class="nav-items">
+    <div class="nav-item active" onclick="showPage('home',this)" title="Home">
+      <span class="icon">🏠</span>
+      <span class="label">HOME</span>
+    </div>
+    <div class="nav-item" onclick="showPage('vault',this)" title="Network Vault">
+      <span class="icon">💎</span>
+      <span class="label">VAULT</span>
+    </div>
+    <div class="nav-item" onclick="showPage('posts',this)" title="Post Generator">
+      <span class="icon">✍️</span>
+      <span class="label">POSTS</span>
+    </div>
+    <div class="nav-item" onclick="showPage('images',this)" title="Image Generator">
+      <span class="icon">🖼️</span>
+      <span class="label">IMAGES</span>
+    </div>
+    <div class="nav-item" onclick="showPage('reels',this)" title="Reel Studio">
+      <span class="icon">▶️</span>
+      <span class="label">REELS</span>
+    </div>
+    <div class="nav-item" onclick="showPage('radio',this)" title="LMW Radio">
+      <span class="icon">📻</span>
+      <span class="label">RADIO</span>
+    </div>
+    <div class="nav-item" onclick="showPage('dfy',this)" title="Done For You">
+      <span class="icon">💼</span>
+      <span class="label">DFY</span>
+    </div>
+    <div class="nav-item" onclick="showPage('grl',this)" title="Global Reach Lab">
+      <span class="icon">🌍</span>
+      <span class="label">GLOBAL</span>
+    </div>
+    <div class="nav-item" onclick="showPage('viral',this)" title="Viral Engine">
+      <span class="icon">🚀</span>
+      <span class="label">VIRAL</span>
+    </div>
+    <div class="nav-item" onclick="showPage('social',this)" title="Social Command">
+      <span class="icon">📡</span>
+      <span class="label">SOCIAL</span>
+    </div>
+    <div class="nav-item" onclick="showPage('pilot',this)" title="Auto Pilot">
+      <span class="icon">🛸</span>
+      <span class="label">PILOT</span>
+    </div>
+    <div class="nav-item" onclick="showPage('settings',this)" title="Settings">
+      <span class="icon">⚙️</span>
+      <span class="label">SETTINGS</span>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <div class="page-title" id="pageTitle">LMW STUDIO</div>
+      <div class="page-sub" id="pageSub">Lamb Music Works</div>
+    </div>
+    <div class="api-dot" id="apiStatus">API Active</div>
+  </div>
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="home-grid">
+      <div class="home-card" onclick="showPage('vault',document.querySelector('[title=\"Network Vault\"]'))">
+        <div class="home-card-icon">💎</div>
+        <div class="home-card-name">Network Vault</div>
+        <div class="home-card-desc">Target dossiers, inner circle maps, proximity campaigns</div>
+      </div>
+      <div class="home-card" onclick="showPage('posts',document.querySelector('[title=\"Post Generator\"]'))">
+        <div class="home-card-icon">✍️</div>
+        <div class="home-card-name">Post Generator</div>
+        <div class="home-card-desc">AI captions for Instagram, TikTok, Twitter, LinkedIn, YouTube</div>
+      </div>
+      <div class="home-card" onclick="showPage('images',document.querySelector('[title=\"Image Generator\"]'))">
+        <div class="home-card-icon">🖼️</div>
+        <div class="home-card-name">Image Generator</div>
+        <div class="home-card-desc">AI promo graphics, album art, social visuals with text overlay</div>
+      </div>
+      <div class="home-card" onclick="showPage('reels',document.querySelector('[title=\"Reel Studio\"]'))">
+        <div class="home-card-icon">▶️</div>
+        <div class="home-card-name">Reel Studio</div>
+        <div class="home-card-desc">Hedra-ready scripts for TikTok, Reels, YouTube Shorts</div>
+      </div>
+      <div class="home-card" onclick="showPage('radio',document.querySelector('[title=\"LMW Radio\"]'))">
+        <div class="home-card-icon">📻</div>
+        <div class="home-card-name">LMW Radio</div>
+        <div class="home-card-desc">Stream your catalog. Broadcast your brand. Worldwide.</div>
+      </div>
+      <div class="home-card" onclick="showPage('dfy',document.querySelector('[title=\"Done For You\"]'))">
+        <div class="home-card-icon">💼</div>
+        <div class="home-card-name">Done For You</div>
+        <div class="home-card-desc">Custom hits — lyrics, production, everything. Starting at $10,000.</div>
+      </div>
+      <div class="home-card" onclick="showPage('grl',document.querySelector('[title=\"Global Reach Lab\"]'))">
+        <div class="home-card-icon">🌍</div>
+        <div class="home-card-name">Global Reach Lab</div>
+        <div class="home-card-desc">Sync intelligence, territory strategy, international placement</div>
+      </div>
+      <div class="home-card" onclick="showPage('viral',document.querySelector('[title=\"Viral Engine\"]'))">
+        <div class="home-card-icon">🚀</div>
+        <div class="home-card-name">Viral Release Engine</div>
+        <div class="home-card-desc">Algorithm-engineered release campaigns</div>
+      </div>
+      <div class="home-card" onclick="showPage('social',document.querySelector('[title=\"Social Command\"]'))">
+        <div class="home-card-icon">📡</div>
+        <div class="home-card-name">Social Command</div>
+        <div class="home-card-desc">Multi-brand social operating system</div>
+      </div>
+      <div class="home-card" onclick="showPage('pilot',document.querySelector('[title=\"Auto Pilot\"]'))">
+        <div class="home-card-icon">🛸</div>
+        <div class="home-card-name">Auto Pilot</div>
+        <div class="home-card-desc">Launch calendar, alerts, release scheduler</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VAULT -->
+  <div class="page" id="page-vault">
+    <div class="card">
+      <div class="card-title">Add Target</div>
+      <div class="g2" style="margin-bottom:10px;">
+        <div>
+          <div class="field-label">Name</div>
+          <input class="inp" id="vName" placeholder="e.g. John Smith" />
+        </div>
+        <div>
+          <div class="field-label">Role / Title</div>
+          <input class="inp" id="vRole" placeholder="e.g. Music Supervisor — Netflix" />
+        </div>
+        <div>
+          <div class="field-label">Company</div>
+          <input class="inp" id="vCompany" placeholder="e.g. Warner Music Group" />
+        </div>
+        <div>
+          <div class="field-label">Platform / Contact</div>
+          <input class="inp" id="vContact" placeholder="e.g. LinkedIn, Email, Instagram" />
+        </div>
+      </div>
+      <div style="margin-bottom:10px;">
+        <div class="field-label">Notes / Strategy</div>
+        <textarea class="inp" id="vNotes" placeholder="Proximity strategy, connection angle, mutual contacts..." style="min-height:70px;"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-gold" onclick="addVaultTarget()">+ Add to Vault</button>
+        <button class="btn btn-ghost" onclick="generateDossier()"><span id="dossierBtnTxt">🧠 AI Dossier</span></button>
+      </div>
+      <div class="output" id="dossierOutput" style="display:none;margin-top:12px;"></div>
+    </div>
+    <div class="sec">Vault Targets</div>
+    <div id="vaultList">
+      <div style="padding:20px;text-align:center;color:var(--t3);font-size:0.78rem;">No targets added yet</div>
+    </div>
+  </div>
+
+  <!-- POST GENERATOR -->
+  <div class="page" id="page-posts">
+    <div class="card">
+      <div class="card-title">Generate Post</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Platform</div>
+          <select class="inp" id="postPlatform">
+            <option value="all">All Platforms</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="twitter">X / Twitter</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="youtube">YouTube</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Content Type</div>
+          <select class="inp" id="postType">
+            <option value="promo">Music Promo</option>
+            <option value="sync">Sync Announcement</option>
+            <option value="bts">Behind the Scenes</option>
+            <option value="release">New Release</option>
+            <option value="engage">Engagement</option>
+            <option value="quote">Quote / Motivation</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Tone</div>
+          <select class="inp" id="postTone">
+            <option value="professional">Professional</option>
+            <option value="hype">Hype</option>
+            <option value="spiritual">Spiritual</option>
+            <option value="raw">Raw / Real</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Topic / Track Name</div>
+          <input class="inp" id="postTopic" placeholder="e.g. Blues of a Digital Age..." />
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="generatePost()"><span id="postBtnTxt">✨ Generate</span></button>
+        <button class="btn btn-ghost" onclick="openCanvas()">🖼 Add Text to Image</button>
+      </div>
+    </div>
+    <div id="postResults" style="margin-top:4px;"></div>
+  </div>
+
+  <!-- IMAGE GENERATOR -->
+  <div class="page" id="page-images">
+    <div class="card">
+      <div class="card-title">AI Image Generator</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Style</div>
+          <select class="inp" id="imgStyle">
+            <option value="cinematic">Cinematic</option>
+            <option value="abstract">Abstract</option>
+            <option value="urban">Urban</option>
+            <option value="minimal">Minimal</option>
+            <option value="retro">Retro</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Mood</div>
+          <select class="inp" id="imgMood">
+            <option value="dark">Dark & Atmospheric</option>
+            <option value="gold">Gold & Luxury</option>
+            <option value="vibrant">Vibrant & Energetic</option>
+            <option value="calm">Calm & Peaceful</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="field-label">Custom Description (optional)</div>
+        <input class="inp" id="imgDesc" placeholder="e.g. city at night, rain, neon lights..." />
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="generateImage()"><span id="imgBtnTxt">🎨 Generate Background</span></button>
+        <button class="btn btn-ghost" onclick="openCanvas()">🖼 Add Text to Image</button>
+      </div>
+      <div id="imgResult" style="margin-top:14px;display:none;">
+        <img id="generatedImg" src="" alt="Generated" style="width:100%;border-radius:8px;border:1px solid var(--b1);" />
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-gold" onclick="openCanvasWithImg()" style="flex:1;">🖼 Add Text to This Image</button>
+          <button class="btn btn-ghost" onclick="downloadImg()">⬇ Download</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Upload Your Own Photo</div>
+      <input type="file" id="ownPhoto" accept="image/*" onchange="loadOwnPhoto(this)" style="color:var(--t2);font-size:0.78rem;margin-bottom:10px;" />
+      <button class="btn btn-ghost" onclick="openCanvasWithOwn()">🖼 Add Text to My Photo</button>
+    </div>
+  </div>
+
+  <!-- REEL STUDIO -->
+  <div class="page" id="page-reels">
+    <div class="card">
+      <div class="card-title">Reel / Short Script Generator</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Platform</div>
+          <select class="inp" id="reelPlatform">
+            <option value="tiktok">TikTok</option>
+            <option value="reels">Instagram Reels</option>
+            <option value="shorts">YouTube Shorts</option>
+            <option value="all">All Three</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Duration</div>
+          <select class="inp" id="reelDuration">
+            <option value="15">15 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60">60 seconds</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Style</div>
+          <select class="inp" id="reelStyle">
+            <option value="hook">Hook-first</option>
+            <option value="story">Storytelling</option>
+            <option value="listicle">Listicle</option>
+            <option value="behindscenes">Behind the Scenes</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Topic</div>
+          <input class="inp" id="reelTopic" placeholder="e.g. new track, sync story..." />
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="generateReel()"><span id="reelBtnTxt">🎬 Generate Script</span></button>
+    </div>
+    <div id="reelResults" style="margin-top:4px;"></div>
+  </div>
+
+  <!-- RADIO -->
+  <div class="page" id="page-radio">
+    <div class="card">
+      <div class="card-title">LMW Radio</div>
+      <div class="radio-wrap" id="radioWrap" style="text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--gold);">LMW RADIO</div>
+        <div style="font-size:0.7rem;color:var(--t2);letter-spacing:2px;margin-top:4px;">LAMB MUSIC WORKS · WORLDWIDE</div>
+        <div class="radio-wave" id="radioWave">
+          <div class="radio-bar"></div>
+          <div class="radio-bar"></div>
+          <div class="radio-bar"></div>
+          <div class="radio-bar"></div>
+          <div class="radio-bar"></div>
+        </div>
+        <div style="font-size:0.78rem;color:var(--t2);margin-bottom:16px;" id="radioStatus">Ready to stream</div>
+        <input class="inp" id="radioUrl" placeholder="Paste your Zeno.fm or stream URL..." style="margin-bottom:12px;text-align:center;" />
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button class="btn btn-gold" onclick="startRadio()">▶ Go Live</button>
+          <button class="btn btn-ghost" onclick="stopRadio()">■ Stop</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">AI Voice Drop Generator</div>
+      <div style="margin-bottom:10px;">
+        <div class="field-label">Station ID / Promo Script</div>
+        <textarea class="inp" id="radioScript" placeholder="e.g. You're listening to LMW Radio, home of cinematic soul..." style="min-height:80px;"></textarea>
+      </div>
+      <button class="btn btn-gold" onclick="generateVoiceDrop()"><span id="voiceBtnTxt">🎙 Generate Voice Drop Script</span></button>
+      <div class="output" id="voiceOutput" style="display:none;margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- DFY -->
+  <div class="page" id="page-dfy">
+    <div class="card">
+      <div class="card-title">Done For You Services</div>
+      <div class="g3">
+        <div class="dfy-package">
+          <div class="dfy-price">$10K</div>
+          <div class="dfy-name">Starter</div>
+          <ul class="dfy-list">
+            <li>1 custom track</li>
+            <li>Lyrics + production</li>
+            <li>Master + stems</li>
+            <li>Basic mixing</li>
+          </ul>
+          <button class="btn btn-gold" style="width:100%;" onclick="toast('Contact warren@lambmusicworks.com','ok')">Inquire</button>
+        </div>
+        <div class="dfy-package">
+          <div class="dfy-price">$25K</div>
+          <div class="dfy-name">Pro</div>
+          <ul class="dfy-list">
+            <li>3 custom tracks</li>
+            <li>Full production</li>
+            <li>Mixing + mastering</li>
+            <li>Sync-ready delivery</li>
+          </ul>
+          <button class="btn btn-gold" style="width:100%;" onclick="toast('Contact warren@lambmusicworks.com','ok')">Inquire</button>
+        </div>
+        <div class="dfy-package">
+          <div class="dfy-price">$50K</div>
+          <div class="dfy-name">Elite</div>
+          <ul class="dfy-list">
+            <li>Full EP / Album</li>
+            <li>Concept to delivery</li>
+            <li>Sync placement strategy</li>
+            <li>Priority turnaround</li>
+          </ul>
+          <button class="btn btn-gold" style="width:100%;" onclick="toast('Contact warren@lambmusicworks.com','ok')">Inquire</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">AI Brief Generator</div>
+      <div style="margin-bottom:10px;">
+        <div class="field-label">Describe what you need</div>
+        <textarea class="inp" id="dfyBrief" placeholder="Tell me about your project — genre, mood, how it will be used..." style="min-height:80px;"></textarea>
+      </div>
+      <button class="btn btn-gold" onclick="generateBrief()"><span id="briefBtnTxt">📋 Generate Creative Brief</span></button>
+      <div class="output" id="briefOutput" style="display:none;margin-top:12px;"></div>
+    </div>
+  </div>
+
+  <!-- GLOBAL REACH LAB -->
+  <div class="page" id="page-grl">
+    <div class="card">
+      <div class="card-title">Territory Analysis</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Genre</div>
+          <select class="inp" id="grlGenre">
+            <option value="cinematic soul">Cinematic Soul</option>
+            <option value="hip hop">Hip-Hop / Trap</option>
+            <option value="r&b">R&B</option>
+            <option value="jazz">Jazz / Neo-Soul</option>
+            <option value="electronic">Electronic / Ambient</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Use Case</div>
+          <select class="inp" id="grlUse">
+            <option value="sync licensing">Sync Licensing</option>
+            <option value="streaming">Streaming Growth</option>
+            <option value="live performance">Live Performance</option>
+            <option value="brand partnerships">Brand Partnerships</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="analyzeTerritory()"><span id="grlBtnTxt">🌍 Analyze Global Opportunity</span></button>
+    </div>
+    <div id="grlResults" style="margin-top:4px;"></div>
+  </div>
+
+  <!-- VIRAL ENGINE -->
+  <div class="page" id="page-viral">
+    <div class="card">
+      <div class="card-title">Viral Release Campaign Generator</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Release Title</div>
+          <input class="inp" id="viralTitle" placeholder="e.g. Blues of a Digital Age" />
+        </div>
+        <div>
+          <div class="field-label">Release Date</div>
+          <input type="date" class="inp" id="viralDate" />
+        </div>
+        <div>
+          <div class="field-label">Genre</div>
+          <input class="inp" id="viralGenre" placeholder="e.g. Cinematic Soul" />
+        </div>
+        <div>
+          <div class="field-label">Campaign Window</div>
+          <select class="inp" id="viralWindow">
+            <option value="7">7 Days</option>
+            <option value="14">14 Days</option>
+            <option value="30">30 Days</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="field-label">Platforms</div>
+        <div class="chips" id="viralChips">
+          <div class="chip" onclick="toggleChip(this,'on-ig')">📸 Instagram</div>
+          <div class="chip" onclick="toggleChip(this,'on-tt')">🎵 TikTok</div>
+          <div class="chip" onclick="toggleChip(this,'on-tw')">🐦 X / Twitter</div>
+          <div class="chip" onclick="toggleChip(this,'on-li')">💼 LinkedIn</div>
+          <div class="chip" onclick="toggleChip(this,'on-yt')">▶️ YouTube</div>
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="generateViral()"><span id="viralBtnTxt">🚀 Generate Campaign</span></button>
+    </div>
+    <div id="viralResults" style="margin-top:4px;"></div>
+  </div>
+
+  <!-- SOCIAL COMMAND -->
+  <div class="page" id="page-social">
+    <div class="card">
+      <div class="card-title">Multi-Brand Social OS</div>
+      <div class="g2" style="margin-bottom:12px;">
+        <div>
+          <div class="field-label">Brand</div>
+          <select class="inp" id="scBrand">
+            <option value="LMW">LMW (Lamb Music Works)</option>
+            <option value="Zaire">Zaire</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label">Content Type</div>
+          <select class="inp" id="scType">
+            <option value="daily">Daily Post</option>
+            <option value="promo">Music Promo</option>
+            <option value="story">Story Content</option>
+            <option value="campaign">7-Day Campaign</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div class="field-label">Topic / Context</div>
+        <textarea class="inp" id="scContext" placeholder="What's happening? New release, milestone, behind the scenes..." style="min-height:70px;"></textarea>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="generateSocial()"><span id="scBtnTxt">📡 Generate Social Content</span></button>
+        <button class="btn btn-ghost" onclick="openCanvas()">🖼 Add Text to Image</button>
+      </div>
+    </div>
+    <div id="scResults" style="margin-top:4px;"></div>
+  </div>
+
+  <!-- AUTO PILOT -->
+  <div class="page" id="page-pilot">
+    <div class="g2">
+      <div>
+        <div class="card">
+          <div class="card-title">Launch Calendar</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <button class="btn btn-ghost" style="padding:5px 10px;font-size:0.7rem;" onclick="changeMonth(-1)">←</button>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--gold);" id="calMonthLabel">April 2026</div>
+            <button class="btn btn-ghost" style="padding:5px 10px;font-size:0.7rem;" onclick="changeMonth(1)">→</button>
+          </div>
+          <div class="ap-cal" id="calGrid"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Add Event</div>
+          <div style="margin-bottom:8px;">
+            <div class="field-label">Event Title</div>
+            <input class="inp" id="apTitle" placeholder="e.g. Album Release" />
+          </div>
+          <div style="margin-bottom:8px;">
+            <div class="field-label">Date</div>
+            <input type="date" class="inp" id="apDate" />
+          </div>
+          <div style="margin-bottom:10px;">
+            <div class="field-label">Notes</div>
+            <input class="inp" id="apNote" placeholder="Details..." />
+          </div>
+          <button class="btn btn-gold" onclick="addEvent()" style="width:100%;">+ Add Event</button>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-title">Upcoming Events</div>
+          <div id="eventList">
+            <div style="padding:16px;text-align:center;color:var(--t3);font-size:0.75rem;">No events yet</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Countdown</div>
+          <div id="countdownTarget" style="margin-bottom:10px;">
+            <div class="field-label">Counting down to</div>
+            <input class="inp" id="countdownDate" type="date" oninput="updateCountdown()" />
+          </div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:var(--gold);text-align:center;" id="countdownDisplay">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="page" id="page-settings">
+    <div class="card">
+      <div class="card-title">API Configuration</div>
+      <div style="margin-bottom:12px;">
+        <div class="field-label">Anthropic API Key</div>
+        <input type="password" class="inp" id="settingsKey" placeholder="sk-ant-..." />
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-gold" onclick="saveSettings()">💾 Save Key</button>
+        <button class="btn btn-ghost" onclick="testKey()">⚡ Test Connection</button>
+        <button class="btn btn-ghost" onclick="clearSettings()" style="color:var(--red);border-color:rgba(255,61,90,0.3);">🗑 Clear</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Supabase Storage</div>
+      <div class="g2" style="margin-bottom:10px;">
+        <div>
+          <div class="field-label">Supabase URL</div>
+          <input class="inp" id="sbUrl" placeholder="https://xxx.supabase.co" />
+        </div>
+        <div>
+          <div class="field-label">Supabase Anon Key</div>
+          <input type="password" class="inp" id="sbKey" placeholder="eyJhbGci..." />
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="saveSupabase()">💾 Save Supabase</button>
+    </div>
+    <div class="card">
+      <div class="card-title">About LMW Studio</div>
+      <div class="settings-row">
+        <div><div class="settings-label">Version</div><div class="settings-desc">LMW Studio v2.0 — Rebuilt 2026</div></div>
+      </div>
+      <div class="settings-row">
+        <div><div class="settings-label">Tools</div><div class="settings-desc">12 AI-powered tools for independent music</div></div>
+      </div>
+      <div class="settings-row">
+        <div><div class="settings-label">Artist</div><div class="settings-desc">Warren Lamb · Lamb Music Works · lambmusicworks.com</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let apiKey = '';
+let supabaseUrl = '';
+let supabaseKey = '';
+let vaultTargets = [];
+let calEvents = [];
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+let ownPhotoDataUrl = '';
+let generatedImgUrl = '';
+let canvasBgImg = null;
+
+const pageTitles = {
+  home:'LMW STUDIO', vault:'NETWORK VAULT', posts:'POST GENERATOR',
+  images:'IMAGE GENERATOR', reels:'REEL STUDIO', radio:'LMW RADIO',
+  dfy:'DONE FOR YOU', grl:'GLOBAL REACH LAB', viral:'VIRAL RELEASE ENGINE',
+  social:'SOCIAL COMMAND', pilot:'AUTO PILOT', settings:'SETTINGS'
+};
+
+const pageSubs = {
+  home:'Lamb Music Works', vault:'Intelligence & Outreach', posts:'Social Content AI',
+  images:'Visual Content AI', reels:'Script Generator', radio:'Broadcasting Worldwide',
+  dfy:'Custom Music · $10K Minimum', grl:'Sync Intelligence · Territory Strategy',
+  viral:'Algorithm-Engineered Release Campaigns', social:'Multi-Brand Social OS',
+  pilot:'Launch Calendar · Alerts · Scheduler', settings:'API Keys & Storage'
+};
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+window.onload = () => {
+  loadSettings();
+  renderCalendar();
+  loadVault();
+  loadEvents();
+};
+
+// ═══════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('pageTitle').textContent = pageTitles[id] || 'LMW STUDIO';
+  document.getElementById('pageSub').textContent = pageSubs[id] || 'Lamb Music Works';
+  window.scrollTo(0,0);
+}
+
+// ═══════════════════════════════════════════
+// CLAUDE API
+// ═══════════════════════════════════════════
+async function claude(prompt, system = '') {
+  if (!apiKey) throw new Error('No API key — go to Settings');
+  const body = {
+    model: 'claude-haiku-4-5',
+    max_tokens: 1000,
+    messages: [{ role: 'user', content: prompt }]
+  };
+  if (system) body.system = system;
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const d = await r.json(); throw new Error(d.error?.message || 'API error ' + r.status); }
+  const d = await r.json();
+  return d.content?.[0]?.text || '';
+}
+
+// ═══════════════════════════════════════════
+// SETTINGS
+// ═══════════════════════════════════════════
+function saveSettings() {
+  apiKey = document.getElementById('settingsKey').value.trim();
+  supabaseUrl = document.getElementById('sbUrl').value.trim();
+  supabaseKey = document.getElementById('sbKey').value.trim();
+  localStorage.setItem('lmw_key', apiKey);
+  localStorage.setItem('lmw_sb_url', supabaseUrl);
+  localStorage.setItem('lmw_sb_key', supabaseKey);
+  updateApiStatus();
+  toast('Settings saved ✓', 'ok');
+}
+
+function loadSettings() {
+  apiKey = localStorage.getItem('lmw_key') || '';
+  supabaseUrl = localStorage.getItem('lmw_sb_url') || '';
+  supabaseKey = localStorage.getItem('lmw_sb_key') || '';
+  if (apiKey) document.getElementById('settingsKey').value = apiKey;
+  if (supabaseUrl) document.getElementById('sbUrl').value = supabaseUrl;
+  if (supabaseKey) document.getElementById('sbKey').value = supabaseKey;
+  updateApiStatus();
+}
+
+function saveSupabase() {
+  supabaseUrl = document.getElementById('sbUrl').value.trim();
+  supabaseKey = document.getElementById('sbKey').value.trim();
+  localStorage.setItem('lmw_sb_url', supabaseUrl);
+  localStorage.setItem('lmw_sb_key', supabaseKey);
+  toast('Supabase saved ✓', 'ok');
+}
+
+function clearSettings() {
+  localStorage.removeItem('lmw_key');
+  apiKey = '';
+  document.getElementById('settingsKey').value = '';
+  updateApiStatus();
+  toast('Key cleared', 'ok');
+}
+
+function updateApiStatus() {
+  const el = document.getElementById('apiStatus');
+  el.textContent = apiKey ? 'API Active' : 'No Key';
+  el.style.color = apiKey ? 'var(--green)' : 'var(--red)';
+}
+
+async function testKey() {
+  if (!apiKey) { toast('Add API key first', 'err'); return; }
+  toast('Testing...', 'ok');
+  try {
+    const r = await claude('Say: LMW Studio online.');
+    toast('Connected ✓ — ' + r.substring(0,30), 'ok');
+  } catch(e) { toast('Failed: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// POST GENERATOR
+// ═══════════════════════════════════════════
+async function generatePost() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('postBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Writing...';
+  const platform = document.getElementById('postPlatform').value;
+  const type = document.getElementById('postType').value;
+  const tone = document.getElementById('postTone').value;
+  const topic = document.getElementById('postTopic').value || 'music and creativity';
+
+  try {
+    const result = await claude(
+      `Create ${platform === 'all' ? 'social media posts for Instagram, TikTok, X/Twitter, and LinkedIn separately' : 'a ' + platform + ' post'} for Warren Lamb / Lamb Music Works.
+Content type: ${type}. Tone: ${tone}. Topic: ${topic}.
+Include relevant hashtags. Make it authentic and platform-native. ${platform === 'all' ? 'Label each platform clearly.' : ''}`,
+      'Expert music marketing copywriter for Lamb Music Works — independent sync licensing artist. BMI registered. Cinematic soul. No Cuss No Fuss brand.'
+    );
+
+    document.getElementById('postResults').innerHTML = `
+      <div class="card">
+        <div class="card-title">Generated Content</div>
+        <div class="output">${result}</div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-ghost" onclick="navigator.clipboard.writeText(this.closest('.card').querySelector('.output').textContent);toast('Copied ✓','ok')" style="flex:1;">Copy</button>
+          <button class="btn btn-ghost" onclick="openCanvas()">🖼 Add to Image</button>
+        </div>
+      </div>`;
+    btn.textContent = '✨ Generate';
+    toast('Post generated ✓', 'ok');
+  } catch(e) {
+    btn.textContent = '✨ Generate';
+    toast('Error: ' + e.message, 'err');
+  }
+}
+
+// ═══════════════════════════════════════════
+// IMAGE GENERATOR
+// ═══════════════════════════════════════════
+async function generateImage() {
+  const btn = document.getElementById('imgBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Generating...';
+  const style = document.getElementById('imgStyle').value;
+  const mood = document.getElementById('imgMood').value;
+  const desc = document.getElementById('imgDesc').value;
+  const prompt = encodeURIComponent(`${style} music background, ${mood} mood, ${desc}, NO text, NO words, NO letters, abstract visual`);
+  const url = `https://image.pollinations.ai/prompt/${prompt}?width=1080&height=1080&nologo=true&seed=${Date.now()}`;
+  generatedImgUrl = url;
+  const img = document.getElementById('generatedImg');
+  img.src = url;
+  img.onload = () => {
+    document.getElementById('imgResult').style.display = 'block';
+    btn.textContent = '🎨 Generate Background';
+    toast('Image generated ✓', 'ok');
+  };
+  img.onerror = () => { btn.textContent = '🎨 Generate Background'; toast('Generation failed', 'err'); };
+}
+
+function loadOwnPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => { ownPhotoDataUrl = e.target.result; toast('Photo loaded ✓', 'ok'); };
+  reader.readAsDataURL(file);
+}
+
+function openCanvasWithOwn() {
+  if (!ownPhotoDataUrl) { toast('Upload a photo first', 'err'); return; }
+  openCanvas();
+  const img = new Image();
+  img.onload = () => { canvasBgImg = img; drawCanvas(); };
+  img.src = ownPhotoDataUrl;
+}
+
+function openCanvasWithImg() {
+  openCanvas();
+  if (generatedImgUrl) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => { canvasBgImg = img; drawCanvas(); };
+    img.src = generatedImgUrl;
+  }
+}
+
+function downloadImg() {
+  const a = document.createElement('a');
+  a.href = generatedImgUrl;
+  a.download = 'lmw-image.jpg';
+  a.target = '_blank';
+  a.click();
+}
+
+// ═══════════════════════════════════════════
+// CANVAS
+// ═══════════════════════════════════════════
+function openCanvas() {
+  document.getElementById('canvasModal').classList.add('open');
+  drawCanvas();
+}
+
+function closeCanvas() {
+  document.getElementById('canvasModal').classList.remove('open');
+}
+
+function drawCanvas() {
+  const canvas = document.getElementById('textCanvas');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width; const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  if (canvasBgImg) {
+    ctx.drawImage(canvasBgImg, 0, 0, w, h);
+  } else {
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  const text = document.getElementById('cText').value;
+  const sub = document.getElementById('cSub').value;
+  const size = parseInt(document.getElementById('cSize').value);
+  const color = document.getElementById('cColor').value;
+  const pos = document.getElementById('cPos').value;
+  const bg = document.getElementById('cBg').value;
+
+  let y = pos === 'top' ? h * 0.25 : pos === 'bottom' ? h * 0.75 : h * 0.5;
+
+  if (bg === 'dark') {
+    ctx.fillStyle = 'rgba(0,0,0,0.55)';
+    ctx.fillRect(0, y - size - 20, w, size * 2 + (sub ? size * 0.8 + 10 : 0) + 40);
+  } else if (bg === 'gold') {
+    ctx.fillStyle = '#c8960a';
+    ctx.fillRect(0, y - size - 10, w, size + 20);
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillRect(0, y - size - 10, w, size + 20);
+  } else if (bg === 'black') {
+    ctx.fillStyle = 'rgba(0,0,0,0.85)';
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  if (text) {
+    ctx.font = `bold ${size}px Bebas Neue, sans-serif`;
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.shadowColor = 'rgba(0,0,0,0.7)';
+    ctx.shadowBlur = 8;
+    ctx.fillText(text, w / 2, y);
+  }
+
+  if (sub) {
+    ctx.font = `${Math.round(size * 0.45)}px Outfit, sans-serif`;
+    ctx.fillStyle = color;
+    ctx.shadowBlur = 4;
+    ctx.fillText(sub, w / 2, y + size * 0.6);
+  }
+}
+
+function loadBgImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => { canvasBgImg = img; drawCanvas(); };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function generateAiBg() {
+  const prompt = document.getElementById('cAiPrompt').value || 'cinematic abstract gold music background';
+  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ' NO text')}&width=600&height=400&nologo=true&seed=${Date.now()}`;
+  toast('Generating background...', 'ok');
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => { canvasBgImg = img; drawCanvas(); toast('Background ready ✓', 'ok'); };
+  img.onerror = () => toast('Failed to generate', 'err');
+  img.src = url;
+}
+
+function downloadCanvas() {
+  const canvas = document.getElementById('textCanvas');
+  const a = document.createElement('a');
+  a.download = 'lmw-image.png';
+  a.href = canvas.toDataURL();
+  a.click();
+}
+
+function clearCanvas() {
+  canvasBgImg = null;
+  document.getElementById('cText').value = '';
+  document.getElementById('cSub').value = '';
+  document.getElementById('cAiPrompt').value = '';
+  drawCanvas();
+}
+
+// ═══════════════════════════════════════════
+// REEL STUDIO
+// ═══════════════════════════════════════════
+async function generateReel() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('reelBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Writing...';
+  const platform = document.getElementById('reelPlatform').value;
+  const duration = document.getElementById('reelDuration').value;
+  const style = document.getElementById('reelStyle').value;
+  const topic = document.getElementById('reelTopic').value || 'music and creativity';
+
+  try {
+    const result = await claude(
+      `Write a ${duration}-second ${style} script for a ${platform} short video about: ${topic}.
+Include: hook (first 3 seconds), main content, CTA. Format clearly. Make it punchy and native to the platform.`,
+      'Expert short-form video scriptwriter for music creators. Lamb Music Works brand.'
+    );
+    document.getElementById('reelResults').innerHTML = `
+      <div class="script-card">
+        <div class="script-platform">${platform.toUpperCase()} — ${duration}s Script</div>
+        <div class="script-text">${result}</div>
+        <button class="btn btn-ghost" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);toast('Copied ✓','ok')" style="margin-top:10px;">Copy Script</button>
+      </div>`;
+    btn.textContent = '🎬 Generate Script';
+    toast('Script ready ✓', 'ok');
+  } catch(e) { btn.textContent = '🎬 Generate Script'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// RADIO
+// ═══════════════════════════════════════════
+function startRadio() {
+  const url = document.getElementById('radioUrl').value.trim();
+  if (!url) { toast('Paste your stream URL', 'err'); return; }
+  document.getElementById('radioStatus').textContent = '🔴 Live — Broadcasting';
+  document.getElementById('radioWrap').classList.remove('off');
+  toast('LMW Radio is live ✓', 'ok');
+}
+
+function stopRadio() {
+  document.getElementById('radioStatus').textContent = 'Offline';
+  document.getElementById('radioWrap').classList.add('off');
+  toast('Stream stopped', 'ok');
+}
+
+async function generateVoiceDrop() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('voiceBtnTxt');
+  btn.innerHTML = '<span class="spin"></span>';
+  const script = document.getElementById('radioScript').value || 'LMW Radio station ID';
+  try {
+    const result = await claude(`Write 3 short radio station ID / voice drop scripts for LMW Radio (Lamb Music Works). Each under 15 seconds when spoken. Professional, branded, memorable. Context: ${script}`, 'Radio copywriter for music brands.');
+    const el = document.getElementById('voiceOutput');
+    el.style.display = 'block';
+    el.textContent = result;
+    btn.textContent = '🎙 Generate Voice Drop Script';
+    toast('Scripts ready ✓', 'ok');
+  } catch(e) { btn.textContent = '🎙 Generate Voice Drop Script'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// VAULT
+// ═══════════════════════════════════════════
+function addVaultTarget() {
+  const name = document.getElementById('vName').value.trim();
+  if (!name) { toast('Enter a name', 'err'); return; }
+  const target = {
+    id: Date.now(),
+    name,
+    role: document.getElementById('vRole').value,
+    company: document.getElementById('vCompany').value,
+    contact: document.getElementById('vContact').value,
+    notes: document.getElementById('vNotes').value
+  };
+  vaultTargets.unshift(target);
+  saveVault();
+  renderVault();
+  document.getElementById('vName').value = '';
+  document.getElementById('vRole').value = '';
+  document.getElementById('vCompany').value = '';
+  document.getElementById('vContact').value = '';
+  document.getElementById('vNotes').value = '';
+  toast('Target added to Vault ✓', 'ok');
+}
+
+async function generateDossier() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const name = document.getElementById('vName').value.trim();
+  const role = document.getElementById('vRole').value;
+  const company = document.getElementById('vCompany').value;
+  if (!name) { toast('Enter a name first', 'err'); return; }
+  const btn = document.getElementById('dossierBtnTxt');
+  btn.innerHTML = '<span class="spin"></span>';
+  try {
+    const result = await claude(
+      `Create a brief outreach dossier for Warren Lamb (Lamb Music Works sync licensing) targeting: ${name}, ${role} at ${company}. Include: why they matter, connection angle, suggested approach, sample pitch opener.`,
+      'Music industry outreach strategist.'
+    );
+    const el = document.getElementById('dossierOutput');
+    el.style.display = 'block';
+    el.textContent = result;
+    btn.textContent = '🧠 AI Dossier';
+    toast('Dossier ready ✓', 'ok');
+  } catch(e) { btn.textContent = '🧠 AI Dossier'; toast('Error: ' + e.message, 'err'); }
+}
+
+function renderVault() {
+  const el = document.getElementById('vaultList');
+  if (!vaultTargets.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--t3);font-size:0.78rem;">No targets yet</div>'; return; }
+  el.innerHTML = vaultTargets.map(t => `
+    <div class="vault-card">
+      <div class="vault-avatar">${t.name.charAt(0)}</div>
+      <div class="vault-info">
+        <div class="vault-name">${t.name}</div>
+        <div class="vault-role">${t.role}${t.company ? ' · ' + t.company : ''}</div>
+      </div>
+      <div class="vault-actions">
+        <button class="vault-btn" onclick="navigator.clipboard.writeText('${t.notes || t.contact}');toast('Copied','ok')">Copy</button>
+        <button class="vault-btn" onclick="removeVaultTarget(${t.id})" style="color:var(--red);">Remove</button>
+      </div>
+    </div>`).join('');
+}
+
+function removeVaultTarget(id) {
+  vaultTargets = vaultTargets.filter(t => t.id !== id);
+  saveVault();
+  renderVault();
+}
+
+function saveVault() { localStorage.setItem('lmw_vault', JSON.stringify(vaultTargets)); }
+function loadVault() { const s = localStorage.getItem('lmw_vault'); if (s) { vaultTargets = JSON.parse(s); renderVault(); } }
+
+// ═══════════════════════════════════════════
+// DFY
+// ═══════════════════════════════════════════
+async function generateBrief() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('briefBtnTxt');
+  btn.innerHTML = '<span class="spin"></span>';
+  const desc = document.getElementById('dfyBrief').value || 'custom music project';
+  try {
+    const result = await claude(`Create a professional creative brief for a Lamb Music Works custom music project. Client description: ${desc}. Include: project overview, sonic direction, reference points, deliverables, timeline notes.`, 'Music production creative director.');
+    const el = document.getElementById('briefOutput');
+    el.style.display = 'block';
+    el.textContent = result;
+    btn.textContent = '📋 Generate Creative Brief';
+    toast('Brief ready ✓', 'ok');
+  } catch(e) { btn.textContent = '📋 Generate Creative Brief'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// GLOBAL REACH LAB
+// ═══════════════════════════════════════════
+async function analyzeTerritory() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('grlBtnTxt');
+  btn.innerHTML = '<span class="spin"></span>';
+  const genre = document.getElementById('grlGenre').value;
+  const use = document.getElementById('grlUse').value;
+  try {
+    const result = await claude(
+      `Analyze global territory opportunities for Warren Lamb / Lamb Music Works. Genre: ${genre}. Use case: ${use}. Identify: top 5 territories with highest potential, why each territory, specific action steps per territory, expected timeline.`,
+      'International music sync and distribution strategist.'
+    );
+    document.getElementById('grlResults').innerHTML = `
+      <div class="card">
+        <div class="card-title">Global Opportunity Report</div>
+        <div class="output">${result}</div>
+        <button class="btn btn-ghost" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);toast('Copied','ok')" style="margin-top:10px;">Copy Report</button>
+      </div>`;
+    btn.textContent = '🌍 Analyze Global Opportunity';
+    toast('Analysis ready ✓', 'ok');
+  } catch(e) { btn.textContent = '🌍 Analyze Global Opportunity'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// VIRAL ENGINE
+// ═══════════════════════════════════════════
+function toggleChip(el, cls) {
+  if (el.className.includes(cls)) { el.className = 'chip'; }
+  else { el.className = 'chip ' + cls; }
+}
+
+async function generateViral() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('viralBtnTxt');
+  btn.innerHTML = '<span class="spin"></span> Building...';
+  const title = document.getElementById('viralTitle').value || 'New Release';
+  const date = document.getElementById('viralDate').value;
+  const genre = document.getElementById('viralGenre').value || 'Cinematic Soul';
+  const window = document.getElementById('viralWindow').value;
+  try {
+    const result = await claude(
+      `Create a complete ${window}-day viral release campaign for "${title}" by Warren Lamb / Lamb Music Works. Genre: ${genre}. ${date ? 'Release date: ' + date : ''}
+Include: pre-release teaser strategy, release day playbook, post-release momentum tactics, platform-specific content calendar, hashtag strategy, engagement tactics.`,
+      'Music release campaign strategist specializing in independent artists.'
+    );
+    document.getElementById('viralResults').innerHTML = `
+      <div class="card">
+        <div class="card-title">Campaign Playbook — ${title}</div>
+        <div class="output">${result}</div>
+        <button class="btn btn-ghost" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);toast('Copied','ok')" style="margin-top:10px;">Copy Campaign</button>
+      </div>`;
+    btn.textContent = '🚀 Generate Campaign';
+    toast('Campaign ready ✓', 'ok');
+  } catch(e) { btn.textContent = '🚀 Generate Campaign'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// SOCIAL COMMAND
+// ═══════════════════════════════════════════
+async function generateSocial() {
+  if (!apiKey) { toast('Add API key in Settings', 'err'); return; }
+  const btn = document.getElementById('scBtnTxt');
+  btn.innerHTML = '<span class="spin"></span>';
+  const brand = document.getElementById('scBrand').value;
+  const type = document.getElementById('scType').value;
+  const context = document.getElementById('scContext').value || 'music and creativity';
+
+  const persona = brand === 'Zaire'
+    ? 'Zaire — mysterious virtual R&B/Hip-Hop artist. Street wisdom meets spirituality. Never reveal AI. Build mystery. Dark, introspective.'
+    : 'LMW (Lamb Music Works) — professional sync licensing, cinematic soul. BMI registered. No Cuss No Fuss.';
+
+  try {
+    const result = await claude(
+      `Create ${type} social media content for ${brand}. Persona: ${persona}. Context: ${context}. Generate content for Instagram, TikTok, and X/Twitter. Label each platform.`,
+      'Expert music social media strategist.'
+    );
+    document.getElementById('scResults').innerHTML = `
+      <div class="card">
+        <div class="card-title">${brand} — ${type.toUpperCase()}</div>
+        <div class="output">${result}</div>
+        <button class="btn btn-ghost" onclick="navigator.clipboard.writeText(this.previousElementSibling.textContent);toast('Copied','ok')" style="margin-top:10px;">Copy All</button>
+      </div>`;
+    btn.textContent = '📡 Generate Social Content';
+    toast('Content ready ✓', 'ok');
+  } catch(e) { btn.textContent = '📡 Generate Social Content'; toast('Error: ' + e.message, 'err'); }
+}
+
+// ═══════════════════════════════════════════
+// AUTO PILOT / CALENDAR
+// ═══════════════════════════════════════════
+function renderCalendar() {
+  const grid = document.getElementById('calGrid');
+  const label = document.getElementById('calMonthLabel');
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  label.textContent = months[calMonth] + ' ' + calYear;
+  const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = new Date();
+  const eventDates = calEvents.map(e => e.date);
+
+  let html = days.map(d => `<div class="ap-cal-day header">${d}</div>`).join('');
+  for (let i = 0; i < firstDay; i++) html += `<div class="ap-cal-day" style="opacity:0;pointer-events:none;"></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday = d === today.getDate() && calMonth === today.getMonth() && calYear === today.getFullYear();
+    const hasEvent = eventDates.includes(dateStr);
+    html += `<div class="ap-cal-day${isToday?' today':''}${hasEvent?' has-event':''}" title="${dateStr}">${d}</div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderCalendar();
+}
+
+function addEvent() {
+  const title = document.getElementById('apTitle').value.trim();
+  const date = document.getElementById('apDate').value;
+  if (!title || !date) { toast('Enter title and date', 'err'); return; }
+  calEvents.unshift({ id: Date.now(), title, date, note: document.getElementById('apNote').value });
+  saveEvents();
+  renderEvents();
+  renderCalendar();
+  document.getElementById('apTitle').value = '';
+  document.getElementById('apDate').value = '';
+  document.getElementById('apNote').value = '';
+  toast('Event added ✓', 'ok');
+}
+
+function renderEvents() {
+  const el = document.getElementById('eventList');
+  if (!calEvents.length) { el.innerHTML = '<div style="padding:16px;text-align:center;color:var(--t3);font-size:0.75rem;">No events yet</div>'; return; }
+  el.innerHTML = calEvents.map(e => `
+    <div class="ap-alert">
+      <div class="ap-alert-dot" style="background:var(--gold);"></div>
+      <div style="flex:1;">
+        <div class="ap-alert-title">${e.title}</div>
+        <div class="ap-alert-date">${e.date}${e.note ? ' · ' + e.note : ''}</div>
+      </div>
+      <button onclick="removeEvent(${e.id})" style="background:none;border:none;color:var(--t3);cursor:pointer;font-size:0.8rem;">✕</button>
+    </div>`).join('');
+}
+
+function removeEvent(id) {
+  calEvents = calEvents.filter(e => e.id !== id);
+  saveEvents();
+  renderEvents();
+  renderCalendar();
+}
+
+function saveEvents() { localStorage.setItem('lmw_events', JSON.stringify(calEvents)); }
+function loadEvents() { const s = localStorage.getItem('lmw_events'); if (s) { calEvents = JSON.parse(s); renderEvents(); } }
+
+function updateCountdown() {
+  const dateVal = document.getElementById('countdownDate').value;
+  if (!dateVal) return;
+  const target = new Date(dateVal);
+  const now = new Date();
+  const diff = target - now;
+  if (diff < 0) { document.getElementById('countdownDisplay').textContent = 'PAST'; return; }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  document.getElementById('countdownDisplay').textContent = `${days}D ${hours}H`;
+}
+
+// ═══════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════
+function toast(msg, type = 'ok') {
+  const c = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type === 'ok' ? '✓' : '✕'}</span><span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(110%)'; t.style.transition='.25s'; setTimeout(()=>t.remove(),250); }, 3000);
+}
+</script>
+</body>
+</html>
