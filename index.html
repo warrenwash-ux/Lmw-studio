@@ -6,16 +6,16 @@
 <title>LMW Super Agent</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;600&family=Raleway:wght@300;400;600&family=Dancing+Script:wght@400;700&family=Righteous&family=Anton&family=Lobster&family=Special+Elite&family=Orbitron:wght@400;700&family=Cinzel:wght@400;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#04050a;--s1:#080a10;--s2:#0d0f18;--b1:#181c28;--b2:#222736;--gold:#c8920a;--g2:#f0b400;--gdim:rgba(200,146,10,0.12);--green:#00d48a;--gndim:rgba(0,212,138,0.1);--red:#ff2d55;--rdim:rgba(255,45,85,0.1);--blue:#4da6ff;--bdim:rgba(77,166,255,0.1);--amber:#ffaa00;--text:#e0e6f0;--t2:#8a9bb5;--t3:#4a5568;--nav:66px;--border-gold:rgba(200,146,10,0.2);}
+:root{--ink:#F0F2E4;--s1:#F8F9EF;--s2:#E3E8D1;--b1:#D9DCC7;--b2:#C3C9AC;--gold:#3C6E4F;--g2:#4F8A67;--gdim:rgba(60,110,79,0.10);--green:#B8860B;--gndim:rgba(184,134,11,0.12);--red:#A13B32;--rdim:rgba(161,59,50,0.09);--blue:#2E6E86;--bdim:rgba(46,110,134,0.10);--amber:#C77D26;--text:#152219;--t2:#4B5C4F;--t3:#7C8A78;--nav:66px;--border-gold:rgba(60,110,79,0.28);}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{background:var(--ink);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 10% 0%,rgba(200,146,10,0.06),transparent 55%),radial-gradient(ellipse 40% 30% at 90% 100%,rgba(0,212,138,0.04),transparent 55%);pointer-events:none;z-index:0;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 10% 0%,rgba(60,110,79,0.06),transparent 55%),radial-gradient(ellipse 40% 30% at 90% 100%,rgba(184,134,11,0.04),transparent 55%);pointer-events:none;z-index:0;}
 .nav{width:var(--nav);min-height:100vh;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;align-items:center;padding:14px 0;position:fixed;left:0;top:0;bottom:0;z-index:100;overflow-y:auto;}
 .nav::-webkit-scrollbar{width:0;}
-.logo{width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--g2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;color:#000;margin-bottom:16px;flex-shrink:0;box-shadow:0 4px 14px rgba(200,146,10,0.3);}
+.logo{width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--g2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;color:var(--s1);margin-bottom:16px;flex-shrink:0;box-shadow:0 4px 14px rgba(60,110,79,0.3);}
 .nitems{display:flex;flex-direction:column;gap:2px;width:100%;padding:0 6px;flex:1;}
 .ni{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:8px;cursor:pointer;transition:all .15s;border:1px solid transparent;}
-.ni:hover{background:var(--s2);}.ni.on{background:var(--gdim);border-color:rgba(200,146,10,.2);}
+.ni:hover{background:var(--s2);}.ni.on{background:var(--gdim);border-color:rgba(60,110,79,.2);}
 .ni .ico{font-size:1.1rem;}.ni .lbl{font-size:.42rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);text-align:center;font-family:sans-serif;font-weight:700;}.ni.on .lbl{color:var(--gold);}
 .main{margin-left:var(--nav);flex:1;min-height:100vh;overflow-y:auto;overflow-x:hidden;position:relative;z-index:1;}
 .main::-webkit-scrollbar{width:3px;}.main::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
@@ -24,9 +24,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .topbar p{font-size:.55rem;color:var(--t3);letter-spacing:2px;text-transform:uppercase;font-family:sans-serif;}
 .pills{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .pill{display:flex;align-items:center;gap:5px;border-radius:16px;padding:4px 10px;font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:sans-serif;}
-.pill-green{background:var(--gndim);border:1px solid rgba(0,212,138,.2);color:var(--green);}
-.pill-red{background:var(--rdim);border:1px solid rgba(255,45,85,.2);color:var(--red);}
-.pill-gold{background:var(--gdim);border:1px solid rgba(200,146,10,.2);color:var(--gold);}
+.pill-green{background:var(--gndim);border:1px solid rgba(184,134,11,.2);color:var(--green);}
+.pill-red{background:var(--rdim);border:1px solid rgba(161,59,50,.2);color:var(--red);}
+.pill-gold{background:var(--gdim);border:1px solid rgba(60,110,79,.2);color:var(--gold);}
 .dot{width:5px;height:5px;border-radius:50%;}.dg{background:var(--green);animation:blink 2s infinite;}.da{background:var(--gold);}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
 .pg{display:none;padding:20px;max-width:1020px;animation:fadeU .25s ease both;}.pg.on{display:block;}
@@ -38,7 +38,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .sec{font-size:.52rem;letter-spacing:3px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:8px;margin-bottom:10px;font-family:sans-serif;font-weight:700;}
 .sec::after{content:'';flex:1;height:1px;background:var(--b1);}
 .btn{border:none;border-radius:7px;padding:9px 18px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.76rem;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
-.bg{background:var(--gold);color:#000;}.bg:hover{background:var(--g2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,146,10,.3);}
+.bg{background:var(--gold);color:var(--s1);}.bg:hover{background:var(--g2);transform:translateY(-1px);box-shadow:0 4px 16px rgba(60,110,79,.3);}
 .bgh{background:transparent;border:1px solid var(--b2);color:var(--t2);}.bgh:hover{border-color:var(--gold);color:var(--gold);}
 .bbl{background:var(--blue);color:#fff;}.bbl:hover{filter:brightness(1.1);transform:translateY(-1px);}
 .bgn{background:var(--green);color:#000;}.bgn:hover{filter:brightness(1.1);transform:translateY(-1px);}
@@ -46,17 +46,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .inp{width:100%;background:var(--ink);border:1px solid var(--b2);border-radius:7px;padding:9px 11px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.8rem;outline:none;transition:border-color .15s;}
 .inp:focus{border-color:var(--gold);}.inp::placeholder{color:var(--t3);}
 textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:pointer;color:var(--text);}select.inp option{background:var(--ink);color:var(--text);}
-.fl{font-size:.55rem;color:#8a9bb5;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-family:sans-serif;font-weight:700;}
+.fl{font-size:.55rem;color:var(--t2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px;font-family:sans-serif;font-weight:700;}
 .out{background:var(--ink);border:1px solid var(--b2);border-radius:7px;padding:12px;font-size:.78rem;line-height:1.7;color:var(--t2);white-space:pre-wrap;min-height:60px;}
 .psw{display:flex;gap:6px;margin-bottom:12px;}
 .pb{padding:5px 16px;border-radius:16px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-family:sans-serif;font-size:.68rem;font-weight:700;letter-spacing:1.5px;cursor:pointer;transition:all .15s;text-transform:uppercase;}
-.plmw{background:var(--gdim);border-color:rgba(200,146,10,.3);color:var(--gold);}
-.pzairey{background:var(--bdim);border-color:rgba(77,166,255,.3);color:var(--blue);}
+.plmw{background:var(--gdim);border-color:rgba(60,110,79,.3);color:var(--gold);}
+.pzairey{background:var(--bdim);border-color:rgba(46,110,134,.3);color:var(--blue);}
 .vrow{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;background:var(--s1);border:1px solid var(--b1);border-radius:8px;margin-bottom:6px;}
 .vbadge{font-family:'Bebas Neue',sans-serif;font-size:.68rem;letter-spacing:2px;padding:2px 9px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
-.vpu{background:var(--gndim);border:1px solid rgba(0,212,138,.2);color:var(--green);}
-.vce{background:var(--rdim);border:1px solid rgba(255,45,85,.2);color:var(--red);}
-.vte{background:rgba(255,170,0,.1);border:1px solid rgba(255,170,0,.2);color:var(--amber);}
+.vpu{background:var(--gndim);border:1px solid rgba(184,134,11,.2);color:var(--green);}
+.vce{background:var(--rdim);border:1px solid rgba(161,59,50,.2);color:var(--red);}
+.vte{background:rgba(199,125,38,.1);border:1px solid rgba(199,125,38,.2);color:var(--amber);}
 .mtiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:14px;}
 .mt{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:12px 14px;}
 .mtl{font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:6px;font-family:sans-serif;font-weight:700;}
@@ -72,9 +72,22 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .ptab.inactive .ptab-title{color:var(--text);}
 .font-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:5px;margin-top:6px;}
 .font-item{padding:8px;border-radius:7px;border:1px solid var(--b2);background:var(--s2);cursor:pointer;text-align:center;transition:all .15s;}
-.font-item:hover{border-color:rgba(200,146,10,.4);}.font-item.active{border-color:var(--gold);background:var(--gdim);}
+.font-item:hover{border-color:rgba(60,110,79,.4);}.font-item.active{border-color:var(--gold);background:var(--gdim);}
 .font-name{font-size:.85rem;color:var(--text);}.font-style{font-size:.44rem;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-#textCanvas{width:100%;display:block;border-radius:8px;border:2px solid rgba(200,146,10,.3);margin-bottom:14px;}
+#textCanvas{width:100%;display:block;border-radius:8px;border:2px solid rgba(60,110,79,.3);margin-bottom:14px;}
+.variant-card{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:12px 14px;margin-bottom:8px;}
+.variant-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.vtag{font-size:.58rem;letter-spacing:1px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:4px;}
+.vtag-hook{background:var(--gdim);color:var(--gold);border:1px solid rgba(60,110,79,.3);}
+.vtag-plat{background:transparent;color:var(--t3);border:1px solid var(--b2);}
+.vtag-cold{font-size:.68rem;color:var(--t3);font-style:italic;margin-bottom:6px;}
+.state-chip{font-size:.6rem;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:12px;display:inline-block;}
+.state-chip.winner{background:var(--gndim);color:var(--green);}
+.state-chip.watch{background:var(--bdim);color:var(--blue);}
+.state-chip.kill{background:var(--rdim);color:var(--red);}
+.state-chip.expired{background:var(--s2);color:var(--t3);}
+.queue-masthead{margin-bottom:20px;}
+.queue-masthead h2{font-family:'Bebas Neue',sans-serif;}
 .gr{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--b1);}.gr:last-child{border-bottom:none;}
 .gck{width:17px;height:17px;border-radius:4px;border:2px solid var(--b2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.6rem;transition:all .15s;flex-shrink:0;}
 .gck.done{background:var(--green);border-color:var(--green);color:#000;}
@@ -84,12 +97,12 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .coach-msgs{padding:12px 14px;min-height:160px;max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;}
 .coach-msgs::-webkit-scrollbar{width:3px;}.coach-msgs::-webkit-scrollbar-thumb{background:var(--b2);}
 .cmsg{padding:9px 12px;border-radius:8px;font-size:.76rem;line-height:1.6;max-width:88%;}
-.cmsg-a{background:var(--gdim);border:1px solid rgba(200,146,10,.1);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px;}
+.cmsg-a{background:var(--gdim);border:1px solid rgba(60,110,79,.1);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px;}
 .cmsg-u{background:var(--s2);border:1px solid var(--b2);color:var(--t2);align-self:flex-end;border-bottom-right-radius:2px;}
 .vfchip{padding:3px 9px;border-radius:12px;font-size:.6rem;font-weight:700;cursor:pointer;border:1px solid var(--b2);color:var(--t3);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;transition:all .15s;}
-.vfchip.active{background:var(--gdim);border-color:rgba(200,146,10,.3);color:var(--gold);}
+.vfchip.active{background:var(--gdim);border-color:rgba(60,110,79,.3);color:var(--gold);}
 .vtarget{padding:10px 12px;border-radius:8px;cursor:pointer;border:1px solid transparent;margin-bottom:4px;transition:all .15s;}
-.vtarget:hover{background:var(--s2);border-color:var(--b2);}.vtarget.active{background:var(--gdim);border-color:rgba(200,146,10,.25);}
+.vtarget:hover{background:var(--s2);border-color:var(--b2);}.vtarget.active{background:var(--gdim);border-color:rgba(60,110,79,.25);}
 .vtavatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;font-weight:700;flex-shrink:0;}
 .vtname{font-size:.78rem;font-weight:700;color:var(--text);}.vtrole{font-size:.62rem;color:var(--t2);margin-top:1px;}
 .dtab{padding:9px 14px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;transition:all .15s;}
@@ -99,7 +112,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .dos-text{font-size:.78rem;color:var(--text);line-height:1.7;}
 .ccard2{background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:11px 13px;margin-bottom:6px;}.ccard2:hover{border-color:var(--b2);}
 .cc-cat{font-size:.5rem;padding:2px 6px;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;display:inline-block;}
-.cc-direct{background:var(--gndim);color:var(--green);}.cc-mgmt{background:var(--gdim);color:var(--gold);}.cc-family{background:var(--bdim);color:var(--blue);}.cc-biz{background:rgba(255,170,0,.1);color:var(--amber);}
+.cc-direct{background:var(--gndim);color:var(--green);}.cc-mgmt{background:var(--gdim);color:var(--gold);}.cc-family{background:var(--bdim);color:var(--blue);}.cc-biz{background:rgba(199,125,38,.1);color:var(--amber);}
 .cc-name{font-size:.78rem;font-weight:700;color:var(--text);margin-bottom:2px;}.cc-role{font-size:.68rem;color:var(--t2);margin-bottom:4px;}
 .cc-why{font-size:.65rem;color:var(--t3);line-height:1.4;margin-bottom:5px;}
 .cc-tag{font-size:.58rem;padding:2px 7px;border-radius:4px;background:var(--s1);border:1px solid var(--b2);color:var(--t2);}
@@ -107,9 +120,9 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .log-entry{padding:10px 12px;background:var(--s2);border:1px solid var(--b1);border-radius:7px;margin-bottom:6px;}
 .log-date{font-size:.58rem;color:var(--t3);font-family:'DM Mono',monospace;margin-bottom:3px;}.log-note{font-size:.75rem;color:var(--text);line-height:1.5;}
 .route-tier{padding:12px 14px;border-radius:8px;margin-bottom:8px;}
-.rt1{background:var(--gndim);border:1px solid rgba(0,212,138,.15);}
-.rt2{background:var(--bdim);border:1px solid rgba(77,166,255,.15);}
-.rt3{background:var(--gdim);border:1px solid rgba(200,146,10,.15);}
+.rt1{background:var(--gndim);border:1px solid rgba(184,134,11,.15);}
+.rt2{background:var(--bdim);border:1px solid rgba(46,110,134,.15);}
+.rt3{background:var(--gdim);border:1px solid rgba(60,110,79,.15);}
 .rt-label{font-size:.54rem;letter-spacing:2px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;margin-bottom:6px;}
 .rt1 .rt-label{color:var(--green);}.rt2 .rt-label{color:var(--blue);}.rt3 .rt-label{color:var(--gold);}
 .script-box{background:var(--ink);border:1px solid var(--b2);border-radius:7px;padding:12px;font-size:.76rem;color:var(--text);line-height:1.7;margin-top:8px;}
@@ -124,9 +137,9 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .track-card{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:12px 14px;margin-bottom:7px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;}
 .track-name{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:3px;}.track-meta{font-size:.64rem;font-family:'DM Mono',monospace;color:var(--t2);}
 .badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.56rem;font-weight:700;font-family:sans-serif;letter-spacing:.5px;}
-.badge-green{background:var(--gndim);border:1px solid rgba(0,212,138,.2);color:var(--green);}
-.badge-red{background:var(--rdim);border:1px solid rgba(255,45,85,.2);color:var(--red);}
-.badge-amber{background:rgba(255,170,0,.1);border:1px solid rgba(255,170,0,.2);color:var(--amber);}
+.badge-green{background:var(--gndim);border:1px solid rgba(184,134,11,.2);color:var(--green);}
+.badge-red{background:var(--rdim);border:1px solid rgba(161,59,50,.2);color:var(--red);}
+.badge-amber{background:rgba(199,125,38,.1);border:1px solid rgba(199,125,38,.2);color:var(--amber);}
 .pitch-card{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:14px;margin-top:10px;}
 .pitch-head{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:3px;}.pitch-sub{font-size:.65rem;color:var(--t2);margin-bottom:10px;}
 .pitch-body{font-size:.76rem;color:var(--text);line-height:1.65;white-space:pre-wrap;}
@@ -140,7 +153,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 @keyframes sp{to{transform:rotate(360deg);}}
 .toasts{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:6px;}
 .toast{background:var(--s2);border:1px solid var(--b2);border-radius:8px;padding:9px 12px;font-size:.72rem;color:var(--text);display:flex;align-items:center;gap:7px;animation:slIn .25s ease both;max-width:260px;}
-.tok{border-color:rgba(0,212,138,.3);}.terr{border-color:rgba(255,45,85,.3);}.tinf{border-color:rgba(200,146,10,.3);}
+.tok{border-color:rgba(184,134,11,.3);}.terr{border-color:rgba(161,59,50,.3);}.tinf{border-color:rgba(60,110,79,.3);}
 @keyframes slIn{from{transform:translateX(110%);opacity:0;}to{transform:translateX(0);opacity:1;}}
 .week-card{background:var(--s2);border:1px solid var(--b1);border-radius:9px;padding:12px 14px;margin-bottom:8px;}
 .week-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
@@ -161,7 +174,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 .ztab{padding:8px 10px;font-size:.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;color:var(--t3);border-bottom:2px solid transparent;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;}
 .ztab:hover{color:var(--t2);}.ztab.active{color:var(--gold);border-bottom-color:var(--gold);}
 .zmsg{padding:10px 14px;border-radius:8px;font-size:.76rem;line-height:1.65;max-width:86%;}
-.zmsg-a{background:var(--gdim);border:1px solid rgba(200,146,10,.1);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px;}
+.zmsg-a{background:var(--gdim);border:1px solid rgba(60,110,79,.1);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px;}
 .zmsg-u{background:var(--s2);border:1px solid var(--b2);color:var(--t2);align-self:flex-end;border-bottom-right-radius:2px;}
 .zcontact-card{background:var(--s1);border:1px solid var(--b1);border-left:3px solid var(--gold);border-radius:10px;padding:13px 15px;margin-bottom:8px;cursor:pointer;transition:background .15s;}
 .zcontact-card:hover{background:var(--s2);}
@@ -173,7 +186,8 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 <nav class="nav">
   <div class="logo">LMW</div>
   <div class="nitems">
-    <div class="ni on" onclick="go('brief',this)"><span class="ico">📋</span><span class="lbl">BRIEF</span></div>
+    <div class="ni on" onclick="go('queue',this)"><span class="ico">✅</span><span class="lbl">QUEUE</span></div>
+    <div class="ni" onclick="go('brief',this)"><span class="ico">📋</span><span class="lbl">BRIEF</span></div>
     <div class="ni" onclick="go('trends',this)"><span class="ico">📡</span><span class="lbl">TRENDS</span></div>
     <div class="ni" onclick="go('create',this)"><span class="ico">✍️</span><span class="lbl">CREATE</span></div>
     <div class="ni" onclick="go('image',this)"><span class="ico">🖼️</span><span class="lbl">IMAGE</span></div>
@@ -182,6 +196,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
     <div class="ni" onclick="go('catalog',this)"><span class="ico">🎵</span><span class="lbl">CATALOG</span></div>
     <div class="ni" onclick="go('libs',this)"><span class="ico">📚</span><span class="lbl">LIBS</span></div>
     <div class="ni" onclick="go('vault',this)"><span class="ico">💎</span><span class="lbl">VAULT</span></div>
+    <div class="ni" onclick="go('perf',this)"><span class="ico">📈</span><span class="lbl">PERF</span></div>
     <div class="ni" onclick="go('alerts',this)"><span class="ico">🔔</span><span class="lbl">ALERTS</span></div>
     <div class="ni" onclick="go('goals',this)"><span class="ico">✅</span><span class="lbl">GOALS</span></div>
     <div class="ni" onclick="go('social',this)"><span class="ico">🎯</span><span class="lbl">SOCIAL</span></div>
@@ -199,8 +214,21 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
     </div>
   </div>
 
+  <!-- DAILY APPROVAL QUEUE -->
+  <div class="pg on" id="pg-queue">
+    <div class="queue-masthead" id="queueSlot"></div>
+    <div id="urgentSection" style="margin-bottom:20px;"></div>
+    <div class="section-head" style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap;">
+      <div class="sec" style="flex:1;">Today's Batch</div>
+      <div id="queueActions" style="display:flex;gap:8px;"></div>
+    </div>
+    <div id="batchSection"></div>
+    <div class="sec" style="margin-top:26px;">Ready To Post</div>
+    <div id="readyToPostList"></div>
+  </div>
+
   <!-- BRIEFING -->
-  <div class="pg on" id="pg-brief">
+  <div class="pg" id="pg-brief">
     <div class="psw"><button class="pb plmw" onclick="setP('lmw',this)">LMW</button><button class="pb" onclick="setP('zairey',this)">ZAIREY</button></div>
     <div class="mtiles">
       <div class="mt"><div class="mtl">Next Alert</div><div class="mtv" id="mt-nxt">--</div><div class="mtd" id="mt-nxtd">--</div></div>
@@ -276,7 +304,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
       <div id="cResult"></div>
     </div>
     <div id="panel-zairey" style="display:none;">
-      <div class="card" style="border-color:rgba(77,166,255,.2);">
+      <div class="card" style="border-color:rgba(46,110,134,.2);">
         <div class="ct" style="color:var(--blue);">Zairey Post Creator</div>
         <div style="margin-bottom:10px;"><div class="fl">Vibe or Theme</div><textarea class="inp" id="zTopic" placeholder="e.g. the silence before the storm..." style="min-height:70px;"></textarea></div>
         <div style="margin-bottom:10px;"><div class="fl">Your Text for Image</div><input type="text" class="inp" id="zText" placeholder="e.g. SOON. or WATCH. or YOUR WORLD CHANGES." /></div>
@@ -367,12 +395,16 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
       <div class="g2" style="margin-bottom:10px;">
         <div><div class="fl">Platform</div><select class="inp" id="rPlat"><option value="TikTok">TikTok</option><option value="Instagram Reels">Instagram Reels</option><option value="YouTube Shorts">YouTube Shorts</option><option value="all three">All Three</option></select></div>
         <div><div class="fl">Duration</div><select class="inp" id="rDur"><option value="15">15 seconds</option><option value="30">30 seconds</option><option value="60">60 seconds</option></select></div>
-        <div><div class="fl">Style</div><select class="inp" id="rStyle"><option value="hook-first punchy stops the scroll immediately">Hook First</option><option value="storytelling personal narrative">Storytelling</option><option value="educational quick tips listicle">Educational Tips</option><option value="behind the scenes authentic real">Behind The Scenes</option><option value="mystery tease builds anticipation never reveals">Mystery Tease</option></select></div>
-        <div><div class="fl">Topic</div><input type="text" class="inp" id="rTopic" placeholder="e.g. how I got my first sync placement..." /></div>
+        <div><div class="fl">Hook Type</div><select class="inp" id="rStyle"><option value="Question Hook">Question Hook</option><option value="Lyric Cold-Open">Lyric Cold-Open</option><option value="Beat-Drop">Beat-Drop</option><option value="Story Hook">Story Hook</option></select></div>
+        <div><div class="fl">Track / Topic</div><input type="text" class="inp" id="rTopic" placeholder="e.g. the new cinematic soul track..." /></div>
       </div>
-      <button class="btn bg" onclick="genReel()" style="width:100%;"><span id="rBtn">Generate Script</span></button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn bg" onclick="genReel()" style="flex:1;"><span id="rBtn">Generate Script</span></button>
+        <button class="btn bgh" onclick="genReelBatch()" style="flex:1;"><span id="rBatchBtn">Generate Batch (8-10)</span></button>
+      </div>
     </div>
     <div id="rResult"></div>
+    <div id="rBatchResult"></div>
   </div>
 
   <!-- PITCH -->
@@ -499,7 +531,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
               <select id="dosStatusSel" onchange="updateTargetStatus(this.value)" style="padding:4px 8px;border-radius:5px;font-size:.62rem;background:var(--s1);border:1px solid var(--b2);color:var(--t2);cursor:pointer;"><option value="new">New</option><option value="active">Active</option><option value="contacted">Contacted</option><option value="responded">Responded</option><option value="placed">Placed</option></select>
               <select id="dosTempSel" onchange="updateTargetTemp(this.value)" style="padding:4px 8px;border-radius:5px;font-size:.62rem;background:var(--s1);border:1px solid var(--b2);color:var(--t2);cursor:pointer;"><option value="cold">❄️ Cold</option><option value="warm">🟡 Warm</option><option value="hot">🔥 Hot</option></select>
               <button class="btn bg" onclick="genPitchFromVault()" style="font-size:.62rem;padding:5px 10px;">Generate Pitch</button>
-              <button class="btn bgh" onclick="deleteTarget()" style="font-size:.62rem;padding:5px 10px;color:var(--red);border-color:rgba(255,45,85,.3);">Remove</button>
+              <button class="btn bgh" onclick="deleteTarget()" style="font-size:.62rem;padding:5px 10px;color:var(--red);border-color:rgba(161,59,50,.3);">Remove</button>
             </div>
           </div>
           <div style="display:flex;gap:0;border-bottom:1px solid var(--b1);background:var(--s1);overflow-x:auto;" id="dosTabs">
@@ -531,6 +563,23 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="pg" id="pg-perf">
+    <div class="mtiles">
+      <div class="mt"><div class="mtl">Tracking Now</div><div class="mtv" id="perfTracking">0</div><div class="mtd">active checkpoints</div></div>
+      <div class="mt"><div class="mtl">Winners</div><div class="mtv gold" id="perfWinners">0</div><div class="mtd">all time</div></div>
+      <div class="mt"><div class="mtl">Learning Model</div><div class="mtv" id="perfExpired">0</div><div class="mtd">expired records logged</div></div>
+    </div>
+    <div class="card" style="font-size:.68rem;color:var(--t3);line-height:1.5;margin-bottom:14px;">Metrics are logged manually -- open the actual post, read its stats, and enter them here when a checkpoint comes due. The app handles the scheduling, classification, and re-amplify triggering automatically.</div>
+    <div class="legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--b1);">
+      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip winner">Winner</span>1.5x+ completion or share vs. median</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip watch">Watch</span>1.0x-1.5x median</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip kill">Kill</span>below 0.7x at T+6, flat or declining</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip expired">Expired</span>archived at T+72</div>
+    </div>
+    <div id="perfList"></div>
   </div>
 
   <!-- ALERTS -->
@@ -600,7 +649,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 
   <!-- SOCIAL INTEL -->
   <div class="pg" id="pg-social">
-    <div class="card" style="border-color:rgba(200,146,10,.3);">
+    <div class="card" style="border-color:rgba(60,110,79,.3);">
       <div class="ct">Mission Control</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
         <div style="padding:12px 14px;background:var(--ink);border:1px solid var(--border-gold);border-radius:8px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;font-family:'Barlow Condensed',sans-serif;font-weight:700;">MISSION 1 — PERMANENT</div><div style="font-size:.82rem;font-weight:700;color:var(--text);">Grow LMW Audience Organically</div><div style="font-size:.68rem;color:var(--t2);margin-top:3px;">Instagram and TikTok — 24/7</div></div>
@@ -668,7 +717,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
   <div class="pg" id="pg-zaire">
     <!-- Header -->
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;padding:14px 16px;background:var(--s1);border:1px solid var(--b1);border-radius:11px;">
-      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--g2));display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;color:#000;box-shadow:0 0 16px rgba(200,146,10,.3);flex-shrink:0;">Z</div>
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--g2));display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:2px;color:var(--s1);box-shadow:0 0 16px rgba(60,110,79,.3);flex-shrink:0;">Z</div>
       <div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:4px;color:var(--gold);">ZAIRE</div>
         <div style="font-size:.5rem;color:var(--t3);letter-spacing:2px;text-transform:uppercase;">Personal AI &middot; Lamb Music Works &middot; Tool 13</div>
@@ -781,6 +830,13 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
       <div style="font-size:.7rem;color:var(--t3);line-height:1.6;">Stored locally in your browser. Never shared. Powers all AI features including Zaire. Get your key at console.anthropic.com</div>
     </div>
     <div class="card">
+      <div class="ct">fal.ai Image API Key</div>
+      <div style="margin-bottom:10px;"><div class="fl">API Key</div>
+        <div style="display:flex;gap:7px;"><input class="inp" id="imgKeyInp" placeholder="key_..." style="flex:1;" autocomplete="off" data-form-type="other" /><button class="btn bg" onclick="saveImgKey()">Save</button></div>
+      </div>
+      <div style="font-size:.7rem;color:var(--t3);line-height:1.6;">Stored locally in your browser. Never shared. Powers image generation in CREATE and IMAGE (Flux via fal.ai). Get your key at fal.ai/dashboard/keys</div>
+    </div>
+    <div class="card">
       <div class="ct">Agent Info</div>
       <div style="font-size:.75rem;color:var(--t2);line-height:1.9;">
         <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--b1);padding:6px 0;"><span>Version</span><span style="font-family:'DM Mono',monospace;font-size:.68rem;color:var(--text);">Super Agent v4.1 — With Zaire AI Tool 13</span></div>
@@ -794,7 +850,7 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
   <div style="padding:0 20px;"><div class="footer"><div class="fl2">LMW Super Agent v4.1</div><div class="fr" id="footR">Warren Lamb · lambmusicworks.com</div></div></div>
 </div>
 <script>
-var K='',P='lmw',cnt=0,alertsOn=false,actx=null;
+var K='',IK='',P='lmw',cnt=0,alertsOn=false,actx=null;
 var contacts=[],catalog=[],submissions=[],libStatus={};
 var weekDone={w1:false,w2:false,w3:false,w4:false};
 var p1Img=null,selFont='Bebas Neue';
@@ -804,13 +860,101 @@ function sys(){return P==='lmw'?LSYS:ZSYS;}
 var FONTS=[{label:'BEBAS NEUE',css:'Bebas Neue',cat:'display'},{label:'ANTON',css:'Anton',cat:'display'},{label:'OSWALD',css:'Oswald',cat:'display'},{label:'Barlow Condensed',css:'Barlow Condensed',cat:'clean'},{label:'Montserrat',css:'Montserrat',cat:'clean'},{label:'Raleway',css:'Raleway',cat:'clean'},{label:'Playfair Display',css:'Playfair Display',cat:'editorial'},{label:'CINZEL',css:'Cinzel',cat:'editorial'},{label:'Dancing Script',css:'Dancing Script',cat:'script'},{label:'Lobster',css:'Lobster',cat:'script'},{label:'Righteous',css:'Righteous',cat:'retro'},{label:'Special Elite',css:'Special Elite',cat:'retro'},{label:'ORBITRON',css:'Orbitron',cat:'tech'},{label:'DM Mono',css:'DM Mono',cat:'tech'}];
 var SCHED={Instagram:[{h:9,m:0,l:'9:00 AM'},{h:11,m:30,l:'11:30 AM'},{h:19,m:0,l:'7:00 PM'}],TikTok:[{h:7,m:0,l:'7:00 AM'},{h:19,m:0,l:'7:00 PM'},{h:21,m:0,l:'9:00 PM'}],Facebook:[{h:9,m:0,l:'9:00 AM'},{h:13,m:0,l:'1:00 PM'},{h:15,m:0,l:'3:00 PM'}],LinkedIn:[{h:8,m:0,l:'8:00 AM'},{h:12,m:0,l:'12:00 PM'},{h:17,m:0,l:'5:00 PM'}],Twitter:[{h:8,m:0,l:'8:00 AM'},{h:12,m:0,l:'12:00 PM'},{h:21,m:0,l:'9:00 PM'}]};
 
-window.onload=function(){loadKey();tick();setInterval(tick,30000);setInterval(checkAlerts,60000);renderSched();initLibDB();buildFontGrid();initVault();initSocialIntel();};
+var WEEKLY_CALENDAR=[
+  {day:0,name:'Sunday',type:'Faith and independence',brand:'lmw',source:'Motivational repurposed'},
+  {day:1,name:'Monday',type:'Sync licensing tip',brand:'lmw',source:'Industry news repurposed'},
+  {day:2,name:'Tuesday',type:'Mystery mood post',brand:'zairey',source:'Trending R&B aesthetic'},
+  {day:3,name:'Wednesday',type:'Music spotlight',brand:'lmw',source:'Your catalog -- original'},
+  {day:4,name:'Thursday',type:'Music business reality',brand:'lmw',source:'Entrepreneur content repurposed'},
+  {day:5,name:'Friday',type:'Behind the scenes',brand:'lmw',source:'Your studio process'},
+  {day:6,name:'Saturday',type:'Zairey tease',brand:'zairey',source:'Trending sound repurposed'}
+];
+var DEFAULT_MEDIANS={'TikTok':{completion:35,share:2},'Instagram Reels':{completion:40,share:1.5},'YouTube Shorts':{completion:45,share:1},'all three':{completion:40,share:1.5}};
 
-function go(id,el){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var pg=document.getElementById('pg-'+id);if(pg)pg.classList.add('on');if(el)el.classList.add('on');window.scrollTo(0,0);}
+var perfRecords=JSON.parse(localStorage.getItem('lmw_perf_records')||'[]');
+var baselineMedians=JSON.parse(localStorage.getItem('lmw_baseline_medians')||'{}');
+var learningModel=JSON.parse(localStorage.getItem('lmw_learning_model')||'[]');
+var approvalQueue=JSON.parse(localStorage.getItem('lmw_approval_queue')||'null');
+var readyToPost=JSON.parse(localStorage.getItem('lmw_ready_to_post')||'[]');
+var urgentQueue=JSON.parse(localStorage.getItem('lmw_urgent_queue')||'[]');
+function savePerfRecords(){localStorage.setItem('lmw_perf_records',JSON.stringify(perfRecords));}
+function saveBaselineMedians(){localStorage.setItem('lmw_baseline_medians',JSON.stringify(baselineMedians));}
+function saveLearningModel(){localStorage.setItem('lmw_learning_model',JSON.stringify(learningModel));}
+function saveApprovalQueue(){localStorage.setItem('lmw_approval_queue',JSON.stringify(approvalQueue));}
+function saveReadyToPost(){localStorage.setItem('lmw_ready_to_post',JSON.stringify(readyToPost));}
+function saveUrgentQueue(){localStorage.setItem('lmw_urgent_queue',JSON.stringify(urgentQueue));}
+
+function todayKey(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function median(arr){if(!arr.length)return null;var s=arr.slice().sort(function(a,b){return a-b;});var mid=Math.floor(s.length/2);return s.length%2?s[mid]:(s[mid-1]+s[mid])/2;}
+function getMedians(platform){
+  var b=baselineMedians[platform];
+  var def=DEFAULT_MEDIANS[platform]||DEFAULT_MEDIANS['TikTok'];
+  return {completion:(b&&b.completion&&b.completion.length)?median(b.completion):def.completion,share:(b&&b.share&&b.share.length)?median(b.share):def.share};
+}
+function pushBaseline(platform,completion,shares){
+  if(!baselineMedians[platform])baselineMedians[platform]={completion:[],share:[]};
+  baselineMedians[platform].completion.push(completion);
+  baselineMedians[platform].share.push(shares);
+  if(baselineMedians[platform].completion.length>30)baselineMedians[platform].completion.shift();
+  if(baselineMedians[platform].share.length>30)baselineMedians[platform].share.shift();
+  saveBaselineMedians();
+}
+function classifyRecord(rec,cpKey){
+  var medians=getMedians(rec.platform);
+  var cp=rec.checkpoints[cpKey];
+  if(!cp||!cp.metrics)return rec.status||'watch';
+  var compRatio=medians.completion?(cp.metrics.completion/medians.completion):1;
+  var shareRatio=medians.share?(cp.metrics.shares/medians.share):1;
+  var maxRatio=Math.max(compRatio,shareRatio);
+  cp.maxRatio=maxRatio;
+  if(maxRatio>=1.5)return 'winner';
+  if((cpKey==='t6'||cpKey==='t24')&&maxRatio<0.7){
+    var prevKey=cpKey==='t6'?'t2':'t6';
+    var prevCp=rec.checkpoints[prevKey];
+    var prevRatio=(prevCp&&prevCp.maxRatio!=null)?prevCp.maxRatio:maxRatio;
+    if(maxRatio<=prevRatio)return 'kill';
+  }
+  return 'watch';
+}
+function peakMetricsOf(rec){
+  var peak={completion:0,shares:0};
+  ['t2','t6','t24','t72'].forEach(function(k){var m=rec.checkpoints[k]&&rec.checkpoints[k].metrics;if(m){peak.completion=Math.max(peak.completion,m.completion);peak.shares=Math.max(peak.shares,m.shares);}});
+  return peak;
+}
+async function triggerReAmplify(rec){
+  if(!K)return;
+  var pDesc=rec.persona==='zairey'?'Zairey mysterious R&B artist -- never break persona':'Warren Lamb / LMW sync licensing cinematic soul No Cuss No Fuss';
+  var sysPrompt=rec.persona==='zairey'?ZSYS:LSYS;
+  var prompt='This script performed as a WINNER (outperforming median 1.5x or more): hook type '+rec.hookType+', platform '+rec.platform+', cold open: '+(rec.coldOpen||'none')+'.\n\nGenerate 2 re-amplify variants to extend this win -- either a new platform cut of the same moment, or a "Part 2" continuing the story.\n\nOutput in EXACTLY this format, separated by a line with only ---:\n\nVARIANT\nHOOK: [hook type]\nPLATFORM: [platform]\nCOLD_OPEN: [which exact 3 seconds to lead with]\nSCRIPT:\n[script]\nCAPTION: [caption]\nHASHTAGS: [hashtags]\n---';
+  try{
+    var res=await ai(prompt,sysPrompt);
+    var items=parseVariantBlocks(res);
+    items.forEach(function(it){it.id='urg_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);it.urgent=true;it.persona=rec.persona;it.sourceRecordId=rec.id;});
+    urgentQueue=urgentQueue.concat(items);
+    saveUrgentQueue();
+    if(document.getElementById('pg-queue')&&document.getElementById('pg-queue').classList.contains('on'))renderQueue();
+    toast('Winner detected -- 2 re-amplify variants queued','ok');
+  }catch(e){/* non-critical background enhancement, fail silently */}
+}
+function getHookWeighting(){
+  if(!learningModel.length)return '';
+  var winners=learningModel.filter(function(r){return r.finalStatus==='winner';});
+  if(!winners.length)return '';
+  var counts={};
+  winners.forEach(function(r){counts[r.hookType]=(counts[r.hookType]||0)+1;});
+  var ranked=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];});
+  return '\n\nBased on Warren\'s past performance data, these hook types have won most often for him (weight toward them, but still vary): '+ranked.join(', ')+'.';
+}
+
+window.onload=function(){loadKey();loadImgKey();tick();setInterval(tick,30000);setInterval(checkAlerts,60000);setInterval(checkPerfDue,60000);renderSched();initLibDB();buildFontGrid();initVault();initSocialIntel();initQueueAndPerf();};
+
+function go(id,el){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var pg=document.getElementById('pg-'+id);if(pg)pg.classList.add('on');if(el)el.classList.add('on');window.scrollTo(0,0);if(id==='queue')renderQueue();if(id==='perf')renderPerformance();}
 function setP(p,el){P=p;el.closest('.psw').querySelectorAll('.pb').forEach(function(b){b.className='pb';});el.className='pb p'+p;toast(p==='lmw'?'LMW mode':'Zairey mode','inf');}
 function tick(){var n=new Date();var t=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});document.getElementById('clk').textContent=t;document.getElementById('footR').textContent='Warren Lamb  -  lambmusicworks.com  -  '+t;updateNextAlert(n);}
 function saveKey(){K=document.getElementById('keyInp').value.trim();localStorage.setItem('lmw4k',K);updPill();toast('Key saved','ok');}
 function loadKey(){var k=localStorage.getItem('lmw4k');if(k){K=k;document.getElementById('keyInp').value=k;}updPill();}
+function saveImgKey(){IK=document.getElementById('imgKeyInp').value.trim();localStorage.setItem('lmw4k_img',IK);toast('Image key saved','ok');}
+function loadImgKey(){var k=localStorage.getItem('lmw4k_img');if(k){IK=k;document.getElementById('imgKeyInp').value=k;}}
 function updPill(){var p=document.getElementById('apill'),t=document.getElementById('atxt');if(K){p.className='pill pill-green';t.textContent='Agent Active';}else{p.className='pill pill-red';t.textContent='No Key';}}
 async function testKey(){if(!K){toast('Add API key first','err');return;}toast('Testing...','inf');try{var r=await ai('Say: LMW Super Agent online.');toast('Connected','ok');}catch(e){toast('Failed: '+e.message,'err');}}
 
@@ -868,6 +1012,24 @@ async function fetchRSS(){
   catch(e){btn.textContent='Live News';toast('RSS blocked -- using AI scan','inf');scanTrends();}
 }
 
+async function genImg(prompt,w,h){
+  if(!IK)throw new Error('Add fal.ai key in Settings');
+  var r=await fetch('https://fal.run/fal-ai/flux/schnell',{method:'POST',headers:{'Authorization':'Key '+IK,'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,image_size:{width:w,height:h},num_images:1})});
+  if(!r.ok){var d={};try{d=await r.json();}catch(e){}var msg=d.detail?(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail)):('Image API error '+r.status);throw new Error(msg);}
+  var d=await r.json();
+  var url=d.images&&d.images[0]&&d.images[0].url;
+  if(!url)throw new Error('No image returned');
+  var blobRes=await fetch(url);
+  var blob=await blobRes.blob();
+  var objUrl=URL.createObjectURL(blob);
+  return new Promise(function(resolve,reject){
+    var img=new Image();
+    img.onload=function(){resolve(img);};
+    img.onerror=function(){reject(new Error('Image failed to decode'));};
+    img.src=objUrl;
+  });
+}
+
 var createMode='quick';
 function setMode(mode){createMode=mode;['quick','custom','zairey'].forEach(function(m){var btn=document.getElementById('mode-'+m),panel=document.getElementById('panel-'+m);if(!btn||!panel)return;var isActive=m===mode;if(isActive){btn.style.border='1px solid '+(m==='zairey'?'var(--blue)':'var(--gold)');btn.style.background=m==='zairey'?'var(--bdim)':'var(--gdim)';}else{btn.style.border='1px solid var(--b2)';btn.style.background='transparent';}panel.style.display=isActive?'block':'none';});}
 
@@ -878,6 +1040,7 @@ function sendToPhase2(img,defaultText,defaultSub){p1Img=img;var tf=document.getE
 
 async function genQuick(){
   if(!K){toast('Add API key in Settings','err');return;}
+  if(!IK){toast('Add fal.ai key in Settings','err');return;}
   var btn=document.getElementById('qBtn');btn.innerHTML='<span class="spin"></span> Creating...';
   var topic=document.getElementById('qTopic').value||'music and the independent creative journey';
   var type=document.getElementById('qType').value;var fmt=document.getElementById('qFmt').value;
@@ -889,22 +1052,18 @@ async function genQuick(){
     var hashLine=((res.match(/^HASHTAGS:\s*(.+)/im)||[])[1]||'#music #sync').trim();
     var bgStyle=P==='zairey'?'mystical dark spiritual fog noir':'cinematic dark atmospheric moody';
     var d=imgDims(fmt);
-    var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(bgStyle+' NO text NO words NO letters NO faces cinematic photorealistic')+'?width='+d.w+'&height='+d.h+'&nologo=true&seed='+Date.now();
-    var img=new Image();img.crossOrigin='anonymous';
-    img.onload=function(){
-      var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
-      document.getElementById('qResult').innerHTML='<div class="post-result"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:8px;">'+textLine+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bg" id="qEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="qDlDirect">Download As-Is</button></div></div>';
-      document.getElementById('qEdit').onclick=function(){sendToPhase2(img,textLine,'lambmusicworks.com');};
-      document.getElementById('qDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='lmw-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
-      btn.textContent='Generate Image Post';toast('Post ready','ok');
-    };
-    img.onerror=function(){btn.textContent='Generate Image Post';toast('Image failed -- try again','err');};
-    img.src=url;
+    var img=await genImg(bgStyle+' NO text NO words NO letters NO faces cinematic photorealistic',d.w,d.h);
+    var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
+    document.getElementById('qResult').innerHTML='<div class="post-result"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:8px;">'+textLine+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bg" id="qEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="qDlDirect">Download As-Is</button></div></div>';
+    document.getElementById('qEdit').onclick=function(){sendToPhase2(img,textLine,'lambmusicworks.com');};
+    document.getElementById('qDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='lmw-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
+    btn.textContent='Generate Image Post';toast('Post ready','ok');
   }catch(e){btn.textContent='Generate Image Post';toast('Error: '+e.message,'err');}
 }
 
 async function genCustom(regen){
   if(!K){toast('Add API key in Settings','err');return;}
+  if(!IK){toast('Add fal.ai key in Settings','err');return;}
   var btn=document.getElementById('ccBtn');btn.innerHTML='<span class="spin"></span> Creating...';
   var topic=document.getElementById('cTopic').value||'music and the independent creative journey';
   var type=document.getElementById('cType').value;var tone=document.getElementById('cTone').value;
@@ -921,17 +1080,12 @@ async function genCustom(regen){
     var hashLine=((res.match(/^HASHTAGS:\s*(.+)/im)||[])[1]||'#music #sync').trim();
     var bgStyle=P==='zairey'?'mystical dark spiritual fog noir':'cinematic dark atmospheric gold';
     var d=imgDims(fmt);
-    var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(bgStyle+' NO text NO words NO letters NO faces cinematic photorealistic')+'?width='+d.w+'&height='+d.h+'&nologo=true&seed='+Date.now();
-    var img=new Image();img.crossOrigin='anonymous';
-    img.onload=function(){
-      var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
-      document.getElementById('cResult').innerHTML='<div class="post-result"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:8px;">'+textLine+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bg" id="cEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="cDlDirect">Download As-Is</button><button class="btn bgh" style="flex:1;font-size:.7rem;" onclick="genCustom(true)">Regenerate</button></div></div>';
-      document.getElementById('cEdit').onclick=function(){sendToPhase2(img,textLine,'lambmusicworks.com');};
-      document.getElementById('cDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='lmw-custom-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
-      btn.textContent='Generate Image Post';toast('Post ready','ok');
-    };
-    img.onerror=function(){btn.textContent='Generate Image Post';toast('Image failed -- try again','err');};
-    img.src=url;
+    var img=await genImg(bgStyle+' NO text NO words NO letters NO faces cinematic photorealistic',d.w,d.h);
+    var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
+    document.getElementById('cResult').innerHTML='<div class="post-result"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:8px;">'+textLine+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bg" id="cEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="cDlDirect">Download As-Is</button><button class="btn bgh" style="flex:1;font-size:.7rem;" onclick="genCustom(true)">Regenerate</button></div></div>';
+    document.getElementById('cEdit').onclick=function(){sendToPhase2(img,textLine,'lambmusicworks.com');};
+    document.getElementById('cDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='lmw-custom-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
+    btn.textContent='Generate Image Post';toast('Post ready','ok');
   }catch(e){btn.textContent='Generate Image Post';toast('Error: '+e.message,'err');}
 }
 
@@ -939,6 +1093,7 @@ async function enhanceIdea(){if(!K){toast('Add API key in Settings','err');retur
 
 async function genZairey(){
   if(!K){toast('Add API key in Settings','err');return;}
+  if(!IK){toast('Add fal.ai key in Settings','err');return;}
   var btn=document.getElementById('zBtn');btn.innerHTML='<span class="spin"></span> Creating...';
   var topic=document.getElementById('zTopic').value||'the silence before the storm';
   var userText=document.getElementById('zText').value.trim();var type=document.getElementById('zType').value;var fmt=document.getElementById('zFmt').value;
@@ -950,23 +1105,26 @@ async function genZairey(){
     var hashLine=((res.match(/^HASHTAGS:\s*(.+)/im)||[])[1]||'#zairey #rb #mystery').trim();
     var defaultText=userText||'COMING SOON';
     var d=imgDims(fmt);
-    var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(topic+', mystical dark spiritual moody cinematic NO text NO words NO letters NO faces photorealistic')+'?width='+d.w+'&height='+d.h+'&nologo=true&seed='+Date.now();
-    var img=new Image();img.crossOrigin='anonymous';
-    img.onload=function(){
-      var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
-      document.getElementById('zResult').innerHTML='<div class="post-result" style="border-color:rgba(77,166,255,.15);"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:'+color+';">'+defaultText+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;margin-top:8px;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bbl" id="zEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="zDlDirect">Download As-Is</button></div></div>';
-      document.getElementById('zEdit').onclick=function(){selFont=font;var colEl=document.getElementById('p2Col');if(colEl)colEl.value=color;buildFontGrid();sendToPhase2(img,defaultText);};
-      document.getElementById('zDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='zairey-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
-      btn.textContent='Generate Zairey Post';toast('Zairey post ready','ok');
-    };
-    img.onerror=function(){btn.textContent='Generate Zairey Post';toast('Image failed','err');};
-    img.src=url;
+    var img=await genImg(topic+', mystical dark spiritual moody cinematic NO text NO words NO letters NO faces photorealistic',d.w,d.h);
+    var previewC=document.createElement('canvas');renderToCanvas(img,previewC,d.cw,d.ch);cnt++;document.getElementById('mt-cnt').textContent=cnt;
+    document.getElementById('zResult').innerHTML='<div class="post-result" style="border-color:rgba(46,110,134,.15);"><img src="'+previewC.toDataURL('image/png')+'" /><div style="background:var(--s2);border:1px solid var(--b2);border-radius:7px;padding:10px;margin-bottom:10px;"><div style="font-size:.82rem;font-weight:700;color:'+color+';">'+defaultText+'</div><div style="font-size:.75rem;color:var(--t2);line-height:1.6;white-space:pre-wrap;margin-top:8px;">'+capLine+'\n\n'+hashLine+'</div></div><div style="display:flex;gap:7px;"><button class="btn bbl" id="zEdit" style="flex:1;">Edit Text in Image Studio</button><button class="btn bgh" style="flex:1;font-size:.7rem;" id="zDlDirect">Download As-Is</button></div></div>';
+    document.getElementById('zEdit').onclick=function(){selFont=font;var colEl=document.getElementById('p2Col');if(colEl)colEl.value=color;buildFontGrid();sendToPhase2(img,defaultText);};
+    document.getElementById('zDlDirect').onclick=function(){previewC.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download='zairey-'+Date.now()+'.png';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1000);toast('PNG saved','ok');},'image/png');};
+    btn.textContent='Generate Zairey Post';toast('Zairey post ready','ok');
   }catch(e){btn.textContent='Generate Zairey Post';toast('Error: '+e.message,'err');}
 }
 
 function setImgSrc(src){document.getElementById('aiPanel').style.display=src==='ai'?'block':'none';document.getElementById('upPanel').style.display=src==='upload'?'block':'none';document.getElementById('srcAI').className=src==='ai'?'btn bg':'btn bgh';document.getElementById('srcUp').className=src==='upload'?'btn bg':'btn bgh';}
 function showPhase(n){var p1=document.getElementById('ip1'),p2=document.getElementById('ip2'),t1=document.getElementById('ptab1'),t2=document.getElementById('ptab2');if(n===1){p1.style.display='block';p2.style.display='none';t1.className='ptab active';t2.className='ptab inactive';}else{if(!p1Img){toast('Generate or upload an image first','err');return;}p1.style.display='none';p2.style.display='block';t1.className='ptab inactive';t2.className='ptab active';buildFontGrid();setTimeout(function(){resizeTC();drawCanvas();},50);}}
-async function genBgP1(){var btn=document.getElementById('iBtn');btn.innerHTML='<span class="spin"></span> Generating...';var style=document.getElementById('iStyle').value;var fmt=document.getElementById('iFmt').value;var desc=document.getElementById('iDesc').value;var d=imgDims(fmt);var url='https://image.pollinations.ai/prompt/'+encodeURIComponent(buildPrompt(style,desc))+'?width='+d.w+'&height='+d.h+'&nologo=true&seed='+Date.now();var img=new Image();img.crossOrigin='anonymous';img.onload=function(){p1Img=img;var pc=document.getElementById('prevCanvas');pc.width=d.cw;pc.height=d.ch;var ctx=pc.getContext('2d');var ir=img.width/img.height,cr=d.cw/d.ch;var sx=0,sy=0,sw=img.width,sh=img.height;if(ir>cr){sw=img.height*cr;sx=(img.width-sw)/2;}else{sh=img.width/cr;sy=(img.height-sh)/2;}ctx.drawImage(img,sx,sy,sw,sh,0,0,d.cw,d.ch);document.getElementById('p1Preview').style.display='block';btn.textContent='Generate Background';toast('Image ready','ok');};img.onerror=function(){btn.textContent='Generate Background';toast('Generation failed','err');};img.src=url;}
+async function genBgP1(){
+  if(!IK){toast('Add fal.ai key in Settings','err');return;}
+  var btn=document.getElementById('iBtn');btn.innerHTML='<span class="spin"></span> Generating...';
+  var style=document.getElementById('iStyle').value;var fmt=document.getElementById('iFmt').value;var desc=document.getElementById('iDesc').value;var d=imgDims(fmt);
+  try{
+    var img=await genImg(buildPrompt(style,desc),d.w,d.h);
+    p1Img=img;var pc=document.getElementById('prevCanvas');pc.width=d.cw;pc.height=d.ch;var ctx=pc.getContext('2d');var ir=img.width/img.height,cr=d.cw/d.ch;var sx=0,sy=0,sw=img.width,sh=img.height;if(ir>cr){sw=img.height*cr;sx=(img.width-sw)/2;}else{sh=img.width/cr;sy=(img.height-sh)/2;}ctx.drawImage(img,sx,sy,sw,sh,0,0,d.cw,d.ch);document.getElementById('p1Preview').style.display='block';btn.textContent='Generate Background';toast('Image ready','ok');
+  }catch(e){btn.textContent='Generate Background';toast('Error: '+e.message,'err');}
+}
 function loadUpP1(input){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){p1Img=img;var pc=document.getElementById('prevCanvas');pc.width=600;pc.height=600;var ctx=pc.getContext('2d');ctx.drawImage(img,0,0,600,600);document.getElementById('p1Preview').style.display='block';toast('Photo loaded','ok');};img.src=e.target.result;};reader.readAsDataURL(file);}
 function confirmImg(){showPhase(2);toast('Image confirmed','ok');}
 function buildFontGrid(){var grid=document.getElementById('fontGrid');if(!grid)return;var html='';FONTS.forEach(function(f){var active=f.css===selFont;html+='<div class="font-item'+(active?' active':'')+'" data-font="'+f.css+'" onclick="pickFont(this)"><div class="font-name" style="font-family:\''+f.css+'\',sans-serif;">'+f.label+'</div><div class="font-style">'+f.cat+'</div></div>';});grid.innerHTML=html;}
@@ -986,13 +1144,13 @@ function drawCanvas(){
   var y=pos==='top'?h*0.22:pos==='bottom'?h*0.78:pos==='upper'?h*0.35:h*0.5;
   if(bg==='dark'){ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(0,y-sz-26,w,sz+(sub?subSz+10:0)+52);}
   else if(bg==='band'){ctx.fillStyle='rgba(0,0,0,0.68)';ctx.fillRect(0,y-sz-18,w,sz+(sub?subSz+10:0)+36);}
-  else if(bg==='gold'){ctx.fillStyle='rgba(200,146,10,0.88)';ctx.fillRect(0,y-sz-10,w,sz+20);}
+  else if(bg==='gold'){ctx.fillStyle='rgba(60,110,79,0.88)';ctx.fillRect(0,y-sz-10,w,sz+20);}
   else if(bg==='black'){ctx.fillStyle='rgba(0,0,0,0.85)';ctx.fillRect(0,0,w,h);}
   else if(bg==='grad'){var gr=ctx.createLinearGradient(0,h*0.45,0,h);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,0.84)');ctx.fillStyle=gr;ctx.fillRect(0,0,w,h);}
   ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;ctx.shadowBlur=0;ctx.shadowColor='transparent';
   if(shadow==='soft'){ctx.shadowColor='rgba(0,0,0,0.85)';ctx.shadowBlur=12;ctx.shadowOffsetY=2;}
   else if(shadow==='hard'){ctx.shadowColor='rgba(0,0,0,1)';ctx.shadowBlur=2;ctx.shadowOffsetX=3;ctx.shadowOffsetY=3;}
-  else if(shadow==='glow'){ctx.shadowColor='rgba(200,146,10,0.85)';ctx.shadowBlur=22;}
+  else if(shadow==='glow'){ctx.shadowColor='rgba(60,110,79,0.85)';ctx.shadowBlur=22;}
   var xPos=align==='left'?w*0.06:align==='right'?w*0.94:w/2;ctx.textAlign=align;
   if(txt&&txt.length>0){ctx.font='700 '+sz+'px "'+font+'", sans-serif';ctx.fillStyle=col;if(spacing>0&&txt.length>1){var chars=txt.split('');var totalW=0;for(var i=0;i<chars.length;i++)totalW+=ctx.measureText(chars[i]).width+(i<chars.length-1?spacing:0);var startX=align==='center'?xPos-totalW/2:align==='left'?xPos:xPos-totalW;for(var j=0;j<chars.length;j++){ctx.textAlign='left';ctx.fillText(chars[j],startX,y);startX+=ctx.measureText(chars[j]).width+spacing;}ctx.textAlign=align;}else{ctx.fillText(txt,xPos,y);}}
   if(sub&&sub.length>0){ctx.shadowBlur=5;ctx.shadowOffsetX=0;ctx.shadowOffsetY=1;ctx.font='500 '+subSz+'px "DM Sans", sans-serif';ctx.fillStyle=subCol;ctx.textAlign=align;ctx.fillText(sub,xPos,y+sz*0.72);}
@@ -1002,7 +1160,294 @@ async function aiEnhanceText(){if(!K){toast('Add API key in Settings','err');ret
 function dlFromCanvas(canvas,fmt,name){var mime=fmt==='jpg'?'image/jpeg':'image/png';var ext=fmt==='jpg'?'.jpg':'.png';canvas.toBlob(function(blob){var u=URL.createObjectURL(blob);var a=document.createElement('a');a.href=u;a.download=(name||'lmw')+'-'+Date.now()+ext;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);document.body.removeChild(a);},1500);toast((fmt==='jpg'?'JPG':'PNG')+' saved','ok');},mime,fmt==='jpg'?0.93:1.0);}
 function dlCanvas(fmt){var tc=document.getElementById('textCanvas');if(!tc||!p1Img){toast('No image to download','err');return;}var ifmt=document.getElementById('iFmt')?document.getElementById('iFmt').value:'sq';var d=imgDims(ifmt);var fullC=document.createElement('canvas');fullC.width=d.w;fullC.height=d.h;fullC.getContext('2d').drawImage(tc,0,0,d.w,d.h);dlFromCanvas(fullC,fmt,'lmw-studio-'+P);}
 
-async function genReel(){if(!K){toast('Add API key in Settings','err');return;}var btn=document.getElementById('rBtn');btn.innerHTML='<span class="spin"></span> Writing...';var plat=document.getElementById('rPlat').value;var dur=document.getElementById('rDur').value;var style=document.getElementById('rStyle').value;var topic=document.getElementById('rTopic').value||'music and the independent creative journey';var pDesc=P==='lmw'?'Warren Lamb / LMW sync licensing cinematic soul No Cuss No Fuss':'Zairey mysterious R&B artist -- never break persona';var prompt='Write a '+dur+'-second '+style+' video script for '+plat+' for '+pDesc+'.\nTopic: '+topic+'\n\nHOOK (first 3 seconds):\n[hook]\n\nMAIN CONTENT:\n[what to say]\n\nCTA (last 3 seconds):\n[call to action]\n\nPOST CAPTION:\n[caption]\n\nHASHTAGS:\n[12-15 hashtags]';try{var res=await ai(prompt,sys());document.getElementById('rResult').innerHTML='<div class="card" style="margin-top:10px;"><div style="font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;">'+plat.toUpperCase()+' -- '+dur+'s SCRIPT</div><div style="font-size:.78rem;color:var(--text);line-height:1.75;white-space:pre-wrap;" id="reelScriptText">'+res+'</div><div style="display:flex;gap:7px;margin-top:12px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'reelScriptText\').textContent);toast(\'Script copied\',\'ok\')" style="flex:1;">Copy Script</button><button class="btn bgh" onclick="genReel()">Regenerate</button></div></div>';btn.textContent='Generate Script';toast('Script ready','ok');}catch(e){btn.textContent='Generate Script';toast('Error: '+e.message,'err');}}
+function tChip(el,cls){var on=el.classList.contains(cls);el.className='chip';if(!on)el.classList.add(cls);}
+
+async function genReel(){
+  if(!K){toast('Add API key in Settings','err');return;}
+  var btn=document.getElementById('rBtn');btn.innerHTML='<span class="spin"></span> Writing...';
+  var plat=document.getElementById('rPlat').value;var dur=document.getElementById('rDur').value;var hookType=document.getElementById('rStyle').value;var topic=document.getElementById('rTopic').value||'music and the independent creative journey';
+  var pDesc=P==='lmw'?'Warren Lamb / LMW sync licensing cinematic soul No Cuss No Fuss':'Zairey mysterious R&B artist -- never break persona';
+  var prompt='Write a '+dur+'-second video script for '+plat+' for '+pDesc+', opening with a '+hookType+'.\nTrack/Topic: '+topic+'\n\nCOLD OPEN (which exact 3 seconds of the track or lyric to lead with):\n[cold open]\n\nHOOK (first 3 seconds spoken or on-screen):\n[hook]\n\nMAIN CONTENT:\n[what to say]\n\nCTA (last 3 seconds):\n[call to action]\n\nPOST CAPTION:\n[caption]\n\nHASHTAGS:\n[12-15 hashtags]';
+  try{
+    var res=await ai(prompt,sys());
+    document.getElementById('rResult').innerHTML='<div class="card" style="margin-top:10px;"><div class="variant-tags"><span class="vtag vtag-hook">'+hookType+'</span><span class="vtag vtag-plat">'+plat+'</span></div><div style="font-size:.78rem;color:var(--text);line-height:1.75;white-space:pre-wrap;" id="reelScriptText">'+res+'</div><div style="display:flex;gap:7px;margin-top:12px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'reelScriptText\').textContent);toast(\'Script copied\',\'ok\')" style="flex:1;">Copy Script</button><button class="btn bgh" onclick="genReel()">Regenerate</button></div></div>';
+    btn.textContent='Generate Script';toast('Script ready','ok');
+  }catch(e){btn.textContent='Generate Script';toast('Error: '+e.message,'err');}
+}
+
+async function genReelBatch(){
+  if(!K){toast('Add API key in Settings','err');return;}
+  var btn=document.getElementById('rBatchBtn');btn.innerHTML='<span class="spin"></span> Writing batch...';
+  var dur=document.getElementById('rDur').value;
+  var topic=document.getElementById('rTopic').value||'music and the independent creative journey';
+  var pDesc=P==='lmw'?'Warren Lamb / LMW sync licensing cinematic soul No Cuss No Fuss':'Zairey mysterious R&B artist -- never break persona';
+  var weighting=getHookWeighting();
+  var prompt='Generate 9 distinct '+dur+'-second video script variants for '+pDesc+' about this track or topic: '+topic+'.\n\nCover a mix of hook types (Question Hook, Lyric Cold-Open, Beat-Drop, Story Hook) and platforms (TikTok, Instagram Reels, YouTube Shorts) across the 9 variants. Do not repeat the same hook type and platform combination.'+weighting+'\n\nFor EACH variant, output in EXACTLY this format, and separate each variant with a line containing only ---:\n\nVARIANT\nHOOK: [Question Hook, Lyric Cold-Open, Beat-Drop, or Story Hook]\nPLATFORM: [TikTok, Instagram Reels, or YouTube Shorts]\nCOLD_OPEN: [which exact 3 seconds of the track or lyric to lead with]\nSCRIPT:\n[hook line]\n[main content]\n[cta]\nCAPTION: [post caption]\nHASHTAGS: [10-12 hashtags]\n---';
+  try{
+    var res=await ai(prompt,sys());
+    renderReelBatch(res);
+    btn.textContent='Generate Batch (8-10)';toast('Batch ready','ok');
+  }catch(e){btn.textContent='Generate Batch (8-10)';toast('Error: '+e.message,'err');}
+}
+function parseVariantBlocks(text){
+  var blocks=text.split(/\n?-{3,}\n?/).map(function(b){return b.trim();}).filter(function(b){return b.length>20;});
+  return blocks.map(function(b){
+    var hook=((b.match(/HOOK:\s*(.+)/i)||[])[1]||'Hook').trim();
+    var plat=((b.match(/PLATFORM:\s*(.+)/i)||[])[1]||'').trim();
+    var cold=((b.match(/COLD_OPEN:\s*(.+)/i)||[])[1]||'').trim();
+    var scriptMatch=b.match(/SCRIPT:\s*([\s\S]+?)(?=CAPTION:|$)/i);
+    var script=(scriptMatch?scriptMatch[1]:b).trim();
+    var cap=((b.match(/CAPTION:\s*(.+)/i)||[])[1]||'').trim();
+    var hash=((b.match(/HASHTAGS:\s*(.+)/i)||[])[1]||'').trim();
+    return {hook:hook,plat:plat,cold:cold,script:script,cap:cap,hash:hash,raw:b};
+  });
+}
+function variantCardHtml(v,idPrefix,i,extraTagHtml){
+  var full=(v.script+(v.cap?'\n\n'+v.cap:'')+(v.hash?'\n\n'+v.hash:'')).replace(/</g,'&lt;');
+  return '<div class="variant-card">'+(extraTagHtml||'')+'<div class="variant-tags"><span class="vtag vtag-hook">'+v.hook+'</span><span class="vtag vtag-plat">'+v.plat+'</span></div>'+(v.cold?'<div class="vtag-cold">Cold open: '+v.cold+'</div>':'')+'<div style="font-size:.78rem;color:var(--text);line-height:1.65;white-space:pre-wrap;" id="'+idPrefix+i+'">'+full+'</div><button class="btn bgh" style="margin-top:8px;font-size:.68rem;" onclick="navigator.clipboard.writeText(document.getElementById(\''+idPrefix+i+'\').textContent);toast(\'Script copied\',\'ok\')">Copy</button></div>';
+}
+function renderReelBatch(text){
+  var el=document.getElementById('rBatchResult');
+  var items=parseVariantBlocks(text);
+  if(!items.length){el.innerHTML='<div class="out">'+text+'</div>';return;}
+  el.innerHTML='<div class="sec">Batch — '+items.length+' Variants</div>'+items.map(function(v,i){
+    return variantCardHtml(v,'batchScript',i);
+  }).join('');
+}
+
+async function genDailyBatch(){
+  if(!K){toast('Add API key in Settings','err');return;}
+  var slot=WEEKLY_CALENDAR[new Date().getDay()];
+  var btn=document.getElementById('genBatchBtn');if(btn)btn.innerHTML='<span class="spin"></span> Generating...';
+  var pDesc=slot.brand==='zairey'?'Zairey mysterious R&B artist -- never break persona':'Warren Lamb / LMW sync licensing cinematic soul No Cuss No Fuss';
+  var sysPrompt=slot.brand==='zairey'?ZSYS:LSYS;
+  var weighting=getHookWeighting();
+  var prompt='Generate 5 distinct short-form video script variants for '+pDesc+' for today\'s content slot.\n\nContent type: '+slot.type+'\nSource angle: '+slot.source+'\n\nCover a mix of hook types (Question Hook, Lyric Cold-Open, Beat-Drop, Story Hook) and platforms (TikTok, Instagram Reels, YouTube Shorts).'+weighting+'\n\nFor EACH variant, output in EXACTLY this format, and separate each variant with a line containing only ---:\n\nVARIANT\nHOOK: [Question Hook, Lyric Cold-Open, Beat-Drop, or Story Hook]\nPLATFORM: [TikTok, Instagram Reels, or YouTube Shorts]\nCOLD_OPEN: [which exact 3 seconds of the track or lyric to lead with]\nSCRIPT:\n[hook line]\n[main content]\n[cta]\nCAPTION: [post caption]\nHASHTAGS: [10-12 hashtags]\n---';
+  try{
+    var res=await ai(prompt,sysPrompt);
+    var items=parseVariantBlocks(res);
+    items.forEach(function(it,i){it.id='q_'+Date.now()+'_'+i;it.status='pending';it.persona=slot.brand;});
+    approvalQueue={date:todayKey(),slot:slot,items:items,generated:true};
+    saveApprovalQueue();
+    renderQueue();
+    toast('Today\'s batch ready','ok');
+  }catch(e){toast('Error: '+e.message,'err');}
+  if(btn)btn.textContent='Generate Today\'s Batch';
+}
+function approveAllQueue(){
+  if(!approvalQueue||!approvalQueue.items.length){toast('No batch to approve','err');return;}
+  approvalQueue.items.forEach(function(it){
+    if(it.status==='skipped')return;
+    readyToPost.push({id:it.id,hook:it.hook,plat:it.plat,cold:it.cold,script:it.script,cap:it.cap,hash:it.hash,persona:it.persona,urgent:false,approvedAt:Date.now(),posted:false,postedAt:null});
+    it.status='approved';
+  });
+  saveApprovalQueue();saveReadyToPost();
+  renderQueue();renderReadyToPost();
+  toast('Batch approved -- moved to Ready to Post','ok');
+}
+function skipToday(){
+  if(!approvalQueue)return;
+  approvalQueue.items.forEach(function(it){it.status='skipped';});
+  saveApprovalQueue();
+  renderQueue();
+  toast('Today skipped','ok');
+}
+function toggleEditVariant(id,isUrgent){
+  var el=document.getElementById((isUrgent?'uq_':'q_')+'text_'+id);
+  if(!el)return;
+  var isEditing=el.dataset.editing==='1';
+  if(isEditing){
+    var ta=document.getElementById((isUrgent?'uq_':'q_')+'edit_'+id);
+    var newText=ta.value;
+    var list=isUrgent?urgentQueue:(approvalQueue?approvalQueue.items:[]);
+    var item=list.find(function(x){return x.id===id;});
+    if(item)item.script=newText;
+    if(isUrgent)saveUrgentQueue();else saveApprovalQueue();
+    el.dataset.editing='0';
+    isUrgent?renderQueue():renderQueue();
+  }else{
+    el.dataset.editing='1';
+    isUrgent?renderQueue():renderQueue();
+  }
+}
+function skipVariant(id){
+  if(!approvalQueue)return;
+  var item=approvalQueue.items.find(function(x){return x.id===id;});
+  if(item)item.status='skipped';
+  saveApprovalQueue();
+  renderQueue();
+}
+function approveUrgent(id){
+  var idx=urgentQueue.findIndex(function(x){return x.id===id;});
+  if(idx<0)return;
+  var it=urgentQueue[idx];
+  readyToPost.push({id:it.id,hook:it.hook,plat:it.plat,cold:it.cold,script:it.script,cap:it.cap,hash:it.hash,persona:it.persona,urgent:true,approvedAt:Date.now(),posted:false,postedAt:null});
+  urgentQueue.splice(idx,1);
+  saveUrgentQueue();saveReadyToPost();
+  renderQueue();renderReadyToPost();
+  toast('Approved -- moved to Ready to Post','ok');
+}
+function skipUrgent(id){
+  var idx=urgentQueue.findIndex(function(x){return x.id===id;});
+  if(idx<0)return;
+  urgentQueue.splice(idx,1);
+  saveUrgentQueue();
+  renderQueue();
+}
+function markPosted(id){
+  var item=readyToPost.find(function(r){return r.id===id;});
+  if(!item||item.posted)return;
+  item.posted=true;item.postedAt=Date.now();
+  var now=Date.now();
+  var rec={
+    id:'perf_'+now+'_'+Math.random().toString(36).slice(2,7),
+    hookType:item.hook,platform:item.plat,coldOpen:item.cold,persona:item.persona,
+    postedAt:now,
+    checkpoints:{
+      t2:{due:now+2*3600000,done:false,metrics:null},
+      t6:{due:now+6*3600000,done:false,metrics:null},
+      t24:{due:now+24*3600000,done:false,metrics:null},
+      t72:{due:now+72*3600000,done:false,metrics:null}
+    },
+    status:'watch'
+  };
+  perfRecords.push(rec);
+  savePerfRecords();saveReadyToPost();
+  renderReadyToPost();renderPerformance();
+  toast('Marked as posted -- tracking started','ok');
+}
+function dueCheckpointKey(rec){
+  var order=['t2','t6','t24','t72'];
+  var now=Date.now();
+  for(var i=0;i<order.length;i++){
+    var k=order[i];
+    if(!rec.checkpoints[k].done&&now>=rec.checkpoints[k].due)return k;
+  }
+  return null;
+}
+function submitMetrics(recId,cpKey){
+  var rec=perfRecords.find(function(r){return r.id===recId;});
+  if(!rec)return;
+  var pfx='m_'+recId+'_'+cpKey+'_';
+  var completion=parseFloat(document.getElementById(pfx+'completion').value)||0;
+  var shares=parseFloat(document.getElementById(pfx+'shares').value)||0;
+  var saves=parseFloat(document.getElementById(pfx+'saves').value)||0;
+  var comments=parseFloat(document.getElementById(pfx+'comments').value)||0;
+  var likes=parseFloat(document.getElementById(pfx+'likes').value)||0;
+  rec.checkpoints[cpKey].metrics={completion:completion,shares:shares,saves:saves,comments:comments,likes:likes};
+  rec.checkpoints[cpKey].done=true;
+  if(cpKey==='t72'){
+    var finalStatus=rec.status||'watch';
+    learningModel.push({hookType:rec.hookType,platform:rec.platform,persona:rec.persona,coldOpenVariant:rec.coldOpen,finalStatus:finalStatus,peakMetrics:peakMetricsOf(rec),expiredAt:Date.now()});
+    rec.status='expired';
+    saveLearningModel();
+  }else{
+    var wasWinner=rec.status==='winner';
+    var newStatus=classifyRecord(rec,cpKey);
+    rec.status=newStatus;
+    if(newStatus==='winner'&&!wasWinner)triggerReAmplify(rec);
+  }
+  pushBaseline(rec.platform,completion,shares);
+  savePerfRecords();
+  renderPerformance();
+  toast('Metrics logged','ok');
+}
+function cpLabel(k){return {t2:'T+2hr',t6:'T+6hr',t24:'T+24hr',t72:'T+72hr'}[k]||k;}
+function renderQueue(){
+  var slotEl=document.getElementById('queueSlot');
+  var slot=WEEKLY_CALENDAR[new Date().getDay()];
+  if(slotEl)slotEl.innerHTML='<div class="eyebrow">'+slot.name+' · '+slot.type+'</div><h2 style="font-family:\'Bebas Neue\',sans-serif;font-size:1.6rem;letter-spacing:1px;color:var(--text);margin-top:4px;">Today\'s approval queue</h2><div style="font-size:.76rem;color:var(--t2);margin-top:6px;">'+(slot.brand==='zairey'?'<span style="color:var(--blue);">Zairey</span>':'<span style="color:var(--gold);">LMW</span>')+' · '+slot.source+'</div>';
+
+  var urgentEl=document.getElementById('urgentSection');
+  if(urgentEl){
+    if(!urgentQueue.length){urgentEl.innerHTML='';}
+    else{
+      urgentEl.innerHTML='<div class="sec">Winner Detected -- Urgent</div>'+urgentQueue.map(function(it,i){
+        var tag='<div class="variant-tags"><span class="tag win" style="margin-right:6px;">Winner Detected</span></div>';
+        var editing=(function(){var el=document.getElementById('uq_text_'+it.id);return el&&el.dataset.editing==='1';})();
+        var body=editing?'<textarea class="inp" id="uq_edit_'+it.id+'" style="min-height:100px;">'+it.script+'</textarea>':'<div id="uq_text_'+it.id+'" style="font-size:.78rem;color:var(--text);line-height:1.65;white-space:pre-wrap;">'+it.script.replace(/</g,'&lt;')+'</div>';
+        return '<div class="variant-card" style="border-left:2px solid var(--green);">'+tag+'<div class="variant-tags"><span class="vtag vtag-hook">'+it.hook+'</span><span class="vtag vtag-plat">'+it.plat+'</span></div>'+(it.cold?'<div class="vtag-cold">Cold open: '+it.cold+'</div>':'')+body+'<div style="display:flex;gap:7px;margin-top:8px;"><button class="btn bg" style="flex:1;font-size:.68rem;" onclick="approveUrgent(\''+it.id+'\')">Approve</button><button class="btn bgh" style="flex:1;font-size:.68rem;" onclick="toggleEditVariant(\''+it.id+'\',true)">'+(editing?'Save':'Edit')+'</button><button class="btn bgh" style="flex:1;font-size:.68rem;" onclick="skipUrgent(\''+it.id+'\')">Skip</button></div></div>';
+      }).join('');
+    }
+  }
+
+  var batchEl=document.getElementById('batchSection');
+  var actionsEl=document.getElementById('queueActions');
+  if(!approvalQueue||approvalQueue.date!==todayKey()){
+    if(batchEl)batchEl.innerHTML='<div class="out" style="text-align:center;">No batch generated yet for today.</div>';
+    if(actionsEl)actionsEl.innerHTML='<button class="btn bg" id="genBatchBtn" onclick="genDailyBatch()" style="width:100%;">Generate Today\'s Batch</button>';
+  }else{
+    var pending=approvalQueue.items.filter(function(it){return it.status==='pending';});
+    var skipped=approvalQueue.items.filter(function(it){return it.status==='skipped';});
+    var approved=approvalQueue.items.filter(function(it){return it.status==='approved';});
+    if(batchEl){
+      if(!pending.length&&!approved.length&&skipped.length===approvalQueue.items.length){
+        batchEl.innerHTML='<div class="out" style="text-align:center;">Today skipped.</div>';
+      }else{
+        batchEl.innerHTML=approvalQueue.items.filter(function(it){return it.status!=='skipped';}).map(function(it){
+          var editing=(function(){var el=document.getElementById('q_text_'+it.id);return el&&el.dataset.editing==='1';})();
+          var body=editing?'<textarea class="inp" id="q_edit_'+it.id+'" style="min-height:100px;">'+it.script+'</textarea>':'<div id="q_text_'+it.id+'" style="font-size:.78rem;color:var(--text);line-height:1.65;white-space:pre-wrap;">'+it.script.replace(/</g,'&lt;')+'</div>';
+          var approvedBadge=it.status==='approved'?'<span class="tag" style="background:var(--gdim);color:var(--gold);margin-left:6px;">Approved</span>':'';
+          return '<div class="variant-card"><div class="variant-tags"><span class="vtag vtag-hook">'+it.hook+'</span><span class="vtag vtag-plat">'+it.plat+'</span>'+approvedBadge+'</div>'+(it.cold?'<div class="vtag-cold">Cold open: '+it.cold+'</div>':'')+body+(it.status==='pending'?'<div style="display:flex;gap:7px;margin-top:8px;"><button class="btn bgh" style="flex:1;font-size:.68rem;" onclick="toggleEditVariant(\''+it.id+'\',false)">'+(editing?'Save':'Edit')+'</button><button class="btn bgh" style="flex:1;font-size:.68rem;" onclick="skipVariant(\''+it.id+'\')">Skip</button></div>':'')+'</div>';
+        }).join('');
+      }
+    }
+    if(actionsEl){
+      actionsEl.innerHTML=pending.length?'<button class="btn bgh" onclick="skipToday()">Skip Today</button><button class="btn bg" onclick="approveAllQueue()" style="flex:1;">Approve All</button>':'';
+    }
+  }
+  renderReadyToPost();
+}
+function renderReadyToPost(){
+  var el=document.getElementById('readyToPostList');
+  if(!el)return;
+  var pending=readyToPost.filter(function(r){return !r.posted;});
+  var posted=readyToPost.filter(function(r){return r.posted;}).slice(-5).reverse();
+  if(!pending.length&&!posted.length){el.innerHTML='<div class="out" style="text-align:center;">Nothing ready to post yet.</div>';return;}
+  el.innerHTML=pending.map(function(it){
+    return '<div class="ready-row" style="display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--b1);border-radius:9px;background:var(--s1);margin-bottom:7px;"><div style="width:80px;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);flex-shrink:0;">'+it.plat+'</div><div style="flex:1;font-size:.78rem;color:var(--text);">'+(it.urgent?'<span class="vtag vtag-hook" style="margin-right:6px;">Winner Re-amp</span>':'')+it.hook+' -- '+(it.script||'').split('\n')[0].slice(0,60)+'</div><button class="btn bg" style="font-size:.68rem;flex-shrink:0;" onclick="markPosted(\''+it.id+'\')">Mark as Posted</button></div>';
+  }).join('')+(posted.length?'<div class="sec" style="margin-top:14px;">Recently Posted</div>'+posted.map(function(it){
+    return '<div class="ready-row" style="display:flex;align-items:center;gap:12px;padding:9px 14px;border:1px solid var(--b1);border-radius:9px;background:var(--s2);margin-bottom:6px;opacity:.75;"><div style="width:80px;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);flex-shrink:0;">'+it.plat+'</div><div style="flex:1;font-size:.76rem;color:var(--t2);">'+it.hook+'</div><span class="tag plat" style="flex-shrink:0;">Posted -- tracking in Performance</span></div>';
+  }).join(''):'');
+}
+function renderPerformance(){
+  var el=document.getElementById('perfList');
+  if(!el)return;
+  var active=perfRecords.filter(function(r){return r.status!=='expired';});
+  var winCount=perfRecords.filter(function(r){return r.status==='winner';}).length+learningModel.filter(function(l){return l.finalStatus==='winner';}).length;
+  var statTracking=document.getElementById('perfTracking');if(statTracking)statTracking.textContent=active.length;
+  var statWinners=document.getElementById('perfWinners');if(statWinners)statWinners.textContent=winCount;
+  var statExpired=document.getElementById('perfExpired');if(statExpired)statExpired.textContent=learningModel.length;
+  if(!perfRecords.length){el.innerHTML='<div class="out" style="text-align:center;">Nothing tracked yet. Mark an item as posted from the Approval Queue to start tracking.</div>';return;}
+  el.innerHTML=perfRecords.slice().reverse().map(function(rec){
+    var due=dueCheckpointKey(rec);
+    var chip='<span class="state-chip '+rec.status+'">'+rec.status+'</span>';
+    var checkpointsHtml=['t2','t6','t24','t72'].map(function(k){
+      var cp=rec.checkpoints[k];
+      var label=cpLabel(k);
+      if(cp.done)return '<span class="tag plat" style="margin-right:4px;">'+label+' ✓</span>';
+      if(k===due)return '<span class="tag hook" style="margin-right:4px;">'+label+' due</span>';
+      return '<span class="tag plat" style="margin-right:4px;opacity:.5;">'+label+'</span>';
+    }).join('');
+    var formHtml='';
+    if(due){
+      var pfx='m_'+rec.id+'_'+due+'_';
+      formHtml='<div style="margin-top:10px;padding:10px;background:var(--s2);border-radius:7px;"><div class="fl">Log metrics -- '+cpLabel(due)+'</div><div class="g3" style="margin-bottom:6px;"><input class="inp" id="'+pfx+'completion" type="number" placeholder="Completion %" /><input class="inp" id="'+pfx+'shares" type="number" placeholder="Shares" /><input class="inp" id="'+pfx+'saves" type="number" placeholder="Saves" /></div><div class="g2" style="margin-bottom:8px;"><input class="inp" id="'+pfx+'comments" type="number" placeholder="Comments" /><input class="inp" id="'+pfx+'likes" type="number" placeholder="Likes" /></div><button class="btn bg" style="width:100%;" onclick="submitMetrics(\''+rec.id+'\',\''+due+'\')">Submit</button></div>';
+    }
+    return '<div class="variant-card"><div class="variant-tags">'+chip+'<span class="vtag vtag-plat">'+rec.platform+'</span><span class="vtag vtag-hook">'+rec.hookType+'</span></div>'+(rec.coldOpen?'<div class="vtag-cold">'+rec.coldOpen+'</div>':'')+'<div style="margin-top:6px;">'+checkpointsHtml+'</div>'+formHtml+'</div>';
+  }).join('');
+}
+function initQueueAndPerf(){
+  if(approvalQueue&&approvalQueue.date!==todayKey()){
+    approvalQueue=null;
+  }
+  renderQueue();
+  renderPerformance();
+}
+function checkPerfDue(){
+  var anyDue=perfRecords.some(function(r){return r.status!=='expired'&&dueCheckpointKey(r);});
+  if(anyDue&&document.getElementById('pg-perf')&&document.getElementById('pg-perf').classList.contains('on'))renderPerformance();
+}
 
 async function genPitch(){if(!K){toast('Add API key in Settings','err');return;}var btn=document.getElementById('pBtn');btn.innerHTML='<span class="spin"></span> Writing...';var type=document.getElementById('pType').value;var target=document.getElementById('pTarget').value||'Music Library';var focus=document.getElementById('pFocus').value||'film and television';var track=document.getElementById('pTrack').value||'a cinematic soul track';var link=document.getElementById('pLink').value||'[your music link]';var mutual=document.getElementById('pMutual').value;var prompt='Write a sync licensing pitch email from Warren Lamb / Lamb Music Works to '+target+'.\n\nPitch type: '+type+'\nTheir focus: '+focus+'\nTrack: '+track+'\nMusic link: '+link+'\nMutual contact: '+(mutual||'none')+'\n\nRules: 3-5 sentences MAX. Lead with music link. Zero adjectives about how great the music is. One clear CTA. Sign off with BMI registered, 100+ tracks, cinematic soul, one-contract clearance, No Cuss No Fuss.\n\nInclude subject line.';try{var res=await ai(prompt,LSYS);document.getElementById('pResult').innerHTML='<div class="pitch-card"><div class="pitch-head">'+target+'</div><div class="pitch-sub">'+focus+'  -  '+new Date().toLocaleTimeString()+'</div><div class="pitch-body" id="pitchBodyText">'+res+'</div><div style="display:flex;gap:7px;margin-top:10px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'pitchBodyText\').textContent);toast(\'Pitch copied\',\'ok\')" style="flex:1;">Copy Pitch</button><button class="btn bgh" onclick="logSubFromPitch()">Log Submission</button><button class="btn bgh" onclick="genPitch()">Regenerate</button></div></div>';btn.textContent='Generate Pitch';toast('Pitch ready','ok');}catch(e){btn.textContent='Generate Pitch';toast('Error: '+e.message,'err');}}
 function scoreCheck(el){el.classList.toggle('done');el.textContent=el.classList.contains('done')?'v':'';var all=el.closest('.card').querySelectorAll('.gck').length;var done=el.closest('.card').querySelectorAll('.gck.done').length;var lbl=el.closest('.card').querySelector('#scoreLbl');var bar=el.closest('.card').querySelector('#scoreBar');if(lbl)lbl.textContent=done+' / '+all;if(bar)bar.style.width=Math.round((done/all)*100)+'%';}
@@ -1013,7 +1458,7 @@ function renderSubs(){var el=document.getElementById('subList');if(!subs.length)
 
 function addTrack(){var t=document.getElementById('trTitle').value.trim();if(!t){toast('Enter a track title','err');return;}catalog.unshift({id:Date.now(),title:t,genre:document.getElementById('trGenre').value,bpm:document.getElementById('trBpm').value,dur:document.getElementById('trDur').value,bmi:document.getElementById('trBmi').value,copy:document.getElementById('trCopy').value,sync:document.getElementById('trSync').value,vers:document.getElementById('trVers').value,notes:document.getElementById('trNotes').value,added:new Date().toLocaleDateString()});renderCat();updateCatStats();['trTitle','trGenre','trBpm','trDur','trNotes'].forEach(function(id){document.getElementById(id).value='';});toast('Track added','ok');}
 function updateCatStats(){document.getElementById('cs-total').textContent=catalog.length;document.getElementById('cs-bmi').textContent=catalog.filter(function(t){return t.bmi==='Registered';}).length;document.getElementById('cs-copy').textContent=catalog.filter(function(t){return t.copy==='Registered';}).length;document.getElementById('cs-sync').textContent=catalog.filter(function(t){return t.sync==='Yes';}).length;document.getElementById('cs-unreg').textContent=catalog.filter(function(t){return t.bmi==='Not Registered'||t.copy==='Not Registered';}).length;document.getElementById('mt-cat').textContent=catalog.length;}
-function renderCat(){var el=document.getElementById('catList');var filter=document.getElementById('catFilter').value;var search=(document.getElementById('catSearch').value||'').toLowerCase();var filtered=catalog.filter(function(t){var ms=!search||t.title.toLowerCase().includes(search)||(t.genre||'').toLowerCase().includes(search);var mf=filter==='all'||(filter==='bmi-no'&&t.bmi==='Not Registered')||(filter==='copy-no'&&t.copy==='Not Registered')||(filter==='sync-yes'&&t.sync==='Yes')||(filter==='sync-no'&&t.sync==='No');return ms&&mf;});if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.74rem;">No tracks match</div>';return;}el.innerHTML=filtered.map(function(t){var bc=t.bmi==='Registered'?'badge-green':t.bmi==='Pending'?'badge-amber':'badge-red';var cc=t.copy==='Registered'?'badge-green':t.copy==='Pending'?'badge-amber':'badge-red';var sc=t.sync==='Yes'?'badge-green':t.sync==='Partial'?'badge-amber':'badge-red';return '<div class="track-card"><div style="flex:1;min-width:140px;"><div class="track-name">'+t.title+'</div><div class="track-meta">'+(t.genre||'')+(t.bpm?'  -  '+t.bpm+' BPM':'')+(t.dur?'  -  '+t.dur:'')+'</div>'+(t.notes?'<div style="font-size:.65rem;color:var(--t3);margin-top:2px;">'+t.notes+'</div>':'')+'<div style="font-size:.62rem;color:var(--t3);margin-top:3px;">'+t.vers+'</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><div><span class="badge '+bc+'">BMI: '+t.bmi+'</span></div><div><span class="badge '+cc+'">(c): '+t.copy+'</span></div><div><span class="badge '+sc+'">SYNC: '+t.sync+'</span></div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="pitchTrack(\''+t.title.replace(/'/g,'&#39;')+'\')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(200,146,10,.25);color:var(--gold);cursor:pointer;">Pitch</button><button onclick="rmTrack('+t.id+')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--rdim);border:1px solid rgba(255,45,85,.2);color:var(--red);cursor:pointer;">Remove</button></div></div></div>';}).join('');}
+function renderCat(){var el=document.getElementById('catList');var filter=document.getElementById('catFilter').value;var search=(document.getElementById('catSearch').value||'').toLowerCase();var filtered=catalog.filter(function(t){var ms=!search||t.title.toLowerCase().includes(search)||(t.genre||'').toLowerCase().includes(search);var mf=filter==='all'||(filter==='bmi-no'&&t.bmi==='Not Registered')||(filter==='copy-no'&&t.copy==='Not Registered')||(filter==='sync-yes'&&t.sync==='Yes')||(filter==='sync-no'&&t.sync==='No');return ms&&mf;});if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.74rem;">No tracks match</div>';return;}el.innerHTML=filtered.map(function(t){var bc=t.bmi==='Registered'?'badge-green':t.bmi==='Pending'?'badge-amber':'badge-red';var cc=t.copy==='Registered'?'badge-green':t.copy==='Pending'?'badge-amber':'badge-red';var sc=t.sync==='Yes'?'badge-green':t.sync==='Partial'?'badge-amber':'badge-red';return '<div class="track-card"><div style="flex:1;min-width:140px;"><div class="track-name">'+t.title+'</div><div class="track-meta">'+(t.genre||'')+(t.bpm?'  -  '+t.bpm+' BPM':'')+(t.dur?'  -  '+t.dur:'')+'</div>'+(t.notes?'<div style="font-size:.65rem;color:var(--t3);margin-top:2px;">'+t.notes+'</div>':'')+'<div style="font-size:.62rem;color:var(--t3);margin-top:3px;">'+t.vers+'</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><div><span class="badge '+bc+'">BMI: '+t.bmi+'</span></div><div><span class="badge '+cc+'">(c): '+t.copy+'</span></div><div><span class="badge '+sc+'">SYNC: '+t.sync+'</span></div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="pitchTrack(\''+t.title.replace(/'/g,'&#39;')+'\')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(60,110,79,.25);color:var(--gold);cursor:pointer;">Pitch</button><button onclick="rmTrack('+t.id+')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--rdim);border:1px solid rgba(161,59,50,.2);color:var(--red);cursor:pointer;">Remove</button></div></div></div>';}).join('');}
 function rmTrack(id){catalog=catalog.filter(function(t){return t.id!==id;});renderCat();updateCatStats();toast('Removed','ok');}
 function pitchTrack(title){document.getElementById('pTrack').value=title;go('pitch',document.querySelectorAll('.ni')[5]);toast('Track loaded in Pitch Generator','ok');}
 function exportCatalog(){if(!catalog.length){toast('No tracks to export','err');return;}if(typeof XLSX==='undefined'){toast('Excel library loading -- try again','inf');return;}var rows=catalog.map(function(t){return{'Title':t.title,'Genre':t.genre,'BPM':t.bpm,'Duration':t.dur,'BMI Status':t.bmi,'Copyright':t.copy,'Sync Ready':t.sync,'Versions':t.vers,'Notes':t.notes,'Added':t.added};});var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),'Catalog');XLSX.writeFile(wb,'LMW_Catalog_'+new Date().toISOString().split('T')[0]+'.xlsx');toast('Catalog exported','ok');}
@@ -1021,7 +1466,7 @@ function importCatalog(input){var file=input.files[0];if(!file)return;if(typeof 
 
 function initLibDB(){var LIB_DB=[{n:'Musicbed',r:'US',f:'Advertising',g:'Cinematic, Indie, Ambient, Electronic',t:'Application',w:'https://www.musicbed.com',e:'',notes:'Premium brand campaigns; very selective'},{n:'Marmoset',r:'US',f:'Advertising',g:'Indie, Cinematic, Pop, Electronic',t:'Application',w:'https://www.marmosetmusic.com',e:'',notes:'B-Corp; Nike Super Bowl clients'},{n:'Artlist',r:'Global',f:'Advertising',g:'Cinematic, Electronic, Indie, Pop',t:'Application',w:'https://artlist.io',e:'',notes:'Netflix Apple Microsoft clients'},{n:'Epidemic Sound',r:'SE/Global',f:'Broadcast',g:'Electronic, Pop, Cinematic, Indie',t:'Application',w:'https://www.epidemicsound.com',e:'',notes:'Upfront payment 50/50; invite only'},{n:'Taxi Music',r:'US',f:'Advertising',g:'Cinematic, Pop, Electronic, Orchestral',t:'Open',w:'https://www.taxi.com',e:'',notes:'Membership based; connects to vetted libraries'},{n:'Broadjam',r:'US',f:'Film & TV',g:'Cinematic, Pop, Electronic, Indie',t:'Open',w:'https://www.broadjam.com',e:'',notes:'Open submissions; sync licensing marketplace'},{n:'Music Gateway',r:'UK/Global',f:'Advertising',g:'Cinematic, Pop, Electronic, Indie',t:'Application',w:'https://www.musicgateway.com',e:'',notes:'Disney Netflix Universal clients'},{n:'TripleScoopMusic',r:'US',f:'Film & TV',g:'Cinematic, Pop, Electronic, Ambient',t:'Application',w:'https://triplescoopmusic.com',e:'artists@triplescoopmusic.com',notes:'Christian and family -- PERFECT for No Cuss No Fuss'},{n:'Soundstripe',r:'US',f:'Broadcast',g:'Pop, Cinematic, Electronic, Corporate',t:'Application',w:'https://www.soundstripe.com',e:'',notes:'Nashville based; subscription platform'},{n:'Premiumbeat',r:'US/Global',f:'Advertising',g:'Corporate, Cinematic, Pop, Electronic',t:'Application',w:'https://www.premiumbeat.com',e:'',notes:'Shutterstock owned; tightly curated'},{n:'Audiosocket',r:'US',f:'Trailers',g:'Indie, Cinematic, Electronic, Pop',t:'Application',w:'https://www.audiosocket.com',e:'',notes:'Non-exclusive 25/75 or exclusive 50/50'},{n:'Songtradr',r:'US/Global',f:'Broadcast',g:'Pop, Electronic, Indie, Cinematic',t:'Open',w:'https://www.songtradr.com',e:'',notes:'AI matched briefs; 90-100% royalties'},{n:'Sentric Music',r:'UK/Global',f:'Broadcast',g:'Pop, Electronic, Indie, Cinematic',t:'Open',w:'https://www.sentric.com',e:'',notes:'80/20 split; rolling 28-day contract; free to join'},{n:'Musicvine',r:'UK',f:'Broadcast',g:'Cinematic, Indie, Ambient, Electronic',t:'Application',w:'https://musicvine.com',e:'',notes:'Documentary placements'},{n:'Bank Robber Music',r:'US',f:'Advertising',g:'Indie, Pop, Electronic, Cinematic',t:'Application',w:'https://bankrobbermusic.com',e:'demos@bankrobbermusic.com',notes:'Email streaming links only'},{n:'Signature Tracks',r:'US',f:'Advertising',g:'Cinematic, Pop, Electronic, Indie',t:'Application',w:'https://www.signaturetracks.com',e:'adam@signaturetracks.com',notes:'Boutique sync licensing'},{n:'Terrorbird Media',r:'US',f:'Advertising',g:'Indie, Pop, Electronic, Cinematic',t:'Application',w:'https://terrorbird.com',e:'contact@terrorbird.com',notes:'Boutique sync agency'},{n:'Friendly Fire Licensing',r:'US',f:'Advertising',g:'Indie, Pop, Electronic, Cinematic',t:'Application',w:'https://www.friendlyfirelicensing.com',e:'info@friendlyfirelicensing.com',notes:'Email with streaming link'},{n:'Lyric House',r:'US',f:'Advertising',g:'Indie, Pop, Electronic, Cinematic',t:'Application',w:'https://www.lyrichouseco.com',e:'',notes:'Submit via contact form'},{n:'Hooksounds',r:'BR/Global',f:'Broadcast',g:'Corporate, Electronic, Pop, Cinematic',t:'Open',w:'https://www.hooksounds.com',e:'',notes:'YouTube and corporate video'},{n:'Crucial Music',r:'US',f:'Trailers',g:'Cinematic, Pop, Electronic',t:'Open',w:'https://www.crucialmusic.com',e:'',notes:'Non-exclusive 3-year term'},{n:'Trailer Rebel',r:'US',f:'Trailers',g:'Trailer, Hybrid, Cinematic, Electronic',t:'Open',w:'https://trailerrebel.com',e:'submission@trailerrebel.com',notes:'More accessible; open to emerging composers'},{n:'Really Slow Motion',r:'UK',f:'Trailers',g:'Trailer, Hybrid, Cinematic, Orchestral',t:'Open',w:'https://www.reallyslowmotion.com',e:'',notes:'Send streaming links only'},{n:'Score a Score',r:'US',f:'Advertising',g:'Cinematic, Hybrid, Electronic',t:'Application',w:'https://scoreascore.com',e:'',notes:'Matches composers to ad agencies'},{n:'Audiio',r:'US',f:'Advertising',g:'Corporate, Electronic, Pop, Cinematic',t:'Application',w:'https://www.audiio.com',e:'',notes:'Supply WAV files and full metadata'},{n:'Motion Array',r:'US',f:'Film & TV',g:'Corporate, Electronic, Cinematic',t:'Open',w:'https://motionarray.com',e:'',notes:'Subscription platform for video editors'},{n:'Cezame Music',r:'FR/EU',f:'European',g:'Cinematic, Orchestral, Electronic, Corporate',t:'Open',w:'https://en.cezamemusic.com',e:'prod@cezamemusic.com',notes:'French 360 sync agency'},{n:'Musicfox',r:'DE/EU',f:'European',g:'Corporate, Electronic, Pop, Cinematic',t:'Open',w:'https://www.musicfox.com',e:'info@musicfox.com',notes:'German library open to submissions'},{n:'Bensound',r:'FR',f:'European',g:'Corporate, Ambient, Electronic, Cinematic',t:'Open',w:'https://www.bensound.com',e:'',notes:'Open to independent composers'}];
   var libStatus={};
-  function renderLibs(){var el=document.getElementById('libList');if(!el)return;var cat=document.getElementById('libCat').value;var stat=document.getElementById('libStat').value;var search=(document.getElementById('libSearch').value||'').toLowerCase();var filtered=LIB_DB.filter(function(l){var mc=cat==='all'||l.f===cat;var ls=libStatus[l.n]||'Not Contacted';var ms2=stat==='all'||ls===stat;var ms=!search||l.n.toLowerCase().includes(search)||(l.g||'').toLowerCase().includes(search)||(l.notes||'').toLowerCase().includes(search);return mc&&ms2&&ms;});document.getElementById('ls-total').textContent=LIB_DB.length;document.getElementById('ls-pitched').textContent=Object.values(libStatus).filter(function(s){return s==='Pitched';}).length;document.getElementById('ls-accept').textContent=Object.values(libStatus).filter(function(s){return s==='Accepted';}).length;document.getElementById('ls-unt').textContent=LIB_DB.filter(function(l){return !libStatus[l.n]||libStatus[l.n]==='Not Contacted';}).length;if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.75rem;">No libraries match</div>';return;}var html='<div style="font-size:.62rem;color:var(--t3);margin-bottom:8px;">Showing '+filtered.length+' of '+LIB_DB.length+'</div>';filtered.forEach(function(l){var ls=libStatus[l.n]||'Not Contacted';var statColors={'Not Contacted':'var(--t3)','Pitched':'var(--blue)','Accepted':'var(--green)','Declined':'var(--red)','No Reply':'var(--amber)'};var sc=statColors[ls]||'var(--t3)';var fit=(l.g||'').toLowerCase().includes('cinematic')||(l.notes||'').toLowerCase().includes('christian')||(l.notes||'').toLowerCase().includes('family')||(l.notes||'').toLowerCase().includes('no cuss');var isOpen=l.t==='Open';var ln=l.n.replace(/'/g,'&#39;');html+='<div class="lib-card" style="border-color:'+(fit?'rgba(200,146,10,0.25)':'var(--b1)')+';">';html+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;">';html+='<div style="flex:1;min-width:140px;"><div class="lib-name">'+l.n+(fit?'<span class="goodfit">GOOD FIT</span>':'')+(isOpen?'<span class="openlib">OPEN</span>':'')+'</div>';html+='<div class="lib-meta">'+l.r+'  -  '+l.f+'  -  '+l.t+'</div><div class="lib-genres">'+l.g+'</div>';if(l.notes)html+='<div class="lib-notes">'+l.notes+'</div>';html+='</div><div><span style="padding:2px 8px;border-radius:4px;font-size:.58rem;font-weight:700;background:'+sc+'20;color:'+sc+';border:1px solid '+sc+'40;white-space:nowrap;">'+ls+'</span></div></div>';html+='<div style="display:flex;gap:5px;margin-top:9px;flex-wrap:wrap;">';if(l.e)html+='<a href="mailto:'+l.e+'" style="padding:3px 8px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);text-decoration:none;">Email</a>';if(l.w)html+='<a href="'+l.w+'" target="_blank" style="padding:3px 8px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);text-decoration:none;">Website</a>';html+='<button onclick="setLibStat(\''+ln+'\',this.value)" style="display:none;"></button>';html+='<select onchange="setLibStat(\''+ln+'\',this.value)" style="padding:3px 6px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);cursor:pointer;">'+['Not Contacted','Pitched','Accepted','Declined','No Reply'].map(function(s){return '<option value="'+s+'"'+(s===ls?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div></div>';});el.innerHTML=html;}
+  function renderLibs(){var el=document.getElementById('libList');if(!el)return;var cat=document.getElementById('libCat').value;var stat=document.getElementById('libStat').value;var search=(document.getElementById('libSearch').value||'').toLowerCase();var filtered=LIB_DB.filter(function(l){var mc=cat==='all'||l.f===cat;var ls=libStatus[l.n]||'Not Contacted';var ms2=stat==='all'||ls===stat;var ms=!search||l.n.toLowerCase().includes(search)||(l.g||'').toLowerCase().includes(search)||(l.notes||'').toLowerCase().includes(search);return mc&&ms2&&ms;});document.getElementById('ls-total').textContent=LIB_DB.length;document.getElementById('ls-pitched').textContent=Object.values(libStatus).filter(function(s){return s==='Pitched';}).length;document.getElementById('ls-accept').textContent=Object.values(libStatus).filter(function(s){return s==='Accepted';}).length;document.getElementById('ls-unt').textContent=LIB_DB.filter(function(l){return !libStatus[l.n]||libStatus[l.n]==='Not Contacted';}).length;if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.75rem;">No libraries match</div>';return;}var html='<div style="font-size:.62rem;color:var(--t3);margin-bottom:8px;">Showing '+filtered.length+' of '+LIB_DB.length+'</div>';filtered.forEach(function(l){var ls=libStatus[l.n]||'Not Contacted';var statColors={'Not Contacted':'var(--t3)','Pitched':'var(--blue)','Accepted':'var(--green)','Declined':'var(--red)','No Reply':'var(--amber)'};var sc=statColors[ls]||'var(--t3)';var fit=(l.g||'').toLowerCase().includes('cinematic')||(l.notes||'').toLowerCase().includes('christian')||(l.notes||'').toLowerCase().includes('family')||(l.notes||'').toLowerCase().includes('no cuss');var isOpen=l.t==='Open';var ln=l.n.replace(/'/g,'&#39;');html+='<div class="lib-card" style="border-color:'+(fit?'rgba(60,110,79,0.25)':'var(--b1)')+';">';html+='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;flex-wrap:wrap;">';html+='<div style="flex:1;min-width:140px;"><div class="lib-name">'+l.n+(fit?'<span class="goodfit">GOOD FIT</span>':'')+(isOpen?'<span class="openlib">OPEN</span>':'')+'</div>';html+='<div class="lib-meta">'+l.r+'  -  '+l.f+'  -  '+l.t+'</div><div class="lib-genres">'+l.g+'</div>';if(l.notes)html+='<div class="lib-notes">'+l.notes+'</div>';html+='</div><div><span style="padding:2px 8px;border-radius:4px;font-size:.58rem;font-weight:700;background:'+sc+'20;color:'+sc+';border:1px solid '+sc+'40;white-space:nowrap;">'+ls+'</span></div></div>';html+='<div style="display:flex;gap:5px;margin-top:9px;flex-wrap:wrap;">';if(l.e)html+='<a href="mailto:'+l.e+'" style="padding:3px 8px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);text-decoration:none;">Email</a>';if(l.w)html+='<a href="'+l.w+'" target="_blank" style="padding:3px 8px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);text-decoration:none;">Website</a>';html+='<button onclick="setLibStat(\''+ln+'\',this.value)" style="display:none;"></button>';html+='<select onchange="setLibStat(\''+ln+'\',this.value)" style="padding:3px 6px;border-radius:4px;font-size:.58rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);cursor:pointer;">'+['Not Contacted','Pitched','Accepted','Declined','No Reply'].map(function(s){return '<option value="'+s+'"'+(s===ls?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div></div>';});el.innerHTML=html;}
   function setLibStat(name,status){libStatus[name]=status;renderLibs();toast(name+' updated','ok');}
   window.renderLibs=renderLibs;window.setLibStat=setLibStat;
   renderLibs();
@@ -1043,7 +1488,7 @@ function initVault(){
 function renderTargetList(){var el=document.getElementById('vTargetList');if(!el)return;var filtered=vTargets.filter(function(t){return vCatFilter==='all'||t.cat===vCatFilter;});if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.72rem;">No targets in this category</div>';return;}var statColors={new:'var(--t3)',active:'var(--green)',contacted:'var(--blue)',responded:'var(--amber)',placed:'var(--gold)'};var tempIcons={cold:'*',warm:'~',hot:'!'};var html='';filtered.forEach(function(t){var sc=statColors[t.status]||'var(--t3)';var ti=tempIcons[t.temp]||'*';var initials=t.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2);html+='<div class="vtarget'+(t.id===vActiveId?' active':'')+'" data-tid="'+t.id+'"><div style="display:flex;align-items:center;gap:9px;"><div class="vtavatar" style="background:'+t.avatarBg+';color:'+t.avatarColor+';">'+initials+'</div><div style="flex:1;min-width:0;"><div class="vtname">'+t.name+'</div><div class="vtrole" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+t.known+'</div><div style="display:flex;align-items:center;gap:5px;margin-top:3px;"><span style="font-size:.52rem;color:'+sc+';">*</span><span style="font-size:.58rem;color:var(--t3);">'+t.status+'</span><span style="font-size:.58rem;">'+ti+'</span></div></div></div></div>';});el.innerHTML=html;el.querySelectorAll('.vtarget').forEach(function(div){div.onclick=function(){openTarget(this.dataset.tid);};});}
 function openTarget(id){var t=vTargets.find(function(x){return x.id===id;});if(!t)return;vActiveId=id;vActiveTab='profile';renderTargetList();document.getElementById('vWelcome').style.display='none';document.getElementById('vAddView').style.display='none';document.getElementById('vDossier').style.display='flex';var av=document.getElementById('dosAvatar');av.style.background=t.avatarBg;av.style.color=t.avatarColor;av.textContent=t.name.split(' ').map(function(w){return w[0]||'';}).join('').slice(0,2);document.getElementById('dosName').textContent=t.name;document.getElementById('dosMeta').textContent=t.known+'  -  '+t.cat;var statColors={new:'var(--t3)',active:'var(--green)',contacted:'var(--blue)',responded:'var(--amber)',placed:'var(--gold)'};var sb=document.getElementById('dosStatus');sb.textContent=t.status.toUpperCase();sb.style.cssText='color:'+statColors[t.status]+';background:'+statColors[t.status]+'20;border:1px solid '+statColors[t.status]+'40;padding:2px 8px;border-radius:4px;font-family:"Barlow Condensed",sans-serif;font-size:.56rem;letter-spacing:1px;';var pd=document.getElementById('dosProx');pd.innerHTML='';for(var i=0;i<10;i++){pd.innerHTML+='<div class="prox-dot'+(i<t.proximity?' fill':'')+'"></div>';}document.getElementById('dosStatusSel').value=t.status;document.getElementById('dosTempSel').value=t.temp;document.querySelectorAll('.dtab').forEach(function(dt){dt.classList.remove('active');});document.querySelector('.dtab').classList.add('active');showDosTab('profile',document.querySelector('.dtab'));}
 function showDosTab(tab,el){vActiveTab=tab;document.querySelectorAll('.dtab').forEach(function(dt){dt.classList.remove('active');});if(el)el.classList.add('active');var t=vTargets.find(function(x){return x.id===vActiveId;});if(!t)return;var body=document.getElementById('dosBody');if(tab==='profile'){body.innerHTML='<div class="dos-section"><div class="dos-label">Who They Are</div><div class="dos-text">'+(t.profile||t.known)+'</div></div><div class="dos-section"><div class="dos-label">Why Right Now</div><div class="dos-text">'+(t.whyNow||'Research and reach out.')+'</div></div><div class="dos-section"><div class="dos-label">Proximity Score</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="display:flex;gap:3px;" id="proxDotsLg"></div><span style="font-size:.78rem;font-weight:700;color:var(--gold);">'+t.proximity+' / 10</span></div></div>';var pd=document.getElementById('proxDotsLg');if(pd){for(var i=0;i<10;i++){pd.innerHTML+='<div class="prox-dot'+(i<t.proximity?' fill':'')+'" style="width:12px;height:12px;"></div>';}}
-}else if(tab==='circle'){var html='<div class="dos-label" style="margin-bottom:12px;">Inner Circle and Associates</div>';(t.circle||[]).forEach(function(c){html+='<div class="ccard2"><div class="cc-cat cc-'+c.cat+'">'+c.cat+'</div><div class="cc-name">'+c.name+'</div><div class="cc-role">'+c.role+'</div><div class="cc-why">'+c.why+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">'+(c.ig?'<a href="'+c.ig+'" target="_blank" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:rgba(225,48,108,.08);border:1px solid rgba(225,48,108,.25);color:#e1306c;text-decoration:none;">Instagram</a>':'')+(c.email&&c.email.indexOf('@')>-1?'<a href="mailto:'+c.email+'" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(200,146,10,.25);color:var(--gold);text-decoration:none;">'+c.email+'</a>':'')+(c.li?'<a href="https://'+c.li+'" target="_blank" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:rgba(0,119,181,.08);border:1px solid rgba(0,119,181,.25);color:#0077b5;text-decoration:none;">LinkedIn</a>':'')+'</div></div>';});body.innerHTML=html;
+}else if(tab==='circle'){var html='<div class="dos-label" style="margin-bottom:12px;">Inner Circle and Associates</div>';(t.circle||[]).forEach(function(c){html+='<div class="ccard2"><div class="cc-cat cc-'+c.cat+'">'+c.cat+'</div><div class="cc-name">'+c.name+'</div><div class="cc-role">'+c.role+'</div><div class="cc-why">'+c.why+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">'+(c.ig?'<a href="'+c.ig+'" target="_blank" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:rgba(225,48,108,.08);border:1px solid rgba(225,48,108,.25);color:#e1306c;text-decoration:none;">Instagram</a>':'')+(c.email&&c.email.indexOf('@')>-1?'<a href="mailto:'+c.email+'" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(60,110,79,.25);color:var(--gold);text-decoration:none;">'+c.email+'</a>':'')+(c.li?'<a href="https://'+c.li+'" target="_blank" style="padding:3px 9px;border-radius:4px;font-size:.58rem;background:rgba(0,119,181,.08);border:1px solid rgba(0,119,181,.25);color:#0077b5;text-decoration:none;">LinkedIn</a>':'')+'</div></div>';});body.innerHTML=html;
 }else if(tab==='contact'){var s=t.social||{};var emails=t.emails||[];var html2='<div class="dos-label" style="margin-bottom:12px;">Social Media</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">';if(s.ig)html2+='<a href="'+s.ig+'" target="_blank" style="padding:8px 16px;border-radius:6px;font-size:.65rem;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:rgba(225,48,108,.1);border:1px solid rgba(225,48,108,.3);color:#e1306c;text-decoration:none;">Instagram</a>';if(s.tw)html2+='<a href="'+s.tw+'" target="_blank" style="padding:8px 16px;border-radius:6px;font-size:.65rem;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:rgba(29,161,242,.1);border:1px solid rgba(29,161,242,.3);color:#1da1f2;text-decoration:none;">Twitter / X</a>';if(t.website)html2+='<a href="'+t.website+'" target="_blank" style="padding:8px 16px;border-radius:6px;font-size:.65rem;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;background:var(--gdim);border:1px solid var(--border-gold);color:var(--gold);text-decoration:none;">Website</a>';html2+='</div>';if(emails.length){html2+='<div class="dos-label" style="margin-bottom:10px;">Known Email Addresses</div>';emails.forEach(function(em){var isEmail=em.email.indexOf('@')>-1;html2+='<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--s2);border:1px solid var(--b1);border-radius:7px;margin-bottom:6px;"><div style="flex:1;"><div style="font-size:.58rem;color:var(--t3);text-transform:uppercase;margin-bottom:2px;">'+em.label+'</div>'+(isEmail?'<a href="mailto:'+em.email+'" style="font-size:.78rem;color:var(--gold);text-decoration:none;">'+em.email+'</a>':'<span style="font-size:.76rem;color:var(--t2);">'+em.email+'</span>')+'</div>'+(isEmail?'<a href="mailto:'+em.email+'" style="padding:5px 12px;border-radius:4px;font-size:.58rem;font-family:\'Barlow Condensed\',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--gdim);border:1px solid var(--border-gold);color:var(--gold);text-decoration:none;">Email Now</a>':'')+'</div>';});}body.innerHTML=html2;
 }else if(tab==='routes'){var r=t.routes||{};body.innerHTML='<div class="dos-label">Contact Routes</div><div class="route-tier rt1"><div class="rt-label">Tier 1 -- Direct</div><div class="dos-text">'+(r.tier1||'Research direct contact.')+'</div></div><div class="route-tier rt2"><div class="rt-label">Tier 2 -- Through Associates</div><div class="dos-text">'+(r.tier2||'Connect through inner circle.')+'</div></div><div class="route-tier rt3"><div class="rt-label">Tier 3 -- Long Game</div><div class="dos-text">'+(r.tier3||'Build proximity over time.')+'</div></div>';
 }else if(tab==='events'){body.innerHTML='<div class="dos-label" style="margin-bottom:12px;">Upcoming Public Events</div><button class="btn bg" onclick="searchProximityEvents()" style="width:100%;margin-bottom:14px;"><span id="eventsBtn">Search for Upcoming Appearances</span></button><div id="eventsOut"><div style="padding:16px;text-align:center;color:var(--t3);font-size:.74rem;">Hit Search to find upcoming public appearances.</div></div>';
@@ -1089,7 +1534,7 @@ function setTarget(){var t=document.getElementById('siTargetInput').value.trim()
 function siTab(tab,el){['brief','opps','content','pipeline','playbook'].forEach(function(t){var panel=document.getElementById('si-panel-'+t);var tabEl=document.getElementById('si-tab-'+t);if(panel)panel.style.display=t===tab?'block':'none';if(tabEl){tabEl.className=t===tab?'ptab active':'ptab inactive';tabEl.style.background=t===tab?'var(--gdim)':'transparent';tabEl.querySelector('div').style.color=t===tab?'var(--gold)':'var(--text)';}});if(tab==='pipeline')renderSIPipeline();if(tab==='opps')renderSavedOpps();}
 async function genDailyBrief(){if(!K){toast('Add API key in Settings','err');return;}var btn=document.getElementById('briefSiBtn');btn.innerHTML='<span class="spin"></span>';var ctx=document.getElementById('siContext').value;var day=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});var prompt='Generate a complete daily social media intelligence brief for Warren Lamb LMW. Date: '+day+'. Target: '+siTarget+'. Why: '+siTargetWhy+'. Context: '+(ctx||'standard day')+'. Include: TARGET INTELLIGENCE. AUDIENCE GROWTH MOVES TODAY -- 3 specific actions. TARGET ECOSYSTEM MOVES TODAY -- 2 specific moves. CONTENT TO CREATE TODAY. WHAT NOT TO DO TODAY. TOMORROW SETUP.';try{var res=await ai(prompt,SI_SYSTEM);document.getElementById('siBriefOut').innerHTML='<div class="card" style="margin-top:10px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:700;">LMW MARKETING TEAM -- '+day.toUpperCase()+'</div><div style="font-size:.78rem;color:var(--text);line-height:1.8;white-space:pre-wrap;" id="siBriefText">'+res+'</div><div style="display:flex;gap:7px;margin-top:14px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'siBriefText\').textContent);toast(\'Copied\',\'ok\')" style="font-size:.68rem;">Copy Brief</button><button class="btn bgh" onclick="genDailyBrief()" style="font-size:.68rem;">Refresh</button></div></div>';btn.textContent='Generate Brief';toast('Brief ready','ok');}catch(e){btn.textContent='Generate Brief';toast('Error: '+e.message,'err');}}
 async function analyzeOpp(){if(!K){toast('Add API key in Settings','err');return;}var post=document.getElementById('siOppPaste').value.trim();var who=document.getElementById('siOppWho').value.trim();if(!post){toast('Paste something to analyze','err');return;}var btn=document.getElementById('oppBtn');btn.innerHTML='<span class="spin"></span>';var prompt='Social opportunity analyst for Warren Lamb LMW. Target: '+siTarget+'. Who posted: '+(who||'unknown')+'. Post: '+post+'. Analyze: OPPORTUNITY RATING 1-10. WHAT THIS SIGNALS. CONNECTION TO TARGET. THE MOVE -- exactly what Warren does. DRAFTED RESPONSE -- the actual comment or DM. WHAT NOT TO DO. FOLLOW UP.';try{var res=await ai(prompt,SI_SYSTEM);var rating=(res.match(/OPPORTUNITY RATING:\s*(\d+)/i)||[])[1]||'?';var ratingColor=parseInt(rating)>=7?'var(--green)':parseInt(rating)>=4?'var(--amber)':'var(--t2)';var oppId='opp-'+Date.now();document.getElementById('siOppOut').innerHTML='<div class="card" style="margin-top:10px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><div style="font-family:serif;font-size:1.6rem;color:'+ratingColor+';">'+rating+'/10</div><div><div style="font-size:.78rem;font-weight:700;color:var(--text);">'+(who||'Post')+'</div><div style="font-size:.64rem;color:var(--t2);">Opportunity Score</div></div></div><div style="font-size:.76rem;color:var(--text);line-height:1.75;white-space:pre-wrap;" id="'+oppId+'">'+res+'</div></div>';btn.textContent='Analyze This Opportunity';toast('Opportunity analyzed','ok');}catch(e){btn.textContent='Analyze This Opportunity';toast('Error: '+e.message,'err');}}
-function renderSavedOpps(){var el=document.getElementById('siSavedOpps');if(!el)return;if(!siOpps.length){el.innerHTML='<div style="padding:14px;text-align:center;color:var(--t3);font-size:.74rem;">No opportunities saved yet.</div>';return;}el.innerHTML=siOpps.map(function(o,i){return '<div style="background:var(--ink);border:1px solid var(--b1);border-radius:7px;padding:11px 13px;margin-bottom:7px;display:flex;align-items:flex-start;gap:10px;"><div style="flex:1;"><div style="font-size:.72rem;font-weight:700;color:var(--text);">'+(o.who||'Opportunity')+'</div><div style="font-size:.64rem;color:var(--t2);">'+o.date+'</div><div style="font-size:.66rem;color:var(--t3);">'+o.post.substring(0,100)+'...</div></div><button onclick="removeOpp('+i+')" style="padding:3px 7px;border-radius:4px;font-size:.56rem;background:var(--rdim);border:1px solid rgba(255,45,85,.2);color:var(--red);cursor:pointer;">Remove</button></div>';}).join('');}
+function renderSavedOpps(){var el=document.getElementById('siSavedOpps');if(!el)return;if(!siOpps.length){el.innerHTML='<div style="padding:14px;text-align:center;color:var(--t3);font-size:.74rem;">No opportunities saved yet.</div>';return;}el.innerHTML=siOpps.map(function(o,i){return '<div style="background:var(--ink);border:1px solid var(--b1);border-radius:7px;padding:11px 13px;margin-bottom:7px;display:flex;align-items:flex-start;gap:10px;"><div style="flex:1;"><div style="font-size:.72rem;font-weight:700;color:var(--text);">'+(o.who||'Opportunity')+'</div><div style="font-size:.64rem;color:var(--t2);">'+o.date+'</div><div style="font-size:.66rem;color:var(--t3);">'+o.post.substring(0,100)+'...</div></div><button onclick="removeOpp('+i+')" style="padding:3px 7px;border-radius:4px;font-size:.56rem;background:var(--rdim);border:1px solid rgba(161,59,50,.2);color:var(--red);cursor:pointer;">Remove</button></div>';}).join('');}
 function removeOpp(i){siOpps.splice(i,1);localStorage.setItem('si_opps',JSON.stringify(siOpps));renderSavedOpps();}
 async function genContentPlan(){if(!K){toast('Add API key in Settings','err');return;}var btn=document.getElementById('contentPlanBtn');btn.innerHTML='<span class="spin"></span>';var platform=document.getElementById('siPlatform').value;var freq=document.getElementById('siFreq').value;var prompt='Content strategist for Warren Lamb LMW. Platforms: '+platform+'. Frequency: '+freq+'. Target: '+siTarget+'. Build a 30-day content plan serving two missions: 1) Grow LMW audience. 2) Build visibility toward target. For each week provide a theme and day by day content. Be specific with real concepts.';try{var res=await ai(prompt,SI_SYSTEM);document.getElementById('siContentPlanOut').innerHTML='<div class="card" style="margin-top:10px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:700;">30-DAY LMW CONTENT PLAN</div><div style="font-size:.76rem;color:var(--text);line-height:1.8;white-space:pre-wrap;" id="contentPlanText">'+res+'</div><div style="display:flex;gap:7px;margin-top:14px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'contentPlanText\').textContent);toast(\'Copied\',\'ok\')" style="font-size:.68rem;">Copy Plan</button><button class="btn bgh" onclick="genContentPlan()" style="font-size:.68rem;">Regenerate</button></div></div>';btn.textContent='Generate 30-Day Plan';toast('Content plan ready','ok');}catch(e){btn.textContent='Generate 30-Day Plan';toast('Error: '+e.message,'err');}}
 function addPipelinePerson(){var name=document.getElementById('plName').value.trim();if(!name){toast('Enter a name or handle','err');return;}siPipeline.unshift({id:'pl-'+Date.now(),name:name,handle:document.getElementById('plHandle').value,stage:document.getElementById('plStage').value,note:document.getElementById('plNote').value,added:new Date().toLocaleDateString()});localStorage.setItem('si_pipeline',JSON.stringify(siPipeline));['plName','plHandle','plNote'].forEach(function(id){document.getElementById(id).value='';});renderSIPipeline();toast('Added to pipeline','ok');}
@@ -1099,8 +1544,6 @@ async function genNextMove(){if(!K){toast('Add API key in Settings','err');retur
 async function genPlaybook(){if(!K){toast('Add API key in Settings','err');return;}var input=document.getElementById('siPlaybookInput').value.trim();if(!input){toast('Describe your situation first','err');return;}var btn=document.getElementById('playbookBtn');btn.innerHTML='<span class="spin"></span>';var prompt='Chief marketing officer for Warren Lamb LMW. Target: '+siTarget+'. Situation: '+input+'. Build a complete 30-day step-by-step playbook. No paid ads no bots. Structure: PLAYBOOK TITLE. SITUATION ASSESSMENT. WEEK 1-4 themes and daily actions. THE PIVOT POINT -- when outreach shifts from building to connecting. SUCCESS LOOKS LIKE.';try{var res=await ai(prompt,SI_SYSTEM);document.getElementById('siPlaybookOut').innerHTML='<div class="card" style="margin-top:10px;"><div style="font-size:.76rem;color:var(--text);line-height:1.8;white-space:pre-wrap;" id="playbookText">'+res+'</div><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'playbookText\').textContent);toast(\'Copied\',\'ok\')" style="width:100%;margin-top:12px;font-size:.7rem;">Copy Playbook</button></div>';btn.textContent='Build My Playbook';toast('Playbook ready','ok');}catch(e){btn.textContent='Build My Playbook';toast('Error: '+e.message,'err');}}
 async function draftMessage(){if(!K){toast('Add API key in Settings','err');return;}var type=document.getElementById('siMsgType').value;var ctx=document.getElementById('siMsgContext').value.trim();var btn=document.getElementById('draftBtn');btn.innerHTML='<span class="spin"></span>';var prompt='Ghostwriter for Warren Lamb (LMW sync licensing, cinematic soul, minister, No Cuss No Fuss, LA). Write a '+type+' for Warren. Context: '+siTarget+'. Post or situation: '+(ctx||'general connection')+'. Rules: sounds like a real human. Warm genuine peer energy. Never desperate. Maximum 3 sentences for comments and DMs. Give three versions: SHORT MEDIUM and LONG.';try{var res=await ai(prompt,SI_SYSTEM);document.getElementById('siDraftOut').innerHTML='<div class="card" style="margin-top:8px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-family:sans-serif;">DRAFTED -- REVIEW BEFORE SENDING</div><div style="font-size:.76rem;color:var(--text);line-height:1.75;white-space:pre-wrap;" id="draftText">'+res+'</div><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'draftText\').textContent);toast(\'Copied\',\'ok\')" style="width:100%;margin-top:10px;font-size:.7rem;">Copy Draft</button></div>';btn.textContent='Draft My Message';toast('Message drafted -- review before sending','ok');}catch(e){btn.textContent='Draft My Message';toast('Error: '+e.message,'err');}}
 function initSocialIntel(){document.addEventListener('click',function(e){if(e.target.classList.contains('si-copy-btn')){var cid=e.target.dataset.cid;var el=document.getElementById(cid);if(el){navigator.clipboard.writeText(el.textContent);toast('Copied','ok');}}});var savedTarget=localStorage.getItem('si_target');if(savedTarget){siTarget=savedTarget;var el=document.getElementById('siCurrentTarget');if(el)el.textContent=siTarget;}var savedWhy=localStorage.getItem('si_target_why');if(savedWhy){siTargetWhy=savedWhy;var el2=document.getElementById('siTargetSub');if(el2)el2.textContent=siTargetWhy;}updateSISystem();}
-
-function tChip(el,cls){var on=el.classList.contains(cls);el.className='chip';if(!on)el.classList.add(cls);}
 
 function renderSched(){var body=document.getElementById('schedBody');if(!body)return;var now=new Date();var h=now.getHours();var m=now.getMinutes();body.innerHTML=Object.keys(SCHED).map(function(p){var wins=SCHED[p];var cols=wins.map(function(w){var isNow=h===w.h&&m>=0&&m<30;return '<td>'+(isNow?'<span class="nowbadge">NOW</span>':'<span class="tbadge">'+w.l+'</span>')+'</td>';}).join('');return '<tr><td style="font-weight:700;color:var(--text);">'+p+'</td>'+cols+'</tr>';}).join('');}
 function updateNextAlert(now){var h=now.getHours(),m=now.getMinutes(),nw=null,np='',mn=Infinity;Object.keys(SCHED).forEach(function(p){SCHED[p].forEach(function(w){var d=(w.h*60+w.m)-(h*60+m);if(d>0&&d<mn){mn=d;nw=w;np=p;}});});if(nw){var hrs=Math.floor(mn/60),mins=mn%60;document.getElementById('mt-nxt').textContent=nw.l;document.getElementById('mt-nxtd').textContent=np+' in '+(hrs>0?hrs+'h '+mins+'m':mins+'m');}}
@@ -1208,7 +1651,7 @@ async function zDraftPitch(){
     var prompt='Draft a professional outreach pitch email from Lamb Music Works (Warren Lamb, founder) to '+target+'. Position LMW as a full-service music production and sync licensing company with a 100+ track BMI-registered catalog. Offer value -- not beg for work. Tone: confident, professional, spiritually grounded. Under 200 words. Include a subject line.';
     var res=await ai(prompt,Z_SYS);
     document.getElementById('zPitchOut').innerHTML=
-      '<div class="card" style="margin-top:10px;border-color:rgba(200,146,10,.25);">'+
+      '<div class="card" style="margin-top:10px;border-color:rgba(60,110,79,.25);">'+
         '<div style="font-size:.76rem;color:var(--text);line-height:1.75;white-space:pre-wrap;margin-bottom:12px;" id="zPitchText">'+res+'</div>'+
         '<div style="display:flex;gap:7px;">'+
           '<button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'zPitchText\').textContent);toast(\'Pitch copied\',\'ok\')" style="flex:1;">Copy Pitch</button>'+
@@ -1292,7 +1735,7 @@ function zModalTab(tab,id){
     body.innerHTML=rows.map(function(r){
       return '<div style="background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:11px 13px;margin-bottom:7px;display:flex;align-items:center;gap:10px;">'+
         '<div style="flex:1;min-width:0;"><div style="font-size:.5rem;color:var(--t3);letter-spacing:1.5px;text-transform:uppercase;font-family:sans-serif;">'+r.label+'</div><div style="font-size:.76rem;color:'+(r.val==='Not found'?'var(--t3)':'var(--text)')+';margin-top:2px;word-break:break-all;">'+r.val+'</div></div>'+
-        (r.link?'<a href="'+r.link+'" target="_blank" style="padding:4px 10px;border-radius:5px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(200,146,10,.3);color:var(--gold);text-decoration:none;white-space:nowrap;">Open &rarr;</a>':'')+
+        (r.link?'<a href="'+r.link+'" target="_blank" style="padding:4px 10px;border-radius:5px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(60,110,79,.3);color:var(--gold);text-decoration:none;white-space:nowrap;">Open &rarr;</a>':'')+
         (r.copyable?'<button onclick="navigator.clipboard.writeText(\''+r.val+'\');toast(\'Copied\',\'ok\')" style="padding:4px 10px;border-radius:5px;font-size:.58rem;background:var(--s1);border:1px solid var(--b2);color:var(--t2);cursor:pointer;">Copy</button>':'')+
       '</div>';
     }).join('');
@@ -1402,7 +1845,7 @@ function zRenderOpps(opps){
         (o.pay&&o.pay!=='--'?'<span style="font-size:.6rem;color:var(--t3);">\uD83D\uDCB0 '+o.pay+'</span>':'')+
       '</div>'+
       '<div style="display:flex;gap:7px;">'+
-        (o.url?'<a href="'+o.url+'" target="_blank" style="padding:5px 12px;border-radius:5px;font-size:.6rem;background:var(--gdim);border:1px solid rgba(200,146,10,.3);color:var(--gold);text-decoration:none;">Open &rarr;</a>':'')+
+        (o.url?'<a href="'+o.url+'" target="_blank" style="padding:5px 12px;border-radius:5px;font-size:.6rem;background:var(--gdim);border:1px solid rgba(60,110,79,.3);color:var(--gold);text-decoration:none;">Open &rarr;</a>':'')+
         '<button onclick="zSaveOpp('+i+')" style="padding:5px 12px;border-radius:5px;font-size:.6rem;background:var(--s2);border:1px solid var(--b2);color:var(--t2);cursor:pointer;">\u2606 Save</button>'+
       '</div>'+
     '</div>';
@@ -1427,7 +1870,7 @@ function zRenderSavedOpps(){
     return '<div style="background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:11px 13px;margin-bottom:6px;display:flex;align-items:flex-start;gap:10px;">'+
       '<div style="flex:1;"><div style="font-size:.76rem;font-weight:700;color:var(--text);">'+(o.title||'')+'</div><div style="font-size:.62rem;color:var(--t3);">'+(o.source||'')+' &middot; Saved '+(o.savedAt||'')+'</div></div>'+
       '<div style="display:flex;gap:5px;">'+
-        (o.url?'<a href="'+o.url+'" target="_blank" style="padding:4px 9px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(200,146,10,.3);color:var(--gold);text-decoration:none;">Open</a>':'')+
+        (o.url?'<a href="'+o.url+'" target="_blank" style="padding:4px 9px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(60,110,79,.3);color:var(--gold);text-decoration:none;">Open</a>':'')+
         '<button onclick="zRemoveSavedOpp('+i+')" style="padding:4px 9px;border-radius:4px;font-size:.58rem;background:none;border:1px solid var(--b2);color:var(--t3);cursor:pointer;">&times;</button>'+
       '</div>'+
     '</div>';
@@ -1445,7 +1888,7 @@ function zRenderTasks(){
   var el=document.getElementById('zTaskList');if(!el)return;
   el.innerHTML=zTasks.map(function(t){
     return '<div style="display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:11px 13px;margin-bottom:7px;opacity:'+(t.done?'.5':'1')+';">'+
-      '<div onclick="zToggleTask('+t.id+')" style="width:18px;height:18px;border-radius:50%;border:'+(t.done?'none':'2px solid var(--gold)')+';background:'+(t.done?'linear-gradient(135deg,var(--gold),var(--g2))':'none')+';cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:#000;">'+(t.done?'\u2713':'')+'</div>'+
+      '<div onclick="zToggleTask('+t.id+')" style="width:18px;height:18px;border-radius:50%;border:'+(t.done?'none':'2px solid var(--gold)')+';background:'+(t.done?'linear-gradient(135deg,var(--gold),var(--g2))':'none')+';cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.58rem;color:var(--s1);">'+(t.done?'\u2713':'')+'</div>'+
       '<div style="flex:1;font-size:.76rem;color:var(--text);text-decoration:'+(t.done?'line-through':'none')+';">'+t.text+'</div>'+
       '<button onclick="zRemoveTask('+t.id+')" style="background:none;border:none;color:var(--t3);cursor:pointer;font-size:.9rem;">&times;</button>'+
     '</div>';
