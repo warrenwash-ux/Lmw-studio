@@ -193,23 +193,9 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
 <nav class="nav">
   <div class="logo">LMW</div>
   <div class="nitems">
-    <div class="ni on" onclick="go('queue',this)"><span class="ico">✅</span><span class="lbl">QUEUE</span></div>
-    <div class="ni" onclick="go('brief',this)"><span class="ico">📋</span><span class="lbl">BRIEF</span></div>
-    <div class="ni" onclick="go('trends',this)"><span class="ico">📡</span><span class="lbl">TRENDS</span></div>
-    <div class="ni" onclick="go('create',this)"><span class="ico">✍️</span><span class="lbl">CREATE</span></div>
-    <div class="ni" onclick="go('image',this)"><span class="ico">🖼️</span><span class="lbl">IMAGE</span></div>
-    <div class="ni" onclick="go('reels',this)"><span class="ico">▶️</span><span class="lbl">REELS</span></div>
-    <div class="ni" onclick="go('pitch',this)"><span class="ico">🎯</span><span class="lbl">PITCH</span></div>
-    <div class="ni" onclick="go('catalog',this)"><span class="ico">🎵</span><span class="lbl">CATALOG</span></div>
+    <div class="ni on" onclick="go('catalog',this)"><span class="ico">🎵</span><span class="lbl">CATALOG</span></div>
     <div class="ni" onclick="go('libs',this)"><span class="ico">📚</span><span class="lbl">LIBS</span></div>
     <div class="ni" onclick="go('vault',this)"><span class="ico">💎</span><span class="lbl">VAULT</span></div>
-    <div class="ni" onclick="go('perf',this)"><span class="ico">📈</span><span class="lbl">PERF</span></div>
-    <div class="ni" onclick="go('alerts',this)"><span class="ico">🔔</span><span class="lbl">ALERTS</span></div>
-    <div class="ni" onclick="go('goals',this)"><span class="ico">✅</span><span class="lbl">GOALS</span></div>
-    <div class="ni" onclick="go('social',this)"><span class="ico">🎯</span><span class="lbl">SOCIAL</span></div>
-    <div class="ni" onclick="go('coach',this)"><span class="ico">🤖</span><span class="lbl">COACH</span></div>
-    <div class="ni" onclick="go('zaire',this)"><span class="ico">⭐</span><span class="lbl">ZAIRE</span></div>
-    <div class="ni" onclick="go('settings',this)"><span class="ico">⚙️</span><span class="lbl">KEYS</span></div>
   </div>
 </nav>
 <div class="main">
@@ -221,239 +207,11 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
     </div>
   </div>
 
-  <!-- DAILY APPROVAL QUEUE -->
-  <div class="pg on" id="pg-queue">
-    <div class="queue-masthead" id="queueSlot"></div>
-    <div id="urgentSection" style="margin-bottom:20px;"></div>
-    <div class="section-head" style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;gap:12px;flex-wrap:wrap;">
-      <div class="sec" style="flex:1;">Today's Batch</div>
-      <div id="queueActions" style="display:flex;gap:8px;"></div>
-    </div>
-    <div id="batchSection"></div>
-    <div class="sec" style="margin-top:26px;">Ready To Post</div>
-    <div id="readyToPostList"></div>
-  </div>
-
-  <!-- BRIEFING -->
-  <div class="pg" id="pg-brief">
-    <div class="psw"><button class="pb plmw" onclick="setP('lmw',this)">LMW</button><button class="pb" onclick="setP('zairey',this)">ZAIREY</button></div>
-    <div class="mtiles">
-      <div class="mt"><div class="mtl">Next Alert</div><div class="mtv" id="mt-nxt">--</div><div class="mtd" id="mt-nxtd">--</div></div>
-      <div class="mt"><div class="mtl">Created Today</div><div class="mtv" id="mt-cnt">0</div><div class="mtd">posts and images</div></div>
-      <div class="mt"><div class="mtl">Daily Goals</div><div class="mtv" id="mt-gl">0%</div><div class="mtd" id="mt-gld">Not started</div></div>
-      <div class="mt"><div class="mtl">Catalog Tracks</div><div class="mtv" id="mt-cat">0</div><div class="mtd">in registry</div></div>
-    </div>
-    <div class="card">
-      <div class="ct">Daily Briefing</div>
-      <div style="margin-bottom:10px;"><div class="fl">Context (optional)</div><input type="text" class="inp" id="briefCtx" placeholder="e.g. focused on sync pitching today..." /></div>
-      <button class="btn bg" onclick="genBrief()" style="width:100%;"><span id="briefBtn">Generate My Briefing</span></button>
-    </div>
-    <div class="out" id="briefOut" style="min-height:180px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:.75rem;">Hit Generate for your daily intelligence briefing</div>
-    <div id="verdictsWrap" style="display:none;margin-top:14px;"><div class="sec">Agent Verdicts</div><div id="verdictsList"></div></div>
-  </div>
-
-  <!-- TRENDS -->
-  <div class="pg" id="pg-trends">
-    <div class="card">
-      <div class="ct">Trend Intelligence Scanner</div>
-      <div style="margin-bottom:10px;"><div class="fl">Focus Area</div>
-        <select class="inp" id="tFocus">
-          <option value="sync licensing independent music business">Sync Licensing and Music Business</option>
-          <option value="R&B hip hop culture street music">R&B and Hip-Hop Culture</option>
-          <option value="content creator social media music marketing">Content Creator and Social Media</option>
-          <option value="faith entrepreneurship independence">Faith and Independent Business</option>
-          <option value="music entertainment culture general">All Music and Entertainment</option>
-        </select>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn bg" onclick="scanTrends()" style="flex:1;"><span id="tBtn">Scan for Opportunities</span></button>
-        <button class="btn bgh" onclick="fetchRSS()"><span id="rssBtn">Live News</span></button>
-      </div>
-    </div>
-    <div id="tResults"><div style="padding:20px;text-align:center;color:var(--t3);font-size:.75rem;">Hit Scan to surface today's top content opportunities</div></div>
-  </div>
-
-  <!-- CREATE -->
-  <div class="pg" id="pg-create">
-    <div class="psw"><button class="pb plmw" id="psw-lmw" onclick="setP('lmw',this)">LMW</button><button class="pb" id="psw-zairey" onclick="setP('zairey',this)">ZAIREY</button></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
-      <div id="mode-quick" onclick="setMode('quick')" style="padding:12px;border-radius:9px;border:1px solid var(--gold);background:var(--gdim);cursor:pointer;text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:2px;color:var(--gold);">QUICK</div><div style="font-size:.58rem;color:var(--gold);margin-top:2px;">One click image post</div></div>
-      <div id="mode-custom" onclick="setMode('custom')" style="padding:12px;border-radius:9px;border:1px solid var(--b2);background:transparent;cursor:pointer;text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:2px;color:var(--text);">CUSTOM</div><div style="font-size:.58rem;color:var(--t2);margin-top:2px;">Full creative control</div></div>
-      <div id="mode-zairey" onclick="setMode('zairey')" style="padding:12px;border-radius:9px;border:1px solid var(--b2);background:transparent;cursor:pointer;text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:2px;color:var(--blue);">ZAIREY</div><div style="font-size:.58rem;color:var(--t2);margin-top:2px;">Mystery persona post</div></div>
-    </div>
-    <div id="panel-quick">
-      <div class="card">
-        <div class="ct">Quick Image Post</div>
-        <div style="margin-bottom:10px;"><div class="fl">What do you want to say?</div><textarea class="inp" id="qTopic" placeholder="e.g. Just finished a cinematic soul track. Sync-ready. No cuss no fuss." style="min-height:75px;"></textarea></div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Content Type</div><select class="inp" id="qType"><option value="music promo">Music Promo</option><option value="sync licensing tip">Sync Tip</option><option value="behind the scenes">Behind The Scenes</option><option value="new release">New Release</option><option value="faith independence">Faith and Independence</option><option value="engagement question">Engagement Question</option></select></div>
-          <div><div class="fl">Format</div><select class="inp" id="qFmt"><option value="sq">Square 1080x1080</option><option value="st">Story 1080x1920</option><option value="ls">Landscape 1200x630</option></select></div>
-        </div>
-        <button class="btn bg" onclick="genQuick()" style="width:100%;font-size:.85rem;padding:12px;"><span id="qBtn">Generate Image Post</span></button>
-      </div>
-      <div id="qResult"></div>
-    </div>
-    <div id="panel-custom" style="display:none;">
-      <div class="card">
-        <div class="ct">Custom Content</div>
-        <div style="margin-bottom:10px;"><div class="fl">Your Idea or Headline</div><textarea class="inp" id="cTopic" placeholder="Type your idea or paste a trending headline..." style="min-height:75px;"></textarea><button class="btn bgh" onclick="enhanceIdea()" style="width:100%;margin-top:6px;font-size:.72rem;"><span id="enhBtn">Enhance with AI</span></button></div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Type</div><select class="inp" id="cType"><option value="music promo">Music Promo</option><option value="sync licensing story">Sync Story</option><option value="repurpose trending content">Repurpose Trend</option><option value="behind the scenes">Behind The Scenes</option><option value="new release">New Release</option><option value="engagement">Engagement</option><option value="faith independence motivation">Faith and Independence</option></select></div>
-          <div><div class="fl">Tone</div><select class="inp" id="cTone"><option value="professional">Professional</option><option value="hype energetic">Hype</option><option value="spiritual deep">Spiritual</option><option value="mysterious dark">Mysterious</option><option value="raw real authentic">Raw and Real</option></select></div>
-        </div>
-        <div style="margin-bottom:10px;"><div class="fl">Platforms</div><div class="chips" id="cChips"><div class="chip" onclick="tChip(this,'cig')">Instagram</div><div class="chip" onclick="tChip(this,'ctt')">TikTok</div><div class="chip" onclick="tChip(this,'cfb')">Facebook</div><div class="chip" onclick="tChip(this,'ctw')">X / Twitter</div><div class="chip" onclick="tChip(this,'cli')">LinkedIn</div></div></div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Image Format</div><select class="inp" id="cFmt"><option value="sq">Square 1080x1080</option><option value="st">Story 1080x1920</option><option value="ls">Landscape 1200x630</option></select></div>
-          <div><div class="fl">Download As</div><select class="inp" id="cDlFmt"><option value="png">PNG</option><option value="jpg">JPG</option></select></div>
-        </div>
-        <div style="display:flex;gap:7px;"><button class="btn bg" onclick="genCustom()" style="flex:1;"><span id="ccBtn">Generate Image Post</span></button><button class="btn bgh" onclick="genCustom(true)">Regenerate</button></div>
-      </div>
-      <div id="cResult"></div>
-    </div>
-    <div id="panel-zairey" style="display:none;">
-      <div class="card" style="border-color:rgba(64,150,143,.2);">
-        <div class="ct" style="color:var(--blue);">Zairey Post Creator</div>
-        <div style="margin-bottom:10px;"><div class="fl">Vibe or Theme</div><textarea class="inp" id="zTopic" placeholder="e.g. the silence before the storm..." style="min-height:70px;"></textarea></div>
-        <div style="margin-bottom:10px;"><div class="fl">Your Text for Image</div><input type="text" class="inp" id="zText" placeholder="e.g. SOON. or WATCH. or YOUR WORLD CHANGES." /></div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Post Type</div><select class="inp" id="zType"><option value="mystery tease build anticipation">Mystery Tease</option><option value="lyric fragment dark poetic">Lyric Fragment</option><option value="coming soon no details cryptic">Coming Soon</option><option value="raw emotional introspective">Raw and Emotional</option><option value="street wisdom spiritual truth">Street Wisdom</option></select></div>
-          <div><div class="fl">Format</div><select class="inp" id="zFmt"><option value="sq">Square 1080x1080</option><option value="st">Story 1080x1920</option></select></div>
-        </div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Font</div><select class="inp" id="zFont"><option value="Cinzel">CINZEL</option><option value="Bebas Neue">BEBAS NEUE</option><option value="Playfair Display">Playfair Display</option><option value="Raleway">Raleway</option><option value="Orbitron">ORBITRON</option><option value="Special Elite">Special Elite</option></select></div>
-          <div><div class="fl">Text Color</div><input type="color" id="zColor" value="#ffffff" style="width:100%;height:38px;border-radius:7px;border:1px solid var(--b2);cursor:pointer;margin-top:4px;" /></div>
-        </div>
-        <button class="btn bbl" onclick="genZairey()" style="width:100%;font-size:.85rem;padding:12px;"><span id="zBtn">Generate Zairey Post</span></button>
-      </div>
-      <div id="zResult"></div>
-    </div>
-  </div>
-
-  <!-- IMAGE STUDIO -->
-  <div class="pg" id="pg-image">
-    <div class="psw"><button class="pb plmw" onclick="setP('lmw',this)">LMW</button><button class="pb" onclick="setP('zairey',this)">ZAIREY</button></div>
-    <div class="phase-tabs">
-      <div class="ptab active" id="ptab1" onclick="showPhase(1)"><div class="ptab-title">PHASE 1 — Create Image</div><div style="font-size:.6rem;color:var(--gold);margin-top:2px;">Generate or upload</div></div>
-      <div class="ptab inactive" id="ptab2" onclick="showPhase(2)" style="border-left:1px solid var(--b1);"><div class="ptab-title">PHASE 2 — Add Text</div><div style="font-size:.6rem;color:var(--t2);margin-top:2px;">Font, size, color, download</div></div>
-    </div>
-    <div id="ip1">
-      <div class="card">
-        <div class="ct">Image Source</div>
-        <div style="display:flex;gap:8px;margin-bottom:12px;"><button class="btn bg" id="srcAI" onclick="setImgSrc('ai')" style="flex:1;">AI Generate</button><button class="btn bgh" id="srcUp" onclick="setImgSrc('upload')" style="flex:1;">Upload My Photo</button></div>
-        <div id="aiPanel">
-          <div class="g2" style="margin-bottom:10px;">
-            <div><div class="fl">Style</div><select class="inp" id="iStyle"><option value="cinematic dark atmospheric moody dramatic film">Cinematic Dark</option><option value="abstract gold luxury premium elegant particles">Abstract Gold</option><option value="urban city night rain neon wet streets bokeh">Urban Night</option><option value="minimal clean white space professional studio">Minimal Clean</option><option value="mystical dark spiritual introspective fog night">Mystical Dark</option><option value="retro vintage warm analog grain soul jazz">Retro Soul</option><option value="modern recording studio professional equipment">Recording Studio</option><option value="nature serene peaceful landscape golden hour">Nature Serene</option></select></div>
-            <div><div class="fl">Format</div><select class="inp" id="iFmt"><option value="sq">Square 1080x1080</option><option value="st">Story 1080x1920</option><option value="ls">Landscape 1200x630</option></select></div>
-          </div>
-          <div style="margin-bottom:10px;"><div class="fl">Describe Your Scene</div><input type="text" class="inp" id="iDesc" placeholder="e.g. modern recording studio with vintage gear..." /></div>
-          <button class="btn bg" onclick="genBgP1()" style="width:100%;"><span id="iBtn">Generate Background</span></button>
-        </div>
-        <div id="upPanel" style="display:none;">
-          <div style="border:2px dashed var(--b2);border-radius:9px;padding:28px;text-align:center;cursor:pointer;" onclick="document.getElementById('upFile').click()"><div style="font-size:1.8rem;margin-bottom:6px;">📷</div><div style="font-size:.78rem;color:var(--t2);">Tap to upload your photo</div></div>
-          <input type="file" id="upFile" accept="image/*" onchange="loadUpP1(this)" style="display:none;" />
-          <div style="margin-top:10px;"><div class="fl">Format</div><select class="inp" id="iFmtUp"><option value="sq">Square 1080x1080</option><option value="st">Story 1080x1920</option><option value="ls">Landscape 1200x630</option></select></div>
-        </div>
-      </div>
-      <div id="p1Preview" style="display:none;">
-        <div class="card">
-          <div class="ct">Preview</div>
-          <canvas id="prevCanvas" style="width:100%;border-radius:8px;border:1px solid var(--b1);display:block;margin-bottom:10px;"></canvas>
-          <div style="display:flex;gap:8px;"><button class="btn bg" onclick="confirmImg()" style="flex:1;">Confirm — Go to Phase 2</button><button class="btn bgh" onclick="genBgP1()">Regenerate</button></div>
-        </div>
-      </div>
-    </div>
-    <div id="ip2" style="display:none;">
-      <div class="card">
-        <button class="btn bgh" onclick="showPhase(1)" style="font-size:.68rem;padding:6px 12px;margin-bottom:12px;">Back to Image</button>
-        <div style="position:relative;margin-bottom:14px;"><canvas id="textCanvas"></canvas><div style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);padding:2px 7px;border-radius:3px;font-size:.55rem;color:var(--gold);font-family:'Space Grotesk',sans-serif;letter-spacing:1px;">LIVE PREVIEW</div></div>
-        <div style="margin-bottom:10px;"><div class="fl">Main Text</div><input type="text" class="inp" id="p2Text" placeholder="Type your text..." oninput="drawCanvas()" /></div>
-        <div style="margin-bottom:4px;"><button class="btn bgh" onclick="aiEnhanceText()" style="width:100%;font-size:.7rem;"><span id="enhTxtBtn">Enhance with AI</span></button></div>
-        <div style="margin-bottom:12px;"><div class="fl" style="margin-top:10px;">Subtitle (optional)</div><input type="text" class="inp" id="p2Sub" placeholder="e.g. lambmusicworks.com" oninput="drawCanvas()" /></div>
-        <div style="margin-bottom:12px;"><div class="fl">Font</div><div class="font-grid" id="fontGrid"></div></div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Text Size — <span id="szLbl" style="color:var(--gold);">48px</span></div><input type="range" id="p2Sz" min="10" max="160" value="48" oninput="document.getElementById('szLbl').textContent=this.value+'px';drawCanvas()" style="width:100%;margin-top:6px;accent-color:var(--gold);" /></div>
-          <div><div class="fl">Subtitle Size — <span id="subSzLbl" style="color:var(--gold);">22px</span></div><input type="range" id="p2SubSz" min="8" max="60" value="22" oninput="document.getElementById('subSzLbl').textContent=this.value+'px';drawCanvas()" style="width:100%;margin-top:6px;accent-color:var(--gold);" /></div>
-        </div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Text Color</div><input type="color" id="p2Col" value="#ffffff" oninput="drawCanvas()" style="width:100%;height:40px;border-radius:7px;border:1px solid var(--b2);cursor:pointer;margin-top:4px;" /></div>
-          <div><div class="fl">Subtitle Color</div><input type="color" id="p2SubCol" value="#f0b400" oninput="drawCanvas()" style="width:100%;height:40px;border-radius:7px;border:1px solid var(--b2);cursor:pointer;margin-top:4px;" /></div>
-        </div>
-        <div class="g2" style="margin-bottom:10px;">
-          <div><div class="fl">Position</div><select class="inp" id="p2Pos" onchange="drawCanvas()"><option value="center">Center</option><option value="top">Top</option><option value="bottom">Bottom</option><option value="upper">Upper</option></select></div>
-          <div><div class="fl">Overlay</div><select class="inp" id="p2Bg" onchange="drawCanvas()"><option value="none">None</option><option value="dark">Dark</option><option value="band">Dark Band</option><option value="gold">Gold Bar</option><option value="black">Black</option><option value="grad">Gradient</option></select></div>
-          <div><div class="fl">Alignment</div><select class="inp" id="p2Align" onchange="drawCanvas()"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></div>
-          <div><div class="fl">Shadow</div><select class="inp" id="p2Shadow" onchange="drawCanvas()"><option value="soft">Soft</option><option value="hard">Hard</option><option value="glow">Gold Glow</option><option value="none">None</option></select></div>
-        </div>
-        <div style="margin-bottom:10px;"><div class="fl">Letter Spacing — <span id="spacingLbl" style="color:var(--gold);">2px</span></div><input type="range" id="p2Spacing" min="-2" max="24" value="2" oninput="document.getElementById('spacingLbl').textContent=this.value+'px';drawCanvas()" style="width:100%;accent-color:var(--gold);" /></div>
-        <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px;padding:9px;background:var(--s2);border-radius:7px;">
-          <input type="checkbox" id="p2Wm" onchange="drawCanvas()" style="width:16px;height:16px;cursor:pointer;accent-color:var(--gold);" />
-          <div><div style="font-size:.76rem;color:var(--text);">LMW Watermark</div><div style="font-size:.62rem;color:var(--t3);">lambmusicworks.com in corner</div></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><button class="btn bg" onclick="dlCanvas('png')">Download PNG</button><button class="btn bbl" onclick="dlCanvas('jpg')">Download JPG</button></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- REELS -->
-  <div class="pg" id="pg-reels">
-    <div class="psw"><button class="pb plmw" onclick="setP('lmw',this)">LMW</button><button class="pb" onclick="setP('zairey',this)">ZAIREY</button></div>
-    <div class="card">
-      <div class="ct">Reel and Short Script Generator</div>
-      <div class="g2" style="margin-bottom:10px;">
-        <div><div class="fl">Platform</div><select class="inp" id="rPlat"><option value="TikTok">TikTok</option><option value="Instagram Reels">Instagram Reels</option><option value="YouTube Shorts">YouTube Shorts</option><option value="all three">All Three</option></select></div>
-        <div><div class="fl">Duration</div><select class="inp" id="rDur"><option value="15">15 seconds</option><option value="30">30 seconds</option><option value="60">60 seconds</option></select></div>
-        <div><div class="fl">Hook Type</div><select class="inp" id="rStyle"><option value="Question Hook">Question Hook</option><option value="Lyric Cold-Open">Lyric Cold-Open</option><option value="Beat-Drop">Beat-Drop</option><option value="Story Hook">Story Hook</option></select></div>
-        <div><div class="fl">Track / Topic</div><input type="text" class="inp" id="rTopic" placeholder="e.g. the new cinematic soul track..." /></div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn bg" onclick="genReel()" style="flex:1;"><span id="rBtn">Generate Script</span></button>
-        <button class="btn bgh" onclick="genReelBatch()" style="flex:1;"><span id="rBatchBtn">Generate Batch (8-10)</span></button>
-      </div>
-    </div>
-    <div id="rResult"></div>
-    <div id="rBatchResult"></div>
-  </div>
-
-  <!-- PITCH -->
-  <div class="pg" id="pg-pitch">
-    <div class="card">
-      <div class="ct">Track Readiness Scorecard</div>
-      <div id="scorecard">
-        <div class="score-row"><div class="gck" onclick="scoreCheck(this)"></div><div style="font-size:.75rem;color:var(--t2);flex:1;">Sync usable — sits under dialogue, can be cut at natural points</div></div>
-        <div class="score-row"><div class="gck" onclick="scoreCheck(this)"></div><div style="font-size:.75rem;color:var(--t2);flex:1;">Clear edit points — editors can drop in at bar 8, cut cleanly</div></div>
-        <div class="score-row"><div class="gck" onclick="scoreCheck(this)"></div><div style="font-size:.75rem;color:var(--t2);flex:1;">Style match — fits the specific library you are pitching to</div></div>
-        <div class="score-row"><div class="gck" onclick="scoreCheck(this)"></div><div style="font-size:.75rem;color:var(--t2);flex:1;">Production competitive — clean mix, balanced EQ, proper headroom</div></div>
-        <div class="score-row"><div class="gck" onclick="scoreCheck(this)"></div><div style="font-size:.75rem;color:var(--t2);flex:1;">Batch ready — part of a focused 5-10 track micro-catalogue</div></div>
-      </div>
-      <div style="margin-top:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.62rem;color:var(--t3);">Readiness</span><span style="font-size:.64rem;color:var(--gold);font-family:'IBM Plex Mono',monospace;" id="scoreLbl">0 / 5</span></div><div class="pbar"><div class="pfill" id="scoreBar" style="width:0%"></div></div></div>
-    </div>
-    <div class="card">
-      <div class="ct">Sync Pitch Generator</div>
-      <div class="g2" style="margin-bottom:10px;">
-        <div><div class="fl">Pitch Type</div><select class="inp" id="pType"><option value="warm referred highest conversion">Warm / Referred</option><option value="cold direct open submission">Cold Direct</option><option value="linkedin soft low pressure">LinkedIn Soft</option></select></div>
-        <div><div class="fl">Library or Supervisor</div><input type="text" class="inp" id="pTarget" placeholder="e.g. Musicbed, Sarah Johnson — Netflix" /></div>
-        <div><div class="fl">Their Focus</div><input type="text" class="inp" id="pFocus" placeholder="e.g. drama TV, documentary, ads" /></div>
-        <div><div class="fl">Your Track</div><input type="text" class="inp" id="pTrack" placeholder="e.g. Blues of a Digital Age — cinematic soul" /></div>
-      </div>
-      <div style="margin-bottom:10px;"><div class="fl">Music Link</div><input type="text" class="inp" id="pLink" placeholder="e.g. SoundCloud, Google Drive..." /></div>
-      <div style="margin-bottom:10px;"><div class="fl">Mutual Contact or Hook</div><input type="text" class="inp" id="pMutual" placeholder="e.g. John Smith passed your details along..." /></div>
-      <button class="btn bg" onclick="genPitch()" style="width:100%;"><span id="pBtn">Generate Pitch</span></button>
-    </div>
-    <div id="pResult"></div>
-    <div class="card">
-      <div class="ct">Submission Tracker</div>
-      <div style="display:flex;gap:7px;margin-bottom:10px;flex-wrap:wrap;">
-        <input type="text" class="inp" id="stLib" placeholder="Library or supervisor" style="flex:2;min-width:120px;" />
-        <input type="text" class="inp" id="stTrack" placeholder="Track submitted" style="flex:2;min-width:100px;" />
-        <select class="inp" id="stStatus" style="flex:1;min-width:90px;"><option>Sent</option><option>Follow Up</option><option>Accepted</option><option>Declined</option><option>No Reply</option></select>
-        <button class="btn bg" onclick="logSub()">+ Log</button>
-      </div>
-      <div id="subList"><div style="padding:12px;text-align:center;color:var(--t3);font-size:.74rem;">No submissions logged yet</div></div>
-    </div>
-  </div>
-
+<div id="quickPitchModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9998;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeQuickPitch()">
+  <div style="background:var(--s1);border:1px solid var(--border-gold);border-radius:10px;padding:18px;max-width:480px;width:100%;max-height:80vh;overflow-y:auto;" id="quickPitchBody"></div>
+</div>
   <!-- CATALOG -->
-  <div class="pg" id="pg-catalog">
+  <div class="pg on" id="pg-catalog">
     <div class="card">
       <div class="ct">Add Track to Registry</div>
       <div class="g2" style="margin-bottom:10px;">
@@ -572,288 +330,6 @@ textarea.inp{resize:vertical;min-height:80px;line-height:1.6;}select.inp{cursor:
     </div>
   </div>
 
-  <!-- PERFORMANCE -->
-  <div class="pg" id="pg-perf">
-    <div class="mtiles">
-      <div class="mt"><div class="mtl">Tracking Now</div><div class="mtv" id="perfTracking">0</div><div class="mtd">active checkpoints</div></div>
-      <div class="mt"><div class="mtl">Winners</div><div class="mtv gold" id="perfWinners">0</div><div class="mtd">all time</div></div>
-      <div class="mt"><div class="mtl">Learning Model</div><div class="mtv" id="perfExpired">0</div><div class="mtd">expired records logged</div></div>
-    </div>
-    <div class="card" style="font-size:.68rem;color:var(--t3);line-height:1.5;margin-bottom:14px;">Metrics are logged manually -- open the actual post, read its stats, and enter them here when a checkpoint comes due. The app handles the scheduling, classification, and re-amplify triggering automatically.</div>
-    <div class="legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--b1);">
-      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip winner">Winner</span>1.5x+ completion or share vs. median</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip watch">Watch</span>1.0x-1.5x median</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip kill">Kill</span>below 0.7x at T+6, flat or declining</div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:.68rem;color:var(--t3);"><span class="state-chip expired">Expired</span>archived at T+72</div>
-    </div>
-    <div id="perfList"></div>
-  </div>
-
-  <!-- ALERTS -->
-  <div class="pg" id="pg-alerts">
-    <div class="card"><div class="ct">Optimal Posting Windows</div><table class="stable"><thead><tr><th>Platform</th><th>Window 1</th><th>Window 2</th><th>Window 3</th></tr></thead><tbody id="schedBody"></tbody></table></div>
-    <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--b1);"><div><div style="font-size:.78rem;color:var(--text);">Enable Audible Alerts</div><div style="font-size:.65rem;color:var(--t2);margin-top:2px;" id="alertStat">Not enabled</div></div><button class="btn bg" onclick="enableAlerts()" id="alertBtn">Enable</button></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;"><div style="font-size:.78rem;color:var(--text);">Test Alert Sound</div><button class="btn bgh" onclick="testAlert()">Test Now</button></div>
-    </div>
-    <div class="card">
-      <div class="ct">Weekly Content Calendar</div>
-      <table class="stable"><thead><tr><th>Day</th><th>Type</th><th>Brand</th><th>Source</th></tr></thead><tbody>
-        <tr><td><strong>Monday</strong></td><td>Sync licensing tip</td><td style="color:var(--gold);">LMW</td><td>Industry news repurposed</td></tr>
-        <tr><td><strong>Tuesday</strong></td><td>Mystery mood post</td><td style="color:var(--blue);">Zairey</td><td>Trending R&B aesthetic</td></tr>
-        <tr><td><strong>Wednesday</strong></td><td>Music spotlight</td><td style="color:var(--gold);">LMW</td><td>Your catalog — original</td></tr>
-        <tr><td><strong>Thursday</strong></td><td>Music business reality</td><td style="color:var(--gold);">LMW</td><td>Entrepreneur content repurposed</td></tr>
-        <tr><td><strong>Friday</strong></td><td>Behind the scenes</td><td style="color:var(--gold);">LMW</td><td>Your studio process</td></tr>
-        <tr><td><strong>Saturday</strong></td><td>Zairey tease</td><td style="color:var(--blue);">Zairey</td><td>Trending sound repurposed</td></tr>
-        <tr><td><strong>Sunday</strong></td><td>Faith and independence</td><td style="color:var(--gold);">LMW</td><td>Motivational repurposed</td></tr>
-      </tbody></table>
-    </div>
-  </div>
-
-  <!-- GOALS -->
-  <div class="pg" id="pg-goals">
-    <div class="card">
-      <div class="ct">30-Day Sync Submission Cycle</div>
-      <div class="week-card"><div class="week-head"><div><div class="week-num">WEEK 1</div><div class="week-title">BUILD</div></div><div class="gck" id="w1" onclick="checkWeek(this,'w1')"></div></div><div class="week-desc">Choose one style. Build 5-10 tracks in one defined sound. No outreach this week — craft only.</div></div>
-      <div class="week-card"><div class="week-head"><div><div class="week-num">WEEK 2</div><div class="week-title">FINISH</div></div><div class="gck" id="w2" onclick="checkWeek(this,'w2')"></div></div><div class="week-desc">Complete all versions — Full Mix, Instrumental, 60s, 30s minimum.</div></div>
-      <div class="week-card"><div class="week-head"><div><div class="week-num">WEEK 3</div><div class="week-title">PREPARE</div></div><div class="gck" id="w3" onclick="checkWeek(this,'w3')"></div></div><div class="week-desc">Select 10-15 libraries. Research each briefly. Draft pitches using the Pitch Generator.</div></div>
-      <div class="week-card"><div class="week-head"><div><div class="week-num">WEEK 4</div><div class="week-title">SUBMIT</div></div><div class="gck" id="w4" onclick="checkWeek(this,'w4')"></div></div><div class="week-desc">Send submissions. Log every response in the Submission Tracker. Start the next micro-catalogue.</div></div>
-      <div style="margin-top:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.62rem;color:var(--t3);">Cycle Progress</span><span style="font-size:.64rem;color:var(--gold);font-family:'IBM Plex Mono',monospace;" id="cycleLbl">0 / 4</span></div><div class="pbar"><div class="pfill" id="cycleBar" style="width:0%"></div></div></div>
-    </div>
-    <div class="g2">
-      <div>
-        <div class="card">
-          <div class="ct">Daily Mission</div>
-          <div id="dailyGoals">
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Post 1 piece of content</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Respond to 5 comments or DMs</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Review daily briefing</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Send 1 sync pitch</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Work on Zairey content</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Work on current batch</div></div>
-            <div class="gr"><div class="gck" onclick="checkGoal(this)"></div><div class="gtx">Scan trends for tomorrow</div></div>
-          </div>
-          <div style="margin-top:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.62rem;color:var(--t3);">Progress</span><span style="font-size:.64rem;color:var(--gold);font-family:'IBM Plex Mono',monospace;" id="dailyPct">0%</span></div><div class="pbar"><div class="pfill" id="dailyBar" style="width:0%"></div></div></div>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-          <div class="ct">Weekly Targets</div>
-          <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.75rem;color:var(--t2);">Posts Published</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);" id="wtp">0 / 7</span></div><div class="pbar"><div class="pfill" id="wbp" style="width:0%"></div></div></div>
-          <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.75rem;color:var(--t2);">Sync Pitches Sent</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);" id="wtpi">0 / 5</span></div><div class="pbar"><div class="pfill" id="wbpi" style="width:0%"></div></div></div>
-          <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.75rem;color:var(--t2);">Library Submissions</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);" id="wtlib">0 / 10</span></div><div class="pbar"><div class="pfill" id="wblib" style="width:0%"></div></div></div>
-          <div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:.75rem;color:var(--t2);">Tracks Finished</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--gold);" id="wtt">0 / 2</span></div><div class="pbar"><div class="pfill" id="wbt" style="width:0%"></div></div></div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <button class="btn bgh" style="font-size:.62rem;padding:6px 10px;" onclick="bump('wtp','wbp',7)">+Post</button>
-            <button class="btn bgh" style="font-size:.62rem;padding:6px 10px;" onclick="bump('wtpi','wbpi',5)">+Pitch</button>
-            <button class="btn bgh" style="font-size:.62rem;padding:6px 10px;" onclick="bump('wtlib','wblib',10)">+Submit</button>
-            <button class="btn bgh" style="font-size:.62rem;padding:6px 10px;" onclick="bump('wtt','wbt',2)">+Track</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SOCIAL INTEL -->
-  <div class="pg" id="pg-social">
-    <div class="card" style="border-color:rgba(209,170,70,.3);">
-      <div class="ct">Mission Control</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-        <div style="padding:12px 14px;background:var(--ink);border:1px solid var(--border-gold);border-radius:8px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;font-family:'Space Grotesk',sans-serif;font-weight:700;">MISSION 1 — PERMANENT</div><div style="font-size:.82rem;font-weight:700;color:var(--text);">Grow LMW Audience Organically</div><div style="font-size:.68rem;color:var(--t2);margin-top:3px;">Instagram and TikTok — 24/7</div></div>
-        <div style="padding:12px 14px;background:var(--ink);border:1px solid var(--border-gold);border-radius:8px;"><div style="font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;font-family:'Space Grotesk',sans-serif;font-weight:700;">MISSION 2 — CURRENT TARGET</div><div style="font-size:.82rem;font-weight:700;color:var(--text);" id="siCurrentTarget">Yo-Yo — Yolanda Whitaker</div><div style="font-size:.68rem;color:var(--t2);margin-top:3px;" id="siTargetSub">766K Instagram · @yoyofearless</div></div>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:200px;"><div class="fl">Change Current Target</div><input type="text" class="inp" id="siTargetInput" placeholder="e.g. Music Supervisor — Netflix Drama..." /></div>
-        <div style="flex:1;min-width:200px;"><div class="fl">Why This Target</div><input type="text" class="inp" id="siTargetWhy" placeholder="e.g. 3 songs written for her..." /></div>
-        <button class="btn bg" onclick="setTarget()" style="align-self:flex-end;">Set Target</button>
-      </div>
-    </div>
-    <div style="display:flex;gap:0;border-radius:9px;overflow:hidden;border:1px solid var(--b1);margin-bottom:14px;">
-      <div class="ptab active" id="si-tab-brief" onclick="siTab('brief',this)" style="flex:1;padding:10px;text-align:center;cursor:pointer;background:var(--gdim);"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;color:var(--gold);">DAILY BRIEF</div></div>
-      <div class="ptab inactive" id="si-tab-opps" onclick="siTab('opps',this)" style="flex:1;padding:10px;text-align:center;cursor:pointer;border-left:1px solid var(--b1);"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;color:var(--text);">OPPORTUNITIES</div></div>
-      <div class="ptab inactive" id="si-tab-content" onclick="siTab('content',this)" style="flex:1;padding:10px;text-align:center;cursor:pointer;border-left:1px solid var(--b1);"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;color:var(--text);">CONTENT PLAN</div></div>
-      <div class="ptab inactive" id="si-tab-pipeline" onclick="siTab('pipeline',this)" style="flex:1;padding:10px;text-align:center;cursor:pointer;border-left:1px solid var(--b1);"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;color:var(--text);">PIPELINE</div></div>
-      <div class="ptab inactive" id="si-tab-playbook" onclick="siTab('playbook',this)" style="flex:1;padding:10px;text-align:center;cursor:pointer;border-left:1px solid var(--b1);"><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;color:var(--text);">PLAYBOOK</div></div>
-    </div>
-    <div id="si-panel-brief">
-      <div class="card"><div class="ct">Daily Intelligence Brief</div><div style="display:flex;gap:8px;"><input type="text" class="inp" id="siContext" placeholder="Optional context..." style="flex:1;" /><button class="btn bg" onclick="genDailyBrief()"><span id="briefSiBtn">Generate Brief</span></button></div></div>
-      <div id="siBriefOut"></div>
-    </div>
-    <div id="si-panel-opps" style="display:none;">
-      <div class="card"><div class="ct">Opportunity Engine</div><textarea class="inp" id="siOppPaste" placeholder="Paste a post, caption, or moment..." style="min-height:90px;margin-bottom:8px;"></textarea><input type="text" class="inp" id="siOppWho" placeholder="Who posted this..." style="margin-bottom:8px;" /><button class="btn bg" onclick="analyzeOpp()" style="width:100%;"><span id="oppBtn">Analyze This Opportunity</span></button></div>
-      <div id="siOppOut"></div>
-      <div class="card" style="margin-top:14px;"><div class="ct">Saved Opportunities</div><div id="siSavedOpps"><div style="padding:14px;text-align:center;color:var(--t3);font-size:.74rem;">No opportunities saved yet.</div></div></div>
-    </div>
-    <div id="si-panel-content" style="display:none;">
-      <div class="card"><div class="ct">30-Day Content Plan</div><div class="g2" style="margin-bottom:10px;"><div><div class="fl">Platform</div><select class="inp" id="siPlatform"><option value="Instagram and TikTok">Instagram and TikTok</option><option value="Instagram">Instagram only</option><option value="TikTok">TikTok only</option><option value="all platforms">All Platforms</option></select></div><div><div class="fl">Frequency</div><select class="inp" id="siFreq"><option value="once daily">Once daily</option><option value="twice daily">Twice daily</option><option value="5 times per week">5x per week</option><option value="3 times per week">3x per week</option></select></div></div><button class="btn bg" onclick="genContentPlan()" style="width:100%;"><span id="contentPlanBtn">Generate 30-Day Plan</span></button></div>
-      <div id="siContentPlanOut"></div>
-    </div>
-    <div id="si-panel-pipeline" style="display:none;">
-      <div class="card"><div class="ct">Relationship Pipeline</div><div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;"><input type="text" class="inp" id="plName" placeholder="Name or handle" style="flex:2;min-width:120px;" /><input type="text" class="inp" id="plHandle" placeholder="@instagram or platform" style="flex:2;min-width:120px;" /><select class="inp" id="plStage" style="flex:1;min-width:100px;"><option value="Unaware">Unaware</option><option value="Aware">Aware</option><option value="Engaged">Engaged</option><option value="Warm">Warm</option><option value="Connected">Connected</option><option value="Advocate">Advocate</option></select><input type="text" class="inp" id="plNote" placeholder="How they connect to target..." style="flex:3;min-width:140px;" /><button class="btn bg" onclick="addPipelinePerson()">Add</button></div></div>
-      <div id="siPipelineList"><div style="padding:16px;text-align:center;color:var(--t3);font-size:.74rem;">No people in pipeline yet.</div></div>
-      <div class="card" style="margin-top:14px;"><div class="ct">Get Next Move</div><div style="display:flex;gap:8px;"><input type="text" class="inp" id="nextMoveInput" placeholder="Name, handle, current stage..." style="flex:1;" /><button class="btn bg" onclick="genNextMove()"><span id="nextMoveBtn">Get Next Move</span></button></div><div id="nextMoveOut" style="margin-top:10px;"></div></div>
-    </div>
-    <div id="si-panel-playbook" style="display:none;">
-      <div class="card"><div class="ct">Growth Playbook</div><textarea class="inp" id="siPlaybookInput" placeholder="Describe your situation in detail..." style="min-height:100px;margin-bottom:8px;"></textarea><button class="btn bg" onclick="genPlaybook()" style="width:100%;"><span id="playbookBtn">Build My Playbook</span></button></div>
-      <div id="siPlaybookOut"></div>
-      <div class="card" style="margin-top:14px;"><div class="ct">Draft a Message</div><div class="g2" style="margin-bottom:10px;"><div><div class="fl">Message Type</div><select class="inp" id="siMsgType"><option value="Instagram comment on their post">IG Comment on Their Post</option><option value="Instagram DM first message">IG DM First Message</option><option value="reply to their story">Story Reply</option><option value="LinkedIn connection note">LinkedIn Note</option></select></div><div><div class="fl">Their Post or Context</div><input type="text" class="inp" id="siMsgContext" placeholder="What did they post..." /></div></div><button class="btn bg" onclick="draftMessage()" style="width:100%;"><span id="draftBtn">Draft My Message</span></button><div id="siDraftOut" style="margin-top:10px;"></div></div>
-    </div>
-  </div>
-
-  <!-- COACH -->
-  <div class="pg" id="pg-coach">
-    <div class="card" style="padding:0;overflow:hidden;">
-      <div style="display:flex;align-items:center;gap:9px;padding:12px 14px;border-bottom:1px solid var(--b1);background:var(--s2);">
-        <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--g2));display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;">🤖</div>
-        <div><div style="font-size:.78rem;font-weight:700;color:var(--text);">LMW Super Agent</div><div style="font-size:.56rem;color:var(--t3);">Business Advisor · Coach · Executes your vision</div></div>
-      </div>
-      <div class="coach-msgs" id="coachMsgs">
-        <div class="cmsg cmsg-a">What is good Warren. Ready when you are. Strategy, content ideas, sync advice, accountability — talk to me.</div>
-      </div>
-      <div style="display:flex;gap:7px;padding:10px 12px;border-top:1px solid var(--b1);">
-        <input type="text" class="inp" id="coachIn" placeholder="Ask anything..." onkeydown="if(event.key==='Enter')sendChat()" />
-        <button class="btn bg" onclick="sendChat()">Send</button>
-      </div>
-    </div>
-  </div>
-  <!-- ═══ ZAIRE AI ASSISTANT — TOOL 13 ═══ -->
-  <!-- INSERT THIS ENTIRE BLOCK right before this line:
-       <div style="padding:0 20px;"><div class="footer">
-  -->
-
-  <div class="pg" id="pg-zaire">
-    <!-- Header -->
-    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;padding:14px 16px;background:var(--s1);border:1px solid var(--b1);border-radius:11px;">
-      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--g2));display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.85rem;letter-spacing:2px;color:var(--s1);box-shadow:0 0 16px rgba(209,170,70,.3);flex-shrink:0;">Z</div>
-      <div>
-        <div style="font-family:var(--font-title);font-weight:600;font-size:2rem;letter-spacing:.5px;color:var(--gold);">ZAIRE</div>
-        <div style="font-size:.5rem;color:var(--t3);letter-spacing:2px;text-transform:uppercase;">Personal AI &middot; Lamb Music Works &middot; Tool 13</div>
-      </div>
-      <div style="margin-left:auto;display:flex;align-items:center;gap:5px;">
-        <div style="width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite;box-shadow:0 0 6px var(--green);"></div>
-        <span style="font-size:.56rem;color:var(--green);letter-spacing:1px;">ACTIVE</span>
-      </div>
-    </div>
-
-    <!-- Tabs -->
-    <div style="display:flex;gap:0;border-radius:9px;overflow:hidden;border:1px solid var(--b1);margin-bottom:14px;">
-      <button class="ztab active" id="zt-chat" onclick="zTab('chat',this)" style="flex:1;padding:10px 6px;text-align:center;">CHAT</button>
-      <button class="ztab" id="zt-pitch" onclick="zTab('pitch',this)" style="flex:1;padding:10px 6px;text-align:center;border-left:1px solid var(--b1);">PITCH</button>
-      <button class="ztab" id="zt-contacts" onclick="zTab('contacts',this)" style="flex:1;padding:10px 6px;text-align:center;border-left:1px solid var(--b1);">CONTACTS</button>
-      <button class="ztab" id="zt-opps" onclick="zTab('opps',this)" style="flex:1;padding:10px 6px;text-align:center;border-left:1px solid var(--b1);">OPPS</button>
-      <button class="ztab" id="zt-tasks" onclick="zTab('tasks',this)" style="flex:1;padding:10px 6px;text-align:center;border-left:1px solid var(--b1);">TASKS</button>
-    </div>
-
-    <!-- CHAT -->
-    <div id="zp-chat">
-      <div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:10px;">
-        <button class="btn bgh" style="font-size:.6rem;padding:5px 11px;white-space:nowrap;" onclick="zQuick('Draft a pitch from Lamb Music Works to an artist manager introducing our sync licensing services and catalog.')">Draft Manager Pitch</button>
-        <button class="btn bgh" style="font-size:.6rem;padding:5px 11px;white-space:nowrap;" onclick="zQuick('Based on my goals with LMW, what should I focus on today?')">Today&#39;s Priorities</button>
-        <button class="btn bgh" style="font-size:.6rem;padding:5px 11px;white-space:nowrap;" onclick="zQuick('How should I position my catalog for sync opportunities in film and TV right now?')">Sync Brief</button>
-        <button class="btn bgh" style="font-size:.6rem;padding:5px 11px;white-space:nowrap;" onclick="zQuick('Based on my outreach goals, who should I contact next and what should I say?')">Who Next</button>
-      </div>
-      <div class="card" style="padding:0;overflow:hidden;">
-        <div id="zMsgs" style="overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;min-height:220px;max-height:340px;">
-          <div class="zmsg zmsg-a">Zaire online. Warren, I&#39;m locked in and ready. Pitch, contacts, strategy &mdash; say the word.</div>
-        </div>
-        <div style="display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--b1);">
-          <input type="text" class="inp" id="zIn" placeholder="Tell Zaire what you need..." onkeydown="if(event.key==='Enter')zSend()" />
-          <button class="btn bg" onclick="zSend()" style="padding:9px 14px;">&#8594;</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- PITCH -->
-    <div id="zp-pitch" style="display:none;">
-      <div class="card">
-        <div class="ct">Pitch Drafter &mdash; LMW Outreach</div>
-        <div style="margin-bottom:10px;"><div class="fl">Who are you pitching to?</div><input type="text" class="inp" id="zPitchTarget" placeholder="e.g. Anthony Wilson, Tycoon Music" /></div>
-        <button class="btn bg" onclick="zDraftPitch()" style="width:100%;"><span id="zPitchBtn">Draft Pitch &#8594;</span></button>
-      </div>
-      <div id="zPitchOut"></div>
-    </div>
-
-    <!-- CONTACTS -->
-    <div id="zp-contacts" style="display:none;">
-      <div style="font-size:.52rem;color:var(--t3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;">Your Targets &mdash; Tap for full profile</div>
-      <div id="zContactList"></div>
-      <div class="card" style="margin-top:14px;">
-        <div class="ct">Research New Contact</div>
-        <div style="display:flex;gap:8px;">
-          <input type="text" class="inp" id="zResearchQ" placeholder="e.g. Scooter Braun, LVRN, Roc Nation..." style="flex:1;" onkeydown="if(event.key==='Enter')zResearch()" />
-          <button class="btn bg" onclick="zResearch()"><span id="zResBtn">Go &#8594;</span></button>
-        </div>
-        <div id="zResOut" style="margin-top:10px;"></div>
-      </div>
-    </div>
-
-    <!-- OPPORTUNITIES -->
-    <div id="zp-opps" style="display:none;">
-      <div class="card">
-        <div class="ct">Opportunity Scanner</div>
-        <div style="font-size:.74rem;color:var(--t2);margin-bottom:12px;line-height:1.6;">Zaire scans the web for real, vetted music industry opportunities. Sync calls, beat requests, brand music gigs, placements. Legitimate sources only.</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;" id="zOppFilters">
-          <button class="btn bg" style="font-size:.6rem;padding:5px 12px;" onclick="setZFilt(this,'sync')">Sync Licensing</button>
-          <button class="btn bgh" style="font-size:.6rem;padding:5px 12px;" onclick="setZFilt(this,'beats')">Beats Wanted</button>
-          <button class="btn bgh" style="font-size:.6rem;padding:5px 12px;" onclick="setZFilt(this,'brand')">Brand / Jingle</button>
-          <button class="btn bgh" style="font-size:.6rem;padding:5px 12px;" onclick="setZFilt(this,'placement')">Placements</button>
-        </div>
-        <button class="btn bg" onclick="zScanOpps()" style="width:100%;"><span id="zOppBtn">&#9675; Scan for Opportunities &#8594;</span></button>
-      </div>
-      <div id="zOppResults"></div>
-      <div id="zSavedOppsWrap" style="display:none;margin-top:12px;">
-        <div class="sec">Saved Opportunities</div>
-        <div id="zSavedOppsList"></div>
-      </div>
-    </div>
-
-    <!-- TASKS -->
-    <div id="zp-tasks" style="display:none;">
-      <div class="card">
-        <div class="ct">Reminders &amp; Tasks</div>
-        <div style="display:flex;gap:8px;margin-bottom:12px;">
-          <input type="text" class="inp" id="zTaskIn" placeholder="Add a task or reminder..." style="flex:1;" onkeydown="if(event.key==='Enter')zAddTask()" />
-          <button class="btn bg" onclick="zAddTask()" style="padding:9px 16px;font-size:1.1rem;">+</button>
-        </div>
-        <div id="zTaskList"></div>
-      </div>
-    </div>
-
-    <!-- Contact Profile Modal -->
-    <div id="zContactModal" onclick="if(event.target===this)zCloseContact()" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);align-items:flex-end;">
-      <div style="width:100%;max-height:90vh;background:var(--s1);border-radius:18px 18px 0 0;border:1px solid var(--b2);border-bottom:none;display:flex;flex-direction:column;overflow:hidden;">
-        <div id="zModalHeader" style="flex-shrink:0;"></div>
-        <div id="zModalBody" style="flex:1;overflow-y:auto;padding:16px;"></div>
-      </div>
-    </div>
-  </div>
-  <!-- SETTINGS -->
-  <div class="pg" id="pg-settings">
-    <div class="card">
-      <div class="ct">Anthropic API Key</div>
-      <div style="margin-bottom:10px;"><div class="fl">API Key</div>
-        <div style="display:flex;gap:7px;"><input class="inp" id="keyInp" placeholder="sk-ant-..." style="flex:1;" autocomplete="off" data-form-type="other" /><button class="btn bg" onclick="saveKey()">Save</button><button class="btn bgh" onclick="testKey()">Test</button></div>
-      </div>
-      <div style="font-size:.7rem;color:var(--t3);line-height:1.6;">Stored locally in your browser. Never shared. Powers all AI features including Zaire. Get your key at console.anthropic.com</div>
-    </div>
-    <div class="card">
-      <div class="ct">fal.ai Image API Key</div>
-      <div style="margin-bottom:10px;"><div class="fl">API Key</div>
-        <div style="display:flex;gap:7px;"><input class="inp" id="imgKeyInp" placeholder="key_..." style="flex:1;" autocomplete="off" data-form-type="other" /><button class="btn bg" onclick="saveImgKey()">Save</button></div>
-      </div>
-      <div style="font-size:.7rem;color:var(--t3);line-height:1.6;">Stored locally in your browser. Never shared. Powers image generation in CREATE and IMAGE (Flux via fal.ai). Get your key at fal.ai/dashboard/keys</div>
-    </div>
-    <div class="card">
-      <div class="ct">Agent Info</div>
-      <div style="font-size:.75rem;color:var(--t2);line-height:1.9;">
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--b1);padding:6px 0;"><span>Version</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text);">Super Agent v4.1 — With Zaire AI Tool 13</span></div>
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--b1);padding:6px 0;"><span>Artist</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text);">Warren Lamb</span></div>
-        <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--b1);padding:6px 0;"><span>Brands</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text);">LMW + Zairey</span></div>
-        <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>Tools</span><span style="font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--text);">13 — including Zaire AI Assistant</span></div>
-      </div>
-    </div>
-  </div>
-
   <div style="padding:0 20px;"><div class="footer"><div class="fl2">LMW Super Agent v4.1</div><div class="fr" id="footR">Warren Lamb · lambmusicworks.com</div></div></div>
 </div>
 <script>
@@ -953,16 +429,19 @@ function getHookWeighting(){
   return '\n\nBased on Warren\'s past performance data, these hook types have won most often for him (weight toward them, but still vary): '+ranked.join(', ')+'.';
 }
 
-window.onload=function(){loadKey();loadImgKey();tick();setInterval(tick,30000);setInterval(checkAlerts,60000);setInterval(checkPerfDue,60000);renderSched();initLibDB();buildFontGrid();initVault();initSocialIntel();initQueueAndPerf();};
+window.onload=function(){loadKey();tick();setInterval(tick,30000);initLibDB();initVault();};
 
 function go(id,el){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var pg=document.getElementById('pg-'+id);if(pg)pg.classList.add('on');if(el)el.classList.add('on');window.scrollTo(0,0);if(id==='queue')renderQueue();if(id==='perf')renderPerformance();}
 function setP(p,el){P=p;el.closest('.psw').querySelectorAll('.pb').forEach(function(b){b.className='pb';});el.className='pb p'+p;toast(p==='lmw'?'LMW mode':'Zairey mode','inf');}
 function tick(){var n=new Date();var t=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});document.getElementById('clk').textContent=t;document.getElementById('footR').textContent='Warren Lamb  -  lambmusicworks.com  -  '+t;updateNextAlert(n);}
 function saveKey(){K=document.getElementById('keyInp').value.trim();localStorage.setItem('lmw4k',K);updPill();toast('Key saved','ok');}
-function loadKey(){var k=localStorage.getItem('lmw4k');if(k){K=k;document.getElementById('keyInp').value=k;}updPill();}
+function loadKey(){var k=localStorage.getItem('lmw4k');if(k){K=k;}updPill();}
 function saveImgKey(){IK=document.getElementById('imgKeyInp').value.trim();localStorage.setItem('lmw4k_img',IK);toast('Image key saved','ok');}
 function loadImgKey(){var k=localStorage.getItem('lmw4k_img');if(k){IK=k;document.getElementById('imgKeyInp').value=k;}}
 function updPill(){var p=document.getElementById('apill'),t=document.getElementById('atxt');if(K){p.className='pill pill-green';t.textContent='Agent Active';}else{p.className='pill pill-red';t.textContent='No Key';}}
+function setKeyPrompt(){var cur=K||'';var k=prompt('Enter your Claude API key (from console.anthropic.com):',cur);if(k===null)return;k=k.trim();K=k;localStorage.setItem('lmw4k',K);updPill();toast(k?'Key saved':'Key cleared','ok');}
+function showQuickPitch(html){document.getElementById('quickPitchBody').innerHTML=html;document.getElementById('quickPitchModal').style.display='flex';}
+function closeQuickPitch(){document.getElementById('quickPitchModal').style.display='none';}
 async function testKey(){if(!K){toast('Add API key first','err');return;}toast('Testing...','inf');try{var r=await ai('Say: LMW Super Agent online.');toast('Connected','ok');}catch(e){toast('Failed: '+e.message,'err');}}
 
 async function ai(prompt,sys2){
@@ -1464,10 +943,18 @@ function logSubFromPitch(){var t=document.getElementById('pTarget').value;var tr
 function renderSubs(){var el=document.getElementById('subList');if(!subs.length){el.innerHTML='<div style="padding:12px;text-align:center;color:var(--t3);font-size:.74rem;">No submissions logged</div>';return;}var colors={Sent:'var(--blue)',Accepted:'var(--green)',Declined:'var(--red)','Follow Up':'var(--amber)','No Reply':'var(--t3)'};el.innerHTML='<table class="stable"><thead><tr><th>Library</th><th>Track</th><th>Status</th><th>Date</th></tr></thead><tbody>'+subs.map(function(s){var c=colors[s.status]||'var(--t2)';return '<tr><td style="color:var(--text);font-weight:600;">'+s.lib+'</td><td>'+s.track+'</td><td style="color:'+c+';">'+s.status+'</td><td style="font-family:\'DM Mono\',monospace;font-size:.62rem;">'+s.date+'</td></tr>';}).join('')+'</tbody></table>';}
 
 function addTrack(){var t=document.getElementById('trTitle').value.trim();if(!t){toast('Enter a track title','err');return;}catalog.unshift({id:Date.now(),title:t,genre:document.getElementById('trGenre').value,bpm:document.getElementById('trBpm').value,dur:document.getElementById('trDur').value,bmi:document.getElementById('trBmi').value,copy:document.getElementById('trCopy').value,sync:document.getElementById('trSync').value,vers:document.getElementById('trVers').value,notes:document.getElementById('trNotes').value,added:new Date().toLocaleDateString()});renderCat();updateCatStats();['trTitle','trGenre','trBpm','trDur','trNotes'].forEach(function(id){document.getElementById(id).value='';});toast('Track added','ok');}
-function updateCatStats(){document.getElementById('cs-total').textContent=catalog.length;document.getElementById('cs-bmi').textContent=catalog.filter(function(t){return t.bmi==='Registered';}).length;document.getElementById('cs-copy').textContent=catalog.filter(function(t){return t.copy==='Registered';}).length;document.getElementById('cs-sync').textContent=catalog.filter(function(t){return t.sync==='Yes';}).length;document.getElementById('cs-unreg').textContent=catalog.filter(function(t){return t.bmi==='Not Registered'||t.copy==='Not Registered';}).length;document.getElementById('mt-cat').textContent=catalog.length;}
+function updateCatStats(){document.getElementById('cs-total').textContent=catalog.length;document.getElementById('cs-bmi').textContent=catalog.filter(function(t){return t.bmi==='Registered';}).length;document.getElementById('cs-copy').textContent=catalog.filter(function(t){return t.copy==='Registered';}).length;document.getElementById('cs-sync').textContent=catalog.filter(function(t){return t.sync==='Yes';}).length;document.getElementById('cs-unreg').textContent=catalog.filter(function(t){return t.bmi==='Not Registered'||t.copy==='Not Registered';}).length;}
 function renderCat(){var el=document.getElementById('catList');var filter=document.getElementById('catFilter').value;var search=(document.getElementById('catSearch').value||'').toLowerCase();var filtered=catalog.filter(function(t){var ms=!search||t.title.toLowerCase().includes(search)||(t.genre||'').toLowerCase().includes(search);var mf=filter==='all'||(filter==='bmi-no'&&t.bmi==='Not Registered')||(filter==='copy-no'&&t.copy==='Not Registered')||(filter==='sync-yes'&&t.sync==='Yes')||(filter==='sync-no'&&t.sync==='No');return ms&&mf;});if(!filtered.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--t3);font-size:.74rem;">No tracks match</div>';return;}el.innerHTML=filtered.map(function(t){var bc=t.bmi==='Registered'?'badge-green':t.bmi==='Pending'?'badge-amber':'badge-red';var cc=t.copy==='Registered'?'badge-green':t.copy==='Pending'?'badge-amber':'badge-red';var sc=t.sync==='Yes'?'badge-green':t.sync==='Partial'?'badge-amber':'badge-red';return '<div class="track-card"><div style="flex:1;min-width:140px;"><div class="track-name">'+t.title+'</div><div class="track-meta">'+(t.genre||'')+(t.bpm?'  -  '+t.bpm+' BPM':'')+(t.dur?'  -  '+t.dur:'')+'</div>'+(t.notes?'<div style="font-size:.65rem;color:var(--t3);margin-top:2px;">'+t.notes+'</div>':'')+'<div style="font-size:.62rem;color:var(--t3);margin-top:3px;">'+t.vers+'</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;"><div><span class="badge '+bc+'">BMI: '+t.bmi+'</span></div><div><span class="badge '+cc+'">(c): '+t.copy+'</span></div><div><span class="badge '+sc+'">SYNC: '+t.sync+'</span></div><div style="display:flex;gap:4px;margin-top:4px;"><button onclick="pitchTrack(\''+t.title.replace(/'/g,'&#39;')+'\')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--gdim);border:1px solid rgba(209,170,70,.25);color:var(--gold);cursor:pointer;">Pitch</button><button onclick="rmTrack('+t.id+')" style="padding:3px 7px;border-radius:4px;font-size:.58rem;background:var(--rdim);border:1px solid rgba(184,67,63,.2);color:var(--red);cursor:pointer;">Remove</button></div></div></div>';}).join('');}
 function rmTrack(id){catalog=catalog.filter(function(t){return t.id!==id;});renderCat();updateCatStats();toast('Removed','ok');}
-function pitchTrack(title){document.getElementById('pTrack').value=title;go('pitch',document.querySelectorAll('.ni')[5]);toast('Track loaded in Pitch Generator','ok');}
+async function pitchTrack(title){
+  if(!K){toast('Add API key first','err');setKeyPrompt();return;}
+  showQuickPitch('<div class="out">Writing pitch for "'+title+'"...</div>');
+  var prompt='Write a sync licensing pitch email from Warren Lamb / Lamb Music Works to a Music Library.\n\nPitch type: warm referred highest conversion\nTheir focus: film and television\nTrack: '+title+'\nMusic link: [your music link]\nMutual contact: none\n\nRules: 3-5 sentences MAX. Lead with music link. Zero adjectives about how great the music is. One clear CTA. Sign off with BMI registered, 100+ tracks, cinematic soul, one-contract clearance, No Cuss No Fuss.\n\nInclude subject line.';
+  try{
+    var res=await ai(prompt,LSYS);
+    showQuickPitch('<div class="pitch-card" style="margin:0;"><div class="pitch-head">'+title+'</div><div class="pitch-body" id="qpBodyText">'+res+'</div><div style="display:flex;gap:7px;margin-top:10px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'qpBodyText\').textContent);toast(\'Pitch copied\',\'ok\')" style="flex:1;">Copy Pitch</button><button class="btn bgh" onclick="closeQuickPitch()">Close</button></div></div>');
+  }catch(e){showQuickPitch('<div class="out">Error: '+e.message+'</div>');}
+}
 function exportCatalog(){if(!catalog.length){toast('No tracks to export','err');return;}if(typeof XLSX==='undefined'){toast('Excel library loading -- try again','inf');return;}var rows=catalog.map(function(t){return{'Title':t.title,'Genre':t.genre,'BPM':t.bpm,'Duration':t.dur,'BMI Status':t.bmi,'Copyright':t.copy,'Sync Ready':t.sync,'Versions':t.vers,'Notes':t.notes,'Added':t.added};});var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),'Catalog');XLSX.writeFile(wb,'LMW_Catalog_'+new Date().toISOString().split('T')[0]+'.xlsx');toast('Catalog exported','ok');}
 function importCatalog(input){var file=input.files[0];if(!file)return;if(typeof XLSX==='undefined'){toast('Excel library loading -- try again','inf');return;}var reader=new FileReader();reader.onload=function(e){try{var wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});var rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});var n=0;rows.forEach(function(r){var title=r['Title']||r['Track Title']||r['Track']||r['Name']||'';if(!title)return;catalog.push({id:Date.now()+n,title:title,genre:r['Genre']||'',bpm:r['BPM']||'',dur:r['Duration']||'',bmi:r['BMI Status']||'Not Registered',copy:r['Copyright']||'Not Registered',sync:r['Sync Ready']||'No',vers:r['Versions']||'None',notes:r['Notes']||'',added:new Date().toLocaleDateString()});n++;});renderCat();updateCatStats();toast(n+' tracks imported','ok');}catch(e){toast('Import failed','err');}};reader.readAsArrayBuffer(file);input.value='';}
 
@@ -1510,7 +997,18 @@ function filterVault(cat,el){vCatFilter=cat;document.querySelectorAll('.vfchip')
 function updateVaultStats(){var ts=document.getElementById('vs-targets');if(ts)ts.textContent=vTargets.length;var cs=document.getElementById('vs-contacts');if(cs)cs.textContent=vTargets.reduce(function(a,t){return a+(t.circle?t.circle.length:0);},0);var hs=document.getElementById('vs-hot');if(hs)hs.textContent=vTargets.filter(function(t){return t.temp==='hot';}).length;}
 function showWelcome(){vActiveId=null;document.getElementById('vWelcome').style.display='flex';document.getElementById('vDossier').style.display='none';document.getElementById('vAddView').style.display='none';renderTargetList();}
 function showAddTarget(){document.getElementById('vWelcome').style.display='none';document.getElementById('vDossier').style.display='none';document.getElementById('vAddView').style.display='block';}
-function genPitchFromVault(){var t=vTargets.find(function(x){return x.id===vActiveId;});if(!t)return;document.getElementById('pTarget').value=t.name;document.getElementById('pFocus').value=t.known;go('pitch',document.querySelectorAll('.ni')[5]);toast('Target loaded in Pitch Generator','ok');}
+async function genPitchFromVault(){
+  var t=vTargets.find(function(x){return x.id===vActiveId;});
+  if(!t)return;
+  if(!K){toast('Add API key first','err');setKeyPrompt();return;}
+  var target=t.name,focus=t.known||'film and television';
+  showQuickPitch('<div class="out">Writing pitch for '+target+'...</div>');
+  var prompt='Write a sync licensing pitch email from Warren Lamb / Lamb Music Works to '+target+'.\n\nPitch type: warm referred highest conversion\nTheir focus: '+focus+'\nTrack: a cinematic soul track\nMusic link: [your music link]\nMutual contact: none\n\nRules: 3-5 sentences MAX. Lead with music link. Zero adjectives about how great the music is. One clear CTA. Sign off with BMI registered, 100+ tracks, cinematic soul, one-contract clearance, No Cuss No Fuss.\n\nInclude subject line.';
+  try{
+    var res=await ai(prompt,LSYS);
+    showQuickPitch('<div class="pitch-card" style="margin:0;"><div class="pitch-head">'+target+'</div><div class="pitch-sub">'+focus+'</div><div class="pitch-body" id="qpBodyText">'+res+'</div><div style="display:flex;gap:7px;margin-top:10px;"><button class="btn bg" onclick="navigator.clipboard.writeText(document.getElementById(\'qpBodyText\').textContent);toast(\'Pitch copied\',\'ok\')" style="flex:1;">Copy Pitch</button><button class="btn bgh" onclick="closeQuickPitch()">Close</button></div></div>');
+  }catch(e){showQuickPitch('<div class="out">Error: '+e.message+'</div>');}
+}
 async function generateDossier(){
   if(!K){toast('Add API key in Settings','err');return;}
   var name=document.getElementById('addName').value.trim();if(!name){toast('Enter a name','err');return;}
@@ -1553,7 +1051,7 @@ async function draftMessage(){if(!K){toast('Add API key in Settings','err');retu
 function initSocialIntel(){document.addEventListener('click',function(e){if(e.target.classList.contains('si-copy-btn')){var cid=e.target.dataset.cid;var el=document.getElementById(cid);if(el){navigator.clipboard.writeText(el.textContent);toast('Copied','ok');}}});var savedTarget=localStorage.getItem('si_target');if(savedTarget){siTarget=savedTarget;var el=document.getElementById('siCurrentTarget');if(el)el.textContent=siTarget;}var savedWhy=localStorage.getItem('si_target_why');if(savedWhy){siTargetWhy=savedWhy;var el2=document.getElementById('siTargetSub');if(el2)el2.textContent=siTargetWhy;}updateSISystem();}
 
 function renderSched(){var body=document.getElementById('schedBody');if(!body)return;var now=new Date();var h=now.getHours();var m=now.getMinutes();body.innerHTML=Object.keys(SCHED).map(function(p){var wins=SCHED[p];var cols=wins.map(function(w){var isNow=h===w.h&&m>=0&&m<30;return '<td>'+(isNow?'<span class="nowbadge">NOW</span>':'<span class="tbadge">'+w.l+'</span>')+'</td>';}).join('');return '<tr><td style="font-weight:700;color:var(--text);">'+p+'</td>'+cols+'</tr>';}).join('');}
-function updateNextAlert(now){var h=now.getHours(),m=now.getMinutes(),nw=null,np='',mn=Infinity;Object.keys(SCHED).forEach(function(p){SCHED[p].forEach(function(w){var d=(w.h*60+w.m)-(h*60+m);if(d>0&&d<mn){mn=d;nw=w;np=p;}});});if(nw){var hrs=Math.floor(mn/60),mins=mn%60;document.getElementById('mt-nxt').textContent=nw.l;document.getElementById('mt-nxtd').textContent=np+' in '+(hrs>0?hrs+'h '+mins+'m':mins+'m');}}
+function updateNextAlert(now){var h=now.getHours(),m=now.getMinutes(),nw=null,np='',mn=Infinity;Object.keys(SCHED).forEach(function(p){SCHED[p].forEach(function(w){var d=(w.h*60+w.m)-(h*60+m);if(d>0&&d<mn){mn=d;nw=w;np=p;}});});if(nw){var el1=document.getElementById('mt-nxt'),el2=document.getElementById('mt-nxtd');if(!el1||!el2)return;var hrs=Math.floor(mn/60),mins=mn%60;el1.textContent=nw.l;el2.textContent=np+' in '+(hrs>0?hrs+'h '+mins+'m':mins+'m');}}
 function checkAlerts(){var n=new Date();var h=n.getHours();var m=n.getMinutes();Object.keys(SCHED).forEach(function(p){SCHED[p].forEach(function(w){if(h===w.h&&m===w.m)triggerAlert(p,w.l);});});renderSched();}
 function triggerAlert(platform,time){playChime();if(alertsOn&&'Notification'in window&&Notification.permission==='granted'){new Notification('LMW - Time to Post!',{body:'Your '+platform+' window is open - '+time+'.'});}toast('Time to post on '+platform+' - '+time,'inf');}
 function playChime(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();[523,659,784,1047].forEach(function(f,i){var o=actx.createOscillator(),g=actx.createGain();o.connect(g);g.connect(actx.destination);o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(0.25,actx.currentTime+i*0.14);g.gain.exponentialRampToValueAtTime(0.001,actx.currentTime+i*0.14+0.28);o.start(actx.currentTime+i*0.14);o.stop(actx.currentTime+i*0.14+0.28);});}catch(e){}}
